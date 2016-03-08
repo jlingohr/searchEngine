@@ -143,4 +143,5 @@ void updateListLinkToBeVisited(char **url_list, int depth);
 
 char *getAddressFromTheLinksToBeVisited(int *depth);
 
+
 #endif

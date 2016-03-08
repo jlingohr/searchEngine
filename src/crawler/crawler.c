@@ -22,6 +22,7 @@
 #include "html.h"
 #include "hash.h"
 #include "header.h"
+#include "../util/input.h"
 
 // Define the dict structure that holds the hash table 
 // and the double linked list of DNODES. Each DNODE holds
@@ -124,17 +125,42 @@ char *url_list[MAX_URL_PER_PAGE];
 */
 
 
-int main() {
+int main(int argc, char** argv) {
 
-  printf("Get cooking cs23!\n");
+  int depth;
+  DIR* dp;
+  char* url;
 
-  printf("Translate the pseudo code. Data structures are in crawler.h\n");
+  if (argc != 4) {
+    perror("Insufficient arguments into crawler.");
+    return -1;
+  }
+  // check valid url passed
+  // For now assume valid url passed as specified
+  if ((url = isValidSeed(argv[1])) == NULL) {
+    perror("Invalid seed.");
+    return -1;
+  }
 
-  printf("Don't forget to read the README in this directory\n\n");
+  // Check valid target_directory passed
+  isValidDir(argv[2]);
 
-  printf("What do you call a fish with no eye? Fsh ;-)\n\n");
+  // check correct depth passed
+  if ((depth = atoi(argv[3])) > 4 || depth < 0) {
+    perror("Depth exceeds maximum allowed.");
+    return -1;
+  }
 
-  printf("Good luck\n");
+
+  // do stuff
+
+  closedir(dp);
+
+
 
   return 0;
+}
+
+char* isValidSeed(char* seed) {
+
 }
