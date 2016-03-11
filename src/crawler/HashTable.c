@@ -7,5 +7,5 @@ void initDictionary(DICTIONARY &table) {
 		table->hash[i] = NULL;
 	}
 	table->start = NULL;
-	table->ed = NULL;
+	table->end = NULL;
 }

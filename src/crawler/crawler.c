@@ -129,7 +129,8 @@ char *url_list[MAX_URL_PER_PAGE];
 
 int main(int argc, char** argv) {
 
-  int depth;
+  int maxDepth;
+  int curDept;
   char* url;
 
   
@@ -150,8 +151,8 @@ int main(int argc, char** argv) {
   //dp = Opendir(argv[2]);
 
   // check correct depth passed
-  depth = atoi(argv[3]);
-  if (depth > 4 || depth < 0) {
+  maxDepth = atoi(argv[3]);
+  if (maxDepth > 4 || maxDepth < 0) {
     perror("Depth exceeds maximum allowed.");
     return -1;
   }
@@ -162,6 +163,7 @@ int main(int argc, char** argv) {
   initDictionary(&dict);
   // Create list of URLS and call initUrl to initialize
   url_list = malloc((char *)*MAX_URL_PER_PAGE);
+  if (initLists)
 
 
 
