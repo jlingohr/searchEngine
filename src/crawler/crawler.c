@@ -18,11 +18,13 @@
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "crawler.h"
-#include "html.h"
-#include "hash.h"
-#include "header.h"
+#include "../util/html.h"
+#include "../util/hash.h"
+#include "../util/header.h"
 #include "../util/input.h"
+#include <dirent.h>
 
 // Define the dict structure that holds the hash table 
 // and the double linked list of DNODES. Each DNODE holds
@@ -128,9 +130,10 @@ char *url_list[MAX_URL_PER_PAGE];
 int main(int argc, char** argv) {
 
   int depth;
-  DIR* dp;
   char* url;
 
+  
+  // Check correct number of arguments passed
   if (argc != 4) {
     perror("Insufficient arguments into crawler.");
     return -1;
@@ -144,23 +147,23 @@ int main(int argc, char** argv) {
 
   // Check valid target_directory passed
   isValidDir(argv[2]);
+  //dp = Opendir(argv[2]);
 
   // check correct depth passed
-  if ((depth = atoi(argv[3])) > 4 || depth < 0) {
+  depth = atoi(argv[3]);
+  if (depth > 4 || depth < 0) {
     perror("Depth exceeds maximum allowed.");
     return -1;
   }
 
-
-  // do stuff
-
-  closedir(dp);
+  //initialize data structs and variables
+  // create hashtable and call initDictionary to initialize
+  dict = malloc(sizeof(DICTIONARY));
+  initDictionary(&dict);
+  // Create list of URLS and call initUrl to initialize
+  url_list = malloc((char *)*MAX_URL_PER_PAGE);
 
 
 
   return 0;
-}
-
-char* isValidSeed(char* seed) {
-
 }
