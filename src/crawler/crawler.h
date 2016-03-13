@@ -143,5 +143,8 @@ void updateListLinkToBeVisited(char **url_list, int depth);
 
 char *getAddressFromTheLinksToBeVisited(int *depth);
 
-
+/*
+  initURLNODE: Initializes a malloced URLNODE to default values
+**/
+void initURLNODE(URLNODE* node, int depth);
 #endif

@@ -10,6 +10,11 @@
 PRE: table is a valid DICTIONARY in memory
 post: values of table are set to NULL
 **/
-void initDictionary(DICTIONARY &table);
+void initDictionary(DICTIONARY* table);
 
+/*
+  addNodeToDictionary: Adds node for seed to dict if seed is unique
+  
+**/
+void addNodeToDictionary(DICTIONARY* dict, char* seed, URLNODE* node);
 #endif

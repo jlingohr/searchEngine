@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -pedantic -ggdb -std=c99
 EXEC = crawler
 SOURCES=./crawler.c ./crawler.h
-CFILES=./crawler.c
+CFILES=./crawler.c ./hashtable.c
 
 UTILDIR=../util/
 UTILFLAG=-ltseutil

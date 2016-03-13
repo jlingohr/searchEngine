@@ -130,8 +130,10 @@ char *url_list[MAX_URL_PER_PAGE];
 int main(int argc, char** argv) {
 
   int maxDepth;
-  int curDept;
+  int curDepth;
   char* url;
+  URLNODE* urlNode;
+
 
   
   // Check correct number of arguments passed
@@ -148,7 +150,6 @@ int main(int argc, char** argv) {
 
   // Check valid target_directory passed
   isValidDir(argv[2]);
-  //dp = Opendir(argv[2]);
 
   // check correct depth passed
   maxDepth = atoi(argv[3]);
@@ -156,14 +157,24 @@ int main(int argc, char** argv) {
     perror("Depth exceeds maximum allowed.");
     return -1;
   }
+  // Initialize variables
+  curDepth = 0;
 
-  //initialize data structs and variables
+  //initialize data structs
   // create hashtable and call initDictionary to initialize
   dict = malloc(sizeof(DICTIONARY));
-  initDictionary(&dict);
+  initDictionary(dict);
   // Create list of URLS and call initUrl to initialize
-  url_list = malloc((char *)*MAX_URL_PER_PAGE);
-  if (initLists)
+  url_list = malloc(sizeof(char *)*MAX_URL_PER_PAGE);
+  urlNode = malloc(sizeof(URLNODE));
+  initURLNODE(urlNode, curDepth);
+
+  // Bootstrap from seed
+  NormalizeWord(url);
+  if (NormalizeUrl(url) == 0) {
+    perror("Invalid URL\n");
+  }
+  addNodeToDictionary(dict, url, node);
 
 
 
