@@ -132,6 +132,8 @@ int main(int argc, char** argv) {
   int maxDepth;
   int curDepth;
   char* url;
+  char* path;
+  char* page;
   URLNODE* urlNode;
 
 
@@ -150,6 +152,7 @@ int main(int argc, char** argv) {
 
   // Check valid target_directory passed
   isValidDir(argv[2]);
+  path = argv[2];
 
   // check correct depth passed
   maxDepth = atoi(argv[3]);
@@ -175,8 +178,49 @@ int main(int argc, char** argv) {
     perror("Invalid URL\n");
   }
   addNodeToDictionary(dict, url, node);
+  page = getPage(url, curDepth, path);
+  if (page == NULL) {
+    perror("Invalid html\n");
+  }
 
 
 
   return 0;
+}
+
+/*
+  getPage: Retrives content of a page given url, path, and depth
+  @param url - url from which to retrieve contents
+  @param depth - current search depth
+  @param path - Desintation of file containing page contents
+  @return buffer containing contents of the page
+**/
+char* getPage(char* url, int depth, char* path) {
+  NormalizeUrl(url);
+
+  // Create buffer for temp html file before downloading
+  char urlBuf[MAX_URL_LENGTH+40];
+  // commands to pass to system
+  char tempFile[20];
+  // form: path/TEMP - used to access temporary html fil
+  char pathName[sizeof(path)+15];
+  int bufSize;
+  int retry;
+  int wget_st;
+
+  strcpy(tempFile, path);
+  strcat(tempFile, "temp.html");
+  bufSize = snprintf(urlBuf, sizeof(urlBuf), "wget -q -T 10 --tries=2 -O %s '%s'", tempFile, url);
+  if (bufSize > sizeof(urlBuf)) {
+    perror("Command buffer problem");
+  }
+  retry = 0;
+  // Make system call
+  if ((wget_st = system(urlBuf)) != 0) {
+    free(urlBuf);
+    wget_st = 0;
+    return NULL;
+  }
+  strncpy(pathName, path, sizeof(path));
+  strncpy(pathName, "TEMP", sizeof("TEMP"));
 }
