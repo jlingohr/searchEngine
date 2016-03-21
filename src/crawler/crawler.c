@@ -207,6 +207,11 @@ char* getPage(char* url, int depth, char* path) {
   int bufSize;
   int retry;
   int wget_st;
+  // used to access page info
+  struct stat stat_buf;
+  // buffer for html page
+  char* file_buffer;
+  char file_name[100];
 
   strcpy(tempFile, path);
   strcat(tempFile, "temp.html");
@@ -223,4 +228,22 @@ char* getPage(char* url, int depth, char* path) {
   }
   strncpy(pathName, path, sizeof(path));
   strncpy(pathName, "TEMP", sizeof("TEMP"));
+
+  stat(pathName, &stat_buf);
+  file_buffer = malloc(stat_buf.st_size + 1);
+  // Copy temp into a buffer
+  initPage(file_buffer, pathName);
+  if (file_buffer == NULL) {
+    //TODO
+  }
+  // UNSAFE
+  strcpy(file_name, path);
+  // Check if file exists
+
+  // If not, open new file and append url/html
+
+  //cleanup
+
+
+
 }
