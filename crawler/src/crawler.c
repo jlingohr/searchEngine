@@ -143,8 +143,8 @@ int main(int argc, char** argv) {
   if (!valid) {
     exit(1);
   }
-  strcat(seed, argv[1]);
-  strcat(target, argv[2]);
+  strcpy(seed, argv[1]);
+  strcpy(target, argv[2]);
   max_depth = atoi(argv[3]);
 
   /* Check initLists - Initialize data structures */
