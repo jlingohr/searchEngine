@@ -1,0 +1,78 @@
+## Taken from Dartmouth CS50 for practice!
+
+Explain the files in your directories: e.g.:
+
+## DESCRIPTION
+
+The source code implements the crawler component of the TinySearch Engine.
+
+Please take a close look at the code - its decomposition into:
+
+1) crawler.[hc] The main Crawler controller code
+2) file.[hc] Common file processing functions and data structures
+3) list.[hc] Common URL list processing functions and data structures
+4) hmtl.[hc] Parsing and html processing functions and data structures
+5) hash.[hc] hash table functions and data structures
+6) dictionary.[hc] Dictionary data structure and processing functions
+7) header.h Some useful Marcos
+
+## SOURCE CODE DETAILS
+
+The lab4 solution includes:
+
+- this file explains the source code, and how to build, run and test it. 
+
+./searchEngine/README 
+
+- this directory is where files are stored [1, 2, 3 ... N]
+
+./searchEngine/data/ 
+
+- the source code is  arranged in the following directory:
+
+./searchEngine/src/util/   
+
+        Description: Includes general purpose utilities and the html parsers
+
+        What's in the util directory? They are sourcs files we think that have 
+        a general usage for the whole search engine project. So we put them in 
+	one directory. However, when we build applications like crawler, when link 
+        these codes in in the Makefile.
+
+	file.c file.h  (file access utilities)
+	html.c html.h (html parsers, where getNextUrl() hides)
+	header.h (some useful MACROS)
+	hash.h hash.c (hash functions)
+	dictionary.h dictionary.c (a general data structure library implementing dictionary)
+
+./searchEngine/src/crawler/
+
+	Description: Main crawler controller, ULR list processing, Makefile
+        and bash script to run and test the code.
+
+	crawler.c  (the main entry, the crawler main logic is here)
+	list.h list.c (all functions related to the URL list is here)
+
+	Makefile - the Makefile for the crawler
+	test_and_start_crawl.sh (the bash script to test and start crawl)
+
+## TO BUILD 
+
+To build the crawler
+
+goto /src/crawler/ and type "make"
+
+
+## TO RUN and TEST
+
+To test the crawler
+
+goto /src/crawler/ and type "./test_and_start_crawl.sh"
+     This script will: 
+     1 Test the argument checking of crawler.
+     2 Test the termination of crawling when using a small depth.
+     3 Crawl http://www.cs.dartmouth.edu, and save data ../../data
+
+
+
+
