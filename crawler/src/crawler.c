@@ -17,121 +17,101 @@
 
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/stat.h>
-#include "crawler.h"
-#include "html.h"
-#include "hash.h"
-#include "header.h"
-#include "dict.h"
+// ---------------- System includes e.g., <stdio.h>
+#include <stdio.h>                           // printf
+#include <sys/stat.h>                        // isdir
+#include <sys/types.h>
+#include <unistd.h>
+#include <curl/curl.h>                       // curl functionality
+#include <string.h>                          // strncmpr
 
-// Define the dict structure that holds the hash table 
-// and the double linked list of DNODES. Each DNODE holds
-// a pointer to a URLNODE. This list is used to store
-// unique URLs. The search time for this list is O(n).
-// To speed that up to O(1) we use the hash table. The
-// hash table holds pointers into the list where 
-// DNODES with the same key are maintained, assuming
-// the hash(key) is not NULL (which implies the URL has
-// not been seen before). The hash table provide quick
-// access to the point in the list that is relevant
-// to the current URL search. 
+// ---------------- Local includes  e.g., "file.h"
+#include "common.h"                          // common functionality
+#include "web.h"                             // curl and html functionality
+#include "list.h"                            // webpage list functionality
+#include "hashtable.h"                       // hashtable functionality
+#include "utils.h"                           // utility stuffs
+#include "file.h"
 
-DICTIONARY* dict = NULL; 
+// ---------------- Constant definitions
+
+// ---------------- Macro definitions
+
+// ---------------- Structures/Types
+
+// ---------------- Private variables
+
+// ---------------- Private prototypes
+int checkValidInputs(char* seed, char* target, char* max_depth);
+int isValidURL(char * URL);
+int isDirec(char * dir);
+int writePage(WebPage *page, char *dir, int x);
+int crawlPage(WebPage *page);
+int saveCrawl();
+void cleanup();
+
+// Global:
+HashTable URLSVisited;
+List toVisit;
 
 
-// This is the table that keeps pointers to a list of URL extracted
-// from the current HTML page. NULL pointer represents the end of the
-// list of URLs.
-
-char *url_list[MAX_URL_PER_PAGE]; 
 
 /*
-
-
-(5) *Crawler*
--------------
-
-// Input command processing logic
-
-(1) Command line processing on arguments
-    Inform the user if arguments are not present
-    IF target_directory does not exist OR depth exceeds max_depth THEN
+(5) *Crawler* Pseudocode
+------------------------
+    // check command line arguments
+    Inform the user if arguments are not present or invalid
+    IF target_directory does not exist OR depth exceeds maxDepth THEN
        Inform user of usage and exit failed
 
-// Initialization of any data structures
+    // init curl
+     We know from Lab3 that we need to setup curl
+    
+    // initialize data structures / variables
+     Initialize any data structure and variables
+    
+    // setup seed page
 
-(2) *initLists* Initialize any data structure and variables
+    // get seed webpage
+     If it fails, report and exit
 
-// Bootstrap part of Crawler for first time through with SEED_URL
+    // write seed file
 
-(3) page = *getPage(seedURL, current_depth, target_directory)* Get HTML into a string and return as page, 
-            also save a file (1..N) with correct format (URL, depth, HTML) 
-    IF page == NULL THEN
-       *log(PANIC: Cannot crawl SEED_URL)* Inform user
-       exit failed
-(4) URLsLists = *extractURLs(page, SEED_URL)* Extract all URLs from SEED_URL page.
-  
-(5) *free(page)* Done with the page so release it
+    // add seed page to hashtable
 
-(6) *updateListLinkToBeVisited(URLsLists, current_depth + 1)*  For all the URL 
-    in the URLsList that do not exist already in the dictionary then add a DNODE/URLNODE 
-    pair to the DNODE list. 
+    // extract urls from seed page and add to URLList
+  //    making sure not to add them if they're already there
+    //    and only if visiting them wouldn't exceed maxDepth
 
-(7) *setURLasVisited(SEED_URL)* Mark the current URL visited in the URLNODE.
-
-// Main processing loop of crawler. While there are URL to visit and the depth is not 
-// exceeded keep processing the URLs.
-
-(8) WHILE ( URLToBeVisited = *getAddressFromTheLinksToBeVisited(current_depth)* ) DO
-        // Get the next URL to be visited from the DNODE list (first one not visited from start)
+    // while there are urls to crawl do
+    
+        // get next url from list
  
-      IF current_depth > max_depth THEN
-    
-          // For URLs that are over max_depth, we just set them to visited
-          // and continue on
-    
-          setURLasVisited(URLToBeVisited) Mark the current URL visited in the URLNODE.
-          continue;
+        // get webpage for url
 
-    page = *getPage(URLToBeVisited, current_depth, target_directory)* Get HTML into a 
-            string and return as page, also save a file (1..N) with correct format (URL, depth, HTML) 
+        // write page file
 
-    IF page == NULL THEN
-       *log(PANIC: Cannot crawl URLToBeVisited)* Inform user
-       setURLasVisited(URLToBeVisited) Mark the bad URL as visited in the URLNODE.
-       Continue; // We don't want the bad URL to stop us processing the remaining URLs.
-   
-    URLsLists = *extractURLs(page, URLToBeVisited)* Extract all URLs from current page.
-  
-    *free(page)* Done with the page so release it
+        // extract urls from webpage and add to URLList
+       //    making sure to only add new ones
+       //    and only if visiting them wouldn't exceed maxDepth
 
-    *updateListLinkToBeVisited(URLsLists, current_depth + 1)* For all the URL 
-    in the URLsList that do not exist already in the dictionary then add a DNODE/URLNODE 
-    pair to the DNODE list. 
+       // sleep for a bit to avoid annoying the target domain
 
-    *setURLasVisited(URLToBeVisited)* Mark the current URL visited in the URLNODE.
+       // free resources
+       
+  //  end while    
 
-    // You must include a sleep delay before crawling the next page 
-    // See note below for reason.
+    // cleanup curl
 
-    *sleep(INTERVAL_PER_FETCH)* Sneak by the server by sleeping. Use the 
-     standard Linux system call
-
-(9)  *log(Nothing more to crawl)
-
-(10) *cleanup* Clean up data structures and make sure all files are closed,
-      resources deallocated.
+    // free resources
 
 */
 
-
 int main(int argc, char** argv) {
 
-  char seed[MAX_URL_LENGTH], target[MAX_URL_LENGTH];
-  int max_depth, valid;
+  char seed_url[MAX_URL_LENGTH], target[MAX_URL_LENGTH];
+  int depth, max_depth, valid, file_counter;
+  WebPage seed_page;
 
   /* Check command line arguments */
   if (argc != 4) {
@@ -143,16 +123,41 @@ int main(int argc, char** argv) {
   if (!valid) {
     exit(1);
   }
-  strcpy(seed, argv[1]);
+  strcpy(seed_url, argv[1]);
   strcpy(target, argv[2]);
   max_depth = atoi(argv[3]);
 
   /* Check initLists - Initialize data structures */
-  initDict(dict);
+  initList();
+  depth = 0;
+  file_counter = 1;
+
+  /* Bootstrap for initial seed */
+  curl_global_init(CURL_GLOBAL_ALL);  // NOTE: Not thread safe!
+  seed_page.url = malloc(sizeof(seed_url)+1);
+  strcpy(seed_page.url, seed_url);
+  strcat(seed_page.url, '/');
+  seed_page.html = NULL;
+  seed_page.html_len = NULL;
+  seed_page.depth = 0;
+
+  if (STATUS_LOG == 1) {
+    printf("\nSeed URL: %s", seed_page.url);
+  }
 
   /* Check getPage */
+  if (!GetWebPage(&seed_page)) {
+    printf("Coulnd't open seed url: %s\n", seed_page.url);
+    free(seed_page.url);
+    exit(1);
+  }
 
-  /* Check extractUrls */
+  /* Write seed file */
+  writePage(&seed_page, target, file_counter);
+  file_counter++;
+
+  /* add seed page to hashtable */
+  HashTableAdd(seed_page.url, URLSVisited.size);
 
   /* check updateListLinkToBeVisisted */
 
@@ -170,25 +175,62 @@ int main(int argc, char** argv) {
 */
 int checkValidInputs(char* seed, char* target, char* max_depth) {
   int depth;
-  struct stat sbuf;
-  Stat(target, &sbuf);
+  
 
-  /* Check if target directory is a valid writable directory */
-  if (!S_ISDIR(sbuf.st_mode)) {
-    printf("Target %s is not a directory.\n", target);
-    return 0;
-  }
-  if (!(sbuf.st_mode & S_IWUSR)) {
-    printf("%s is not writable.\n", target);
-    return 0;
-  }
+  if (!isValidURL(seed))
+    return 1;
+  if (!isDirec(target))
+    return 1;
 
-  /* Check max depth does not exceed 4 */
   depth = atoi(max_depth);
   if (depth < 0 || depth > MAX_DEPTH) {
     printf("Invalid depth specified: %d\n", depth);
     return 0;
-  }
+  }  
+  
   return 1;
 
+}
+
+int isDirec(char* dir) {
+  struct stat sbuf;
+  Stat(dir, &sbuf);
+  if (!S_ISDIR(sbuf.st_mode)) {
+    printf("Target %s is not a directory.\n", dir);
+    return 0;
+  }
+  if (!(sbuf.st_mode & S_IWUSR)) {
+    printf("%s is not writable.\n", dir);
+    return 0;
+  }
+  return 1;
+}
+
+/*
+* isValidUrl - Checks whether seed is a valid URL and within domain in common.h
+*/
+int isValidURL(char * URL) {
+  if (strncmp(URL, URL_PREFIX, strlen(URL_PREFIX)))
+    return 1;
+  return 0;
+}
+
+/*
+* writePage - Save web page into directory
+* URL is saved to first line, depth in second line, and HTML follows
+*/
+int writePage(WebPage *page, char *dir, int file_counter) {
+  // TODO
+  char name[MAXLINE];
+  char depth[MAXLINE];
+  sprintf(name, "%s%d", dir, file_counter);
+  sprintf(depth, "\nDepth: %d\n", page->depth);
+  FILE* fd = Fopen(name, O_WRONLY);
+  if (fd) {
+    writen(fd, name, strlen(name));
+    writen(fd, depth, strlen(depth));
+    writen(fd, page->html, page->html_len);
+    Fclose(fd);
+  }
+  return 0;
 }

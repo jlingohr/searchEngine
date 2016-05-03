@@ -4,8 +4,8 @@ PATH = ./src/
 
 LIBFLAGS = -lcurl
 EXEC = crawler
-OBJS = $(PATH)dict.o $(PATH)file.o $(PATH)hash.o $(PATH)html.o
-SRC = $(PATH)crawler.c $(PATH)dict.c $(PATH)hash.c $(PATH)file.c $(PATH)html.c
+OBJS = $(PATH)hashtable.o $(PATH)list.o $(PATH)web.o $(PATH)file.o
+SRC = $(PATH)crawler.c $(PATH)hashtable.c $(PATH)list.c $(PATH)web.c $(PATH)file.c
 
 crawler: $(SRC)
 	$(CC) $(CFLAGS) -o crawler $(SRC) $(LIBFLAGS)
