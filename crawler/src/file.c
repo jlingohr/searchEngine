@@ -32,6 +32,11 @@ ssize_t writen(int fd, void* usrbuf, size_t n) {
   return n;
 }
 
+void Fputs(const char* ptr, FILE* stream) {
+  if (fputs(ptr, stream) == EOF)
+    unix_error("Fputs error");
+}
+
 /*
 * Fopen - Wrapper function for open
 */
@@ -43,6 +48,16 @@ int Open(const char* filename, int flags, mode_t mode) {
   return rc;
 }
 
+
+FILE* Fopen(const char* filename, const char* mode) {
+  FILE* fp;
+  if ((fp = fopen(filename, mode)) == NULL)
+    unix_error("Fopen error");
+
+  return fp;
+}
+
+
 /*
 * Fclose - Wrapper function for close
 */
@@ -51,4 +66,9 @@ void Close(int fd) {
 
   if ((rc = close(fd)) < 0)
     unix_error("Close");
+}
+
+void Fclose(FILE* fp) {
+  if (fclose(fp) != 0)
+    unix_error("Fclose error");
 }

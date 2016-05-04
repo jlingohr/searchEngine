@@ -75,6 +75,8 @@ int main(int argc, char** argv) {
   printf("Crawling - %s\n", argv[1]);
 
   strcpy(seed_url, argv[1]);
+  NormalizeURL(seed_url);
+  printf("Normalized seed URL: %s\n", seed_url);
   strcpy(target, argv[2]);
   max_depth = atoi(argv[3]);
 
@@ -83,15 +85,18 @@ int main(int argc, char** argv) {
   initHashTable();
   depth = 0;
   file_counter = 1;
+  printf("Everything initialized...\n");
 
   /* Bootstrap for initial seed */
   curl_global_init(CURL_GLOBAL_ALL);  // NOTE: Not thread safe!
-  seed_page.url = malloc(sizeof(seed_url)+1);
-  strcpy(seed_page.url, NormalizeURL(seed_url));
+  printf("Initialized curl...\n");
+  seed_page.url = malloc(sizeof(seed_url));
+  strcpy(seed_page.url, seed_url);
   //strcat(seed_page.url, "/");
   seed_page.html = NULL;
-  seed_page.html_len = NULL;
+  //seed_page.html_len = NULL;
   seed_page.depth = 0;
+  printf("Bootstrap complete...\n");
 
   if (STATUS_LOG == 1) {
     printf("\nSeed URL: %s", seed_page.url);
@@ -107,6 +112,7 @@ int main(int argc, char** argv) {
   /* Write seed file */
   writePage(&seed_page, target, file_counter);
   file_counter++;
+  printf("Writing seed page complete...\n");
 
   /* add seed page to hashtable */
   //HashTableAdd(seed_page.url);    /* Done after crawled! */
@@ -206,12 +212,16 @@ int writePage(WebPage *page, char *dir, int file_counter) {
   char depth[MAXLINE];
   sprintf(name, "%s%d", dir, file_counter);
   sprintf(depth, "\nDepth: %d\n", page->depth);
-  int fd = Open(name, O_WRONLY, 0);
+  FILE* fd = Fopen(name, O_WRONLY);
   if (fd) {
-    writen(fd, name, strlen(name));
+    /*writen(fd, name, strlen(name));
     writen(fd, depth, strlen(depth));
     writen(fd, page->html, page->html_len);
-    Close(fd);
+    Fclose(fd);*/
+    Fputs(name, fd);
+    fprintf(fd, "\nDepth: %s\n", depth);
+    Fputs(page->html, fd);
+    Fclose(fd);
   }
   return 0;
 }

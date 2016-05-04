@@ -63,7 +63,7 @@ int HashTableLookUp(char * url) {
 
   tmp = URLSVisited.table[p];
   while (tmp) {
-    if (strcmp(url, tmp))
+    if (strcmp(url, tmp->url))
       return 1;
     tmp = tmp->next;
   }

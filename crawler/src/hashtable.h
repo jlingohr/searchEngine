@@ -13,6 +13,7 @@
 
 // ---------------- Prerequisites e.g., Requires "math.h"
 #include "common.h"                          // common functionality
+#include <string.h>
 #include <stdio.h>   
 
 // ---------------- Constants
