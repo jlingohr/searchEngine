@@ -49,7 +49,7 @@ int writePage(WebPage *page, char *dir, int x);
 int crawlPage(WebPage *page);
 int saveCrawl();
 void cleanup();
-int validDepth(int depth);
+int validDepth(int depth, int user_depth);
 
 // Global:
 HashTable URLSVisited;
@@ -59,7 +59,8 @@ List toVisit;
 int main(int argc, char** argv) {
 
   char seed_url[MAX_URL_LENGTH], target[MAX_URL_LENGTH];
-  int depth, max_depth, valid, file_counter;
+  static int user_depth;
+  int max_depth, valid, file_counter;
   WebPage seed_page;
 
   /* Check command line arguments */
@@ -74,57 +75,54 @@ int main(int argc, char** argv) {
   }
   printf("Crawling - %s\n", argv[1]);
 
+  /* Check initLists - Initialize data structures */
   strcpy(seed_url, argv[1]);
   NormalizeURL(seed_url);
-  printf("Normalized seed URL: %s\n", seed_url);
   strcpy(target, argv[2]);
-  max_depth = atoi(argv[3]);
+  user_depth = atoi(argv[3]);
 
-  /* Check initLists - Initialize data structures */
   initList();
   initHashTable();
-  depth = 0;
   file_counter = 1;
-  printf("Everything initialized...\n");
 
-  /* Bootstrap for initial seed */
+  /* Bootstrap given URL for initial seed */
   curl_global_init(CURL_GLOBAL_ALL);  // NOTE: Not thread safe!
-  printf("Initialized curl...\n");
   seed_page.url = malloc(sizeof(seed_url));
   strcpy(seed_page.url, seed_url);
-  //strcat(seed_page.url, "/");
   seed_page.html = NULL;
-  //seed_page.html_len = NULL;
   seed_page.depth = 0;
-  printf("Bootstrap complete...\n");
 
   if (STATUS_LOG == 1) {
     printf("\nSeed URL: %s", seed_page.url);
   }
 
-  /* Check getPage */
+  /* Check getPage for seed page */
   if (!GetWebPage(&seed_page)) {
     printf("Coulnd't open seed url: %s\n", seed_page.url);
     free(seed_page.url);
-    exit(1);
+    free(seed_page.html);
+    exit(-1);
   }
 
-  /* Write seed file */
-  writePage(&seed_page, target, file_counter);
+  /* Write seed page to file */
+  if (!writePage(&seed_page, target, file_counter)) {
+    printf("Error writing seed page...\n");
+    return 1;
+  }
   file_counter++;
-  printf("Writing seed page complete...\n");
 
   /* add seed page to hashtable */
-  //HashTableAdd(seed_page.url);    /* Done after crawled! */
+  //HashTableAdd(seed_page.url);
 
   /* Extract urls from seed and add to URLLIST */
   crawlPage(&seed_page);
+  sleep(INTERVAL_PER_FETCH);
 
   /* while there are urls to crawl do */
   WebPage* tmp;
-  while(toVisit.head) {
+  while((tmp = listRemove())) {
     /* get next url from list */
-    tmp = listRemove();
+    //tmp = listRemove();
 
     /* get webpage for url */
     if (GetWebPage(tmp)) { /* write page file */
@@ -134,16 +132,18 @@ int main(int argc, char** argv) {
       /* extract urls from webpage and add to URLList
        making sure to only add new ones
        and only if visiting them wouldn't exceed maxDepth */
-      if (validDepth(tmp->depth))
+      if (validDepth(tmp->depth, user_depth) && !HashTableLookUp(tmp->url))
         crawlPage(tmp); /* Possible asynchronous problems here? */
+
+      free(tmp->html);
     }
     /* sleep for a bit to avoid annoying the target domain */
     sleep(INTERVAL_PER_FETCH);
 
     /* free resources */
     /* TODO - Possible memory leaks doing this! Also free url? */
-    free(tmp->html);
-    free(tmp);
+    
+    dec_ref(tmp);
   }
 
   /* Cleanup curl */
@@ -151,6 +151,7 @@ int main(int argc, char** argv) {
 
   /* Free resources */
   cleanup();
+  /* Free seed page */
   free(seed_page.html);
   free(seed_page.url);
 
@@ -195,11 +196,13 @@ int isDirec(char* dir) {
 
 /*
 * isValidUrl - Checks whether seed is a valid URL and within domain in common.h
+* Return 1 if valid
+* Return 0 if invalid
 */
 int isValidURL(char * URL) {
-  if (strncmp(URL, URL_PREFIX, strlen(URL_PREFIX)))
-    return 1;
-  return 0;
+  if (strncmp(URL, URL_PREFIX, strlen(URL_PREFIX)) != 0)
+    return 0;
+  return 1;
 }
 
 /*
@@ -207,39 +210,44 @@ int isValidURL(char * URL) {
 * URL is saved to first line, depth in second line, and HTML follows
 */
 int writePage(WebPage *page, char *dir, int file_counter) {
-  // TODO
+  // TODO - Writing depth line twice; Not writing url to top
   char name[MAXLINE];
   char depth[MAXLINE];
   sprintf(name, "%s%d", dir, file_counter);
   sprintf(depth, "\nDepth: %d\n", page->depth);
-  FILE* fd = Fopen(name, O_WRONLY);
+  FILE* fd = fopen(name, "ab+");
   if (fd) {
-    /*writen(fd, name, strlen(name));
-    writen(fd, depth, strlen(depth));
-    writen(fd, page->html, page->html_len);
-    Fclose(fd);*/
-    Fputs(name, fd);
-    fprintf(fd, "\nDepth: %s\n", depth);
+    Fputs(page->url, fd);
+    Fputs(depth, fd);
+    //fprintf(fd, "\nDepth: %s\n", depth);
     Fputs(page->html, fd);
-    Fclose(fd);
+    fclose(fd);
+    return 1;
+  }
+  if (fd == NULL) {
+    fprintf(stderr, "Error opening file.");
+    return 1;
   }
   return 0;
 }
 
 /*
 * crawlPage - Crawls WebPage page to extract URLS
+* Extracts urls only if not already in hashtable and would not
+* exceed maximum allowed epth
 */
 int crawlPage(WebPage *page) {
-  //TODO - Make sure to sleep!
+  //TODO - Getting some duplicates - Becuase of freeing?
   int pos;
   char* buf;
 
   pos = 0;
   buf = NULL;
-  while ((pos = GetNextURL(page->html, pos, page->html, &buf)) > 0) {
+
+  while ((pos = GetNextURL(page->html, pos, page->url, &buf)) > 0) {
     if (NormalizeURL(buf)) {
       if (isValidURL(buf)) {
-        if (!HashTableLookUp(buf) && page->depth < MAX_DEPTH) { /* Make sure not visited and valid depth */
+        if (!HashTableLookUp(buf)) {
           if (STATUS_LOG == 1)
             printf("\nFound url: %s", buf);
 
@@ -249,12 +257,14 @@ int crawlPage(WebPage *page) {
           tmp->depth = page->depth + 1;
 
           listAdd(tmp);
-          //HashTableAdd(tmp->url);
+          free(buf);
         }
       }
     }
   }
   HashTableAdd(page->url);
+  inc_ref(page);
+  //free(buf);
   return 1;
 }
 
@@ -262,8 +272,8 @@ int crawlPage(WebPage *page) {
 * validDepth - Checks if depth is less than MAXDEPTH
 * Returns 1 if so, else returns 0
 */
-int validDepth(int depth) {
-  return depth < MAX_DEPTH;
+int validDepth(int depth, int user_depth) {
+  return (depth < user_depth && depth < MAX_DEPTH);
 }
 
 /*

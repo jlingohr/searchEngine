@@ -22,11 +22,11 @@
 #define MAX_DEPTH 4                          // don't want to go too far do
 #define MAX_URL_LENGTH 1000
 #define MAXLINE 1000     
-#define STATUS_LOG 0            // switch to one for output       
+#define STATUS_LOG 1            // switch to one for output       
 
 
 // limit crawling to only this domain
-#define URL_PREFIX "http://old-www.cs.dartmouth.edu/~cs50/tse"
+#define URL_PREFIX "http://www.cs.dartmouth.edu/~campbell/cs50/"
 
 // ---------------- Structures/Types
 
@@ -35,6 +35,7 @@ typedef struct WebPage {
     char *html;                              // html code of the page
     size_t html_len;                         // length of html code
     int depth;                               // depth of crawl
+    int ref_count;                            // Track references to manage memory
 } WebPage;
 
 // ---------------- Public Variables

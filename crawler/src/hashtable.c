@@ -33,7 +33,7 @@ int HashTableAdd(char * url) {
 
   tmp = malloc(sizeof(HashTableNode));
   tmp->url = malloc(strlen(url));
-  strcat(tmp->url, url);
+  strcpy(tmp->url, url);
 
   p = Hash(url, URLSVisited.size);
   if (URLSVisited.table[p] == NULL) {
@@ -58,16 +58,11 @@ int HashTableLookUp(char * url) {
   HashTableNode* tmp;
 
   p = Hash(url, URLSVisited.size);
-  if (URLSVisited.table[p] == NULL)
-    return 0;
-
   tmp = URLSVisited.table[p];
   while (tmp) {
-    if (strcmp(url, tmp->url))
-      return 1;
-    tmp = tmp->next;
+    if (strcmp(url, tmp->url) != 0)
+      tmp = tmp->next;
+    return 1;
   }
-
   return 0;
-
 }
