@@ -35,18 +35,20 @@ ssize_t writen(int fd, void* usrbuf, size_t n) {
 /*
 * Fopen - Wrapper function for open
 */
-FILE* Fopen(const char* filename, const char* mode) {
-  FILE* fp;
-  if ((fp = fopen(filename, mode)) == NULL)
-    unix_error("Fopen error");
+int Open(const char* filename, int flags, mode_t mode) {
+  int rc;
+  if ((rc = open(filename, flags, mode)) < 0)
+    unix_error("Open error");
 
-  return fp;
+  return rc;
 }
 
 /*
 * Fclose - Wrapper function for close
 */
-void Fclose(FILE* fp) {
-  if (fclose(fp) != 0)
-    unix_error("Fclose");
+void Close(int fd) {
+  int rc;
+
+  if ((rc = close(fd)) < 0)
+    unix_error("Close");
 }

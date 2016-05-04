@@ -39,6 +39,5 @@ extern List toVisit;
 void listAdd(WebPage *page);
 int initList();
 WebPage* listRemove();
-void cleanHash();
 
 #endif // LIST_H

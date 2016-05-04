@@ -49,63 +49,12 @@ int writePage(WebPage *page, char *dir, int x);
 int crawlPage(WebPage *page);
 int saveCrawl();
 void cleanup();
+int validDepth(int depth);
 
 // Global:
 HashTable URLSVisited;
 List toVisit;
 
-
-
-/*
-(5) *Crawler* Pseudocode
-------------------------
-    // check command line arguments
-    Inform the user if arguments are not present or invalid
-    IF target_directory does not exist OR depth exceeds maxDepth THEN
-       Inform user of usage and exit failed
-
-    // init curl
-     We know from Lab3 that we need to setup curl
-    
-    // initialize data structures / variables
-     Initialize any data structure and variables
-    
-    // setup seed page
-
-    // get seed webpage
-     If it fails, report and exit
-
-    // write seed file
-
-    // add seed page to hashtable
-
-    // extract urls from seed page and add to URLList
-  //    making sure not to add them if they're already there
-    //    and only if visiting them wouldn't exceed maxDepth
-
-    // while there are urls to crawl do
-    
-        // get next url from list
- 
-        // get webpage for url
-
-        // write page file
-
-        // extract urls from webpage and add to URLList
-       //    making sure to only add new ones
-       //    and only if visiting them wouldn't exceed maxDepth
-
-       // sleep for a bit to avoid annoying the target domain
-
-       // free resources
-       
-  //  end while    
-
-    // cleanup curl
-
-    // free resources
-
-*/
 
 int main(int argc, char** argv) {
 
@@ -123,20 +72,23 @@ int main(int argc, char** argv) {
   if (!valid) {
     exit(1);
   }
+  printf("Crawling - %s\n", argv[1]);
+
   strcpy(seed_url, argv[1]);
   strcpy(target, argv[2]);
   max_depth = atoi(argv[3]);
 
   /* Check initLists - Initialize data structures */
   initList();
+  initHashTable();
   depth = 0;
   file_counter = 1;
 
   /* Bootstrap for initial seed */
   curl_global_init(CURL_GLOBAL_ALL);  // NOTE: Not thread safe!
   seed_page.url = malloc(sizeof(seed_url)+1);
-  strcpy(seed_page.url, seed_url);
-  strcat(seed_page.url, '/');
+  strcpy(seed_page.url, NormalizeURL(seed_url));
+  //strcat(seed_page.url, "/");
   seed_page.html = NULL;
   seed_page.html_len = NULL;
   seed_page.depth = 0;
@@ -157,15 +109,44 @@ int main(int argc, char** argv) {
   file_counter++;
 
   /* add seed page to hashtable */
-  HashTableAdd(seed_page.url, URLSVisited.size);
+  //HashTableAdd(seed_page.url);    /* Done after crawled! */
 
-  /* check updateListLinkToBeVisisted */
+  /* Extract urls from seed and add to URLLIST */
+  crawlPage(&seed_page);
 
-  /* Check setURLLast Visisted */
+  /* while there are urls to crawl do */
+  WebPage* tmp;
+  while(toVisit.head) {
+    /* get next url from list */
+    tmp = listRemove();
 
-  /*Check getAddressFromTheLinksToBeVisisted */
+    /* get webpage for url */
+    if (GetWebPage(tmp)) { /* write page file */
+      writePage(tmp, target, file_counter);
+      file_counter++;
 
-  /* Check cleanup */
+      /* extract urls from webpage and add to URLList
+       making sure to only add new ones
+       and only if visiting them wouldn't exceed maxDepth */
+      if (validDepth(tmp->depth))
+        crawlPage(tmp); /* Possible asynchronous problems here? */
+    }
+    /* sleep for a bit to avoid annoying the target domain */
+    sleep(INTERVAL_PER_FETCH);
+
+    /* free resources */
+    /* TODO - Possible memory leaks doing this! Also free url? */
+    free(tmp->html);
+    free(tmp);
+  }
+
+  /* Cleanup curl */
+  curl_global_cleanup();
+
+  /* Free resources */
+  cleanup();
+  free(seed_page.html);
+  free(seed_page.url);
 
   return 0;
 }
@@ -225,12 +206,59 @@ int writePage(WebPage *page, char *dir, int file_counter) {
   char depth[MAXLINE];
   sprintf(name, "%s%d", dir, file_counter);
   sprintf(depth, "\nDepth: %d\n", page->depth);
-  FILE* fd = Fopen(name, O_WRONLY);
+  int fd = Open(name, O_WRONLY, 0);
   if (fd) {
     writen(fd, name, strlen(name));
     writen(fd, depth, strlen(depth));
     writen(fd, page->html, page->html_len);
-    Fclose(fd);
+    Close(fd);
   }
   return 0;
+}
+
+/*
+* crawlPage - Crawls WebPage page to extract URLS
+*/
+int crawlPage(WebPage *page) {
+  //TODO - Make sure to sleep!
+  int pos;
+  char* buf;
+
+  pos = 0;
+  buf = NULL;
+  while ((pos = GetNextURL(page->html, pos, page->html, &buf)) > 0) {
+    if (NormalizeURL(buf)) {
+      if (isValidURL(buf)) {
+        if (!HashTableLookUp(buf) && page->depth < MAX_DEPTH) { /* Make sure not visited and valid depth */
+          if (STATUS_LOG == 1)
+            printf("\nFound url: %s", buf);
+
+          WebPage* tmp = malloc(sizeof(WebPage));
+          tmp->url = malloc(strlen(buf)+1);
+          strcpy(tmp->url, buf);
+          tmp->depth = page->depth + 1;
+
+          listAdd(tmp);
+          //HashTableAdd(tmp->url);
+        }
+      }
+    }
+  }
+  HashTableAdd(page->url);
+  return 1;
+}
+
+/*
+* validDepth - Checks if depth is less than MAXDEPTH
+* Returns 1 if so, else returns 0
+*/
+int validDepth(int depth) {
+  return depth < MAX_DEPTH;
+}
+
+/*
+* cleanup - free resources
+*/
+void cleanup() {
+  //TODO
 }

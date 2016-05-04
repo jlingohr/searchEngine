@@ -28,7 +28,7 @@ typedef struct HashTableNode {
 typedef struct HashTable {
     HashTableNode *table[MAX_HASH_SLOT];     // actual hashtable
     unsigned int size;
-    unsigned int n
+    unsigned int n;
 } HashTable;
 
 // ---------------- Public Variables
@@ -39,10 +39,12 @@ typedef struct HashTable {
 
 unsigned long Hash(const char *str, unsigned long mod);
 
-
+void initHashTable();
 // add to hash table
 int HashTableAdd(char * url);
 // lookup
 int HashTableLookUp(char * url);
+void cleanHash();
+
 
 #endif // HASHTABLE_H
