@@ -1,0 +1,1708 @@
+http://www.cs.dartmouth.edu/~campbell/cs50/datastructures.html
+Depth: 2
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title></title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="datastructures.tex"> 
+<meta name="date" content="2012-04-16 00:25:00"> 
+<link rel="stylesheet" type="text/css" href="datastructures.css"> 
+</head><body 
+>
+<h1 class="likepartHead"><a 
+ id="x1-1000"></a>CS 50 Software Design and Implementation</h1>
+<h1 class="likepartHead"><a 
+ id="x1-2000"></a>Lecture 13</h1>
+<h1 class="likepartHead"><a 
+ id="x1-3000"></a>TinySearch Engine: Crawler Data Structure Design</h1>
+<!--l. 21--><p class="noindent" >In the this lecture we will discuss the detailed design of the crawler&#8217;s data structures. We discuss double
+linked lists and hash tables for speeding up the search for unique URLs. The major data structures include
+the hash table, a double linked list for holding DNODEs (general dictionary elements). DNODEs maintain
+spointers to a URL structure called URLNODE which in turn maintain state information
+associated with the webpage crawled such as its depth as well as control information for the
+algorithm such as the visited variable indicating if the webpage as been crawled already or
+not.
+<!--l. 23--><p class="noindent" >The complexity of the design is the crawler is mostly carried by the data structure design making the
+code relatively non complex. Putting effort into the design of smart data structures saves a
+significant amount of coding. Poor data structure choice leads to complex and complicated
+code.
+<h3 class="likesectionHead"><a 
+ id="x1-4000"></a>Goals</h3>
+<!--l. 27--><p class="noindent" >We plan to learn the following from today&#8217;s lecture:
+     <ul class="itemize1">
+     <li class="itemize">The URLNODE data structure
+     </li>
+     <li class="itemize">Common data structures: single, double, and circular linked lists
+     </li>
+     <li class="itemize">The DNODE data structure
+     </li>
+     <li class="itemize">Speeding up the search with hash tables and hash function: very cool.
+     </li>
+     <li class="itemize">The DICTIONARY data structure
+     </li>
+     <li class="itemize">Creating DICTIONARY, DNODE, URLNODE data structures
+                                                                                  
+                                                                                  
+     </li>
+     <li class="itemize">Data structures in action</li></ul>
+<!--l. 40--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-5000"></a>URLNODE Data Structure</h3>
+<!--l. 42--><p class="noindent" >There are a number of important data structures used to implement the crawler. In fact these data
+structures are also used to implement the indexer which will be the subject of Lab5. In what follows, we
+discuss each of the structures.
+<!--l. 44--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                  
+                                                                                  
+<a 
+ id="x1-50011"></a>
+                                                                                  
+                                                                                  
+                                                                                  
+                                                                                  
+<!--l. 45--><p class="noindent" ><img 
+src="datastructures0x.png" alt="PIC" class="graphics" width="578.15999pt" height="795.49467pt" ><!--tex4ht:graphics  
+name="datastructures0x.png" src="common.eps"  
+-->
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1: </span><span  
+class="content">Some common data structures: single and double linked lists, and hash table</span></div><!--tex4ht:label?: x1-50011 -->
+                                                                                  
+                                                                                  
+<!--l. 48--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 50--><p class="noindent" >A key problem is the design of the data structure representing the information that must be maintained
+for each URL. This includes the URL name itself and the depth associated with the URL (e.g., 0, 1, 2,
+etc.) and a control flag used by the crawler program to mark if the URL has been visited or not.
+Visited indicates that the webpage has been downloaded by the wget command and the URLs
+extracted from the page and inserted into the double linked list maintained by the DICTIONARY
+structure.
+<!--l. 52--><p class="noindent" >A possible implementation of the URL element is the following <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">URLNODE</span></span></span>:
+<div 
+class="colorbox" id="colorbox1"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">typedef</span><span 
+class="cmtt-10">&#x00A0;struct</span><span 
+class="cmtt-10">&#x00A0;_URL{</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;url[MAX_URL_LENGTH];</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;e.g.,</span><span 
+class="cmtt-10">&#x00A0;www.cs.dartmouth.edu</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;depth;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;depth</span><span 
+class="cmtt-10">&#x00A0;associated</span><span 
+class="cmtt-10">&#x00A0;with</span><span 
+class="cmtt-10">&#x00A0;this</span><span 
+class="cmtt-10">&#x00A0;URL.</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;visited;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;crawled</span><span 
+class="cmtt-10">&#x00A0;or</span><span 
+class="cmtt-10">&#x00A0;not,</span><span 
+class="cmtt-10">&#x00A0;marked</span><span 
+class="cmtt-10">&#x00A0;true(1),</span><span 
+class="cmtt-10">&#x00A0;otherwise</span><span 
+class="cmtt-10">&#x00A0;false(0)</span><br /><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;__URL;</span><br /><br /><span 
+class="cmtt-10">typedef</span><span 
+class="cmtt-10">&#x00A0;struct</span><span 
+class="cmtt-10">&#x00A0;_URL</span><span 
+class="cmtt-10">&#x00A0;URLNODE;</span><br /><br /><span 
+class="cmtt-10">MAX_URL_LENGTH</span><span 
+class="cmtt-10">&#x00A0;should</span><span 
+class="cmtt-10">&#x00A0;be</span><span 
+class="cmtt-10">&#x00A0;set</span><span 
+class="cmtt-10">&#x00A0;equal</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;maximum</span><span 
+class="cmtt-10">&#x00A0;size</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;an</span><span 
+class="cmtt-10">&#x00A0;URL</span><span 
+class="cmtt-10">&#x00A0;(we</span><span 
+class="cmtt-10">&#x00A0;over-estimate).</span><br /><br /></div></div>
+<!--l. 73--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                  
+                                                                                  
+<a 
+ id="x1-50142"></a>
+                                                                                  
+                                                                                  
+                                                                                  
+                                                                                  
+<!--l. 74--><p class="noindent" ><img 
+src="datastructures1x.png" alt="PIC" class="graphics" width="578.15999pt" height="795.49467pt" ><!--tex4ht:graphics  
+name="datastructures1x.png" src="urlnode.eps"  
+-->
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2: </span><span  
+class="content">Data structures: url-list[] and URLNODE structure</span></div><!--tex4ht:label?: x1-50142 -->
+                                                                                  
+                                                                                  
+<!--l. 77--><p class="noindent" ></div><hr class="endfigure">
+<h3 class="likesectionHead"><a 
+ id="x1-6000"></a>DNODE Data Structure; and a general comment on link lists</h3>
+<!--l. 81--><p class="noindent" >First some general comments. We need a structure that could be used to first define if a URL is unique. If
+it is unique we want to store it and then at a point later (after we have process one or more URLs) we
+want to download the webpage associated with this stored URL and then extract and store unique URLs
+embedded in that page. A obvious structure is some list (single or double linked list) that is a list of
+URLNODES that can be searched and items added. However, the access to this data structure
+is linear. If we are unlucky, we need to parse all the data structure in order to retrieve the
+URL.
+<!--l. 83--><p class="noindent" >From below we define a double linked list (start and end) of DNODES. The DNODE holds a void pointer
+(data) to a URLNODE (which holds the URL name, depth and visited elements). It also holds forward
+and reserve pointers to a double linked list of DNODE structure instances which hold information related
+to other URL that the program deems unique. The assume being that if there is a DNODE/URLNODE
+pair on the list (start, end) then it unique.
+<!--l. 85--><p class="noindent" >Link lists are fundamental data structures that you will see time and time again. They are used for many
+applications from queuing process control blocks in the Linux kernel scheduler to handling application
+requests at a webserver. Linked lists like DNODE *start, *end consist of a number of elements (i.e.,
+DNODES) grouped or linked together in some order (could be unordered or ordered based on some
+requirement - alphabetically, numerically, priority to name a few criteria). Link lists are designed to make
+insertion and removal of elements very efficient. For example, DNODE is a double linked structure
+with forward and backward pointers making insert very efficient at any point in the list of
+elements.
+<!--l. 87--><p class="noindent" >Importantly, we make use of dynamic allocated memory using malloc at runtime to create both
+URLNODE/DNODE pairs when we need them. This makes good design sense because we don&#8217;t know if
+crawler will come across 50 or 5000 URLs, right. Therefore we can&#8217;t (and never should) hard code a hack
+to do this. Better to design an intelligent program that grows as needed in a scalable manner. We do this
+in our design and implementation.
+<!--l. 89--><p class="noindent" >There are a number of different link lists:
+<!--l. 91--><p class="noindent" ><span 
+class="cmti-10">Single link lists</span>, where a single pointer allows the program to traverse the list from start to finish. End of
+the list is denoted as a NULL pointer<br 
+class="newline" />
+<!--l. 93--><p class="noindent" ><span 
+class="cmti-10">Double link lists</span>, where elements are linked with two pointers rather than one and the list can be
+traversed in both forward and backward directions. In the case of our structure *start points the
+first DNODE linked and *end to the last one. Therefore traversing can be either direction. It
+is easy to insert at the start and end. It is also very easy to insert at any point in the list
+since DNODEs maintain forward and backward pointers to neighboring DNODEs. End of
+the list is denoted by a NULL pointer. Empty list is denoted by start and end being NULL
+pointers.<br 
+class="newline" />
+                                                                                  
+                                                                                  
+<!--l. 95--><p class="noindent" ><span 
+class="cmti-10">Circular link lists</span>, where the last element is linked to the first element instead of being NULL.<br 
+class="newline" />
+<!--l. 97--><p class="noindent" >Note, we hold off on a discussion of the key element until below.
+<div 
+class="colorbox" id="colorbox2"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">typedef</span><span 
+class="cmtt-10">&#x00A0;struct</span><span 
+class="cmtt-10">&#x00A0;_DNODE</span><span 
+class="cmtt-10">&#x00A0;{</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;struct</span><span 
+class="cmtt-10">&#x00A0;_DNODE</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;*next;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;struct</span><span 
+class="cmtt-10">&#x00A0;_DNODE</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;*prev;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;void</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;*data;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;actual</span><span 
+class="cmtt-10">&#x00A0;data</span><span 
+class="cmtt-10">&#x00A0;points</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;URLNODE</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;key[KEY_LENGTH];</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;actual</span><span 
+class="cmtt-10">&#x00A0;(URL)</span><span 
+class="cmtt-10">&#x00A0;key</span><br /><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;__DNODE;</span><br /><br /><span 
+class="cmtt-10">typedef</span><span 
+class="cmtt-10">&#x00A0;struct</span><span 
+class="cmtt-10">&#x00A0;_DNODE</span><span 
+class="cmtt-10">&#x00A0;DNODE;</span><br /><br /><span 
+class="cmtt-10">DNODE</span><span 
+class="cmtt-10">&#x00A0;*start;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;start</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;double</span><span 
+class="cmtt-10">&#x00A0;link</span><span 
+class="cmtt-10">&#x00A0;list</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;DNODES</span><span 
+class="cmtt-10">&#x00A0;terminated</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;NULL</span><span 
+class="cmtt-10">&#x00A0;pointer</span><br /><span 
+class="cmtt-10">DNODE</span><span 
+class="cmtt-10">&#x00A0;*end;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;points</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;last</span><span 
+class="cmtt-10">&#x00A0;DNODE</span><span 
+class="cmtt-10">&#x00A0;on</span><span 
+class="cmtt-10">&#x00A0;this</span><span 
+class="cmtt-10">&#x00A0;list</span><br /><br /></div></div>
+<!--l. 120--><p class="noindent" >The performance of such a structure is O(n). Because we may have hundreds of URLNODES linked to this
+list at anyone time we want to design a faster access structure - e.g., O(1). For example, if you crawl the
+www.cs.dartmouth.edu to a depth of 2 there will be approximately 200 unique. The pure list solution
+would make the operation of the crawler slow. So how can we speed up this operation. We need a smart
+data structures.
+<!--l. 122--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                  
+                                                                                  
+<a 
+ id="x1-60153"></a>
+                                                                                  
+                                                                                  
+                                                                                  
+                                                                                  
+<!--l. 123--><p class="noindent" ><img 
+src="datastructures2x.png" alt="PIC" class="graphics" width="433.62pt" height="568.94168pt" ><!--tex4ht:graphics  
+name="datastructures2x.png" src="dictionary1.eps"  
+-->
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;3: </span><span  
+class="content">Dictionary data structure used to build the index used by the crawler. The thick arrows
+show how the documents related to a given URL are retrieved.</span></div><!--tex4ht:label?: x1-60153 -->
+                                                                                  
+                                                                                  
+<!--l. 126--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 129--><p class="noindent" >One possible implementation can be based on a <span 
+class="cmti-10">dictionary</span>, i.e., a generalized hash table (like that we have
+seen in the assignment about the design of the index).
+<!--l. 131--><p class="noindent" >Each element of the dictionary is defined as follows:
+<h3 class="likesectionHead"><a 
+ id="x1-7000"></a>Hash tables and hash functions</h3>
+<!--l. 136--><p class="noindent" >Clearly, if we are dealing with small numbers of URLs then a linked list if the right cup of
+tea. But we are not. Performance O(n) would not be a good design for 10,0000 URLs. You
+have time for the tea to grow in Darjeeling before the crawl completed. Order(1) would be
+nice!
+<!--l. 138--><p class="noindent" >The use of a hash table would speed our execution significantly. Hash tables and functions support one of
+the most effective types of searches: <span 
+class="cmti-10">hashing</span>. A hash table consists of an array of some length where data
+is accessed via a special index called (in a general sense) a <span 
+class="cmti-10">key</span>. The ideas behind the hash
+table is to create a mapping between the key (in our application the key is the URL e.g.,
+www.cs.dartmouth.edu/&#x02DC;nlane) and the index into the hash table array - the index is called has value.
+Keys can almost be anything - URL, time of day, IP address (routers use hash tables to look up the next
+hop to forward an IP packet), name - but hash values are always an integer that identifies the slot of the
+hash table array.
+<!--l. 140--><p class="noindent" >The great innovation in hash tables is that computing the index (a hash function does that - the one we
+use is called hash1(char *)) is done in constant time! Therefore no matter how many URLs (elements) we
+have we will always search (to determine the uniqueness of the URL before we inset it in
+the list) in constant time. That is a very nice scaling property of the design. In ideal cases
+(i.e., unrealistic) a function will guarantee that no two keys will hash to the same slot (i.e.,
+have the same hash value). However, in reality this is not the case. Different keys may with
+small probability (assuming that the size of the table in relation to the maximum number
+of elements is reasonable but clearly we assume that the number of entries in the table is
+small in comparison to the potentially large number of URLs encountered) have the same
+hash index. As a consequence most hash functions will map two or more keys to the same
+slot in the table. This is called collision. And a good hash function will be designed to limit
+collision in an attempt to randomly distribute DNODEs/URLNODEs elements across the
+table.
+<!--l. 142--><p class="noindent" >Here is how the process works.<br 
+class="newline" />
+<!--l. 144--><p class="noindent" >Given the following:
+<!--l. 146--><p class="noindent" >- a <span 
+class="cmbx-10">key </span>www.cs.dartmouth.edu/&#x00A0;campbell <br 
+class="newline" />
+<!--l. 148--><p class="noindent" >- a <span 
+class="cmbx-10">hash function </span>hash1() <br 
+class="newline" />
+                                                                                  
+                                                                                  
+<!--l. 150--><p class="noindent" >- a <span 
+class="cmbx-10">hash table </span>DNODE *hash[MAX_HASH_SLOT] of a certain size (here we choose a large value of
+MAX_HASH_SLOT = of 10000)<br 
+class="newline" />
+<!--l. 153--><p class="noindent" >Then we can do the following:
+<!--l. 155--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">hashIndex</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;hash1(&#8216;&#8216;www.cs.dartmouth.edu/~campbell&#8217;&#8217;);</span></span></span>
+<!--l. 157--><p class="noindent" >Assume that the hashIndex returned is 19. Then we can say that hash1 will always return 19 for that key.
+And that the hashIndex indexes a slot in the hash table that keeps a pointer to a DNODE. In our
+algorithm we can make the following assumption. If the slot contains a NULL pointer (say for the key
+above) then we are assured that the key is unique. If a pointer is already at slot 19 we cannot conversely
+say that the URL is not unique because other keys my be hashed at the slot too. So we have to search
+through the list starting at what is pointed to by slot 19 in the table and search the list until we either
+find the same URL (therefore it is not unique) OR we come to the end of the DNODEs that are associated
+with hash value 19. For example, each DNODE holds a <span 
+class="cmbx-10">key </span>(which in our case is a URL
+name) therefore assume that there are two DNODEs linked starting from slot 19 with different
+keys but the hash index 19 <span 
+class="cmbx-10">(but recall that the hash table simply points to elements</span>
+<span 
+class="cmbx-10">in the double linked list)</span>. But how do we know that we have got to the end of the list
+of DNODEs with the same hash value? We recompute the hash value for each DNODE we
+traverse for the key maintained in the DNODE and if they equal 19 in this case (the same
+hash index) we know they are related and need to be searched and compared for uniqueness
+against the current URL. But if the hash index is different (not 19) then we know for sure
+that the URL is unique and should be linked into the end of the DNODEs that have the
+same hash value. This paragraph really describes the algorithm for searching using the hash
+table and hash function. Be sure to read it again before coding it. Be sure to pencil our a few
+scenarios that help explain the various conditions of searching and insertion. An example of a
+hash table pointing to DNODES (and DNODES point to URLNODES) is shown in Figure
+1.
+<!--l. 159--><p class="noindent" >Now to explain our design choices. The DICTIONARY holds the hash table and the start and end
+pointers into a double link list. This is an unordered list with the exception that DNODES with the same
+hash value are clusters along the list at the same place as discussed above. So you hash into the
+list. Check for uniqueness of the URL If not found add to the end of the cluster associated
+with the same key/hash value. You will have to search the hash table starting at the hash
+value and write an addElement function to insert the DNODE into the list at the current
+place.
+<div 
+class="colorbox" id="colorbox3"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">typedef</span><span 
+class="cmtt-10">&#x00A0;struct</span><span 
+class="cmtt-10">&#x00A0;_DICTIONARY</span><span 
+class="cmtt-10">&#x00A0;{</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;DNODE</span><span 
+class="cmtt-10">&#x00A0;*hash[MAX_HASH_SLOT];</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;hash</span><span 
+class="cmtt-10">&#x00A0;table</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;slots,</span><span 
+class="cmtt-10">&#x00A0;each</span><span 
+class="cmtt-10">&#x00A0;slot</span><span 
+class="cmtt-10">&#x00A0;points</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;DNODE</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;DNODE</span><span 
+class="cmtt-10">&#x00A0;*start;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;start</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;double</span><span 
+class="cmtt-10">&#x00A0;link</span><span 
+class="cmtt-10">&#x00A0;list</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;DNODES</span><span 
+class="cmtt-10">&#x00A0;terminated</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;NULL</span><span 
+class="cmtt-10">&#x00A0;pointer</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;DNODE</span><span 
+class="cmtt-10">&#x00A0;*end;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;points</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;last</span><span 
+class="cmtt-10">&#x00A0;DNODE</span><span 
+class="cmtt-10">&#x00A0;on</span><span 
+class="cmtt-10">&#x00A0;this</span><span 
+class="cmtt-10">&#x00A0;list</span><br /><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;__DICTIONARY;</span><br /><br /><span 
+class="cmtt-10">typedef</span><span 
+class="cmtt-10">&#x00A0;struct</span><span 
+class="cmtt-10">&#x00A0;_DICTIONARY</span><span 
+class="cmtt-10">&#x00A0;DICTIONARY;</span><br /><br /></div></div>
+<!--l. 178--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-8000"></a>DICTIONARY Data Structure</h3>
+<!--l. 180--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">prev</span></span></span> and <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">next</span></span></span> are pointers to the previous and the next element in the dynamic list of DNODEs. <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">start</span></span></span>
+and <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">end</span></span></span> are pointers to the first and last element in this dynamic list.
+                                                                                  
+                                                                                  
+<!--l. 182--><p class="noindent" >Each element in the dynamic list has a unique string called <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">key</span></span></span>. The general use of this data structure is
+the following: given a key in input, we want to find out an element with the same key. For example, we
+want to retrieve the element corresponding to a certain URL.
+<!--l. 184--><p class="noindent" >As we said, a linked list, you may have to traverse the whole list, comparing each <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">key</span></span></span> of each element to
+the given key in input. Using a very long list, this process is very slow.
+<!--l. 186--><p class="noindent" >The name hash derives from the fact that it is based on the use of hash functions. These functions return
+a hash value index that is an integer in a certain range (0 to <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">MAX_HASH_SLOT</span></span></span> in our code) given an
+arbitrarily long string. The longer the string the better.
+<!--l. 188--><p class="noindent" >Each piece of data that has to be stored is associated to a certain position (also called bin or slot) in the
+list calculated by means of the hash function. For example, by hashing a certain URL, let us say
+<span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">http:\\www.dartmouth.edu</span></span></span>), we obtain the position 43. Then the information (i.e., the struct containing
+the information) is stored in a list associated to the position 43. In fact, different strings in input can be
+mapped into the same bin; therefore, we do not have a single element associated to this position, but a list
+of elements.
+<!--l. 190--><p class="noindent" >The goal is to separate the whole list into several parts/sublists (clusters) where each part is composed of
+one or more elements. Then, the complexity of the search is reduced, since we have to search
+only through the elements of the list associated to a certain bin/slot retrieved using the hash
+function.
+<!--l. 192--><p class="noindent" >To implement such a data structure, we keep an array hash in memory, where <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">MAX_HASH_SLOT</span></span></span> is the max
+value of all the possible hash values:
+<!--l. 194--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                  
+                                                                                  
+<a 
+ id="x1-80014"></a>
+                                                                                  
+                                                                                  
+                                                                                  
+                                                                                  
+<!--l. 195--><p class="noindent" ><img 
+src="datastructures3x.png" alt="PIC" class="graphics" width="578.15999pt" height="795.49467pt" ><!--tex4ht:graphics  
+name="datastructures3x.png" src="dnode.eps"  
+-->
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4: </span><span  
+class="content">Data structures: DNODE and DICTIONARY structures</span></div><!--tex4ht:label?: x1-80014 -->
+                                                                                  
+                                                                                  
+<!--l. 198--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 200--><p class="noindent" >The data structure is allocated in the heap using <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">malloc()</span></span></span>.
+<!--l. 202--><p class="noindent" >Given a certain string, first you <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">hash1()</span></span></span> it, obtaining an hash index <span 
+class="cmti-10">h </span>(i.e., the bin in position <span 
+class="cmti-10">h</span>, and use
+the result as the index of the <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">hash</span></span></span> array above. The pointer you get from the array points
+to the first element of the dynamic list characterized by a key equal to <span 
+class="cmmi-10">h</span>. This mechanism
+is used to add or retrieve the information. The result of the hash table/function is we only
+have compare a small fraction of elements associated with the whole list to find the element
+with the same key rather than search through all the elements - representing a significant
+speed-up.
+<!--l. 208--><p class="noindent" >The dictionary data structure is quite generic and it can be used with various types of data.
+Each element not contain only the <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">key</span></span></span> but also a data pointer. In our implementation, the
+<span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">data</span></span></span> variable stores the pointer (the famous void *pointer) to the data (URLNODE) rather
+than storing the data itself as in the data structure used for the index. Therefore, users could
+insert any data in the list simply by providing a unique key and the pointer to the actual
+data. A generic dictionary is shown in Figure&#x00A0;<span 
+class="cmbx-10">??</span>. An example of a generalized DICTIONARY
+hash table pointing to DNODES (and DNODES point to URLNODES) is shown in Figure
+1.
+<!--l. 211--><p class="noindent" >In our case, the key is the URL and the data points to a struct of type <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">DNODE</span></span></span>. Let us consider the case of
+the insertion of a <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">DNODE</span></span></span> element in this list. The idea is that you have to first find the list with the same
+hash value by hashing the URL address and then insert your element in the list in the position equal to
+the hash value (by appending it to the list). If there is no element in the list sharing the same
+hash value index, you can just insert the element (first element) and change the pointer in
+the hash array setting it to the memory location of the the newly inserted element. In this
+case you should add the element to the end of the list (DNODE *end) points to. And, then
+update the pointer in the hash table at the associated hash index to point to the element.
+If there is an element, you insert the element at the end of the list assuming no match is
+found.
+<h3 class="likesectionHead"><a 
+ id="x1-9000"></a>Creating DICTIONARY, DNODE, URLNODE data structures</h3>
+<!--l. 215--><p class="noindent" ><span 
+class="cmbx-10">url&#x02D9;list </span>Code snippet for malloc-ing space for a URL, initializing it, linking it into url_list, and then
+copying the URL over.
+<div 
+class="colorbox" id="colorbox4"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">char*</span><span 
+class="cmtt-10">&#x00A0;url_list[MAX_URL_PER_PAGE];</span><br /><br /><span 
+class="cmtt-10">url_list[i]</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;malloc(MAX_URL_LENGTH);</span><br /><span 
+class="cmtt-10">MALLOC_CHECK(url_list[i]);</span><br /><span 
+class="cmtt-10">BZERO(url_list[i],</span><span 
+class="cmtt-10">&#x00A0;MAX_URL_LENGTH);</span><br /><span 
+class="cmtt-10">strncpy(url_list[i],</span><span 
+class="cmtt-10">&#x00A0;url,</span><span 
+class="cmtt-10">&#x00A0;MAX_URL_LENGTH);</span><br /><br /></div></div>
+<!--l. 233--><p class="noindent" ><span 
+class="cmbx-10">URLNODE </span>Code snippet for malloc-ing space for a new URLNODE, initializing its elements, and then
+copying the URL over.
+<div 
+class="colorbox" id="colorbox5"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">URLNODE*</span><span 
+class="cmtt-10">&#x00A0;n</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;malloc(sizeof(URLNODE));</span><br /><span 
+class="cmtt-10">MALLOC_CHECK(n);</span><br /><span 
+class="cmtt-10">n-&#x003E;depth</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;d;</span><br /><span 
+class="cmtt-10">n-&#x003E;visited</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;0;</span><br /><span 
+class="cmtt-10">BZERO(n-&#x003E;url,</span><span 
+class="cmtt-10">&#x00A0;MAX_URL_LENGTH);</span><br /><span 
+class="cmtt-10">strncpy(n-&#x003E;url,</span><span 
+class="cmtt-10">&#x00A0;URL,</span><span 
+class="cmtt-10">&#x00A0;MAX_URL_LENGTH);</span><br /><br /></div></div>
+<!--l. 251--><p class="noindent" ><span 
+class="cmbx-10">DICTIONARY </span>Code snippet for malloc-ing space for the dictionary and initializing it - and explicit the
+double linked list used to hold DNODEs.
+<div 
+class="colorbox" id="colorbox6"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">DICTIONARY*</span><span 
+class="cmtt-10">&#x00A0;d</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;(DICTIONARY*)malloc(sizeof(DICTIONARY));</span><br /><span 
+class="cmtt-10">MALLOC_CHECK(d);</span><br /><span 
+class="cmtt-10">BZERO(d,</span><span 
+class="cmtt-10">&#x00A0;sizeof(DICTIONARY));</span><br /><span 
+class="cmtt-10">d-&#x003E;start</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;d-&#x003E;end</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;NULL;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;make</span><span 
+class="cmtt-10">&#x00A0;explicit</span><br /><br /></div></div>
+                                                                                  
+                                                                                  
+<!--l. 267--><p class="noindent" ><span 
+class="cmbx-10">DNODE </span>Code snippet for malloc-ing space for the DNODE and initializing it, and adding it to the list -
+as you can see this is for the condition that there is not other DNODE on the list. The new DNODE is
+then added to the hash table at the hash index element and the key (URL in this case) is copied
+over.
+<div 
+class="colorbox" id="colorbox7"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">dict-&#x003E;start</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;dict-&#x003E;end</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;malloc(sizeof(DNODE));</span><br /><span 
+class="cmtt-10">MALLOC_CHECK(dict-&#x003E;start);</span><br /><span 
+class="cmtt-10">dict-&#x003E;start-&#x003E;prev</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;dict-&#x003E;start-&#x003E;next</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;NULL;</span><br /><span 
+class="cmtt-10">dict-&#x003E;hash[h]</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;dict-&#x003E;start;</span><br /><span 
+class="cmtt-10">dict-&#x003E;start-&#x003E;data</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;n;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;note</span><span 
+class="cmtt-10">&#x00A0;that</span><span 
+class="cmtt-10">&#x00A0;n</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;pointer</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;URL</span><span 
+class="cmtt-10">&#x00A0;from</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;example</span><span 
+class="cmtt-10">&#x00A0;above</span><br /><span 
+class="cmtt-10">BZERO(dict-&#x003E;start-&#x003E;key,</span><span 
+class="cmtt-10">&#x00A0;KEY_LENGTH);</span><br /><span 
+class="cmtt-10">strncpy(dict-&#x003E;start-&#x003E;key,</span><span 
+class="cmtt-10">&#x00A0;key,</span><span 
+class="cmtt-10">&#x00A0;KEY_LENGTH);</span><br /><br /></div></div>
+<!--l. 286--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-10000"></a>Illustration of data structures in action</h3>
+<!--l. 288--><p class="noindent" ><span 
+class="cmbx-10">Searching for uniquenes of URL</span>. How do we determine that the URL is unique? First we hash into
+the hash table and if the element is NULL then the URL is unique. We link it into the end of the double
+link list and update the hash table entry to point to it.
+<!--l. 290--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                  
+                                                                                  
+<a 
+ id="x1-100015"></a>
+                                                                                  
+                                                                                  
+                                                                                  
+                                                                                  
+<!--l. 291--><p class="noindent" ><img 
+src="datastructures4x.png" alt="PIC" class="graphics" width="578.15999pt" height="795.49467pt" ><!--tex4ht:graphics  
+name="datastructures4x.png" src="search.eps"  
+-->
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;5: </span><span  
+class="content">Hashing into the list and searching the &#8220;cluster&#8221; of DNODEs for uniqueness of the URL</span></div><!--tex4ht:label?: x1-100015 -->
+                                                                                  
+                                                                                  
+<!--l. 294--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 296--><p class="noindent" >If there is a pointer at the hash index then we do not know if there the URL is unique - why
+is this the case? We need to search the cluster (defined as the group of DNODES with the
+same key) to see if there the URL is linked in. We look at the linked URLNODE to do the
+string compare of current URL againt the URL names in the URLNODES. If we traverse all
+the cluster and there is no match then the URL is unique and we link it to the end of the
+cluster.
+<!--l. 298--><p class="noindent" >The figure below shows that the DNODE list as a number of URLs added. The list is searched for the
+uniqueness of www.sartmouth.edu/&#x02DC;wpay It is found to be unique and the point in the list is marked
+where it should be inserted.
+<h3 class="likesectionHead"><a 
+ id="x1-11000"></a>Add a url to the url_list</h3>
+<!--l. 302--><p class="noindent" ><span 
+class="cmbx-10">url&#x02D9;list </span>Code snippet for malloc-ing space for a URL, initializing it, linking it into url_list, and then
+copying the URL over.
+<div 
+class="colorbox" id="colorbox8"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">char*</span><span 
+class="cmtt-10">&#x00A0;url_list[MAX_URL_PER_PAGE];</span><br /><br /><span 
+class="cmtt-10">url_list[i]</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;malloc(MAX_URL_LENGTH);</span><br /><span 
+class="cmtt-10">MALLOC_CHECK(url_list[i]);</span><br /><span 
+class="cmtt-10">BZERO(url_list[i],</span><span 
+class="cmtt-10">&#x00A0;MAX_URL_LENGTH);</span><br /><span 
+class="cmtt-10">strncpy(url_list[i],</span><span 
+class="cmtt-10">&#x00A0;url,</span><span 
+class="cmtt-10">&#x00A0;MAX_URL_LENGTH);</span><br /><br /></div></div>
+<!--l. 320--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-12000"></a>Inserting a DNODE into the dictionary</h3>
+<!--l. 322--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                  
+                                                                                  
+<a 
+ id="x1-120016"></a>
+                                                                                  
+                                                                                  
+                                                                                  
+                                                                                  
+<!--l. 323--><p class="noindent" ><img 
+src="datastructures5x.png" alt="PIC" class="graphics" width="578.15999pt" height="795.49467pt" ><!--tex4ht:graphics  
+name="datastructures5x.png" src="link.eps"  
+-->
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;6: </span><span  
+class="content">Inserting a DNODE at the end of a cluster of DNODEs</span></div><!--tex4ht:label?: x1-120016 -->
+                                                                                  
+                                                                                  
+<!--l. 326--><p class="noindent" ></div><hr class="endfigure">
+<h3 class="likesectionHead"><a 
+ id="x1-13000"></a>Files you need for the crawler implementation</h3>
+<!--l. 330--><p class="noindent" >Here are the following source files give out to assist in the implementation:<br 
+class="newline" />
+<!--l. 332--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/crawler.h" >crawler.h</a>- Implementation Spec is captured in the crawler.h file. It defines the important defines, marcos,
+data structures and prototype functions.
+<!--l. 334--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/crawler.c" >crawler.c</a>- Students add the code starting here. It includes, from the Design Spec (Pseudo code description
+of the crawler algorithm), inputs and outputs.
+<!--l. 336--><p class="noindent" >Other code given out for the Lab4 (to make your life easier) include:<br 
+class="newline" />
+<!--l. 338--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/hash.h" >hash.h</a>- Hash function header file
+<!--l. 340--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/hash.c" >hash.c</a>- Hash function
+<!--l. 342--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/html.h" >html.h</a>- HTML parsing code including GetNextURL()
+<!--l. 344--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/header.h" >header.h</a>- Some useful Macros
+<!--l. 346--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/html.c" >html.c</a>- GetNextURL()
+<!--l. 348--><p class="noindent" >In the tarball sent you there is also a README file which we point to here for completeness.<br 
+class="newline" />
+<!--l. 350--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/README" >README</a>- README
+ 
+</body></html> 
+
+                                                                                  
+
+
+http://www.cs.dartmouth.edu/~campbell/cs50/datastructures.html
+Depth: 2
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title></title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="datastructures.tex"> 
+<meta name="date" content="2012-04-16 00:25:00"> 
+<link rel="stylesheet" type="text/css" href="datastructures.css"> 
+</head><body 
+>
+<h1 class="likepartHead"><a 
+ id="x1-1000"></a>CS 50 Software Design and Implementation</h1>
+<h1 class="likepartHead"><a 
+ id="x1-2000"></a>Lecture 13</h1>
+<h1 class="likepartHead"><a 
+ id="x1-3000"></a>TinySearch Engine: Crawler Data Structure Design</h1>
+<!--l. 21--><p class="noindent" >In the this lecture we will discuss the detailed design of the crawler&#8217;s data structures. We discuss double
+linked lists and hash tables for speeding up the search for unique URLs. The major data structures include
+the hash table, a double linked list for holding DNODEs (general dictionary elements). DNODEs maintain
+spointers to a URL structure called URLNODE which in turn maintain state information
+associated with the webpage crawled such as its depth as well as control information for the
+algorithm such as the visited variable indicating if the webpage as been crawled already or
+not.
+<!--l. 23--><p class="noindent" >The complexity of the design is the crawler is mostly carried by the data structure design making the
+code relatively non complex. Putting effort into the design of smart data structures saves a
+significant amount of coding. Poor data structure choice leads to complex and complicated
+code.
+<h3 class="likesectionHead"><a 
+ id="x1-4000"></a>Goals</h3>
+<!--l. 27--><p class="noindent" >We plan to learn the following from today&#8217;s lecture:
+     <ul class="itemize1">
+     <li class="itemize">The URLNODE data structure
+     </li>
+     <li class="itemize">Common data structures: single, double, and circular linked lists
+     </li>
+     <li class="itemize">The DNODE data structure
+     </li>
+     <li class="itemize">Speeding up the search with hash tables and hash function: very cool.
+     </li>
+     <li class="itemize">The DICTIONARY data structure
+     </li>
+     <li class="itemize">Creating DICTIONARY, DNODE, URLNODE data structures
+                                                                                  
+                                                                                  
+     </li>
+     <li class="itemize">Data structures in action</li></ul>
+<!--l. 40--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-5000"></a>URLNODE Data Structure</h3>
+<!--l. 42--><p class="noindent" >There are a number of important data structures used to implement the crawler. In fact these data
+structures are also used to implement the indexer which will be the subject of Lab5. In what follows, we
+discuss each of the structures.
+<!--l. 44--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                  
+                                                                                  
+<a 
+ id="x1-50011"></a>
+                                                                                  
+                                                                                  
+                                                                                  
+                                                                                  
+<!--l. 45--><p class="noindent" ><img 
+src="datastructures0x.png" alt="PIC" class="graphics" width="578.15999pt" height="795.49467pt" ><!--tex4ht:graphics  
+name="datastructures0x.png" src="common.eps"  
+-->
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1: </span><span  
+class="content">Some common data structures: single and double linked lists, and hash table</span></div><!--tex4ht:label?: x1-50011 -->
+                                                                                  
+                                                                                  
+<!--l. 48--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 50--><p class="noindent" >A key problem is the design of the data structure representing the information that must be maintained
+for each URL. This includes the URL name itself and the depth associated with the URL (e.g., 0, 1, 2,
+etc.) and a control flag used by the crawler program to mark if the URL has been visited or not.
+Visited indicates that the webpage has been downloaded by the wget command and the URLs
+extracted from the page and inserted into the double linked list maintained by the DICTIONARY
+structure.
+<!--l. 52--><p class="noindent" >A possible implementation of the URL element is the following <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">URLNODE</span></span></span>:
+<div 
+class="colorbox" id="colorbox1"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">typedef</span><span 
+class="cmtt-10">&#x00A0;struct</span><span 
+class="cmtt-10">&#x00A0;_URL{</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;url[MAX_URL_LENGTH];</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;e.g.,</span><span 
+class="cmtt-10">&#x00A0;www.cs.dartmouth.edu</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;depth;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;depth</span><span 
+class="cmtt-10">&#x00A0;associated</span><span 
+class="cmtt-10">&#x00A0;with</span><span 
+class="cmtt-10">&#x00A0;this</span><span 
+class="cmtt-10">&#x00A0;URL.</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;visited;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;crawled</span><span 
+class="cmtt-10">&#x00A0;or</span><span 
+class="cmtt-10">&#x00A0;not,</span><span 
+class="cmtt-10">&#x00A0;marked</span><span 
+class="cmtt-10">&#x00A0;true(1),</span><span 
+class="cmtt-10">&#x00A0;otherwise</span><span 
+class="cmtt-10">&#x00A0;false(0)</span><br /><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;__URL;</span><br /><br /><span 
+class="cmtt-10">typedef</span><span 
+class="cmtt-10">&#x00A0;struct</span><span 
+class="cmtt-10">&#x00A0;_URL</span><span 
+class="cmtt-10">&#x00A0;URLNODE;</span><br /><br /><span 
+class="cmtt-10">MAX_URL_LENGTH</span><span 
+class="cmtt-10">&#x00A0;should</span><span 
+class="cmtt-10">&#x00A0;be</span><span 
+class="cmtt-10">&#x00A0;set</span><span 
+class="cmtt-10">&#x00A0;equal</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;maximum</span><span 
+class="cmtt-10">&#x00A0;size</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;an</span><span 
+class="cmtt-10">&#x00A0;URL</span><span 
+class="cmtt-10">&#x00A0;(we</span><span 
+class="cmtt-10">&#x00A0;over-estimate).</span><br /><br /></div></div>
+<!--l. 73--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                  
+                                                                                  
+<a 
+ id="x1-50142"></a>
+                                                                                  
+                                                                                  
+                                                                                  
+                                                                                  
+<!--l. 74--><p class="noindent" ><img 
+src="datastructures1x.png" alt="PIC" class="graphics" width="578.15999pt" height="795.49467pt" ><!--tex4ht:graphics  
+name="datastructures1x.png" src="urlnode.eps"  
+-->
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2: </span><span  
+class="content">Data structures: url-list[] and URLNODE structure</span></div><!--tex4ht:label?: x1-50142 -->
+                                                                                  
+                                                                                  
+<!--l. 77--><p class="noindent" ></div><hr class="endfigure">
+<h3 class="likesectionHead"><a 
+ id="x1-6000"></a>DNODE Data Structure; and a general comment on link lists</h3>
+<!--l. 81--><p class="noindent" >First some general comments. We need a structure that could be used to first define if a URL is unique. If
+it is unique we want to store it and then at a point later (after we have process one or more URLs) we
+want to download the webpage associated with this stored URL and then extract and store unique URLs
+embedded in that page. A obvious structure is some list (single or double linked list) that is a list of
+URLNODES that can be searched and items added. However, the access to this data structure
+is linear. If we are unlucky, we need to parse all the data structure in order to retrieve the
+URL.
+<!--l. 83--><p class="noindent" >From below we define a double linked list (start and end) of DNODES. The DNODE holds a void pointer
+(data) to a URLNODE (which holds the URL name, depth and visited elements). It also holds forward
+and reserve pointers to a double linked list of DNODE structure instances which hold information related
+to other URL that the program deems unique. The assume being that if there is a DNODE/URLNODE
+pair on the list (start, end) then it unique.
+<!--l. 85--><p class="noindent" >Link lists are fundamental data structures that you will see time and time again. They are used for many
+applications from queuing process control blocks in the Linux kernel scheduler to handling application
+requests at a webserver. Linked lists like DNODE *start, *end consist of a number of elements (i.e.,
+DNODES) grouped or linked together in some order (could be unordered or ordered based on some
+requirement - alphabetically, numerically, priority to name a few criteria). Link lists are designed to make
+insertion and removal of elements very efficient. For example, DNODE is a double linked structure
+with forward and backward pointers making insert very efficient at any point in the list of
+elements.
+<!--l. 87--><p class="noindent" >Importantly, we make use of dynamic allocated memory using malloc at runtime to create both
+URLNODE/DNODE pairs when we need them. This makes good design sense because we don&#8217;t know if
+crawler will come across 50 or 5000 URLs, right. Therefore we can&#8217;t (and never should) hard code a hack
+to do this. Better to design an intelligent program that grows as needed in a scalable manner. We do this
+in our design and implementation.
+<!--l. 89--><p class="noindent" >There are a number of different link lists:
+<!--l. 91--><p class="noindent" ><span 
+class="cmti-10">Single link lists</span>, where a single pointer allows the program to traverse the list from start to finish. End of
+the list is denoted as a NULL pointer<br 
+class="newline" />
+<!--l. 93--><p class="noindent" ><span 
+class="cmti-10">Double link lists</span>, where elements are linked with two pointers rather than one and the list can be
+traversed in both forward and backward directions. In the case of our structure *start points the
+first DNODE linked and *end to the last one. Therefore traversing can be either direction. It
+is easy to insert at the start and end. It is also very easy to insert at any point in the list
+since DNODEs maintain forward and backward pointers to neighboring DNODEs. End of
+the list is denoted by a NULL pointer. Empty list is denoted by start and end being NULL
+pointers.<br 
+class="newline" />
+                                                                                  
+                                                                                  
+<!--l. 95--><p class="noindent" ><span 
+class="cmti-10">Circular link lists</span>, where the last element is linked to the first element instead of being NULL.<br 
+class="newline" />
+<!--l. 97--><p class="noindent" >Note, we hold off on a discussion of the key element until below.
+<div 
+class="colorbox" id="colorbox2"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">typedef</span><span 
+class="cmtt-10">&#x00A0;struct</span><span 
+class="cmtt-10">&#x00A0;_DNODE</span><span 
+class="cmtt-10">&#x00A0;{</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;struct</span><span 
+class="cmtt-10">&#x00A0;_DNODE</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;*next;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;struct</span><span 
+class="cmtt-10">&#x00A0;_DNODE</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;*prev;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;void</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;*data;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;actual</span><span 
+class="cmtt-10">&#x00A0;data</span><span 
+class="cmtt-10">&#x00A0;points</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;URLNODE</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;key[KEY_LENGTH];</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;actual</span><span 
+class="cmtt-10">&#x00A0;(URL)</span><span 
+class="cmtt-10">&#x00A0;key</span><br /><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;__DNODE;</span><br /><br /><span 
+class="cmtt-10">typedef</span><span 
+class="cmtt-10">&#x00A0;struct</span><span 
+class="cmtt-10">&#x00A0;_DNODE</span><span 
+class="cmtt-10">&#x00A0;DNODE;</span><br /><br /><span 
+class="cmtt-10">DNODE</span><span 
+class="cmtt-10">&#x00A0;*start;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;start</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;double</span><span 
+class="cmtt-10">&#x00A0;link</span><span 
+class="cmtt-10">&#x00A0;list</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;DNODES</span><span 
+class="cmtt-10">&#x00A0;terminated</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;NULL</span><span 
+class="cmtt-10">&#x00A0;pointer</span><br /><span 
+class="cmtt-10">DNODE</span><span 
+class="cmtt-10">&#x00A0;*end;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;points</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;last</span><span 
+class="cmtt-10">&#x00A0;DNODE</span><span 
+class="cmtt-10">&#x00A0;on</span><span 
+class="cmtt-10">&#x00A0;this</span><span 
+class="cmtt-10">&#x00A0;list</span><br /><br /></div></div>
+<!--l. 120--><p class="noindent" >The performance of such a structure is O(n). Because we may have hundreds of URLNODES linked to this
+list at anyone time we want to design a faster access structure - e.g., O(1). For example, if you crawl the
+www.cs.dartmouth.edu to a depth of 2 there will be approximately 200 unique. The pure list solution
+would make the operation of the crawler slow. So how can we speed up this operation. We need a smart
+data structures.
+<!--l. 122--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                  
+                                                                                  
+<a 
+ id="x1-60153"></a>
+                                                                                  
+                                                                                  
+                                                                                  
+                                                                                  
+<!--l. 123--><p class="noindent" ><img 
+src="datastructures2x.png" alt="PIC" class="graphics" width="433.62pt" height="568.94168pt" ><!--tex4ht:graphics  
+name="datastructures2x.png" src="dictionary1.eps"  
+-->
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;3: </span><span  
+class="content">Dictionary data structure used to build the index used by the crawler. The thick arrows
+show how the documents related to a given URL are retrieved.</span></div><!--tex4ht:label?: x1-60153 -->
+                                                                                  
+                                                                                  
+<!--l. 126--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 129--><p class="noindent" >One possible implementation can be based on a <span 
+class="cmti-10">dictionary</span>, i.e., a generalized hash table (like that we have
+seen in the assignment about the design of the index).
+<!--l. 131--><p class="noindent" >Each element of the dictionary is defined as follows:
+<h3 class="likesectionHead"><a 
+ id="x1-7000"></a>Hash tables and hash functions</h3>
+<!--l. 136--><p class="noindent" >Clearly, if we are dealing with small numbers of URLs then a linked list if the right cup of
+tea. But we are not. Performance O(n) would not be a good design for 10,0000 URLs. You
+have time for the tea to grow in Darjeeling before the crawl completed. Order(1) would be
+nice!
+<!--l. 138--><p class="noindent" >The use of a hash table would speed our execution significantly. Hash tables and functions support one of
+the most effective types of searches: <span 
+class="cmti-10">hashing</span>. A hash table consists of an array of some length where data
+is accessed via a special index called (in a general sense) a <span 
+class="cmti-10">key</span>. The ideas behind the hash
+table is to create a mapping between the key (in our application the key is the URL e.g.,
+www.cs.dartmouth.edu/&#x02DC;nlane) and the index into the hash table array - the index is called has value.
+Keys can almost be anything - URL, time of day, IP address (routers use hash tables to look up the next
+hop to forward an IP packet), name - but hash values are always an integer that identifies the slot of the
+hash table array.
+<!--l. 140--><p class="noindent" >The great innovation in hash tables is that computing the index (a hash function does that - the one we
+use is called hash1(char *)) is done in constant time! Therefore no matter how many URLs (elements) we
+have we will always search (to determine the uniqueness of the URL before we inset it in
+the list) in constant time. That is a very nice scaling property of the design. In ideal cases
+(i.e., unrealistic) a function will guarantee that no two keys will hash to the same slot (i.e.,
+have the same hash value). However, in reality this is not the case. Different keys may with
+small probability (assuming that the size of the table in relation to the maximum number
+of elements is reasonable but clearly we assume that the number of entries in the table is
+small in comparison to the potentially large number of URLs encountered) have the same
+hash index. As a consequence most hash functions will map two or more keys to the same
+slot in the table. This is called collision. And a good hash function will be designed to limit
+collision in an attempt to randomly distribute DNODEs/URLNODEs elements across the
+table.
+<!--l. 142--><p class="noindent" >Here is how the process works.<br 
+class="newline" />
+<!--l. 144--><p class="noindent" >Given the following:
+<!--l. 146--><p class="noindent" >- a <span 
+class="cmbx-10">key </span>www.cs.dartmouth.edu/&#x00A0;campbell <br 
+class="newline" />
+<!--l. 148--><p class="noindent" >- a <span 
+class="cmbx-10">hash function </span>hash1() <br 
+class="newline" />
+                                                                                  
+                                                                                  
+<!--l. 150--><p class="noindent" >- a <span 
+class="cmbx-10">hash table </span>DNODE *hash[MAX_HASH_SLOT] of a certain size (here we choose a large value of
+MAX_HASH_SLOT = of 10000)<br 
+class="newline" />
+<!--l. 153--><p class="noindent" >Then we can do the following:
+<!--l. 155--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">hashIndex</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;hash1(&#8216;&#8216;www.cs.dartmouth.edu/~campbell&#8217;&#8217;);</span></span></span>
+<!--l. 157--><p class="noindent" >Assume that the hashIndex returned is 19. Then we can say that hash1 will always return 19 for that key.
+And that the hashIndex indexes a slot in the hash table that keeps a pointer to a DNODE. In our
+algorithm we can make the following assumption. If the slot contains a NULL pointer (say for the key
+above) then we are assured that the key is unique. If a pointer is already at slot 19 we cannot conversely
+say that the URL is not unique because other keys my be hashed at the slot too. So we have to search
+through the list starting at what is pointed to by slot 19 in the table and search the list until we either
+find the same URL (therefore it is not unique) OR we come to the end of the DNODEs that are associated
+with hash value 19. For example, each DNODE holds a <span 
+class="cmbx-10">key </span>(which in our case is a URL
+name) therefore assume that there are two DNODEs linked starting from slot 19 with different
+keys but the hash index 19 <span 
+class="cmbx-10">(but recall that the hash table simply points to elements</span>
+<span 
+class="cmbx-10">in the double linked list)</span>. But how do we know that we have got to the end of the list
+of DNODEs with the same hash value? We recompute the hash value for each DNODE we
+traverse for the key maintained in the DNODE and if they equal 19 in this case (the same
+hash index) we know they are related and need to be searched and compared for uniqueness
+against the current URL. But if the hash index is different (not 19) then we know for sure
+that the URL is unique and should be linked into the end of the DNODEs that have the
+same hash value. This paragraph really describes the algorithm for searching using the hash
+table and hash function. Be sure to read it again before coding it. Be sure to pencil our a few
+scenarios that help explain the various conditions of searching and insertion. An example of a
+hash table pointing to DNODES (and DNODES point to URLNODES) is shown in Figure
+1.
+<!--l. 159--><p class="noindent" >Now to explain our design choices. The DICTIONARY holds the hash table and the start and end
+pointers into a double link list. This is an unordered list with the exception that DNODES with the same
+hash value are clusters along the list at the same place as discussed above. So you hash into the
+list. Check for uniqueness of the URL If not found add to the end of the cluster associated
+with the same key/hash value. You will have to search the hash table starting at the hash
+value and write an addElement function to insert the DNODE into the list at the current
+place.
+<div 
+class="colorbox" id="colorbox3"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">typedef</span><span 
+class="cmtt-10">&#x00A0;struct</span><span 
+class="cmtt-10">&#x00A0;_DICTIONARY</span><span 
+class="cmtt-10">&#x00A0;{</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;DNODE</span><span 
+class="cmtt-10">&#x00A0;*hash[MAX_HASH_SLOT];</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;hash</span><span 
+class="cmtt-10">&#x00A0;table</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;slots,</span><span 
+class="cmtt-10">&#x00A0;each</span><span 
+class="cmtt-10">&#x00A0;slot</span><span 
+class="cmtt-10">&#x00A0;points</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;DNODE</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;DNODE</span><span 
+class="cmtt-10">&#x00A0;*start;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;start</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;double</span><span 
+class="cmtt-10">&#x00A0;link</span><span 
+class="cmtt-10">&#x00A0;list</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;DNODES</span><span 
+class="cmtt-10">&#x00A0;terminated</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;NULL</span><span 
+class="cmtt-10">&#x00A0;pointer</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;DNODE</span><span 
+class="cmtt-10">&#x00A0;*end;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;points</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;last</span><span 
+class="cmtt-10">&#x00A0;DNODE</span><span 
+class="cmtt-10">&#x00A0;on</span><span 
+class="cmtt-10">&#x00A0;this</span><span 
+class="cmtt-10">&#x00A0;list</span><br /><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;__DICTIONARY;</span><br /><br /><span 
+class="cmtt-10">typedef</span><span 
+class="cmtt-10">&#x00A0;struct</span><span 
+class="cmtt-10">&#x00A0;_DICTIONARY</span><span 
+class="cmtt-10">&#x00A0;DICTIONARY;</span><br /><br /></div></div>
+<!--l. 178--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-8000"></a>DICTIONARY Data Structure</h3>
+<!--l. 180--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">prev</span></span></span> and <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">next</span></span></span> are pointers to the previous and the next element in the dynamic list of DNODEs. <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">start</span></span></span>
+and <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">end</span></span></span> are pointers to the first and last element in this dynamic list.
+                                                                                  
+                                                                                  
+<!--l. 182--><p class="noindent" >Each element in the dynamic list has a unique string called <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">key</span></span></span>. The general use of this data structure is
+the following: given a key in input, we want to find out an element with the same key. For example, we
+want to retrieve the element corresponding to a certain URL.
+<!--l. 184--><p class="noindent" >As we said, a linked list, you may have to traverse the whole list, comparing each <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">key</span></span></span> of each element to
+the given key in input. Using a very long list, this process is very slow.
+<!--l. 186--><p class="noindent" >The name hash derives from the fact that it is based on the use of hash functions. These functions return
+a hash value index that is an integer in a certain range (0 to <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">MAX_HASH_SLOT</span></span></span> in our code) given an
+arbitrarily long string. The longer the string the better.
+<!--l. 188--><p class="noindent" >Each piece of data that has to be stored is associated to a certain position (also called bin or slot) in the
+list calculated by means of the hash function. For example, by hashing a certain URL, let us say
+<span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">http:\\www.dartmouth.edu</span></span></span>), we obtain the position 43. Then the information (i.e., the struct containing
+the information) is stored in a list associated to the position 43. In fact, different strings in input can be
+mapped into the same bin; therefore, we do not have a single element associated to this position, but a list
+of elements.
+<!--l. 190--><p class="noindent" >The goal is to separate the whole list into several parts/sublists (clusters) where each part is composed of
+one or more elements. Then, the complexity of the search is reduced, since we have to search
+only through the elements of the list associated to a certain bin/slot retrieved using the hash
+function.
+<!--l. 192--><p class="noindent" >To implement such a data structure, we keep an array hash in memory, where <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">MAX_HASH_SLOT</span></span></span> is the max
+value of all the possible hash values:
+<!--l. 194--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                  
+                                                                                  
+<a 
+ id="x1-80014"></a>
+                                                                                  
+                                                                                  
+                                                                                  
+                                                                                  
+<!--l. 195--><p class="noindent" ><img 
+src="datastructures3x.png" alt="PIC" class="graphics" width="578.15999pt" height="795.49467pt" ><!--tex4ht:graphics  
+name="datastructures3x.png" src="dnode.eps"  
+-->
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4: </span><span  
+class="content">Data structures: DNODE and DICTIONARY structures</span></div><!--tex4ht:label?: x1-80014 -->
+                                                                                  
+                                                                                  
+<!--l. 198--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 200--><p class="noindent" >The data structure is allocated in the heap using <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">malloc()</span></span></span>.
+<!--l. 202--><p class="noindent" >Given a certain string, first you <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">hash1()</span></span></span> it, obtaining an hash index <span 
+class="cmti-10">h </span>(i.e., the bin in position <span 
+class="cmti-10">h</span>, and use
+the result as the index of the <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">hash</span></span></span> array above. The pointer you get from the array points
+to the first element of the dynamic list characterized by a key equal to <span 
+class="cmmi-10">h</span>. This mechanism
+is used to add or retrieve the information. The result of the hash table/function is we only
+have compare a small fraction of elements associated with the whole list to find the element
+with the same key rather than search through all the elements - representing a significant
+speed-up.
+<!--l. 208--><p class="noindent" >The dictionary data structure is quite generic and it can be used with various types of data.
+Each element not contain only the <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">key</span></span></span> but also a data pointer. In our implementation, the
+<span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">data</span></span></span> variable stores the pointer (the famous void *pointer) to the data (URLNODE) rather
+than storing the data itself as in the data structure used for the index. Therefore, users could
+insert any data in the list simply by providing a unique key and the pointer to the actual
+data. A generic dictionary is shown in Figure&#x00A0;<span 
+class="cmbx-10">??</span>. An example of a generalized DICTIONARY
+hash table pointing to DNODES (and DNODES point to URLNODES) is shown in Figure
+1.
+<!--l. 211--><p class="noindent" >In our case, the key is the URL and the data points to a struct of type <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">DNODE</span></span></span>. Let us consider the case of
+the insertion of a <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">DNODE</span></span></span> element in this list. The idea is that you have to first find the list with the same
+hash value by hashing the URL address and then insert your element in the list in the position equal to
+the hash value (by appending it to the list). If there is no element in the list sharing the same
+hash value index, you can just insert the element (first element) and change the pointer in
+the hash array setting it to the memory location of the the newly inserted element. In this
+case you should add the element to the end of the list (DNODE *end) points to. And, then
+update the pointer in the hash table at the associated hash index to point to the element.
+If there is an element, you insert the element at the end of the list assuming no match is
+found.
+<h3 class="likesectionHead"><a 
+ id="x1-9000"></a>Creating DICTIONARY, DNODE, URLNODE data structures</h3>
+<!--l. 215--><p class="noindent" ><span 
+class="cmbx-10">url&#x02D9;list </span>Code snippet for malloc-ing space for a URL, initializing it, linking it into url_list, and then
+copying the URL over.
+<div 
+class="colorbox" id="colorbox4"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">char*</span><span 
+class="cmtt-10">&#x00A0;url_list[MAX_URL_PER_PAGE];</span><br /><br /><span 
+class="cmtt-10">url_list[i]</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;malloc(MAX_URL_LENGTH);</span><br /><span 
+class="cmtt-10">MALLOC_CHECK(url_list[i]);</span><br /><span 
+class="cmtt-10">BZERO(url_list[i],</span><span 
+class="cmtt-10">&#x00A0;MAX_URL_LENGTH);</span><br /><span 
+class="cmtt-10">strncpy(url_list[i],</span><span 
+class="cmtt-10">&#x00A0;url,</span><span 
+class="cmtt-10">&#x00A0;MAX_URL_LENGTH);</span><br /><br /></div></div>
+<!--l. 233--><p class="noindent" ><span 
+class="cmbx-10">URLNODE </span>Code snippet for malloc-ing space for a new URLNODE, initializing its elements, and then
+copying the URL over.
+<div 
+class="colorbox" id="colorbox5"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">URLNODE*</span><span 
+class="cmtt-10">&#x00A0;n</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;malloc(sizeof(URLNODE));</span><br /><span 
+class="cmtt-10">MALLOC_CHECK(n);</span><br /><span 
+class="cmtt-10">n-&#x003E;depth</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;d;</span><br /><span 
+class="cmtt-10">n-&#x003E;visited</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;0;</span><br /><span 
+class="cmtt-10">BZERO(n-&#x003E;url,</span><span 
+class="cmtt-10">&#x00A0;MAX_URL_LENGTH);</span><br /><span 
+class="cmtt-10">strncpy(n-&#x003E;url,</span><span 
+class="cmtt-10">&#x00A0;URL,</span><span 
+class="cmtt-10">&#x00A0;MAX_URL_LENGTH);</span><br /><br /></div></div>
+<!--l. 251--><p class="noindent" ><span 
+class="cmbx-10">DICTIONARY </span>Code snippet for malloc-ing space for the dictionary and initializing it - and explicit the
+double linked list used to hold DNODEs.
+<div 
+class="colorbox" id="colorbox6"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">DICTIONARY*</span><span 
+class="cmtt-10">&#x00A0;d</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;(DICTIONARY*)malloc(sizeof(DICTIONARY));</span><br /><span 
+class="cmtt-10">MALLOC_CHECK(d);</span><br /><span 
+class="cmtt-10">BZERO(d,</span><span 
+class="cmtt-10">&#x00A0;sizeof(DICTIONARY));</span><br /><span 
+class="cmtt-10">d-&#x003E;start</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;d-&#x003E;end</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;NULL;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;make</span><span 
+class="cmtt-10">&#x00A0;explicit</span><br /><br /></div></div>
+                                                                                  
+                                                                                  
+<!--l. 267--><p class="noindent" ><span 
+class="cmbx-10">DNODE </span>Code snippet for malloc-ing space for the DNODE and initializing it, and adding it to the list -
+as you can see this is for the condition that there is not other DNODE on the list. The new DNODE is
+then added to the hash table at the hash index element and the key (URL in this case) is copied
+over.
+<div 
+class="colorbox" id="colorbox7"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">dict-&#x003E;start</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;dict-&#x003E;end</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;malloc(sizeof(DNODE));</span><br /><span 
+class="cmtt-10">MALLOC_CHECK(dict-&#x003E;start);</span><br /><span 
+class="cmtt-10">dict-&#x003E;start-&#x003E;prev</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;dict-&#x003E;start-&#x003E;next</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;NULL;</span><br /><span 
+class="cmtt-10">dict-&#x003E;hash[h]</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;dict-&#x003E;start;</span><br /><span 
+class="cmtt-10">dict-&#x003E;start-&#x003E;data</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;n;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;note</span><span 
+class="cmtt-10">&#x00A0;that</span><span 
+class="cmtt-10">&#x00A0;n</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;pointer</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;URL</span><span 
+class="cmtt-10">&#x00A0;from</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;example</span><span 
+class="cmtt-10">&#x00A0;above</span><br /><span 
+class="cmtt-10">BZERO(dict-&#x003E;start-&#x003E;key,</span><span 
+class="cmtt-10">&#x00A0;KEY_LENGTH);</span><br /><span 
+class="cmtt-10">strncpy(dict-&#x003E;start-&#x003E;key,</span><span 
+class="cmtt-10">&#x00A0;key,</span><span 
+class="cmtt-10">&#x00A0;KEY_LENGTH);</span><br /><br /></div></div>
+<!--l. 286--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-10000"></a>Illustration of data structures in action</h3>
+<!--l. 288--><p class="noindent" ><span 
+class="cmbx-10">Searching for uniquenes of URL</span>. How do we determine that the URL is unique? First we hash into
+the hash table and if the element is NULL then the URL is unique. We link it into the end of the double
+link list and update the hash table entry to point to it.
+<!--l. 290--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                  
+                                                                                  
+<a 
+ id="x1-100015"></a>
+                                                                                  
+                                                                                  
+                                                                                  
+                                                                                  
+<!--l. 291--><p class="noindent" ><img 
+src="datastructures4x.png" alt="PIC" class="graphics" width="578.15999pt" height="795.49467pt" ><!--tex4ht:graphics  
+name="datastructures4x.png" src="search.eps"  
+-->
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;5: </span><span  
+class="content">Hashing into the list and searching the &#8220;cluster&#8221; of DNODEs for uniqueness of the URL</span></div><!--tex4ht:label?: x1-100015 -->
+                                                                                  
+                                                                                  
+<!--l. 294--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 296--><p class="noindent" >If there is a pointer at the hash index then we do not know if there the URL is unique - why
+is this the case? We need to search the cluster (defined as the group of DNODES with the
+same key) to see if there the URL is linked in. We look at the linked URLNODE to do the
+string compare of current URL againt the URL names in the URLNODES. If we traverse all
+the cluster and there is no match then the URL is unique and we link it to the end of the
+cluster.
+<!--l. 298--><p class="noindent" >The figure below shows that the DNODE list as a number of URLs added. The list is searched for the
+uniqueness of www.sartmouth.edu/&#x02DC;wpay It is found to be unique and the point in the list is marked
+where it should be inserted.
+<h3 class="likesectionHead"><a 
+ id="x1-11000"></a>Add a url to the url_list</h3>
+<!--l. 302--><p class="noindent" ><span 
+class="cmbx-10">url&#x02D9;list </span>Code snippet for malloc-ing space for a URL, initializing it, linking it into url_list, and then
+copying the URL over.
+<div 
+class="colorbox" id="colorbox8"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">char*</span><span 
+class="cmtt-10">&#x00A0;url_list[MAX_URL_PER_PAGE];</span><br /><br /><span 
+class="cmtt-10">url_list[i]</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;malloc(MAX_URL_LENGTH);</span><br /><span 
+class="cmtt-10">MALLOC_CHECK(url_list[i]);</span><br /><span 
+class="cmtt-10">BZERO(url_list[i],</span><span 
+class="cmtt-10">&#x00A0;MAX_URL_LENGTH);</span><br /><span 
+class="cmtt-10">strncpy(url_list[i],</span><span 
+class="cmtt-10">&#x00A0;url,</span><span 
+class="cmtt-10">&#x00A0;MAX_URL_LENGTH);</span><br /><br /></div></div>
+<!--l. 320--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-12000"></a>Inserting a DNODE into the dictionary</h3>
+<!--l. 322--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                  
+                                                                                  
+<a 
+ id="x1-120016"></a>
+                                                                                  
+                                                                                  
+                                                                                  
+                                                                                  
+<!--l. 323--><p class="noindent" ><img 
+src="datastructures5x.png" alt="PIC" class="graphics" width="578.15999pt" height="795.49467pt" ><!--tex4ht:graphics  
+name="datastructures5x.png" src="link.eps"  
+-->
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;6: </span><span  
+class="content">Inserting a DNODE at the end of a cluster of DNODEs</span></div><!--tex4ht:label?: x1-120016 -->
+                                                                                  
+                                                                                  
+<!--l. 326--><p class="noindent" ></div><hr class="endfigure">
+<h3 class="likesectionHead"><a 
+ id="x1-13000"></a>Files you need for the crawler implementation</h3>
+<!--l. 330--><p class="noindent" >Here are the following source files give out to assist in the implementation:<br 
+class="newline" />
+<!--l. 332--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/crawler.h" >crawler.h</a>- Implementation Spec is captured in the crawler.h file. It defines the important defines, marcos,
+data structures and prototype functions.
+<!--l. 334--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/crawler.c" >crawler.c</a>- Students add the code starting here. It includes, from the Design Spec (Pseudo code description
+of the crawler algorithm), inputs and outputs.
+<!--l. 336--><p class="noindent" >Other code given out for the Lab4 (to make your life easier) include:<br 
+class="newline" />
+<!--l. 338--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/hash.h" >hash.h</a>- Hash function header file
+<!--l. 340--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/hash.c" >hash.c</a>- Hash function
+<!--l. 342--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/html.h" >html.h</a>- HTML parsing code including GetNextURL()
+<!--l. 344--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/header.h" >header.h</a>- Some useful Macros
+<!--l. 346--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/html.c" >html.c</a>- GetNextURL()
+<!--l. 348--><p class="noindent" >In the tarball sent you there is also a README file which we point to here for completeness.<br 
+class="newline" />
+<!--l. 350--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/README" >README</a>- README
+ 
+</body></html> 
+
+                                                                                  
+
+

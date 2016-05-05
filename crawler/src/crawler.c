@@ -15,6 +15,9 @@
   and the depth on the second line. The HTML will for the webpage 
   will start on the third line.
 
+  To run: ./crawler http://www.cs.dartmouth.edu/~campbell/cs50/ ./data/ 2
+
+
 */
 
 // ---------------- System includes e.g., <stdio.h>
@@ -26,12 +29,14 @@
 #include <string.h>                          // strncmpr
 
 // ---------------- Local includes  e.g., "file.h"
-#include "common.h"                          // common functionality
 #include "web.h"                             // curl and html functionality
 #include "list.h"                            // webpage list functionality
-#include "hashtable.h"                       // hashtable functionality
 #include "utils.h"                           // utility stuffs
 #include "file.h"
+#include "../../util/hashtable.h"                       // hashtable functionality
+#include "../../util/common.h"                          // common functionality
+
+
 
 // ---------------- Constant definitions
 
@@ -48,11 +53,11 @@ int isDirec(char * dir);
 int writePage(WebPage *page, char *dir, int x);
 int crawlPage(WebPage *page);
 int saveCrawl();
-void cleanup();
+void cleanup(HashTable* ht);
 int validDepth(int depth, int user_depth);
 
 // Global:
-HashTable URLSVisited;
+HashTable* URLSVisited;
 List toVisit;
 
 
@@ -60,7 +65,7 @@ int main(int argc, char** argv) {
 
   char seed_url[MAX_URL_LENGTH], target[MAX_URL_LENGTH];
   static int user_depth;
-  int max_depth, valid, file_counter;
+  int valid, file_counter;
   WebPage seed_page;
 
   /* Check command line arguments */
@@ -82,7 +87,7 @@ int main(int argc, char** argv) {
   user_depth = atoi(argv[3]);
 
   initList();
-  initHashTable();
+  URLSVisited = initHashTable();
   file_counter = 1;
 
   /* Bootstrap given URL for initial seed */
@@ -121,7 +126,7 @@ int main(int argc, char** argv) {
   WebPage* tmp;
   while((tmp = listRemove())) {
     /* get next url from list */
-    if (validDepth(tmp->depth, user_depth) && !HashTableLookUp(tmp->url)) {
+    if (validDepth(tmp->depth, user_depth) && !HashTableLookUpURL(URLSVisited ,tmp->url)) {
       /* get webpage for url */
       if (GetWebPage(tmp)) { /* write page file */
         writePage(tmp, target, file_counter);
@@ -144,7 +149,7 @@ int main(int argc, char** argv) {
   curl_global_cleanup();
 
   /* Free resources */
-  cleanup();
+  cleanup(URLSVisited);
   /* Free seed page */
   free(seed_page.html);
   free(seed_page.url);
@@ -204,7 +209,6 @@ int isValidURL(char * URL) {
 * URL is saved to first line, depth in second line, and HTML follows
 */
 int writePage(WebPage *page, char *dir, int file_counter) {
-  // TODO - Writing depth line twice; Not writing url to top
   char name[MAXLINE];
   char depth[MAXLINE];
   sprintf(name, "%s%d", dir, file_counter);
@@ -213,7 +217,6 @@ int writePage(WebPage *page, char *dir, int file_counter) {
   if (fd) {
     Fputs(page->url, fd);
     Fputs(depth, fd);
-    //fprintf(fd, "\nDepth: %s\n", depth);
     Fputs(page->html, fd);
     fclose(fd);
     return 1;
@@ -231,7 +234,6 @@ int writePage(WebPage *page, char *dir, int file_counter) {
 * exceed maximum allowed epth
 */
 int crawlPage(WebPage *page) {
-  //TODO - Getting some duplicates - Becuase of freeing?
   int pos;
   char* buf;
 
@@ -241,7 +243,7 @@ int crawlPage(WebPage *page) {
   while ((pos = GetNextURL(page->html, pos, page->url, &buf)) > 0) {
     if (NormalizeURL(buf)) {
       if (isValidURL(buf)) {
-        if (!HashTableLookUp(buf)) {
+        if (!HashTableLookUpURL(URLSVisited, buf)) {
           if (STATUS_LOG == 1)
             printf("\nFound url: %s", buf);
 
@@ -255,7 +257,7 @@ int crawlPage(WebPage *page) {
       }
     }
   }
-  HashTableAdd(page->url);
+  HashTableAddURL(URLSVisited, page->url);
   free(buf);
   return 1;
 }
@@ -271,6 +273,7 @@ int validDepth(int depth, int user_depth) {
 /*
 * cleanup - free resources
 */
-void cleanup() {
-  cleanHash();
+void cleanup(HashTable* ht) {
+  cleanHashURL(ht);
+  free(ht);
 }
