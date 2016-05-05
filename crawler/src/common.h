@@ -1,7 +1,6 @@
 /* ========================================================================== */
 /* File: common.h
  *
- * Project name: CS50 Tiny Search Engine
  * Component name: Crawler
  *
  * This file contains the common defines and data structures.
@@ -35,7 +34,7 @@ typedef struct WebPage {
     char *html;                              // html code of the page
     size_t html_len;                         // length of html code
     int depth;                               // depth of crawl
-    int ref_count;                            // Track references to manage memory
+    int ref_count;
 } WebPage;
 
 // ---------------- Public Variables

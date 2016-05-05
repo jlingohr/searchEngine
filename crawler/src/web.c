@@ -1,7 +1,6 @@
 /* ========================================================================== */
 /* File: web.c
  *
- * Project name: CS50 Tiny Search Engine
  * Component name: Crawler
  *
  * Author: Ira Ray Jenkins - jenkins@cs.dartmouth.edu

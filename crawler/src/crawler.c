@@ -111,10 +111,9 @@ int main(int argc, char** argv) {
   }
   file_counter++;
 
-  /* add seed page to hashtable */
-  //HashTableAdd(seed_page.url);
 
-  /* Extract urls from seed and add to URLLIST */
+  /* Extract urls from seed and add to URLLIST
+  and Hashtable */
   crawlPage(&seed_page);
   sleep(INTERVAL_PER_FETCH);
 
@@ -122,28 +121,23 @@ int main(int argc, char** argv) {
   WebPage* tmp;
   while((tmp = listRemove())) {
     /* get next url from list */
-    //tmp = listRemove();
-
-    /* get webpage for url */
-    if (GetWebPage(tmp)) { /* write page file */
-      writePage(tmp, target, file_counter);
-      file_counter++;
-
-      /* extract urls from webpage and add to URLList
-       making sure to only add new ones
-       and only if visiting them wouldn't exceed maxDepth */
-      if (validDepth(tmp->depth, user_depth) && !HashTableLookUp(tmp->url))
-        crawlPage(tmp); /* Possible asynchronous problems here? */
-
-      free(tmp->html);
+    if (validDepth(tmp->depth, user_depth) && !HashTableLookUp(tmp->url)) {
+      /* get webpage for url */
+      if (GetWebPage(tmp)) { /* write page file */
+        writePage(tmp, target, file_counter);
+        file_counter++;
+        /* extract urls from webpage and add to URLList */
+        crawlPage(tmp);
+        free(tmp->html);
+      }
     }
-    /* sleep for a bit to avoid annoying the target domain */
-    sleep(INTERVAL_PER_FETCH);
 
     /* free resources */
-    /* TODO - Possible memory leaks doing this! Also free url? */
+    dec_ref(tmp); 
+
+    /* sleep for a bit to avoid annoying the target domain */
+    sleep(INTERVAL_PER_FETCH);
     
-    dec_ref(tmp);
   }
 
   /* Cleanup curl */
@@ -257,14 +251,12 @@ int crawlPage(WebPage *page) {
           tmp->depth = page->depth + 1;
 
           listAdd(tmp);
-          free(buf);
         }
       }
     }
   }
   HashTableAdd(page->url);
-  inc_ref(page);
-  //free(buf);
+  free(buf);
   return 1;
 }
 
@@ -273,12 +265,12 @@ int crawlPage(WebPage *page) {
 * Returns 1 if so, else returns 0
 */
 int validDepth(int depth, int user_depth) {
-  return (depth < user_depth && depth < MAX_DEPTH);
+  return (depth <= user_depth && depth <= MAX_DEPTH);
 }
 
 /*
 * cleanup - free resources
 */
 void cleanup() {
-  //TODO
+  cleanHash();
 }

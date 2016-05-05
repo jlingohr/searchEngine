@@ -13,7 +13,6 @@ int initList() {
 * listAdd - Add webpage to end of list
 */
 void listAdd(WebPage *page) {
-  /* TODO - Add reference counting */
   ListNode* tmp;
 
   tmp = malloc(sizeof(ListNode));
@@ -36,7 +35,6 @@ void listAdd(WebPage *page) {
 * Return pointer to the first webpage in the list
 */
 WebPage* listRemove() {
-  /* TODO - Add reference counting */
   WebPage* page;
   ListNode* tmp;
 

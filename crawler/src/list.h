@@ -2,7 +2,6 @@
 /* ========================================================================== */
 /* File: list.h
  *
- * Project name: CS50 Tiny Search Engine
  * Component name: Crawler
  *
  * This file contains the definitions for a doubly-linked list of WebPages.

@@ -11,4 +11,4 @@ crawler: $(SRC)
 	$(CC) $(CFLAGS) -g -o crawler $(SRC) $(LIBFLAGS)
 
 clean: 
-	rm *.o
+	rm -f *.o

@@ -24,6 +24,7 @@ unsigned long Hash(const char *str, unsigned long mod) {
 
 /*
 * HashTableAdd - Add url to hashtable using chaining
+* Copies URL into memory
 * Returns 1 if successful
 */
 int HashTableAdd(char * url) {
@@ -65,4 +66,18 @@ int HashTableLookUp(char * url) {
     return 1;
   }
   return 0;
+}
+
+/*
+* cleanHash - Deallocate all memory in hash table
+*/
+void cleanHash() {
+  HashTableNode* tmp;
+  for (int i = 0; i < MAX_HASH_SLOT; i++) {
+    tmp = URLSVisited.table[i];
+    while (tmp) {
+      free(tmp->url)
+      tmp = tmp->next;
+    }
+  }
 }
