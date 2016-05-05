@@ -14,9 +14,6 @@
 void unix_error(char* msg);
 
 void Stat(const char* filename, struct stat* buf);
-ssize_t writen(int fd, void* usrbuf, size_t n);
-int Open(const char* filename, int flags, mode_t mode);
-void Close(int fd);
 FILE* Fopen(const char* filename, const char* mode);
 void Fclose(FILE* fp);
 void Fputs(const char* ptr, FILE* stream);

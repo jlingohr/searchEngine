@@ -29,12 +29,13 @@
 #include <string.h>                          // strncmpr
 
 // ---------------- Local includes  e.g., "file.h"
-#include "web.h"                             // curl and html functionality
 #include "list.h"                            // webpage list functionality
 #include "utils.h"                           // utility stuffs
-#include "file.h"
 #include "../../util/hashtable.h"                       // hashtable functionality
 #include "../../util/common.h"                          // common functionality
+#include "../../util/util.h"
+#include "../../util/web.h"                             // curl and html functionality
+
 
 
 
