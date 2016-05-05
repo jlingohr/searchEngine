@@ -1,0 +1,10 @@
+Specification
+-------------
+Each word (w) in a document (d) forms a posting (w,d) that is added to a list
+
+Requirements
+---------
+1- create index from html files
+2- write the index to a file to store, e.g., index.dat
+3- read the index from thefile (i.e., index.dat) and recreate the index data structures
+4- write the index to a different file (new_index.dat) for comparison with index.dat (should be identical)

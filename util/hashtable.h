@@ -3,7 +3,7 @@
  *
  * Component name: Crawler
  *
- * This file contains the definitions for a hashtable of urls.
+ * Refactored hashtable to work with any kind of node
  *
  */
 /* ========================================================================== */
@@ -20,8 +20,11 @@
 
 // ---------------- Structures/Types
 
+/* For working with generics */
+typedef void* element_t;
+
 typedef struct HashTableNode {
-    char *url;                               // url previously seen
+    element_t data;                               // object hashed
     struct HashTableNode *next;              // pointer to next node
 } HashTableNode;
 
@@ -31,19 +34,21 @@ typedef struct HashTable {
     unsigned int n;
 } HashTable;
 
+
+
 // ---------------- Public Variables
- extern HashTable URLSVisited;
+ extern HashTable ht;
 
 // ---------------- Prototypes/Macros
 
 
-unsigned long Hash(const char *str, unsigned long mod);
+unsigned long Hash(const element_t key, unsigned long mod);
 
 void initHashTable();
 // add to hash table
-int HashTableAdd(char * url);
+int HashTableAdd(element_t key);
 // lookup
-int HashTableLookUp(char * url);
+int HashTableLookUp(element_t key);
 void cleanHash();
 
 
