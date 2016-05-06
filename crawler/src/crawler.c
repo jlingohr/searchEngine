@@ -29,12 +29,13 @@
 #include <string.h>                          // strncmpr
 
 // ---------------- Local includes  e.g., "file.h"
-#include "list.h"                            // webpage list functionality
 #include "utils.h"                           // utility stuffs
 #include "../../util/hashtable.h"                       // hashtable functionality
 #include "../../util/common.h"                          // common functionality
 #include "../../util/util.h"
 #include "../../util/web.h"                             // curl and html functionality
+#include "../../util/list.h"                            // webpage list functionality
+
 
 
 
@@ -59,7 +60,7 @@ int validDepth(int depth, int user_depth);
 
 // Global:
 HashTable* URLSVisited;
-List toVisit;
+List* toVisit;
 
 
 int main(int argc, char** argv) {
@@ -87,7 +88,7 @@ int main(int argc, char** argv) {
   strcpy(target, argv[2]);
   user_depth = atoi(argv[3]);
 
-  initList();
+  toVisit= initList();
   URLSVisited = initHashTable();
   file_counter = 1;
 
@@ -125,7 +126,7 @@ int main(int argc, char** argv) {
 
   /* while there are urls to crawl do */
   WebPage* tmp;
-  while((tmp = listRemove())) {
+  while((tmp = listRemovePage(toVisit))) {
     /* get next url from list */
     if (validDepth(tmp->depth, user_depth) && !HashTableLookUpURL(URLSVisited ,tmp->url)) {
       /* get webpage for url */
@@ -179,20 +180,6 @@ int checkValidInputs(char* seed, char* target, char* max_depth) {
   return 1;
 
 }
-/*
-int isDirec(char* dir) {
-  struct stat sbuf;
-  Stat(dir, &sbuf);
-  if (!S_ISDIR(sbuf.st_mode)) {
-    printf("Target %s is not a directory.\n", dir);
-    return 0;
-  }
-  if (!(sbuf.st_mode & S_IWUSR)) {
-    printf("%s is not writable.\n", dir);
-    return 0;
-  }
-  return 1;
-}*/
 
 /*
 * isValidUrl - Checks whether seed is a valid URL and within domain in common.h
@@ -253,7 +240,7 @@ int crawlPage(WebPage *page) {
           strcpy(tmp->url, buf);
           tmp->depth = page->depth + 1;
 
-          listAdd(tmp);
+          listAddPage(toVisit, tmp);
         }
       }
     }
