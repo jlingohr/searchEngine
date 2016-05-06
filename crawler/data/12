@@ -1,0 +1,941 @@
+http://www.cs.dartmouth.edu/~campbell/cs50/designandcrawler.html
+Depth: 2
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title></title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- html --> 
+<meta name="src" content="designandcrawler.tex"> 
+<meta name="date" content="2015-04-25 15:09:00"> 
+<link rel="stylesheet" type="text/css" href="designandcrawler.css"> 
+</head><body 
+>
+<h1 class="likepartHead"><a 
+ id="x1-1000"></a>CS 50 Software Design and Implementation</h1>
+<h1 class="likepartHead"><a 
+ id="x1-2000"></a>Lecture 11</h1>
+<h1 class="likepartHead"><a 
+ id="x1-3000"></a>Software Design Methodology</h1>
+<!--l. 21--><p class="noindent" >In the this lecture, we will introduce a simple software design methodology and apply it to the the top
+level design of the TinySearch Engine crawler.
+<!--l. 23--><p class="noindent" ><span 
+class="cmbx-10">TODO this week</span>: We will progressively read through the paper. <a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/searchingtheweb.pdf" >&#8220;Searching the Web&#8221;</a>, Arvind
+Arasu, Junghoo Cho, Hector Garcia-Molina, Andreas Paepcke, Sriram Raghavan (Stanford
+University). ACM Transactions on Internet Technology (TOIT), Volume 1 , Issue 1 (August
+2001).
+<!--l. 25--><p class="noindent" >Please read the these lecture notes and come armed with ideas of how you would design the crawler. Do
+not worry if you don&#8217;t have clear ideas but just give it some thought. For example, what data structures
+would you use to maintain a list of URLs that need to be searched by the crawler to maintain uniqueness?
+What would be the main control flow of the crawler algorithm (hint: look at its operation discussed
+below). Your input is welcome in class.
+<!--l. 27--><p class="noindent" ><span 
+class="cmbx-10">Methodology note</span>. In Lab4, we will be putting functions or groups of related functions into seperate C
+files. We will also use the <span 
+class="cmti-10">GNU make command </span>to build our system from multiple files. We will discuss
+make this week and the writing of simple, clean, small functions that will be placed in their own
+files.
+<h3 class="likesectionHead"><a 
+ id="x1-4000"></a>Goals</h3>
+<!--l. 31--><p class="noindent" >We plan to learn the following from today&#8217;s lecture:
+     <ul class="itemize1">
+     <li class="itemize">Software system design methodology
+     </li>
+     <li class="itemize">Crawler requirements and operations
+     </li>
+     <li class="itemize">Top level design of the crawler
+     </li>
+     <li class="itemize">Crawler input
+                                                                                  
+                                                                                  
+     </li>
+     <li class="itemize">Crawler output
+     </li></ul>
+<!--l. 42--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-5000"></a>Software system design methodology</h3>
+<!--l. 44--><p class="noindent" >There have been many books written on how to write good code. Some are intuitive: top-down or
+bottom-up design; divide and conquer (breaking the system down into smaller more understandable
+components), structured design (data flow-oriented design approach), object oriented design (modularity,
+abstraction, and information-hiding). For a quick survey of these and other techniques see<a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/survey.html" >&#8220;A Survey of
+Major Software Design Methodologies&#8221;</a>
+<!--l. 46--><p class="noindent" >Many of these techniques use similar approaches. Abstraction is important, decomposition is important,
+having an good understanding of the translation of requirements into design of data structures and
+algorithms is important too. Think of how data flows through a system designed on paper is helpful. Top
+down is a good way to deal with complexity. But whenever I read a book or note that says something
+like follow these 10 steps and be assured of great system software I&#8217;m skeptical. I&#8217;m a great
+believer in making mistakes from building small prototype systems as a means to refine your
+design methodology. Clarity comes from the experience of working from requirements, through
+system design, implementation and testing, to integration and customer bake-off against the
+requirements.
+<!--l. 49--><p class="noindent" >We will follow a pragmatic design methodology which I used for a number of years in industry. It still
+includes some magic which is hard to get over. But here are a set of stepwise refinements that will lead to
+the development of good software.
+<!--l. 51--><p class="noindent" >Figure 1 shows a pragmatic software design methodology which we will use in the design of TinySearch
+and the projects.
+<!--l. 53--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-6000"></a>Procurement phase</h3>
+<!--l. 54--><p class="noindent" >The procurement phase of a project represents its early stages. It represents deep discussion between a
+company and provider of software systems (in our case) and a customer - yes, there has to be a customer
+(e.g., I&#8217;m your customer when it comes to the Labs and project) and you have to understand and capture
+the customers needs.
+                                                                                  
+                                                                                  
+<!--l. 56--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-7000"></a>System requirements spec</h3>
+<!--l. 57--><p class="noindent" >The <span 
+class="cmbx-10">system requirements spec </span>captures all the requirements of the system that the customer wants
+built. Typically the provider and customer get into deep discussion of requirements and their cost.
+Sometimes these documents are written in a legal like language - for good reason. If the customer gets a
+system that does not meet the spec then the lawyers may get called in. If a system is late financial
+penalties may arise.
+<!--l. 59--><p class="noindent" >The system requirement spec may have a variety of requirements typically considered <span 
+class="cmti-10">&#8220;the SHALLS&#8221; </span>- the
+crawler SHALL crawl 1000 sites in 5 minutes (performance requirement) - these include: functional
+requirements, performance requirements, cost/cots requirements.
+<!--l. 61--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-8000"></a>Design Spec</h3>
+<!--l. 62--><p class="noindent" >The result of starring at the system requirements for sometime and applying the art of design (the magic)
+with a design team is the definition of the <span 
+class="cmbx-10">Design Spec</span>. This is a translation of requirements into design.
+Each requirements must be mapped to one of the systems design modules which represent a decomposition
+of the complete system into design modules that are said to be spect. The Design spec for a module
+includes:
+     <ul class="itemize1">
+     <li class="itemize">Functional decomposition
+     </li>
+     <li class="itemize">Identify the Inputs and Outputs
+     </li>
+     <li class="itemize">Pseudo code (plain English like language) for logic/algorithmic flow
+     </li>
+     <li class="itemize">Data flow through module
+     </li>
+     <li class="itemize">Major data structure, shortage</li></ul>
+<!--l. 72--><p class="noindent" >The Design Spec represents a language/OS/HW independent specification. In principle it could be
+implemented in any language from micro-code to Java.
+<!--l. 74--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-9000"></a>Implementation Spec</h3>
+                                                                                  
+                                                                                  
+<!--l. 75--><p class="noindent" >The <span 
+class="cmbx-10">Implementation Spec </span>represents a further refinement and decomposition of the system. It is
+language/OS/HW dependent (in many cases the language abstracts the OS and HW out of the equation
+but not in this course). The implementation spec module includes:
+     <ul class="itemize1">
+     <li class="itemize">Detailed pseudo code for each of the objects/components/functions
+     </li>
+     <li class="itemize">Definition of detailed APIs/interfaces/prototype functions and their IO parameters
+     </li>
+     <li class="itemize">data structures, variables.
+     </li>
+     <li class="itemize">Others issues that maybe considered include, information hiding, resources management, error
+     management</li></ul>
+<!--l. 84--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-10000"></a>Code it</h3>
+<!--l. 85--><p class="noindent" >Coding is the fun part of the software development cycle. Good coding principles are important in this
+phase. It is likely that you will spend about 20% of your time coding in industry as a software developer
+(that is if you don&#8217;t go to the Street). The rest of the time will be dealing with the other phases of the
+methodology, particularly, the last few: testing, integration, fixing problems with the product and
+all the meetings, yes, its a problem in the industry - too many meetings not enough code
+time.
+<!--l. 87--><p class="noindent" ><span 
+class="cmbx-10">Correctness </span><br 
+class="newline" />&#8211; Is the program correct (i.e., does it work) and error free. Important hey?<br 
+class="newline" />
+<!--l. 90--><p class="noindent" ><span 
+class="cmbx-10">Clarity</span><br 
+class="newline" />&#8211; Is the code easy to read, well commented, use good names <br 
+class="newline" />&#8211; for variables and functions. In essence, is it easy to understand and use <br 
+class="newline" />&#8211; [K&amp;P] Clarity makes sure that the code is easy to understand for people and machines.<br 
+class="newline" />
+<!--l. 95--><p class="noindent" ><span 
+class="cmbx-10">Simplicity </span><br 
+class="newline" />&#8211; Is the code as simple as is possible.<br 
+class="newline" />&#8211; [K&amp;P] Simplicity keeps the program short and manageable<br 
+class="newline" />
+<!--l. 99--><p class="noindent" ><span 
+class="cmbx-10">Generality </span><br 
+class="newline" />&#8211; Can the program easily adapt to change or modification.<br 
+class="newline" />&#8211; [K&amp;P] Generality means the code can work well in a broad range of situations and adapt
+<br 
+class="newline" />
+<!--l. 104--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-11000"></a>Unit and sub-system testing</h3>
+<!--l. 105--><p class="noindent" >Probably the most important of all. Testing is critical. Both unit testing of code in isolation and at the
+various levels as it is put together (sub-system, system). We will unit test our code in a later
+lab. In Lab4 we will start by writing some bash test scripts to automatically run against our
+code. The goal of testing is to exercise all paths through the code. Most of the time (99%)
+the code will execute a small set of the branches in the module. So when conditions all line
+up and new branches fail it is hard to find those problems in large complex pieces of code.
+So code to test. And, write test scripts (tools) to quickly give confidence that even though
+5% of new code has been added no new bugs emerged because our test scripts assure us of
+that.
+<!--l. 107--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-12000"></a>Integration testing</h3>
+<!--l. 108--><p class="noindent" >The system starts to be incrementally put together and tested at higher levels. Subsystems could
+integrate many SW components, and new HW. The developer will run the integrated system
+against the original requirements to see if there is any gotchas. For example, performance
+requirements can only be tested once the full system comes together; for example, to increase
+the processing, communications load on the system as a means to see how it operates under
+load.
+<!--l. 110--><p class="noindent" ><span 
+class="cmbx-10">Anecdotal note</span>. Many times systems collapse under load and revisions might be called for in
+the original design. Here is an example, I was once hired to improve the performance of a
+packets switched radio system. It was a wireless router. It was also written in Ada. The system
+took 1 second to forward a packet from its input radio to its output radio. I studied the code.
+After two weeks I made a radical proposal. There was no way to get the transfer down to 100
+msec I told the team without redesign and recoding. However, I said if we remove all the
+tasking and rendezvous (a form of inter process communications) I could meet that requirement,
+possibly. That decision had impacts on generality because now the system looked like one large
+task. The change I made took 100 lines of Ada. I wrote a mailbox (double linked list) for
+messages passing as a replacement for process rendezvous. The comms time came down to 90
+msec! Usually contractors get treated like work dogs in industry but for a week I was King.
+They also gave me a really juicy next design job. The message here is that study the code
+and thinking deeply is much more helpful than hacking your way out of the problem guns
+blasting!
+                                                                                  
+                                                                                  
+<!--l. 112--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-13000"></a>Customer bake-off</h3>
+<!--l. 113--><p class="noindent" >This is when the customer sits down next to you with the original requirement spec and checks each
+requirement off or not as is the case many times. This phase may lead (if you are unlucky) to a system
+redesign and you (as software lead) getting fired.
+<!--l. 115--><p class="noindent" >In the Labs and project we will emphasis understanding the requirements of the system we want to build.
+Writing good design and implementation specs before coding. We will apply the coding principles of
+simplicity, clarity, and generality (we will put more weight on these as we move forward with assignments
+and the project). We will start doing simple program tests for Lab4 and emphasis this more with each
+assignment.
+<!--l. 117--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                  
+                                                                                  
+<a 
+ id="x1-130011"></a>
+                                                                                  
+                                                                                  
+                                                                                  
+                                                                                  
+<!--l. 118--><p class="noindent" ><img 
+src="designandcrawler0x.png" alt="PIC" class="graphics" width="578.15999pt" height="747.04324pt" ><!--tex4ht:graphics  
+name="designandcrawler0x.png" src="designmethodology.eps"  
+-->
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1: </span><span  
+class="content">Software system design methodoloy</span></div><!--tex4ht:label?: x1-130011 -->
+                                                                                  
+                                                                                  
+<!--l. 121--><p class="noindent" ></div><hr class="endfigure">
+<h3 class="likesectionHead"><a 
+ id="x1-14000"></a>TinySearch Architectural Design</h3>
+<!--l. 125--><p class="noindent" >In what follows, we present the overall design for TinySearch search. The overall architecture presented in
+Figure 2 shows the following modular decomposition of the system:
+<!--l. 127--><p class="noindent" ><span 
+class="cmbx-10">Crawler</span>, which asynchronously crawls the web and retrieves webpage starting with a seed URL. It parses
+the seed webpage extracts any embedded URLs that are tagged and retrieves those webpages, and so on.
+Once TinySearch has completed at least one complete crawling cycle (i.e., it has visited a target number of
+Web pages which is defined by a <span 
+class="cmti-10">depth parameter </span>on the crawler command line) then the
+crawler process is complete until it runs again and the indexing of the documents collected can
+begin.
+<!--l. 129--><p class="noindent" >An example of the command line interface for the crawler is as follows:<br 
+class="newline" />
+<!--l. 131--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">[atc</span><span 
+class="cmtt-10">&#x00A0;crawler]$</span><span 
+class="cmtt-10">&#x00A0;crawler</span><span 
+class="cmtt-10">&#x00A0;www.cs.dartmouth.edu</span><span 
+class="cmtt-10">&#x00A0;./data/</span><span 
+class="cmtt-10">&#x00A0;2</span></span></span><br 
+class="newline" />
+<!--l. 133--><p class="noindent" ><span 
+class="cmbx-10">Indexer</span>, which asynchronously extracts all the keywords for each stored webpage and records the URL
+where each word was found. A lookup table is created that maintains the words that were found and their
+associated URLs. The result is a table that maps a word to all the URLs (webpages) where the word was
+found.
+<!--l. 135--><p class="noindent" ><span 
+class="cmbx-10">Query Engine</span>, which asynchronously managed requests and responses from users. The query module
+checks the index to retrieve the pages that have references to search keywords. Because the number of hits
+can be high (e.g., 117,000 for fly fishing Vermont) there is a need for a <span 
+class="cmti-10">ranking module </span>to rank the results
+(e.g., high to low number of instances of a keyword on a page). The ranking module needs to sort the
+results retrieved when checking the index to provide the user with the pages they are more likely looking
+for.
+<!--l. 137--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-15000"></a>Crawler Design</h3>
+<!--l. 139--><p class="noindent" >In what follows, we will focus on the design of the crawler which will be implemented as part of
+Lab4. The crawler module receives a seed URL address and generates a repository of pages
+in the file system based on the unique URLs it finds. The remaining information in these
+notes refer only to the crawler design. We will discuss the Indexer and Query Engine in later
+lectures.
+<!--l. 141--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                  
+                                                                                  
+<a 
+ id="x1-150012"></a>
+                                                                                  
+                                                                                  
+<!--l. 142--><p class="noindent" ><img 
+src="designandcrawler1x.png" alt="PIC" class="graphics" width="578.15999pt" height="483.11813pt" ><!--tex4ht:graphics  
+name="designandcrawler1x.png" src="tinysearch.eps"  
+-->
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2: </span><span  
+class="content">TinySearch high-level architectural design.</span></div><!--tex4ht:label?: x1-150012 -->
+                                                                                  
+                                                                                  
+<!--l. 145--><p class="noindent" ></div><hr class="endfigure">
+<h3 class="likesectionHead"><a 
+ id="x1-16000"></a>Crawler Requirements</h3>
+<!--l. 149--><p class="noindent" >Design, implement, and test (but not exhaustively at this stage) a standalone crawler the TinySearch. The
+design of crawler will be done in class. In the next lecture we will develop a DESIGN SPEC for the
+crawler module. We will also develop an IMPLEMENTATION SPEC. Based on these two specs
+you will have a blueprint of the system to develop your own implementation that you can
+test.
+<!--l. 151--><p class="noindent" >The crawler is a standalone program that crawls the web and retrieves webpage starting with a seed URL.
+It parses the seed webpage extracts any embedded URLs that are tagged and retrieves those webpage, and
+so on. Once TinySearch has completed at least one complete crawling cycle (i.e., it has visited a target
+number of Web pages which is defined by a <span 
+class="cmti-10">depth </span>parameter on the crawler command line) then the
+crawler process will complete its operation.
+<!--l. 153--><p class="noindent" >The REQUIREMENTS of the crawler are as follows. The crawler SHALL (a term here that means
+requirement):
+     <ul class="itemize1">
+     <li class="itemize">receives a SEED_URL as input - considered as the initial URL;
+     </li>
+     <li class="itemize">only needs one good (i.e., valid/page found) URL to start the crawl process;
+     </li>
+     <li class="itemize">retrieves the seed page from the Web using the SEED_URL;
+     </li>
+     <li class="itemize">uses wget to transfer webpages to the TARGET_DIRECTORY;
+     </li>
+     <li class="itemize">parses the embedded URL links inside the seed page;
+     </li>
+     <li class="itemize">stores theses URL links in the <span 
+class="cmti-10">URLsList </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">URLsList</span></span></span> The URL is only added to the URL List
+     iff it is not already present in the list. Each element of this list is associated with a boolean
+     flag <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">visited</span></span></span> that is initialized to false;
+     </li>
+     <li class="itemize">saves the seed webpage as a unique document ID starting at 1 and incrementing by one (i.e.,
+     2, 3, 4 and so on);
+     </li>
+     <li class="itemize">saves the SEED_URL and current depth in the file as well. The SEED_URL is put on the
+     first line of the file and the depth on the second line of the file (note, the seed URL is depth
+     0, the URLs found in the seed URL page are depth 1, and so on). The HTML follows on the
+                                                                                  
+                                                                                  
+     third line of the file;
+     </li>
+     <li class="itemize">The crawler sets the seed URL as visited;
+     </li>
+     <li class="itemize">The crawler repeats the <span 
+class="cmbx-10">crawl cycle </span>getting a new URL for a webpage not visited (not the
+     seed because that has been visited). The crawler gets a new address from the list <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">URLsList</span></span></span>,
+     retrieves the page, parses for new URL links inside page; stores these new URL links in the
+     URL list if not already in the list <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">URLsList</span></span></span>; and sets the current URL as visited in the
+     <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">URLsList</span></span></span> (i.e., <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">visited=true</span></span></span>).</li></ul>
+<!--l. 168--><p class="noindent" >The TinySearch architecture is shown in Figure 2. Observe the crawled webpages saved with unique
+document ID as the file name. The URL and the current depth of the search is stored in each
+file.
+<!--l. 170--><p class="noindent" ><span 
+class="cmbx-10">When does it complete? </span>The crawler cycle completes when either all the URLs in the URL list are
+visited or an external stop command is issued. Note, the crawler stops retrieving new webpages once its as
+reached the depth of the depth parameter. For example, if the depth is 0 then only the seed wepage is
+retrieved. If the depth is 1 then only the seed page is retrieved and the pages of the URLs embedded in
+the seed page. If the depth is 2 then the seed page is retrieved, all the pages pointed to by URLs in the
+seed page, and then all the pages pointed to by URLs in those pages. You can see the greater the depth
+the more webpages stoted. The depth parameter tunes the number of pages that the crawler will
+retrieve.
+<!--l. 172--><p class="noindent" ><span 
+class="cmbx-10">Need to sleep. </span>Because webservers DO NOT like crawlers (think about why) they will block your
+crawler based on its address. THIS is a real problem. Why? Imagine your launch your spiffy TinySearch
+crawler and crawl the New York Times webpage continuously and fast. The New York Times server will
+try and serve your pages as fast as it can. Imagine 100s of crawlers launched against the server? Yes, it
+would spend an increasing amount of time serving crawlers and not customers - people like the
+lecturer.
+<!--l. 174--><p class="noindent" >But, wait. What would the New York Times do if it detects you crawling to heavily from a domain
+dartmouth.edu? It would likely block the domain, i.e., the complete dartmouth community! What would
+that mean? Probably, Jim Wright wouldn&#8217;t be able to read his New York Times and I&#8217;m toast. So what
+should we do? Well let&#8217;s try and not look like a crawler to the New York Times website. Let&#8217;s introduce a
+delay. Just like spy - recall? - lets sleep for a period INTERVAL_PER_FETCH between successive crawler
+cycles. Sneaky hey?
+<!--l. 176--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-17000"></a>Command-line execution</h3>
+<!--l. 178--><p class="noindent" >The crawler command takes the following input:
+<div 
+class="colorbox" id="colorbox1"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">./crawler</span><span 
+class="cmtt-10">&#x00A0;[SEED_URL]</span><span 
+class="cmtt-10">&#x00A0;[TARGET_DIRECTORY</span><span 
+class="cmtt-10">&#x00A0;WHERE</span><span 
+class="cmtt-10">&#x00A0;TO</span><span 
+class="cmtt-10">&#x00A0;PUT</span><span 
+class="cmtt-10">&#x00A0;THE</span><span 
+class="cmtt-10">&#x00A0;DATA]</span><span 
+class="cmtt-10">&#x00A0;[CRAWLING_DEPTH]</span><br /><br /><span 
+class="cmtt-10">Example</span><span 
+class="cmtt-10">&#x00A0;command</span><span 
+class="cmtt-10">&#x00A0;input</span><br /><br /><span 
+class="cmtt-10">crawler</span><span 
+class="cmtt-10">&#x00A0;www.cs.dartmouth.edu</span><span 
+class="cmtt-10">&#x00A0;./data/</span><span 
+class="cmtt-10">&#x00A0;2</span><br /><br /><span 
+class="cmtt-10">[SEED_URL]</span><br /><span 
+class="cmtt-10">Requirement:</span><span 
+class="cmtt-10">&#x00A0;The</span><span 
+class="cmtt-10">&#x00A0;URL</span><span 
+class="cmtt-10">&#x00A0;must</span><span 
+class="cmtt-10">&#x00A0;be</span><span 
+class="cmtt-10">&#x00A0;valid.</span><br /><span 
+class="cmtt-10">Usage:</span><span 
+class="cmtt-10">&#x00A0;The</span><span 
+class="cmtt-10">&#x00A0;crawler</span><span 
+class="cmtt-10">&#x00A0;needs</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;inform</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;user</span><span 
+class="cmtt-10">&#x00A0;if</span><span 
+class="cmtt-10">&#x00A0;URL</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;not</span><span 
+class="cmtt-10">&#x00A0;found</span><br /><br /><span 
+class="cmtt-10">[TARGET_DIRECTORY]</span><br /><span 
+class="cmtt-10">Requirement:</span><span 
+class="cmtt-10">&#x00A0;The</span><span 
+class="cmtt-10">&#x00A0;directory</span><span 
+class="cmtt-10">&#x00A0;must</span><span 
+class="cmtt-10">&#x00A0;exist</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;be</span><span 
+class="cmtt-10">&#x00A0;already</span><span 
+class="cmtt-10">&#x00A0;created</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;user.</span><br /><span 
+class="cmtt-10">Usage:</span><span 
+class="cmtt-10">&#x00A0;The</span><span 
+class="cmtt-10">&#x00A0;crawler</span><span 
+class="cmtt-10">&#x00A0;needs</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;inform</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;user</span><span 
+class="cmtt-10">&#x00A0;if</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;directory</span><span 
+class="cmtt-10">&#x00A0;can</span><span 
+class="cmtt-10">&#x00A0;not</span><span 
+class="cmtt-10">&#x00A0;be</span><span 
+class="cmtt-10">&#x00A0;found</span><br /><br /><span 
+class="cmtt-10">[CRAWLING_DEPTH]</span><br /><span 
+class="cmtt-10">Requirement:</span><span 
+class="cmtt-10">&#x00A0;The</span><span 
+class="cmtt-10">&#x00A0;crawl</span><span 
+class="cmtt-10">&#x00A0;depth</span><span 
+class="cmtt-10">&#x00A0;cannot</span><span 
+class="cmtt-10">&#x00A0;exceed</span><span 
+class="cmtt-10">&#x00A0;4</span><br /><span 
+class="cmtt-10">Usage:</span><span 
+class="cmtt-10">&#x00A0;The</span><span 
+class="cmtt-10">&#x00A0;crawler</span><span 
+class="cmtt-10">&#x00A0;needs</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;inform</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;user</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;user</span><span 
+class="cmtt-10">&#x00A0;exceeds</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;maximum</span><span 
+class="cmtt-10">&#x00A0;depth</span><br /><br /><span 
+class="cmtt-10">For</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;example</span><span 
+class="cmtt-10">&#x00A0;command</span><span 
+class="cmtt-10">&#x00A0;line:</span><br /><br /><span 
+class="cmtt-10">crawler</span><span 
+class="cmtt-10">&#x00A0;www.cs.dartmouth.edu</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;./data/</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;2</span><br /><br /><span 
+class="cmtt-10">[SEED_URL]</span><span 
+class="cmtt-10">&#x00A0;www.cs.dartmouth.edu</span><br /><span 
+class="cmtt-10">[TARGET_DIRECTORY]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;./data/</span><br /><span 
+class="cmtt-10">[CRAWLING_DEPTH]</span><span 
+class="cmtt-10">&#x00A0;2</span><br /><br /></div></div>
+                                                                                  
+                                                                                  
+<!--l. 215--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-18000"></a>Crawler output</h3>
+<!--l. 217--><p class="noindent" >The output of your crawler program should be:
+<div 
+class="colorbox" id="colorbox2"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">For</span><span 
+class="cmtt-10">&#x00A0;each</span><span 
+class="cmtt-10">&#x00A0;webpage</span><span 
+class="cmtt-10">&#x00A0;crawled</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;crawler</span><span 
+class="cmtt-10">&#x00A0;program</span><span 
+class="cmtt-10">&#x00A0;will</span><span 
+class="cmtt-10">&#x00A0;create</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;file</span><span 
+class="cmtt-10">&#x00A0;in</span><span 
+class="cmtt-10">&#x00A0;the</span><br /><span 
+class="cmtt-10">[TARGET_DIRECTORY].</span><span 
+class="cmtt-10">&#x00A0;The</span><span 
+class="cmtt-10">&#x00A0;name</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;file</span><span 
+class="cmtt-10">&#x00A0;will</span><span 
+class="cmtt-10">&#x00A0;start</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;1</span><span 
+class="cmtt-10">&#x00A0;for</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;[SEED_URL]</span><br /><span 
+class="cmtt-10">and</span><span 
+class="cmtt-10">&#x00A0;be</span><span 
+class="cmtt-10">&#x00A0;incremented</span><span 
+class="cmtt-10">&#x00A0;for</span><span 
+class="cmtt-10">&#x00A0;each</span><span 
+class="cmtt-10">&#x00A0;subsequent</span><span 
+class="cmtt-10">&#x00A0;HTML</span><span 
+class="cmtt-10">&#x00A0;webpage</span><span 
+class="cmtt-10">&#x00A0;crawled.</span><br /><br /><span 
+class="cmtt-10">Each</span><span 
+class="cmtt-10">&#x00A0;file</span><span 
+class="cmtt-10">&#x00A0;(e.g.,</span><span 
+class="cmtt-10">&#x00A0;10)</span><span 
+class="cmtt-10">&#x00A0;will</span><span 
+class="cmtt-10">&#x00A0;include</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;URL</span><span 
+class="cmtt-10">&#x00A0;associated</span><span 
+class="cmtt-10">&#x00A0;with</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;saved</span><span 
+class="cmtt-10">&#x00A0;webpage</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;the</span><br /><span 
+class="cmtt-10">current</span><span 
+class="cmtt-10">&#x00A0;depth</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;search</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;(e.g.,</span><span 
+class="cmtt-10">&#x00A0;1,</span><span 
+class="cmtt-10">&#x00A0;2,</span><span 
+class="cmtt-10">&#x00A0;..</span><span 
+class="cmtt-10">&#x00A0;N)</span><span 
+class="cmtt-10">&#x00A0;in</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;file.</span><span 
+class="cmtt-10">&#x00A0;The</span><span 
+class="cmtt-10">&#x00A0;URL</span><span 
+class="cmtt-10">&#x00A0;will</span><span 
+class="cmtt-10">&#x00A0;be</span><span 
+class="cmtt-10">&#x00A0;on</span><span 
+class="cmtt-10">&#x00A0;the</span><br /><span 
+class="cmtt-10">first</span><span 
+class="cmtt-10">&#x00A0;line</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;file</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;depth</span><span 
+class="cmtt-10">&#x00A0;on</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;second</span><span 
+class="cmtt-10">&#x00A0;line.</span><span 
+class="cmtt-10">&#x00A0;The</span><span 
+class="cmtt-10">&#x00A0;HTML</span><span 
+class="cmtt-10">&#x00A0;for</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;webpage</span><br /><span 
+class="cmtt-10">will</span><span 
+class="cmtt-10">&#x00A0;start</span><span 
+class="cmtt-10">&#x00A0;on</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;third</span><span 
+class="cmtt-10">&#x00A0;line.</span><br /><br /></div></div>
+<!--l. 237--><p class="noindent" >Once the crawler starts to run it gets wget to download the SEED_URL then its starts to process each
+webpage hunting for new URLs. A parser function (which we will provide to you) runs through its
+webpage looking for URLs. These are stored in a URLList for later processing. The crawler must remove
+duplicate URLs that it finds (or better it marks that it has visited a webpage (URL) and does not visit
+again even it it finds the same URL again. There are also conditions of stale URLs that give &#8220;Page
+Not Found&#8221;. It has to be able to keep on processing the URLs even if it encounters a bad
+link.
+<!--l. 240--><p class="noindent" >Below is a snipped when the program starts to crawl the CS webserver to a depth of 2. Meaning it
+will attempt to visit all URLs in the main CS webpage and then all URLs in those pages.
+The crawler prints status information as it goes along (this could be used in debug mode to
+observe the operation of the crawler as it moves through its workload). Note, you should use a
+LOGSTATUS macro that can be set when compiling to switch these status print outs on or off.
+In addition, you should be able to write the output to a logfile to look at later should you
+wish.
+<!--l. 242--><p class="noindent" >In the snippet, the program get the SEED_URL page then prints out all the URLs it finds and
+then crawls http://www.cs.dartmouth.edu/index.php next. PHP is a scripting language that
+produces HTML - .php provides a valid webpage just like .html In the snippet it only get two
+webpages.
+<div 
+class="colorbox" id="colorbox3"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">atc@dhcp-212-163</span><span 
+class="cmtt-10">&#x00A0;crawler]</span><span 
+class="cmtt-10">&#x00A0;crawler</span><span 
+class="cmtt-10">&#x00A0;www.cs.dartmouth.edu</span><span 
+class="cmtt-10">&#x00A0;~atc/teaching/cs50/notes/tinysearch/code</span><span 
+class="cmtt-10">&#x00A0;2</span><br /><span 
+class="cmtt-10">Crawler]Crawlingwww.cs.dartmouth.edu</span><br /><span 
+class="cmtt-10">--02:36:10--</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;http://www.cs.dartmouth.edu/</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;=&#x003E;</span><span 
+class="cmtt-10">&#x00A0;&#8216;temp&#8217;</span><br /><span 
+class="cmtt-10">Resolving</span><span 
+class="cmtt-10">&#x00A0;www.cs.dartmouth.edu...</span><span 
+class="cmtt-10">&#x00A0;done.</span><br /><span 
+class="cmtt-10">Connecting</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;www.cs.dartmouth.edu[129.170.213.101]:80...</span><span 
+class="cmtt-10">&#x00A0;connected.</span><br /><span 
+class="cmtt-10">HTTP</span><span 
+class="cmtt-10">&#x00A0;request</span><span 
+class="cmtt-10">&#x00A0;sent,</span><span 
+class="cmtt-10">&#x00A0;awaiting</span><span 
+class="cmtt-10">&#x00A0;response...</span><span 
+class="cmtt-10">&#x00A0;200</span><span 
+class="cmtt-10">&#x00A0;OK</span><br /><span 
+class="cmtt-10">Length:</span><span 
+class="cmtt-10">&#x00A0;7,679</span><span 
+class="cmtt-10">&#x00A0;[text/html]</span><br /><br /><span 
+class="cmtt-10">100%[===================================================&#x003E;]</span><span 
+class="cmtt-10">&#x00A0;7,679</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;7.32M/s</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;ETA</span><span 
+class="cmtt-10">&#x00A0;00:00</span><br /><br /><span 
+class="cmtt-10">02:36:10</span><span 
+class="cmtt-10">&#x00A0;(7.32</span><span 
+class="cmtt-10">&#x00A0;MB/s)</span><span 
+class="cmtt-10">&#x00A0;-</span><span 
+class="cmtt-10">&#x00A0;&#8216;temp&#8217;</span><span 
+class="cmtt-10">&#x00A0;saved</span><span 
+class="cmtt-10">&#x00A0;[7679/7679]</span><br /><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/index.php</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/about.php</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/news.php</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/people.php</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/jobs.php</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/contact.php</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/internal/</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/research.php</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/seminar.php</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/books.php</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/reports</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/ug.php</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/gr.php</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/ug_courses.php</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/gr_courses.php</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/robotcamp</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.dartmouth.edu/apply</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/admit_ms.php</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/admit_phd.php</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/~mdphd</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/gr_life.php</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/~sws</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.ams.org/bull</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/~afra</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.ams.org/bull/2008-45-01/home.html</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/~farid</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/farid/press/todayshow07.html</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:www.cs.dartmouth.edu/~robotics</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.maa.org/mathland/mathtrek_07_25_05.html</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/~robotics/</span><br /><span 
+class="cmtt-10">[crawler]:Parser</span><span 
+class="cmtt-10">&#x00A0;find</span><span 
+class="cmtt-10">&#x00A0;link:http://www.cs.dartmouth.edu/</span><br /><span 
+class="cmtt-10">[Crawler]Crawlinghttp://www.cs.dartmouth.edu/index.php</span><br /><span 
+class="cmtt-10">--02:36:11--</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;http://www.cs.dartmouth.edu/index.php</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;=&#x003E;</span><span 
+class="cmtt-10">&#x00A0;&#8216;temp&#8217;</span><br /><span 
+class="cmtt-10">Resolving</span><span 
+class="cmtt-10">&#x00A0;www.cs.dartmouth.edu...</span><span 
+class="cmtt-10">&#x00A0;done.</span><br /><span 
+class="cmtt-10">Connecting</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;www.cs.dartmouth.edu[129.170.213.101]:80...</span><span 
+class="cmtt-10">&#x00A0;connected.</span><br /><span 
+class="cmtt-10">HTTP</span><span 
+class="cmtt-10">&#x00A0;request</span><span 
+class="cmtt-10">&#x00A0;sent,</span><span 
+class="cmtt-10">&#x00A0;awaiting</span><span 
+class="cmtt-10">&#x00A0;response...</span><span 
+class="cmtt-10">&#x00A0;200</span><span 
+class="cmtt-10">&#x00A0;OK</span><br /><span 
+class="cmtt-10">Length:</span><span 
+class="cmtt-10">&#x00A0;7,527</span><span 
+class="cmtt-10">&#x00A0;[text/html]</span><br /><br /><span 
+class="cmtt-10">100%[============================================&#x003E;]</span><span 
+class="cmtt-10">&#x00A0;7,527</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;7.18M/s</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;ETA</span><span 
+class="cmtt-10">&#x00A0;00:00</span><br /><br /><span 
+class="cmtt-10">02:36:11</span><span 
+class="cmtt-10">&#x00A0;(7.18</span><span 
+class="cmtt-10">&#x00A0;MB/s)</span><span 
+class="cmtt-10">&#x00A0;-</span><span 
+class="cmtt-10">&#x00A0;&#8216;temp&#8217;</span><span 
+class="cmtt-10">&#x00A0;saved</span><span 
+class="cmtt-10">&#x00A0;[7527/7527]</span><br /><br /></div></div>
+<!--l. 309--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-19000"></a>What does the TARGET_DIRECTORY look after the crawler has run</h3>
+<!--l. 311--><p class="noindent" >For each URL crawled the program creates a file and places in the file the URL and filename. But for a
+CRAWLING_DEPTH = 2 as in this example there are a large amount of webpages are crawled and files
+created. For example, if we look at the files created in the [TARGET_DIRECTORY] pages
+directory in this case, then crawler creates 184 files (184 webpages) of 3.2 Megabtes. That
+means a depth of 2 on the departmental webpage there are 184 unique URLs. Note, webpages
+are dynamic so there may be many more than 184 unqiue URLs by the time you run your
+crawler.
+<div 
+class="colorbox" id="colorbox4"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">[atc@dhcp-212-163</span><span 
+class="cmtt-10">&#x00A0;data]</span><span 
+class="cmtt-10">&#x00A0;ls</span><span 
+class="cmtt-10">&#x00A0;|</span><span 
+class="cmtt-10">&#x00A0;sort</span><span 
+class="cmtt-10">&#x00A0;-n</span><br /><span 
+class="cmtt-10">1</span><br /><span 
+class="cmtt-10">2</span><br /><span 
+class="cmtt-10">3</span><br /><span 
+class="cmtt-10">4</span><br /><span 
+class="cmtt-10">5</span><br /><span 
+class="cmtt-10">6</span><br /><span 
+class="cmtt-10">7</span><br /><span 
+class="cmtt-10">8</span><br /><span 
+class="cmtt-10">9</span><br /><span 
+class="cmtt-10">=====</span><br /><span 
+class="cmtt-10">SNIP</span><br /><span 
+class="cmtt-10">=====</span><br /><span 
+class="cmtt-10">174</span><br /><span 
+class="cmtt-10">175</span><br /><span 
+class="cmtt-10">176</span><br /><span 
+class="cmtt-10">177</span><br /><span 
+class="cmtt-10">178</span><br /><span 
+class="cmtt-10">179</span><br /><span 
+class="cmtt-10">180</span><br /><span 
+class="cmtt-10">181</span><br /><span 
+class="cmtt-10">182</span><br /><span 
+class="cmtt-10">183</span><br /><span 
+class="cmtt-10">184</span><br /><br /></div></div>
+                                                                                  
+                                                                                  
+<!--l. 348--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-20000"></a>Looking at the format of the save files</h3>
+<!--l. 350--><p class="noindent" >Note, that each webpage is saved as a unique document ID starting at 1 and incrementing by one. Below
+we less three files (viz. 1, 5, 139). As you can see the crawler has stored the URL and the current depth
+value when the page was crawled.
+<div 
+class="colorbox" id="colorbox5"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">[atc@dhcp-212-163</span><span 
+class="cmtt-10">&#x00A0;data]</span><span 
+class="cmtt-10">&#x00A0;less</span><span 
+class="cmtt-10">&#x00A0;1</span><br /><br /><span 
+class="cmtt-10">www.cs.dartmouth.edu</span><br /><span 
+class="cmtt-10">0</span><br /><span 
+class="cmtt-10">&#x003C;!DOCTYPE</span><span 
+class="cmtt-10">&#x00A0;html</span><span 
+class="cmtt-10">&#x00A0;PUBLIC</span><span 
+class="cmtt-10">&#x00A0;"-//W3C//DTD</span><span 
+class="cmtt-10">&#x00A0;XHTML</span><span 
+class="cmtt-10">&#x00A0;1.0</span><span 
+class="cmtt-10">&#x00A0;Strict//EN"</span><span 
+class="cmtt-10">&#x00A0;"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;html</span><span 
+class="cmtt-10">&#x00A0;xmlns="http://www.w3.org/1999/xhtml"</span><span 
+class="cmtt-10">&#x00A0;xml:lang="en"</span><span 
+class="cmtt-10">&#x00A0;lang="en"&#x003E;</span><br /><br /><span 
+class="cmtt-10">====</span><br /><span 
+class="cmtt-10">SNIP</span><br /><span 
+class="cmtt-10">====</span><br /><br /><span 
+class="cmtt-10">atc@dhcp-212-163</span><span 
+class="cmtt-10">&#x00A0;data]</span><span 
+class="cmtt-10">&#x00A0;less</span><span 
+class="cmtt-10">&#x00A0;5</span><br /><br /><span 
+class="cmtt-10">http://www.cs.dartmouth.edu/people.php</span><br /><span 
+class="cmtt-10">1</span><br /><span 
+class="cmtt-10">&#x003C;!DOCTYPE</span><span 
+class="cmtt-10">&#x00A0;html</span><span 
+class="cmtt-10">&#x00A0;PUBLIC</span><span 
+class="cmtt-10">&#x00A0;"-//W3C//DTD</span><span 
+class="cmtt-10">&#x00A0;XHTML</span><span 
+class="cmtt-10">&#x00A0;1.0</span><span 
+class="cmtt-10">&#x00A0;Strict//EN"</span><span 
+class="cmtt-10">&#x00A0;"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;html</span><span 
+class="cmtt-10">&#x00A0;xmlns="http://www.w3.org/1999/xhtml"</span><span 
+class="cmtt-10">&#x00A0;xml:lang="en"</span><span 
+class="cmtt-10">&#x00A0;lang="en"&#x003E;</span><br /><br /><br /><span 
+class="cmtt-10">====</span><br /><span 
+class="cmtt-10">SNIP</span><br /><span 
+class="cmtt-10">====</span><br /><br /><span 
+class="cmtt-10">[atc@dhcp-212-163</span><span 
+class="cmtt-10">&#x00A0;data]</span><span 
+class="cmtt-10">&#x00A0;less</span><span 
+class="cmtt-10">&#x00A0;139</span><br /><br /><span 
+class="cmtt-10">http://www.cs.dartmouth.edu/ug_honors.php</span><br /><span 
+class="cmtt-10">2</span><br /><span 
+class="cmtt-10">&#x003C;!DOCTYPE</span><span 
+class="cmtt-10">&#x00A0;html</span><span 
+class="cmtt-10">&#x00A0;PUBLIC</span><span 
+class="cmtt-10">&#x00A0;"-//W3C//DTD</span><span 
+class="cmtt-10">&#x00A0;XHTML</span><span 
+class="cmtt-10">&#x00A0;1.0</span><span 
+class="cmtt-10">&#x00A0;Strict//EN"</span><span 
+class="cmtt-10">&#x00A0;"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;html</span><span 
+class="cmtt-10">&#x00A0;xmlns="http://www.w3.org/1999/xhtml"</span><span 
+class="cmtt-10">&#x00A0;xml:lang="en"</span><span 
+class="cmtt-10">&#x00A0;lang="en"&#x003E;</span><br /><br /><br /></div></div>
+ 
+</body></html> 
+
+                                                                                  
+
+

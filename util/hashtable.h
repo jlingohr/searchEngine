@@ -37,19 +37,31 @@ typedef struct HashTable {
 
 
 // ---------------- Public Variables
- extern HashTable ht;
+ //extern HashTable ht;
 
 // ---------------- Prototypes/Macros
 
+/* URL Hashtable wrappers */
+int HashURL(const element_t strv, int mod);
+int HashTableAddURL(HashTable* ht, char* url);
+int HashTableLookUpURL(HashTable* ht, char* url);
+void cleanHashURL(HashTable* ht);
 
-unsigned long Hash(const element_t key, unsigned long mod);
 
-void initHashTable();
-// add to hash table
-int HashTableAdd(element_t key);
-// lookup
-int HashTableLookUp(element_t key);
+
+
+/* Wordnode Hashtable wrappers */
+
+
+/* Hashtable macros */
+HashTable* initHashTable();
+int HashTableAdd(HashTable* ht, element_t key, int (*f)(element_t, int));
+int HashTableLookUp(HashTable* ht, element_t key, int (*f)(element_t, int), int (*g)(element_t, element_t));
 void cleanHash();
+
+
+/* Hashtable helpers */
+int cmpStrings(element_t av, element_t bv);
 
 
 #endif // HASHTABLE_H

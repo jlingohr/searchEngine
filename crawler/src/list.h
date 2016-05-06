@@ -12,7 +12,7 @@
 #define LIST_H
 
 // ---------------- Prerequisites e.g., Requires "math.h"
-#include "common.h"                          // common functionality
+#include "../../util/common.h"                          // common functionality
  
 
 // ---------------- Constants

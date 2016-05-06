@@ -50,7 +50,7 @@
 // ---------------- Private prototypes
 int checkValidInputs(char* seed, char* target, char* max_depth);
 int isValidURL(char * URL);
-int isDirec(char * dir);
+//int isDirec(char * dir);
 int writePage(WebPage *page, char *dir, int x);
 int crawlPage(WebPage *page);
 int saveCrawl();
@@ -179,7 +179,7 @@ int checkValidInputs(char* seed, char* target, char* max_depth) {
   return 1;
 
 }
-
+/*
 int isDirec(char* dir) {
   struct stat sbuf;
   Stat(dir, &sbuf);
@@ -192,7 +192,7 @@ int isDirec(char* dir) {
     return 0;
   }
   return 1;
-}
+}*/
 
 /*
 * isValidUrl - Checks whether seed is a valid URL and within domain in common.h

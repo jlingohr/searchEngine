@@ -26,8 +26,7 @@
 /* Private Prototypes */
 int checkCommandLine(int argc, char** argv);
 char* loadDoc(char* filename);
-int getDocID(char* filename);
-int getNextWord(const char* doc, int pos, char** word);
+int getDocID(char* filename, char* dir);
 int updateIndex(char* word, int docID, InvertedIndex* index);
 int saveIndexToFile(InvertedIndex* index);
 
@@ -35,7 +34,7 @@ HashTable* Index;
 
 int main(int argc, char** argv) {
   char *target_directory, *target_file, *test_old, *test_new;
-  char* doc, *prev_file;
+  char* prev_file;
   char** filenames;
   int num_files;
   
@@ -63,11 +62,18 @@ int main(int argc, char** argv) {
     return 1;
   }
 
-  /* Prepend directory name to filenames?
+  /* Prepend directory name to filenames */
   for (int i = 0; i < num_files; i++) {
-    printf("%s\n", filenames[i]);
-    
-  } */
+    char* tmp = filenames[i];
+    int len = strlen(target_directory) + strlen(tmp) + 1;
+    char* buf = calloc(len, sizeof(char));
+    strcpy(buf, target_directory);
+    strcat(buf, tmp);
+    if (tmp)
+      free(tmp);
+
+    filenames[i] = buf;
+  }
   
 
   //3. LOG( "Building the index" );
@@ -76,8 +82,19 @@ int main(int argc, char** argv) {
   }
 
   /*4. Index *wordindex=buildIndexFromDirectory("argv[1]"); */
+  char* doc, *word;
+  int doc_id, pos;
   for (int i = 0; i < num_files; i++) {
+    if (!isFile(filenames[i])) {
+      fprintf(stderr, "%s not a file\n", filenames[i]);
+      continue;
+    }
     doc = loadDoc(filenames[i]);
+    doc_id = getDocID(filenames[i], target_directory);
+    pos = 0;
+
+    while ((pos = getNextWord(doc, pos, &word)) > 0)
+      updateIndex(Index, word, doc_id);
   }
 
 
@@ -168,33 +185,64 @@ int checkCommandLine(int argc, char** argv) {
 * Returns string containing the loaded document
 */
 char* loadDoc(char* filename) {
-  //TODO
-  return NULL;
+  /* TODO - Better way to prevent leaks/dangling pointers */
+  char* buf;
+  FILE* fp;
+  long bufsize;
+
+  buf = NULL;
+  fp = fopen(filename, "r");
+  if (fp) {
+    /* Go to end of the file */
+    if (fseek(fp, 0l, SEEK_END) == 0) {
+      /* Get size of file */
+      bufsize = ftell(fp);
+      if (bufsize == -1) {
+        fclose(fp);
+        return NULL;
+      }
+
+      /* Allocate buffer to that size */
+      buf = malloc(sizeof(char) * (bufsize + 1));
+
+      /* Go back to start */
+      if (fseek(fp, 0l, SEEK_SET) != 0) {
+        fclose(fp);
+        return NULL;
+      }
+
+      /* Read file into buf */
+      size_t new_len = fread(buf, sizeof(char), bufsize, fp);
+      if (new_len == 0) {
+        fprintf(stderr, "Error reading file %s\n", filename);
+        fclose(fp);
+        return NULL;
+      }
+      else {
+        buf[new_len++] = '\0';
+      }
+    }
+  }
+  fclose(fp);
+  return buf;
 }
 
 /*
 * getDocID - Generates document identifier from the name of the file. ASSUME
 * crawler saved the filed using unique identifiers as names
 * @doc: name of the file
+* @dir: Directory file is in
 *
 * Returns integer identifying document
 */
-int getDocID(char* filename) {
+int getDocID(char* filename, char* dir) {
   //TODO
-  return -1;
-}
+  int pos;
+  char* id;
 
-/*
-* getNextWord - Parses the string containing the loaded document skippng the HTML tags
-* @doc: string containing the HTML document
-* @pos: current position within that document (starts at 0)
-* @word: pointer to C-style string
-*
-* Returns the current position in the document and a newly allocated word (must be freed)
-*/
-int getNextWord(const char* doc, int pos, char** word) {
-  // TODO
-  return -1;
+  pos = strlen(dir);
+  id = filename + pos;
+  return atoi(id);
 }
 
 /* updateIndex - Updates the structure containing the index
