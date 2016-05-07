@@ -29,9 +29,6 @@ char* loadDoc(char* filename);
 int getDocID(char* filename, char* dir);
 int updateIndex(char* word, int docID, HashTable* index);
 int saveIndexToFile(HashTable* index);
-void initWNode(WordNode* wNode, char* word, int docID);
-int updateDNode(DocumentNode* dNode, int docID);
-void initDNode(DocumentNode* dNode, int docID);
 
 HashTable* Index;
 
@@ -96,8 +93,10 @@ int main(int argc, char** argv) {
     doc_id = getDocID(filenames[i], target_directory);
     pos = 0;
 
-    while ((pos = GetNextWord(doc, pos, &word)) > 0)
+    while ((pos = GetNextWord(doc, pos, &word)) > 0) {
+      NormalizeWord(word);
       updateIndex(word, doc_id, Index);
+    }
   }
 
 
@@ -105,7 +104,9 @@ int main(int argc, char** argv) {
     // LOG( "done!");
   if (STATUS_LOG == 1) {
     printf("\nLogging complete!\n");
+    HashTablePrintWords(Index);
   }
+  saveFile(argv[2], Index);
      
   //6. CleanDynamicList (wordindex)
 
@@ -267,16 +268,18 @@ int getDocID(char* filename, char* dir) {
 * Returns 0 otherwise
 */
 int updateIndex(char* word, int docID, HashTable* index) {
-  //TODO
+  //TODO - Problems initializing
   WordNode* wNode;
 
-  if (!HashTableLookUpWord(index, word, &wNode)) { /* Word is not in index */
-    wNode = malloc(sizeof(WordNode));
-    initWNode(wNode, word, docID);
-    return HashTableAddWord(index, word);
+  if (HashTableLookUpWord(index, word, &wNode)) { /* Word is in table */
+    /* Update docID for word */
+    return HashTableUpdateWord(index, word, docID);
   }
-  /* Word is already in index */
-  return updateDNode(wNode->page, docID);
+  else {
+    /* Word not in, so insert word */
+    return HashTableAddWord(index, word, docID);
+  }
+  return 1;
 }
 
 /*
@@ -291,69 +294,3 @@ int saveIndexToFile(HashTable* index) {
   return 0;
 }
 
-/**************
-* Helpers 
-**************/
-
-/*
-* initDNode - allocates DocumentNode and assigns initial values
-* @dNode: DocumentNode to be initialized
-* @docID: document id
-*
-*/
-void initDNode(DocumentNode* dNode, int docID) {
-  dNode->document_id = docID;
-  dNode->page_word_frequency = 1;
-  dNode->next = NULL;
-}
-
-/*
-* initWNode - Initializes WordNode and assigns initial values
-* @wNode: WordNote to initialize 
-* @word: Word the node corresponds to
-* @docID: Document ID for new WordNode
-*
-*/
-void initWNode(WordNode* wNode, char* word, int docID) {
-  /* TODO - BUGS here with assigning dNOde to list;
-  Check for memory leaks */
-  DocumentNode* dNode; 
-
-  /* copy over word */
-  strcpy(wNode->word, word);
-
-  /* Allocate DocumentNode */
-  dNode = malloc(sizeof(DocumentNode));
-  initDNode(dNode, docID);
-  wNode->page = dNode;
-}
-
-/*
-* updateDNode - Updates the occurence of word in the
-* document docID
-* @dNodeList: List of documents for the word
-* @docID: Document ID
-*
-* Returns 1 on success
-*/
-int updateDNode(DocumentNode* dNode, int docID) {
-  /* TODO - Decouple! */
-  DocumentNode* cur;
-  DocumentNode* next;
-
-  cur = dNode;
-  /* Find last document */
-  while ((next = cur->next)) {
-    cur = next;
-  }
-  /* Check document ID */
-  if (cur->document_id != docID) { /* Create new DocumentNode */
-    DocumentNode* node = malloc(sizeof(DocumentNode));
-    initDNode(node, docID);
-  }
-  else
-    cur->page_word_frequency++;
-
-  return 1;
-
-}
