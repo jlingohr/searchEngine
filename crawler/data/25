@@ -4978,3 +4978,833 @@ engine).
                                                                                   
 
 
+http://www.cs.dartmouth.edu/~campbell/cs50/lab6.html
+Depth: 2
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title></title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- html --> 
+<meta name="src" content="lab6.tex"> 
+<meta name="date" content="2015-05-15 09:01:00"> 
+<link rel="stylesheet" type="text/css" href="lab6.css"> 
+</head><body 
+>
+<h1 class="likepartHead"><a 
+ id="x1-1000"></a>CS 50 Software Design and Implementation</h1>
+<h1 class="likepartHead"><a 
+ id="x1-2000"></a>Lab6</h1>
+<h1 class="likepartHead"><a 
+ id="x1-3000"></a>TinySearch Engine: Query Engine Lab</h1>
+<h1 class="likepartHead"><a 
+ id="x1-4000"></a>Putting it all together</h1>
+<!--l. 20--><p class="noindent" >Lab6 is the third and final in a three part series of labs associated with building your very own search
+engine - the now famous TinySearch Engine!
+<!--l. 22--><p class="noindent" >The lab draws on all we have learnt in the course so far culmunating in putting the complete TinySearch
+system together.
+<!--l. 24--><p class="noindent" >We have coded the crawler and indexer. Now it&#8217;s time to write the front-end - and it&#8217;s not going to
+be a graphical user interface folks; you guessed it - we will design a simple command-line
+interace to the TinySearch system. This lab consists of a number of tasks that allows us to
+pull the system together. We will code a simple ranking system and a command-line query
+processor - collectively we refer to these components as the query engine. So before you do
+another thing please read Section 5 on Ranking and Analysis in <a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/searchingtheweb.pdf" >&#8220;Searching the Web&#8221;</a>, Arvind
+Arasu, Junghoo Cho, Hector Garcia-Molina, Andreas Paepcke, Sriram Raghavan (Stanford
+University). ACM Transactions on Internet Technology (TOIT), Volume 1 , Issue 1 (August
+2001). While we will do nothing as sophisticated as this in our code it might give you some
+ideas for ranking should you want to implement something more creative. Feel free to do just
+that.
+<!--l. 29--><p class="noindent" >The lab also requires you to unit test your query engine code in the same manner as we discussed during
+the lecture on the Art of Testing: Unit Testing. You have to build a C library for the common functions
+found in your util sub directory. Also, there can be no memory leaks in any of your components (i.e.,
+crawler, indexer, query engine).
+<!--l. 32--><p class="noindent" ><span 
+class="cmbx-10">Important point if you use any code provide to you as part of the solutions we have given</span>
+<span 
+class="cmbx-10">you for the crawler or indexer then your Lab will be graded out of 80% and not 100%. The</span>
+<span 
+class="cmbx-10">incentive here is for you to use your code and not our solution. In addition, if there</span>
+<span 
+class="cmbx-10">are any memory leaks in your code there is an addition 10 points take off your</span>
+<span 
+class="cmbx-10">grade</span>.
+<!--l. 34--><p class="noindent" ><span 
+class="cmbx-10">This year 10% of the grade for this lab will be awarded to your refactoring efforts; that is,</span>
+<span 
+class="cmbx-10">how you structured your code and developed common functions used by crawler, indexer</span>
+                                                                                  
+                                                                                  
+<span 
+class="cmbx-10">and queryengine</span>.
+<!--l. 36--><p class="noindent" >The query engine (comprising the query processor and ranking modules) is shown in Figure
+1.
+<!--l. 39--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                  
+                                                                                  
+<a 
+ id="x1-40011"></a>
+                                                                                  
+                                                                                  
+<!--l. 40--><p class="noindent" ><img 
+src="lab60x.png" alt="PIC" class="graphics" width="578.15999pt" height="483.11813pt" ><!--tex4ht:graphics  
+name="lab60x.png" src="tinysearch.eps"  
+-->
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1: </span><span  
+class="content">The TinySearch Query Engine</span></div><!--tex4ht:label?: x1-40011 -->
+                                                                                  
+                                                                                  
+<!--l. 43--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 45--><p class="noindent" >You will have to come up with the Design Spec and the Implementation Spec for the query
+engine in addition to coding, debugging, and unit testing it. <span 
+class="cmbx-10">Please make sure that the</span>
+<span 
+class="cmbx-10">Design Spec and Implementation Spec details (e.g., input, output, data flow, data</span>
+<span 
+class="cmbx-10">structures, pseudocode) are included in the appropriate places of the *.c and *.h files,</span>
+<span 
+class="cmbx-10">respectively.</span>
+<!--l. 47--><p class="noindent" >This is a another challenging assignment. In essence, the last challenging lab of the course. The final lab,
+i.e., Lab7, is relatively simple in comparison to this lab but the concept of sockets will be new to many of
+you. Sockets are the backbone programming abstraction for almost everything you do on the
+Internet.
+<!--l. 49--><p class="noindent" ><span 
+class="cmbx-10">Read carefully. </span>This lab will cover a number of new issues, so read this carefully: First you need to
+complete the last component of the system, unit test all functions, putting the complete system together -
+writing a script (<span 
+class="cmbx-10">make</span><span 
+class="cmbx-10">_test</span><span 
+class="cmbx-10">_run</span><span 
+class="cmbx-10">_tinysearch.sh</span>) that: 1) &#8220;makes&#8221; (Makfile) each component
+of the system (crawler, indexer, query engine); 2) runs your unit tests for the query engine
+code (and only carries on if the tests all pass) and then runs the crawler, indexer and then
+invokes the query engine. All stages (i.e., compilation, unit testing of query engine, running the
+crawler, indexer and query engine) must provably work successfully for the system to work
+- signing in your complete system into svn. We will <span 
+class="cmti-10">checkout </span>your TinySearch source tree
+and run make_test_run_tinysearch.sh. We also run valgrind against your complete system. If
+there are any memory leaks in your system you will have 10% deducted from your lab grade.
+That means you will have to go back and fix your crawler and indexer if memory leaks exist
+in your lab submissions. We will discuss and demo svn in the next lecture. For unit testing
+you can base your test harness code on the one we gave out in class. <span 
+class="cmbx-10">A detailed outline of</span>
+<span 
+class="cmbx-10">the structure of the make</span><span 
+class="cmbx-10">_test</span><span 
+class="cmbx-10">_run</span><span 
+class="cmbx-10">_tinysearch.sh is given at the end of this lab</span>
+<span 
+class="cmbx-10">note.</span>
+<!--l. 51--><p class="noindent" ><span 
+class="cmbx-10">Submitting assignment using Subversion Versions System (SVN) - source code management</span>:
+From now on you will use SVN to sign in your source tree.
+<!--l. 53--><p class="noindent" >In the lab6 directory creates the following sub-directories and files. Your files must be as follows:
+<!--l. 55--><p class="noindent" ><span 
+class="cmbx-10">crawler </span>- this is the directory that holds the crawler files, README, Makefile
+<!--l. 57--><p class="noindent" ><span 
+class="cmbx-10">index </span>- this is the directory that holds the indexer files, README, Makefile
+<!--l. 59--><p class="noindent" ><span 
+class="cmbx-10">README </span>- this is a plain text file that describes all files and directories and how to build, test, and run
+the system
+<!--l. 62--><p class="noindent" ><span 
+class="cmbx-10">util </span>- utility directory with common functions; the libtseutil.a library is built and stored here <a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/buildlib.html" > read
+building my own library.</a>At the end of those lecture notes you will find hints about building the library as
+part of the Makefile in each component (crawler, indexer, queryengine)<br 
+class="newline" />
+<!--l. 64--><p class="noindent" ><span 
+class="cmbx-10">data </span>- data files stored here
+<!--l. 66--><p class="noindent" ><span 
+class="cmbx-10">make</span><span 
+class="cmbx-10">_test</span><span 
+class="cmbx-10">_run</span><span 
+class="cmbx-10">_tinysearch.sh </span>- this is the bash script that makes the system (including the
+queryengine unit test code), tests the query engine - and if it passes all unit tests then runs the crawler,
+indexer and queryengine. This is a very cool script.
+                                                                                  
+                                                                                  
+<!--l. 68--><p class="noindent" >You should sign the complete source tree for Lab5 into your svn account before the deadline. We will sign
+it out and simply run the make_test_run_tinysearch.sh script. It should work. Please test this case, i.e.,
+sign the source tree in and the change local directory and sign it all out and run the script -
+does it get you to the queryengine command-line? If not you have failed. If yes, we are in
+business. But now does the query work? That is the next thing we will test. <span 
+class="cmbx-10">Each student will</span>
+<span 
+class="cmbx-10">crawl the same SEED DIRECTORY (www.cs.dartmouth.edu) to depth 3</span>. So the
+number of words in the index will be the same for all student (note, CS has dynamic web
+pages so there might be some differences but this is not a big issue). That way the everyones
+TinySearch will return the same ranked URLs. So we should get the same response from inputing a
+query. So that is easy for us to test your system against. Then we will test combinations of
+queries using the logical operators. See below for some examples and an explanation of these
+operators.
+<!--l. 70--><p class="noindent" >Note, Winter 2010 I ran crawler at the following depths and this is the number of files stored in my target
+directory.
+<!--l. 72--><p class="noindent" >Depth Number of files<br 
+class="newline" />1 25<br 
+class="newline" />2 187<br 
+class="newline" />3 777<br 
+class="newline" />
+<!--l. 77--><p class="noindent" >Make sure that you have enough file space to store the maximum number of files. <br 
+class="newline" />
+<!--l. 79--><p class="noindent" >The amount of storage per student for data/ the target directory at depth 3 is:<br 
+class="newline" />
+<!--l. 81--><p class="noindent" >drwxr-xr-x@ 779 atc admin 26486 Feb 10 00:50 data<br 
+class="newline" />
+<!--l. 83--><p class="noindent" >The TA should check with Wayne if we are OK here.<br 
+class="newline" />
+<!--l. 85--><p class="noindent" ><span 
+class="cmbx-10">Coding style, clarify, simplicity, generality</span>: You know it. We will be looking for great code, great
+style, simple code, etc. - expect marks to be taken off if that is not the case.
+<!--l. 87--><p class="noindent" ><span 
+class="cmbx-10">Good design and implementation</span>. You know it. Good code, nice decomposition, good unit tests,
+etc.
+<!--l. 89--><p class="noindent" ><span 
+class="cmbx-10">Testing at depth 3</span>. Your submitted Tiny Search Engine must run correctly at crawler depth 3. That
+means the indexer will index approximately 700 files.
+<!--l. 91--><p class="noindent" ><span 
+class="cmbx-10">We will not grade labs that segfault</span>. You would not buy a product that crashed. So please do not
+submit a lab that has segfaults. We will not grade it. You will have to fix the segfaults and resubmit
+the lab. There will be penalties. This is in fairness to students that submited labs without
+segfaults.
+<!--l. 93--><p class="noindent" >____________________________________________________________________________
+                                                                                  
+                                                                                  
+<h3 class="likesectionHead"><a 
+ id="x1-5000"></a>What you have to deliver for TinySearch</h3>
+<!--l. 97--><p class="noindent" >The final lab in the TinySearch Engine series is demanding and includes many aspects of the course being
+pulled together. You have to deliver the following:
+     <ul class="itemize1">
+     <li class="itemize">Design and implement the query engine - you do everything this time.
+     </li>
+     <li class="itemize">Unit test the query engine component
+     </li>
+     <li class="itemize">Building a C library for the util functions called libtseutil.a
+     </li>
+     <li class="itemize">Write a bash sript to make, test and run the complete TinySearch Engine
+     </li>
+     <li class="itemize">Sign source tree into SVN
+     </li>
+     <li class="itemize">Warning: Use your own code - penalties if you use any solution code
+     </li>
+     <li class="itemize">Warning: No memory leaks - leaks will cost you points
+     </li>
+     <li class="itemize">Goal: good design, good coding style, and simple, short well documented functions.</li></ul>
+<!--l. 112--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-6000"></a>Query Engine Requirements</h3>
+<!--l. 114--><p class="noindent" >First, this assignment includes much of the indexer code, specifically, readFile(index). The query engine
+must build the index from a file, handle queries from the user and then search the index for matches for
+the key words in the query, rank them, and display the results to the user. It should continue to handle
+new queries until the user types control-c.
+<!--l. 116--><p class="noindent" >The query engine includes a query processor, and a ranking module.
+<!--l. 118--><p class="noindent" >The operations performed by the query engine are as follows:
+     <ul class="itemize1">
+     <li class="itemize">it should load the previously generated index from the file system;
+     </li>
+     <li class="itemize">it should receive user queries from input;
+                                                                                  
+                                                                                  
+     </li>
+     <li class="itemize">it should convert capital letters of words of the query to lower case (i.e., we do not distinguish
+     between <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">dog</span></span></span> and <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">Dog</span></span></span>;
+     </li>
+     <li class="itemize">for each query, it should check the index retrieving the results matching the query, returning
+     a non ranked list of results;
+     </li>
+     <li class="itemize">it should rank the list of results according to a simple algorithm based on the frequency of
+     occurrences of each word and the use of AND and OR operators; and
+     </li>
+     <li class="itemize">it should display the results to the user.</li></ul>
+<!--l. 128--><p class="noindent" >The search engine should be able to process queries composed of two or more words using <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">AND</span></span></span> and <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">OR</span></span></span> as
+logical operators.
+<!--l. 130--><p class="noindent" >In other words, we assume that the queries have the following structure:
+<!--l. 132--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">word</span></span></span>
+<!--l. 134--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">word1</span><span 
+class="cmtt-10">&#x00A0;AND</span><span 
+class="cmtt-10">&#x00A0;word2</span></span></span>
+<!--l. 136--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">word1</span><span 
+class="cmtt-10">&#x00A0;OR</span><span 
+class="cmtt-10">&#x00A0;word2</span></span></span>
+<!--l. 138--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">&#x00A0;word1</span><span 
+class="cmtt-10">&#x00A0;word2</span></span></span> (equivalent to <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">word1</span><span 
+class="cmtt-10">&#x00A0;AND</span><span 
+class="cmtt-10">&#x00A0;word2</span></span></span>)
+<!--l. 140--><p class="noindent" >In addition multiple words could be entered:
+<!--l. 142--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">bird</span><span 
+class="cmtt-10">&#x00A0;AND</span><span 
+class="cmtt-10">&#x00A0;jazz</span><span 
+class="cmtt-10">&#x00A0;or</span><span 
+class="cmtt-10">&#x00A0;village</span></span></span>
+<!--l. 144--><p class="noindent" >OR has precedence over AND. And, a space is assumed to be an AND (e.g., village vaguard).
+<!--l. 146--><p class="noindent" >The ranking module should use a word frequency in a HTML page to rank the results. Let&#8217;s suppose that
+the query is <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">dog</span><span 
+class="cmtt-10">&#x00A0;cat</span></span></span>. The context score is defined as equal to the sum of the occurrences of the words in
+the documents taken into consideration. The search engine should assume that an <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">AND</span></span></span> logic operator is
+used. Then the query processor module consults a <span 
+class="cmti-10">context index </span>for <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">dog</span></span></span> and <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">cat</span></span></span>. For example, assume
+the resulting set is composed of document 1 (containing 3 <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">dog</span></span></span>s and 5 <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">cat</span></span></span>s) and document 2
+(containing 2 <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">dog</span></span></span>s and 5 <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">cat</span></span></span>s). The score is simply derived by calculating the sum of the
+occurrences of both words. In this case, the score for document 1 is 8 (3+5) and the score for
+document 2 is 7 (2+5). Therefore, document 1 is ranked first. This is a very simple ranking
+scheme.
+<!--l. 151--><p class="noindent" ><span 
+class="cmbx-10">Extra Credit: </span>There are two types of extra credits for this lab &#8211; do one of them or both if you wish.
+Please comments into the README to indicate if you have completed the extra credits - see below for
+specifics.
+<!--l. 154--><p class="noindent" ><span 
+class="cmti-10">Testing Credit. </span>The first is very cool because it really excercises your crawler code. I know you have that
+nagging feeling about your crawler &#8211; is it robust? Does it handle collisions consistently? Here is a brute
+force way to check. Change the size of your hash table to 10 instead of 10000 and run your crawler at
+depth 3. Any segfaults? In the README provide some evidence that this worked by answering the
+following questions: (1) Did it work without segfaults; (2) How long did it take depth 3 to run (i.e., the
+approximate amount of time) for hash table 10 and 10,000, respectively; (3) what were the
+                                                                                  
+                                                                                  
+number of files in both cases; and (4) make some summary observations looking at the gprof
+tool output for both cases. You have to answer (1) but try (2), (3) and (4) too for increasing
+credits.
+<!--l. 156--><p class="noindent" ><span 
+class="cmti-10">Functional Credit. </span>Feel free to implement more sophisticated ranking algorithms if you wish. Students can
+implement smarter techniques to improve the quality of the search results. For example, if the
+search word is in the title of the html document, the ranking module could assign to it a
+higher score. Your ideas on ranking will be rewarded an extra credit. The support of other
+operational words like <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">NOT</span></span></span> might be interesting. Finally, like google you might display an abstract
+or summary of where the words occurred on the html page as part of the display or ranked
+URLs. Take a look at google to see examples of this. Explain any extensions in the README
+file.
+<!--l. 159--><p class="noindent" ><span 
+class="cmbx-10">Refactoring Crawler and Indexer:</span>
+<!--l. 161--><p class="noindent" >As stated in the notes above we suggest you refactor your crawler and indexer based on our design &#8211; that
+is, you feel that your design is not modular or functionally decomposed well enough then take a look at
+our design and base your refactoring on our solution for crawler and indexer. We&#8217;d like you to do this
+ONLY if your current design is not a good modular design that decomposes crawler and indexer into
+various processing units (list, file, dictionary) and their associated functions &#8211; mostly in the UTIL
+directory in the solution.
+<!--l. 163--><p class="noindent" >A student ask could he just use the functions &#8220;as is&#8221; in the solution. ANSWER: NO. You can&#8217;t just lift
+code for functions from the solution for example getDataWithKey() or DAdd() and use them in your
+refactored crawler as is. Rather, we want you to adopt a better design (if yours is poorer) and learn from
+changing your code to a better design and implementation.
+<!--l. 165--><p class="noindent" >You can do this by studying our solution and learning from it. For example, you could examine the
+structure of our code. You could even use the prototype definitions of some of our functions (e.g.,
+getDataWithKey() or DAdd()), but write your own code or refactor your existing code into in body of the
+refactor functions. There might seem to be a thin line between reusing our code directly (not advised) and
+refactoring your code based on our design but there is a big difference &#8211; see penalties and honor code
+violations below.
+<!--l. 167--><p class="noindent" ><span 
+class="cmbx-10">Penalty:</span>
+<!--l. 169--><p class="noindent" >Reuse penalty: If you submit any solution code as part of your Lab6 submission you be graded out of
+80%. Warning: If you use our code to implement functions (e.g., getDataWithKey()) and
+the result is its our code with slightly modifies (e.g., change variable names, etc.) then the
+penalties apply. <span 
+class="cmti-10">Note, you have to state explicitly that you reused our code if you cut and paste</span>
+<span 
+class="cmti-10">code in your README file. To use the code without such a citation would break our honor</span>
+<span 
+class="cmti-10">code</span>.
+<!--l. 172--><p class="noindent" >Memory leaks penalty: If there are any memory leaks in your test programs, crawler, indexer, or query
+engine you get an additional 10 points taken off.
+<!--l. 174--><p class="noindent" >
+                                                                                  
+                                                                                  
+<h3 class="likesectionHead"><a 
+ id="x1-7000"></a>Command-line Execution and User Input</h3>
+<!--l. 176--><p class="noindent" >In what follows, we define the command line execution of the TinySearch and the the running
+program.
+<div 
+class="colorbox" id="colorbox1"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">Running</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;query</span><span 
+class="cmtt-10">&#x00A0;engine</span><span 
+class="cmtt-10">&#x00A0;(called</span><span 
+class="cmtt-10">&#x00A0;tinysearch)</span><br /><br /><span 
+class="cmtt-10">./tinysearch</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;index.dat</span><span 
+class="cmtt-10">&#x00A0;[TARGET_DIRECTORY]</span><br /><br /><span 
+class="cmtt-10">Example</span><span 
+class="cmtt-10">&#x00A0;command</span><span 
+class="cmtt-10">&#x00A0;input</span><br /><br /><span 
+class="cmtt-10">./tinysearch</span><span 
+class="cmtt-10">&#x00A0;../index/index.dat</span><span 
+class="cmtt-10">&#x00A0;../../data/</span><br /><br /><span 
+class="cmtt-10">Input</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;tinysearch</span><span 
+class="cmtt-10">&#x00A0;-</span><span 
+class="cmtt-10">&#x00A0;type</span><span 
+class="cmtt-10">&#x00A0;keywords:</span><br /><br /><span 
+class="cmtt-10">TinySearch&#x003E;</span><br /><br /></div></div>
+<!--l. 200--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-8000"></a>Output</h3>
+<!--l. 202--><p class="noindent" >TinySearch allows the use to enter as many keywords and logical operators (viz. AND OR - these are
+reserved words) as they wish.
+<div 
+class="colorbox" id="colorbox2"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">A</span><span 
+class="cmtt-10">&#x00A0;space</span><span 
+class="cmtt-10">&#x00A0;between</span><span 
+class="cmtt-10">&#x00A0;two</span><span 
+class="cmtt-10">&#x00A0;keywords</span><span 
+class="cmtt-10">&#x00A0;defaults</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;AND</span><br /><br /><span 
+class="cmtt-10">TinySearch&#x003E;</span><span 
+class="cmtt-10">&#x00A0;andrew</span><span 
+class="cmtt-10">&#x00A0;campbell</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:26</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~campbell</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:9</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/research.php</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:149</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~campbell/cs23</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:186</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~campbell/cs23</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:62</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~miluzzo</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:71</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~keren</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:163</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~cs78</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:187</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~cs78</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:192</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~miluzzo</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:5</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/people.php</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:33</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/newsinfo/kemeny</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:164</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~campbell/sensor-seminar.html</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:32</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~csrs</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:49</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~rapjr</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:53</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~musolesi</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:72</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~fodor</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:78</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~niclane</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:188</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~campbell/dragonfly.html</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:190</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~niclane</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:193</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~rapjr</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:1</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/</span><br /><br /><br /><span 
+class="cmtt-10">TinySearch&#x003E;</span><span 
+class="cmtt-10">&#x00A0;andrew</span><span 
+class="cmtt-10">&#x00A0;AND</span><span 
+class="cmtt-10">&#x00A0;campbell</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:26</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~campbell</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:9</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/research.php</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:149</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~campbell/cs23</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:186</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~campbell/cs23</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:62</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~miluzzo</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:71</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~keren</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:163</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~cs78</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:187</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~cs78</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:192</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~miluzzo</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:5</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/people.php</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:33</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/newsinfo/kemeny</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:164</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~campbell/sensor-seminar.html</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:32</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~csrs</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:49</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~rapjr</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:53</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~musolesi</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:72</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~fodor</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:78</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~niclane</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:188</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~campbell/dragonfly.html</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:190</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~Eniclane</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:193</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~rapjr</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:1</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/</span><br /><br /><span 
+class="cmtt-10">Using</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;OR</span><span 
+class="cmtt-10">&#x00A0;operator</span><br /><br /><span 
+class="cmtt-10">TinySearch&#x003E;</span><span 
+class="cmtt-10">&#x00A0;andrew</span><span 
+class="cmtt-10">&#x00A0;OR</span><span 
+class="cmtt-10">&#x00A0;campbell</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:26</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~campbell</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:9</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/research.php</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:149</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~campbell/cs23</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:186</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~campbell/cs23</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:62</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~miluzzo</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:71</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~keren</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:163</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/cs78</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:187</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/cs78</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:192</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~miluzzo</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:5</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/people.php</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:33</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/newsinfo/kemeny</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:164</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~campbell/sensor-seminar.html</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:1</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:32</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~csrs</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:49</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~rapjr</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:53</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~musolesi</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:72</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~fodor</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:78</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~niclane</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:188</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~campbell/dragonfly.html</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:190</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~niclane</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:193</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~rapjr</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:15</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/ug_courses.php</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:16</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/gr_courses.php</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:21</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~mdphd</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:57</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~asparker</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:70</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~jbrody</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:103</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~farid/group.html</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:137</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/ug_honors.php</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:159</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~cs44</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:178</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~sws/advising</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:179</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~sws/cv</span><br /><br /><span 
+class="cmtt-10">Combining</span><span 
+class="cmtt-10">&#x00A0;AND</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;OR</span><span 
+class="cmtt-10">&#x00A0;in</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;example</span><span 
+class="cmtt-10">&#x00A0;&#8216;&#8216;andrew</span><span 
+class="cmtt-10">&#x00A0;AND</span><span 
+class="cmtt-10">&#x00A0;campbell</span><span 
+class="cmtt-10">&#x00A0;OR</span><span 
+class="cmtt-10">&#x00A0;parker&#8217;&#8217;</span><br /><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;operation</span><span 
+class="cmtt-10">&#x00A0;in</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;brackets</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;computed</span><span 
+class="cmtt-10">&#x00A0;first</span><span 
+class="cmtt-10">&#x00A0;since</span><span 
+class="cmtt-10">&#x00A0;OR</span><span 
+class="cmtt-10">&#x00A0;has</span><br /><span 
+class="cmtt-10">precedence</span><span 
+class="cmtt-10">&#x00A0;over</span><span 
+class="cmtt-10">&#x00A0;AND</span><span 
+class="cmtt-10">&#x00A0;-</span><span 
+class="cmtt-10">&#x00A0;andrew</span><span 
+class="cmtt-10">&#x00A0;AND</span><span 
+class="cmtt-10">&#x00A0;(campbell</span><span 
+class="cmtt-10">&#x00A0;OR</span><span 
+class="cmtt-10">&#x00A0;parker).</span><span 
+class="cmtt-10">&#x00A0;The</span><br /><span 
+class="cmtt-10">results</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;(campbell</span><span 
+class="cmtt-10">&#x00A0;OR</span><span 
+class="cmtt-10">&#x00A0;parker)</span><span 
+class="cmtt-10">&#x00A0;are</span><span 
+class="cmtt-10">&#x00A0;then</span><span 
+class="cmtt-10">&#x00A0;AND</span><span 
+class="cmtt-10">&#x00A0;with</span><span 
+class="cmtt-10">&#x00A0;andrew</span><span 
+class="cmtt-10">&#x00A0;resulting</span><br /><span 
+class="cmtt-10">in:</span><br /><br /><span 
+class="cmtt-10">TinySearch&#x003E;</span><span 
+class="cmtt-10">&#x00A0;andrew</span><span 
+class="cmtt-10">&#x00A0;AND</span><span 
+class="cmtt-10">&#x00A0;campbell</span><span 
+class="cmtt-10">&#x00A0;OR</span><span 
+class="cmtt-10">&#x00A0;parker</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:26</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~campbell</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:9</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/research.php</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:149</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~campbell/cs23</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:186</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~campbell/cs23</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:5</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/people.php</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:62</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~miluzzo</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:71</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~keren</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:163</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~cs78</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:187</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~cs78</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:192</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~miluzzo</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:33</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/newsinfo/kemeny</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:164</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~campbell/sensor-seminar.html</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:32</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~csrs</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:49</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~rapjr</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:53</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~musolesi</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:57</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~asparker</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:72</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~fodor</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:78</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~niclane</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:188</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~campbell/dragonfly.html</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:190</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~niclane</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:193</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~rapjr</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:1</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu</span><br /><br /><span 
+class="cmtt-10">Longer</span><span 
+class="cmtt-10">&#x00A0;query</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;only</span><span 
+class="cmtt-10">&#x00A0;one</span><span 
+class="cmtt-10">&#x00A0;URL</span><span 
+class="cmtt-10">&#x00A0;response</span><br /><br /><span 
+class="cmtt-10">TinySearch&#x003E;</span><span 
+class="cmtt-10">&#x00A0;andrew</span><span 
+class="cmtt-10">&#x00A0;campbell</span><span 
+class="cmtt-10">&#x00A0;dartmouth</span><span 
+class="cmtt-10">&#x00A0;college</span><span 
+class="cmtt-10">&#x00A0;PhD</span><span 
+class="cmtt-10">&#x00A0;students</span><br /><span 
+class="cmtt-10">Document</span><span 
+class="cmtt-10">&#x00A0;ID:26</span><span 
+class="cmtt-10">&#x00A0;URL:http://www.cs.dartmouth.edu/~campbell</span><br /><br /></div></div>
+<!--l. 333--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-9000"></a>Building your own library</h3>
+<!--l. 335--><p class="noindent" >As part of this lab you will build your own C libray called libtseutil.a as discussed in the lecture on library
+- libtseutil.a <a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/buildlib.html" > read building my own library</a><br 
+class="newline" />
+<!--l. 338--><p class="noindent" >You will first build the library in the util/ subdirectory and then use that to build reach component. The
+makefiles should handle this.
+<!--l. 341--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-10000"></a>Unit Testing</h3>
+<!--l. 343--><p class="noindent" >You need to write a queryengine_test.c file that fully tests all you query engine functions and main code.
+The queryengine_test.c file should be in the queryengine/ directory.
+<!--l. 345--><p class="noindent" >Your queryengine_test.c should compile and link with your queryengine.c and any other files needed by
+make and produce a queryengine_test executable which should execute each of the test cases for each of
+the functions. If any test fails it should list which test failed as part of a summary. Also, the number of
+tests passed should be displayed.
+<!--l. 347--><p class="noindent" >You should follow that methodology discussed in class but because the guery engine code will be different
+for the dictionary.c you need to design your tests and usage cases accordingly.
+<!--l. 349--><p class="noindent" ><span 
+class="cmbx-10">Note, you do not have to unit test any code written for the indexer such as readFile(index)</span>
+<span 
+class="cmbx-10">only new code for the query engine.</span>
+                                                                                  
+                                                                                  
+<!--l. 351--><p class="noindent" >Please make sure you test as many of the different code branches in your query engine code. The more the
+better: the better the grade.
+<!--l. 354--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-11000"></a>The make_test_run_tinysearch.sh script</h3>
+<!--l. 356--><p class="noindent" >Following on from the last section, change local directories and sign out a clean source tree and run the
+make_test_run_tinysearch.sh It should cleanly compile build and test the complete tinysearch engine
+components.
+<!--l. 359--><p class="noindent" ><span 
+class="cmbx-10">First, run crawler</span><span 
+class="cmbx-10">_test.sh to test and run the crawler.</span>
+<!--l. 361--><p class="noindent" ><span 
+class="cmbx-10">Next, run indexer</span><span 
+class="cmbx-10">_test.sh to test and run the indexer.</span>
+<!--l. 363--><p class="noindent" ><span 
+class="cmbx-10">Then, build query engine &#8211; i.e., make</span>.
+<!--l. 365--><p class="noindent" ><span 
+class="cmbx-10">Then, run the queryengine unit tests e.g., ./queryengine</span><span 
+class="cmbx-10">_test (source queryengine</span><span 
+class="cmbx-10">_test.c)</span>
+<!--l. 367--><p class="noindent" ><span 
+class="cmbx-10">Finally, assuming the crawler and indexer were build, tested and ran correctly, launch the</span>
+<span 
+class="cmbx-10">query engine to take user input</span>
+<!--l. 369--><p class="noindent" ><span 
+class="cmbx-10">Note, that this make</span><span 
+class="cmbx-10">_test</span><span 
+class="cmbx-10">_run</span><span 
+class="cmbx-10">_tinysearch.sh script pulls everything together that you have</span>
+<span 
+class="cmbx-10">done for TSE</span>. It builds and tests each TSE component (e.g., indexer) then runs the component for the
+next stage to run against (i.e., query engine). This is a very cool shell script. Make sure that
+you code defensively and check for incorrect user input (e.g., incorrect path for the query
+engine).
+<!--l. 371--><p class="noindent" >Good luck! You are doing a great job. Almost there.
+ 
+</body></html> 
+
+                                                                                  
+
+

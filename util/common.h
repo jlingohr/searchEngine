@@ -42,6 +42,19 @@ typedef struct WebPage {
     int ref_count;
 } WebPage;
 
+/* Bad practice? Should be in list module... */
+
+typedef struct ListNode {
+    element_t data;                           // the data for a node
+    struct ListNode *prev;                   // pointer to previous node
+    struct ListNode *next;                   // pointer to next node
+} ListNode;
+
+typedef struct List {
+    ListNode *head;                          // "beginning" of the list
+    ListNode *tail;                          // "end" of the list
+} List;
+
 
 /*
 * Associated location for each word containing
@@ -63,17 +76,9 @@ typedef struct _WordNode {
   List* page;           /* Pointer to first element of the page list */
 } WordNode;
 
-/*
-* Inverted list is a sorted list of locations where the term
-* appears in the collection. The location consists of:
-*   1- page identifier
-*   2- Position of term in the page
-*/
-typedef struct _InvertedIndex {
-  WordNode* start;              /* Start and end pointer of dynamic links */
-  WordNode* end;                /* Start of the list */
-  WordNode* hash[MAX_NUMBER_OF_SLOTS]; /* Hash slot */
-} InvertedIndex;
+
+
+
 
 // ---------------- Public Variables
 

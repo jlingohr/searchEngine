@@ -59,7 +59,15 @@ int HashTableAddURL(HashTable* ht, char* url) {
 * @buf: pointer to URL if found, NULL otherwise
 */
 int HashTableLookUpURL(HashTable* ht, char* url, char** buf) {
-  return HashTableLookUp(ht, url, buf, HashString, cmpStrings);
+  int found;
+
+  if((found = HashTableLookUp(ht, url, (element_t*)buf, HashString, cmpStrings))) {
+    *buf = (char*)buf;
+  }
+  else {
+    buf = NULL;
+  }
+  return found;
 }
 
 /*
@@ -117,8 +125,16 @@ int HashTableAddWord(HashTable* ht, char* word) {
 * Returns 1 if word is in table
 * Returns 0 otherwise
 */
-WordNode* HashTableLookUpWord(HashTable* ht, char* word, WordNode** wNode) {
-  return HashTableLookUp(ht, word, wNode, HashString, cmpWNode);
+int HashTableLookUpWord(HashTable* ht, char* word, WordNode** wNode) {
+  int found;
+
+  if ((found = HashTableLookUp(ht, word, (element_t*)wNode, HashString, cmpWNode))) {
+    *wNode = (WordNode*)wNode;
+  }
+  else {
+    wNode = NULL;
+  }
+  return found;
 }
 
 /*

@@ -682,3 +682,117 @@ class="content">Indexer: data structures in action </span></div><!--tex4ht:label
                                                                                   
 
 
+http://www.cs.dartmouth.edu/~campbell/cs50/indexer.html
+Depth: 2
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title></title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="indexer.tex"> 
+<meta name="date" content="2012-04-29 21:46:00"> 
+<link rel="stylesheet" type="text/css" href="indexer.css"> 
+</head><body 
+>
+<h1 class="likepartHead"><a 
+ id="x1-1000"></a>CS 50 Software Design and Implementation</h1>
+<h1 class="likepartHead"><a 
+ id="x1-2000"></a>Lecture 16</h1>
+<h1 class="likepartHead"><a 
+ id="x1-3000"></a>TinySearch Indexer Design</h1>
+<!--l. 20--><p class="noindent" >Below are my rough notes from today. I will update these ASAP.
+<h3 class="likesectionHead"><a 
+ id="x1-4000"></a>Data flow, input and output</h3>
+<!--l. 24--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                  
+                                                                                  
+<a 
+ id="x1-40011"></a>
+                                                                                  
+                                                                                  
+                                                                                  
+                                                                                  
+<!--l. 25--><p class="noindent" ><img 
+src="indexer0x.png" alt="PIC" class="graphics" width="578.15999pt" height="795.49467pt" ><!--tex4ht:graphics  
+name="indexer0x.png" src="flow.eps"  
+-->
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1: </span><span  
+class="content">Indexer: The diagram shows the input, data flow, and output </span></div><!--tex4ht:label?: x1-40011 -->
+                                                                                  
+                                                                                  
+<!--l. 28--><p class="noindent" ></div><hr class="endfigure">
+<h3 class="likesectionHead"><a 
+ id="x1-5000"></a>Pseudocode</h3>
+<!--l. 32--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                  
+                                                                                  
+<a 
+ id="x1-50012"></a>
+                                                                                  
+                                                                                  
+                                                                                  
+                                                                                  
+<!--l. 33--><p class="noindent" ><img 
+src="indexer1x.png" alt="PIC" class="graphics" width="578.15999pt" height="795.49467pt" ><!--tex4ht:graphics  
+name="indexer1x.png" src="index.eps"  
+-->
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2: </span><span  
+class="content">Indexer: pesudocode </span></div><!--tex4ht:label?: x1-50012 -->
+                                                                                  
+                                                                                  
+<!--l. 36--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 38--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                  
+                                                                                  
+<a 
+ id="x1-50023"></a>
+                                                                                  
+                                                                                  
+                                                                                  
+                                                                                  
+<!--l. 39--><p class="noindent" ><img 
+src="indexer2x.png" alt="PIC" class="graphics" width="578.15999pt" height="795.49467pt" ><!--tex4ht:graphics  
+name="indexer2x.png" src="index2.eps"  
+-->
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;3: </span><span  
+class="content">Indexer: pesudocode </span></div><!--tex4ht:label?: x1-50023 -->
+                                                                                  
+                                                                                  
+<!--l. 42--><p class="noindent" ></div><hr class="endfigure">
+<h3 class="likesectionHead"><a 
+ id="x1-6000"></a>Data structures in action</h3>
+<!--l. 46--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                  
+                                                                                  
+<a 
+ id="x1-60014"></a>
+                                                                                  
+                                                                                  
+                                                                                  
+                                                                                  
+<!--l. 47--><p class="noindent" ><img 
+src="indexer3x.png" alt="PIC" class="graphics" width="578.15999pt" height="795.49467pt" ><!--tex4ht:graphics  
+name="indexer3x.png" src="indexing.eps"  
+-->
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4: </span><span  
+class="content">Indexer: data structures in action </span></div><!--tex4ht:label?: x1-60014 -->
+                                                                                  
+                                                                                  
+<!--l. 50--><p class="noindent" ></div><hr class="endfigure">
+ 
+</body></html> 
+
+                                                                                  
+
+

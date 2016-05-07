@@ -27,10 +27,10 @@
 int checkCommandLine(int argc, char** argv);
 char* loadDoc(char* filename);
 int getDocID(char* filename, char* dir);
-int updateIndex(char* word, int docID, InvertedIndex* index);
-int saveIndexToFile(InvertedIndex* index);
+int updateIndex(char* word, int docID, HashTable* index);
+int saveIndexToFile(HashTable* index);
 WordNode* initWNode(char* word, int docID);
-int updateDNode(WordNode* wNode, int docID);
+int updateDNode(List* dNodeList, int docID);
 
 HashTable* Index;
 
@@ -95,8 +95,8 @@ int main(int argc, char** argv) {
     doc_id = getDocID(filenames[i], target_directory);
     pos = 0;
 
-    while ((pos = getNextWord(doc, pos, &word)) > 0)
-      updateIndex(Index, word, doc_id);
+    while ((pos = GetNextWord(doc, pos, &word)) > 0)
+      updateIndex(word, doc_id, Index);
   }
 
 
@@ -136,7 +136,7 @@ int main(int argc, char** argv) {
 int checkCommandLine(int argc, char** argv) {
   char* dir, *file;
   int index;
-  FILE* fp;
+
   if (argc != 3 && argc != 5)
     return 0;
 
@@ -265,10 +265,9 @@ int getDocID(char* filename, char* dir) {
 * Returns 1 if successful
 * Returns 0 otherwise
 */
-int updateIndex(char* word, HashTable* index, int docID) {
+int updateIndex(char* word, int docID, HashTable* index) {
   //TODO
   WordNode* wNode;
-  DocumentNode* dNode;
 
   if (!HashTableLookUpWord(index, word, &wNode)) { /* Word is not in index */
     wNode = initWNode(word, docID);
@@ -285,7 +284,7 @@ int updateIndex(char* word, HashTable* index, int docID) {
 * Returns 1 if successful
 * Returns 0 otherwise
 */
-int saveIndexToFile(InvertedIndex* index) {
+int saveIndexToFile(HashTable* index) {
   //TODO
   return 0;
 }
@@ -302,7 +301,7 @@ int saveIndexToFile(InvertedIndex* index) {
 */
 DocumentNode* initDNode(int docID) {
   DocumentNode* dNode = malloc(sizeof(DocumentNode));
-  dNode->id = docID;
+  dNode->document_id = docID;
   dNode->page_word_frequency = 1;
   return dNode;
 }
@@ -338,13 +337,16 @@ WordNode* initWNode(char* word, int docID) {
 * Returns 1 on success
 */
 int updateDNode(List* dNodeList, int docID) {
-  /* TODO - Better way? */
-  if (dNodeList->tail->document_id != docID) {
+  /* TODO - Decouple! */
+  DocumentNode* node;
+
+  node = (DocumentNode*)dNodeList->tail->data;
+  if (node->document_id != docID) {
     DocumentNode* dNode = initDNode(docID);
     listAddDoc(dNodeList, dNode);
   }
   else {
-    dNodeList->tail->document_id++;
+    node->document_id++;
   }
   return 1;
 }

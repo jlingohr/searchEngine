@@ -11,9 +11,10 @@
 #define HASHTABLE_H
 
 // ---------------- Prerequisites e.g., Requires "math.h"
-#include "common.h"                          // common functionality
 #include <string.h>
 #include <stdio.h>   
+#include "common.h"                          // common functionality
+#include "list.h"
 
 // ---------------- Constants
 #define MAX_HASH_SLOT 10000                // number of "buckets" 10000 
@@ -35,6 +36,7 @@ typedef struct HashTable {
 
 
 
+
 // ---------------- Public Variables
  //extern HashTable ht;
 
@@ -51,14 +53,14 @@ void cleanHashURL(HashTable* ht);
 
 /* Wordnode Hashtable wrappers */
 int HashTableAddWord(HashTable* ht, char* word);
-int HashTableLookUpWord(HashTable* ht, char* word, WordNode* wNode);
+int HashTableLookUpWord(HashTable* ht, char* word, WordNode** wNode);
 int cmpWNode(element_t wordv, element_t wNodev);
 int HashWNode(const element_t wNodev, int mod);
 
 /* Hashtable macros */
 HashTable* initHashTable();
 int HashTableAdd(HashTable* ht, element_t key, int (*f)(element_t, int));
-int HashTableLookUp(HashTable* ht, element_t* key, element_t ret, int (*f)(element_t, int), int (*g)(element_t, element_t));
+int HashTableLookUp(HashTable* ht, element_t key, element_t* ret, int (*f)(element_t, int), int (*g)(element_t, element_t));
 void cleanHash();
 
 

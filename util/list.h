@@ -19,24 +19,17 @@
 
 // ---------------- Structures/Types
 
-typedef struct ListNode {
-    element_t data;                           // the data for a node
-    struct ListNode *prev;                   // pointer to previous node
-    struct ListNode *next;                   // pointer to next node
-} ListNode;
-
-typedef struct List {
-    ListNode *head;                          // "beginning" of the list
-    ListNode *tail;                          // "end" of the list
-} List;
 
 /* Document list nodes */
+
+
 
 // ---------------- Public Variables
 
 //extern List toVisit;
 
 // ---------------- Prototypes/Macros
+
 
 /* WebPage list wrappers */
 WebPage* listRemovePage(List* list);
