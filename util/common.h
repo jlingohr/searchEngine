@@ -45,8 +45,7 @@ typedef struct WebPage {
 /* Bad practice? Should be in list module... */
 
 typedef struct ListNode {
-    element_t data;                           // the data for a node
-    struct ListNode *prev;                   // pointer to previous node
+    element_t* data;                           // the data for a node
     struct ListNode *next;                   // pointer to next node
 } ListNode;
 
@@ -64,7 +63,7 @@ typedef struct List {
 typedef struct DocumentNode {
   int document_id;              /* Document identifer */
   int page_word_frequency;      /* Number of occurrences of the word */
-  struct DocumentNode* next;
+  //struct DocumentNode* next;
 } DocumentNode;
 
 /*
@@ -74,7 +73,7 @@ typedef struct DocumentNode {
 
 typedef struct WordNode {
   char word[WORD_LENGTH];       /* The word */
-  DocumentNode* page;           /* Pointer to first element of the page list */
+  List* page;           /* Pointer to first element of the page list */
 } WordNode;
 
 

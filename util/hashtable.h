@@ -52,10 +52,13 @@ void cleanHashURL(HashTable* ht);
 
 
 /* Wordnode Hashtable wrappers */
-int HashTableAddWord(HashTable* ht, char* word);
+int HashTableAddWord(HashTable* ht, char* word, int docID);
 int HashTableLookUpWord(HashTable* ht, char* word, WordNode** wNode);
+int HashTableUpdateWord(HashTable* ht, char* word, int docID);
 int cmpWNode(element_t wordv, element_t wNodev);
 int HashWNode(const element_t wNodev, int mod);
+WordNode* initWNode(char* word, int docID);
+void HashTablePrintWords(HashTable* ht);
 
 /* Hashtable macros */
 HashTable* initHashTable();

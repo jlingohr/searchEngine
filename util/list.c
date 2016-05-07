@@ -27,7 +27,7 @@ WebPage* listRemovePage(List* list) {
   node = listRemove(list);
   if (node == NULL)
     return NULL;
-  page = node->data;
+  page = (WebPage*)node->data;
   node = NULL;
   dec_ref(page);
   return page;
@@ -103,11 +103,11 @@ void listAdd(List* list, element_t elem) {
 
   if (list->head == NULL) { /* List is empty */
     list->head = list->tail = tmp;
-    tmp->prev = tmp->next = NULL;
+    tmp->next = NULL;
   }
-  else { /* List has at least 1 element */
-    tmp->prev = list->tail;
-    list->tail = list->tail->next = tmp;
+  else { /* Append to end of list */
+    list->tail->next = tmp;
+    list->tail = tmp;
     tmp->next = NULL;
   }
 }
@@ -126,12 +126,6 @@ ListNode* listRemove(List* list) {
   tmp = list->head;
   list->head = tmp->next;
   return tmp;
-
-
-  //elem = tmp->data;
-  //tmp = NULL;
-  //dec_ref(elem);
-  //return elem;
 }
 
 

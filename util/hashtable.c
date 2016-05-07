@@ -92,6 +92,30 @@ void cleanHashURL(HashTable* ht) {
 **************************/
 
 /*
+* initWNode - Initializes WordNode and assigns initial values
+* @word: Word the node corresponds to
+* @docID: documet id
+*
+*/
+WordNode* initWNode(char* word, int docID) {
+  /* TODO - BUGS here with assigning dNOde to list;
+  Check for memory leaks */
+  
+  WordNode* wNode = malloc(sizeof(WordNode));
+  strcpy(wNode->word, word);
+
+  wNode->page = initList();
+
+  DocumentNode* dNode = malloc(sizeof(DocumentNode));
+  dNode->document_id = docID;
+  dNode->page_word_frequency = 1;
+
+  listAddDoc(wNode->page, dNode);
+  return wNode;
+}
+
+
+/*
 * HashWNode - Get hash value of a WordNode
 * @wNodev: void* pointer to a WordNode
 *
@@ -106,14 +130,14 @@ int HashWNode(const element_t wNodev, int mod) {
 * HashTableAddWord - Add word to hashtable index
 * @ht: Hashtable adding to
 * @word: Word we are adding to the table
+* @docID: document id for word
 *
 * Returns 1 on success
 */
-int HashTableAddWord(HashTable* ht, char* word) {
+int HashTableAddWord(HashTable* ht, char* word, int docID) {
   WordNode* wNode;
 
-  wNode = malloc(sizeof(WordNode));
-  strcpy(wNode->word, word);
+  wNode = initWNode(word, docID);
   return HashTableAdd(ht, wNode, HashWNode);
 }
 
@@ -139,6 +163,44 @@ int HashTableLookUpWord(HashTable* ht, char* word, WordNode** wNode) {
   return found;
 }
 
+
+/*
+* HashTableUpdateWord - Updates word frequency count on relevant doc
+* @ht: Hashtable to look in
+* @word: Word to update
+* @docID: Document id to update
+*
+* Returns 1 on success 
+*/
+int HashTableUpdateWord(HashTable* ht, char* word, int docID) {
+  HashTableNode* node;
+  WordNode* wNode;
+  DocumentNode* dNode;
+  int p;
+
+  /* Get WordNode for word */
+  p = HashString(word, ht->size);
+  node = ht->table[p];
+  while (cmpWNode(word, node->data) != 0) {
+    node = node->next;
+  }
+
+  /* Update tail of WordNode->Page */
+  wNode = (WordNode*)node->data;
+  dNode = (DocumentNode*)wNode->page->tail;
+
+  if (dNode->document_id == docID)
+    dNode->page_word_frequency++;
+  else {
+    DocumentNode* tmp = malloc(sizeof(DocumentNode));
+    tmp->document_id = docID;
+    tmp->page_word_frequency++;
+    listAddDoc(wNode->page, tmp);
+  }
+  return 1;
+}
+
+
 /*
 * cmpWNode - Compares a word and a WordNode
 * @wordv: search word
@@ -152,6 +214,16 @@ int cmpWNode(element_t wordv, element_t wNodev) {
   char* word = (char*)wordv;
   WordNode* wNode = (WordNode*)wNodev;
   return cmpStrings(word, wNode->word);
+}
+
+/*
+* HashTablePrintWords - Print out contents of the hashtable
+* for testing purposes
+* @ht: Hashtable to print out
+*/
+void HashTablePrintWords(HashTable* ht) {
+  /* TODO */
+  return
 }
 
 /*************************
