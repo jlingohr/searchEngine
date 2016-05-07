@@ -20,8 +20,7 @@
 
 // ---------------- Structures/Types
 
-/* For working with generics */
-typedef void* element_t;
+
 
 typedef struct HashTableNode {
     element_t data;                               // object hashed
@@ -42,21 +41,24 @@ typedef struct HashTable {
 // ---------------- Prototypes/Macros
 
 /* URL Hashtable wrappers */
-int HashURL(const element_t strv, int mod);
+int HashString(const element_t strv, int mod);
 int HashTableAddURL(HashTable* ht, char* url);
-int HashTableLookUpURL(HashTable* ht, char* url);
+int HashTableLookUpURL(HashTable* ht, char* url, char** buf);
 void cleanHashURL(HashTable* ht);
 
 
 
 
 /* Wordnode Hashtable wrappers */
-
+int HashTableAddWord(HashTable* ht, char* word);
+int HashTableLookUpWord(HashTable* ht, char* word, WordNode* wNode);
+int cmpWNode(element_t wordv, element_t wNodev);
+int HashWNode(const element_t wNodev, int mod);
 
 /* Hashtable macros */
 HashTable* initHashTable();
 int HashTableAdd(HashTable* ht, element_t key, int (*f)(element_t, int));
-int HashTableLookUp(HashTable* ht, element_t key, int (*f)(element_t, int), int (*g)(element_t, element_t));
+int HashTableLookUp(HashTable* ht, element_t* key, element_t ret, int (*f)(element_t, int), int (*g)(element_t, element_t));
 void cleanHash();
 
 

@@ -30,7 +30,7 @@ int cmpStrings(element_t av, element_t bv) {
 * Hash - Generic hash function must be a helper
 * based on type of data (i.e. Horners if char*)
 */
-int HashURL(const element_t strv, int mod) {
+int HashString(const element_t strv, int mod) {
   /* TODO */
   int hash, len;
   char* str = strv;
@@ -49,14 +49,17 @@ int HashURL(const element_t strv, int mod) {
 int HashTableAddURL(HashTable* ht, char* url) {
   char* buf = malloc(strlen(url)+1);
   strcpy(buf, url);
-  return HashTableAdd(ht, (element_t) buf, HashURL);
+  return HashTableAdd(ht, (element_t) buf, HashString);
 }
 
 /*
 * HashTableLookUpURL - wrapper function to lookup URLs in hashtable
+* @ht: Hashtable in which to look
+* @url: url looking up
+* @buf: pointer to URL if found, NULL otherwise
 */
-int HashTableLookUpURL(HashTable* ht, char* url) {
-  return HashTableLookUp(ht, url, HashURL, cmpStrings);
+int HashTableLookUpURL(HashTable* ht, char* url, char** buf) {
+  return HashTableLookUp(ht, url, buf, HashString, cmpStrings);
 }
 
 /*
@@ -79,6 +82,59 @@ void cleanHashURL(HashTable* ht) {
 * Wordnode Hashtable wrappers 
 **************************/
 
+/*
+* HashWNode - Get hash value of a WordNode
+* @wNodev: void* pointer to a WordNode
+*
+* Returns hashed value of WordNode->word
+*/
+int HashWNode(const element_t wNodev, int mod) {
+  WordNode* wNode = (WordNode*)wNodev;
+  return HashString(wNode->word, mod);
+}
+
+/*
+* HashTableAddWord - Add word to hashtable index
+* @ht: Hashtable adding to
+* @word: Word we are adding to the table
+*
+* Returns 1 on success
+*/
+int HashTableAddWord(HashTable* ht, char* word) {
+  WordNode* wNode;
+
+  wNode = malloc(sizeof(WordNode));
+  strcpy(wNode->word, word);
+  return HashTableAdd(ht, wNode, HashWNode);
+}
+
+/*
+* HashTableLookUpWord - Searches for word in hashtable index
+* @ht: Table we are looking in
+* @word: Word searching for
+* @wNode: Saves pointer to WordNode if held
+*
+* Returns 1 if word is in table
+* Returns 0 otherwise
+*/
+WordNode* HashTableLookUpWord(HashTable* ht, char* word, WordNode** wNode) {
+  return HashTableLookUp(ht, word, wNode, HashString, cmpWNode);
+}
+
+/*
+* cmpWNode - Compares a word and a WordNode
+* @wordv: search word
+* @wNodev: Node in which to compare
+*
+* Returns 1 if the same
+* Returns 0 otherwise
+*/
+int cmpWNode(element_t wordv, element_t wNodev) {
+  /* TODO - Check casting */
+  char* word = (char*)wordv;
+  WordNode* wNode = (WordNode*)wNodev;
+  return cmpStrings(word, wNode->word);
+}
 
 /*************************
 * Hashtable Macros 
@@ -130,11 +186,18 @@ int HashTableAdd(HashTable* ht, element_t key, int (*f)(element_t, int)) {
 
 /*
 * HashTableLookUp - Searches for key in the table
-* - g is function pointer to comparator function
+* @ht: Hashtable searching in
+* @key: Key on which to hash
+* @ret: saves pointer to value if found
+* @f: hashing function
+* @g: comparator function
+*
 * Returns 1 if found
 * Returns 0 if not found
 */
-int HashTableLookUp(HashTable* ht, void* key, int (*f)(element_t, int), int (*g)(element_t, element_t)) {
+int HashTableLookUp(HashTable* ht, element_t key, element_t* ret,
+ int (*f)(element_t, int), int (*g)(element_t, element_t)) 
+{
   /* TODO - Refactor */
   int p;
   HashTableNode* tmp;
@@ -143,10 +206,13 @@ int HashTableLookUp(HashTable* ht, void* key, int (*f)(element_t, int), int (*g)
   tmp = ht->table[p];
   while (tmp) {
     /* Will comparisons always be made on a string? */
-    if (g(key, tmp->data) == 0)
+    if (g(key, tmp->data) == 0) {
+      *ret = tmp->data;
       return 1;
+    }
     tmp = tmp->next;
   }
+  ret = NULL;
   return 0;
 }
 

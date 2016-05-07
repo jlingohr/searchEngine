@@ -31,6 +31,9 @@
 
 // ---------------- Structures/Types
 
+/* For working with generics */
+typedef void* element_t;
+
 typedef struct WebPage {
     char *url;                               // url of the page
     char *html;                              // html code of the page
@@ -46,7 +49,6 @@ typedef struct WebPage {
 *   2- Number of occurences
 */
 typedef struct _DocumentNode {
-  struct _DocumentNode* next;   /* Pointer to next member of list */
   int document_id;              /* Document identifer */
   int page_word_frequency;      /* Number of occurrences of the word */
 } DocumentNode;
@@ -57,10 +59,8 @@ typedef struct _DocumentNode {
 */
 
 typedef struct _WordNode {
-  struct _WordNode* prev;       /* Pointer to previous word */
-  struct _WordNode* next;       /* Pointer to the next word */
   char word[WORD_LENGTH];       /* The word */
-  DocumentNode* page;           /* Pointer to first element of the page list */
+  List* page;           /* Pointer to first element of the page list */
 } WordNode;
 
 /*
