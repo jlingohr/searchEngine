@@ -73,7 +73,15 @@ void listAddDoc(List* list, DocumentNode* dNode) {
   listAdd(list, dNode);
 }
 
-
+/*
+* listGetLastDNode - Get last DocumentNode in a list
+* @list: list operating on
+*
+* Returns last DocumentNode pointer
+*/
+DocumentNode* listGetLastDNode(List* list) {
+  return (DocumentNode*)listGetLast(list);
+}
 
 
 
@@ -88,6 +96,7 @@ List* initList() {
   List* list = malloc(sizeof(List));
   list->head = NULL;
   list->tail = NULL;
+  list->len = 0;
   return list;
 }
 
@@ -110,11 +119,12 @@ void listAdd(List* list, element_t elem) {
     list->tail = tmp;
     tmp->next = NULL;
   }
+  list->len++;
 }
 
 /*
 * listRemove - Remove node from front of list
-* Return pointer to the first node in the list
+* Return pointer data of tail node
 */
 ListNode* listRemove(List* list) {
   //element_t elem;
@@ -125,7 +135,55 @@ ListNode* listRemove(List* list) {
 
   tmp = list->head;
   list->head = tmp->next;
+  list->len--;
   return tmp;
 }
 
+/*
+* listGetLast - Get tail node of a list
+* @list: list operating on
+*
+* Returns pointer to last node
+*/
+element_t listGetLast(List* list) {
+  return list->tail->data;
+}
 
+/*
+* listForEach - Execute function f for each element of list list
+* @f: function to call
+* list: List to iterate through
+*/
+void listForEach(void (*f)(element_t), List* list) {
+  ListNode* cur = list->head;
+  while (cur) {
+    // TODO
+  }
+}
+
+/* 
+* listFoldl - Fold list using function f placing result in out
+* @f: function to fold on
+* @out: pointer to output variable
+* @list: List folding on
+*/
+void listFoldString(void (*f) (element_t*, element_t), char** v, List* a) {
+  /* TODO - REDO sloppy */
+  char* tmp = malloc(MAXLINE);
+  char* dNode_buf = malloc(MAXLINE);
+  ListNode* cur = a->head;
+  while (cur) {
+    DocumentNode* dNode = (DocumentNode*)cur->data;
+    sprintf(dNode_buf, "%d %d ", dNode->document_id, dNode->page_word_frequency);
+    cur = cur->next;
+    strcat(tmp, dNode_buf);
+    //printf("%s", tmp);
+  }
+  //sprintf(*v, " %d ", a->len);
+  f((element_t*)v, (element_t)tmp);
+  strcat(*v, "\n");
+  free(tmp);
+  free(dNode_buf);
+
+
+}

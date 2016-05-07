@@ -24,6 +24,7 @@
 #define STATUS_LOG 1            // switch to one for output    
 #define WORD_LENGTH 1000
 #define MAX_NUMBER_OF_SLOTS 10000  
+#define BUF_SIZE 8192
  
 
 // limit crawling to only this domain
@@ -52,6 +53,7 @@ typedef struct ListNode {
 typedef struct List {
     ListNode *head;                          // "beginning" of the list
     ListNode *tail;                          // "end" of the list
+    int len;
 } List;
 
 

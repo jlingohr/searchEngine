@@ -58,17 +58,15 @@ int HashTableAddURL(HashTable* ht, char* url) {
 * @url: url looking up
 * @buf: pointer to URL if found, NULL otherwise
 */
-int HashTableLookUpURL(HashTable* ht, char* url, char** buf) {
+int HashTableLookUpURL(HashTable* ht, char* url) {
   int found;
-  char* tmp;
 
-  if((found = HashTableLookUp(ht, url, (element_t*)&tmp, HashString, cmpStrings))) {
-    *buf = tmp;
+  if((found = HashTableLookUp(ht, url, HashString, cmpStrings))) {
+    return 1;
   }
   else {
-    buf = NULL;
+    return 0;
   }
-  return found;
 }
 
 /*
@@ -150,17 +148,8 @@ int HashTableAddWord(HashTable* ht, char* word, int docID) {
 * Returns 1 if word is in table
 * Returns 0 otherwise
 */
-int HashTableLookUpWord(HashTable* ht, char* word, WordNode** wNode) {
-  int found;
-  WordNode* tmp;
-
-  if ((found = HashTableLookUp(ht, word, (element_t*)&tmp, HashString, cmpWNode))) {
-    *wNode = tmp;
-  }
-  else {
-    wNode = NULL;
-  }
-  return found;
+int HashTableLookUpWord(HashTable* ht, char* word) {
+  return HashTableLookUp(ht, word, HashString, cmpWNode);
 }
 
 
@@ -184,17 +173,24 @@ int HashTableUpdateWord(HashTable* ht, char* word, int docID) {
   while (cmpWNode(word, node->data) != 0) {
     node = node->next;
   }
+  if (!node) {
+    fprintf(stderr, "HashTableUpdateWord error\n");
+    return 0;
+  }
 
   /* Update tail of WordNode->Page */
   wNode = (WordNode*)node->data;
-  dNode = (DocumentNode*)wNode->page->tail;
 
-  if (dNode->document_id == docID)
+  dNode = listGetLastDNode(wNode->page);
+
+
+  if (dNode->document_id == docID) {
     dNode->page_word_frequency++;
+  }
   else {
     DocumentNode* tmp = malloc(sizeof(DocumentNode));
     tmp->document_id = docID;
-    tmp->page_word_frequency++;
+    tmp->page_word_frequency = 1;
     listAddDoc(wNode->page, tmp);
   }
   return 1;
@@ -216,15 +212,53 @@ int cmpWNode(element_t wordv, element_t wNodev) {
   return cmpStrings(word, wNode->word);
 }
 
-/*
-* HashTablePrintWords - Print out contents of the hashtable
-* for testing purposes
-* @ht: Hashtable to print out
-*/
-void HashTablePrintWords(HashTable* ht) {
-  /* TODO */
-  return
+
+
+void concat(element_t* av, element_t bv) {
+  char** a = (char**)av;
+  char* b = (char*)bv;
+  int alen = strlen(*a);
+  int blen = strlen(b);
+  *a = realloc(*a, alen + blen + 1);
+  strcat(*a, b);
 }
+
+
+/*
+* HashTableLoadWords - load hashtable values into string buffer. Each word
+* is loaded followed by (1) number indicating how many documents the word is in;
+* (2) (a,b) pairs where the document a has b occurences of the word
+* @ht: Hashtable to load from
+* @buf: pointer to C-style string to loads values
+*
+* Returns size of buffer
+*/
+int HashTableLoadWords(HashTable* ht, char** buf) {
+  /* TODO - REDO, too sloppy and risks fragmentations */
+  HashTableNode* node;
+  WordNode* wNode;
+  char* word, *word_buf;
+
+  for (int i = 0; i < ht->size; i++) {  /* Loop through hashtable */
+    node = ht->table[i];
+    while (node) { /* Loop through WordNode */
+      wNode = (WordNode*)node->data;
+      word = wNode->word;
+      //printf("Obtaining data on %s\n", word);
+      word_buf = malloc(MAXLINE);
+
+      sprintf(word_buf, "%s %d ", word, wNode->page->len);
+      listFoldString(concat, &word_buf, wNode->page);
+      strcat(*buf, word_buf);
+      free(word_buf);
+
+      node = node->next;      
+    }
+  }
+  return strlen(*buf);
+}
+
+
 
 /*************************
 * Hashtable Macros 
@@ -237,6 +271,9 @@ HashTable* initHashTable() {
   HashTable* ht = malloc(sizeof(HashTable));
   ht->size = MAX_HASH_SLOT;
   ht->n = 0;
+  for (int i = 0; i < MAX_HASH_SLOT; i++) {
+    ht->table[i] = NULL;
+  }
   return ht;
 }
 
@@ -285,8 +322,7 @@ int HashTableAdd(HashTable* ht, element_t key, int (*f)(element_t, int)) {
 * Returns 1 if found
 * Returns 0 if not found
 */
-int HashTableLookUp(HashTable* ht, element_t key, element_t* ret,
- int (*f)(element_t, int), int (*g)(element_t, element_t)) 
+int HashTableLookUp(HashTable* ht, element_t key, int (*f)(element_t, int), int (*g)(element_t, element_t)) 
 {
   /* TODO - Refactor */
   int p;
@@ -297,12 +333,10 @@ int HashTableLookUp(HashTable* ht, element_t key, element_t* ret,
   while (tmp) {
     /* Will comparisons always be made on a string? */
     if (g(key, tmp->data) == 0) {
-      *ret = tmp->data;
       return 1;
     }
     tmp = tmp->next;
   }
-  ret = NULL;
   return 0;
 }
 

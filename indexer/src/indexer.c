@@ -28,7 +28,7 @@ int checkCommandLine(int argc, char** argv);
 char* loadDoc(char* filename);
 int getDocID(char* filename, char* dir);
 int updateIndex(char* word, int docID, HashTable* index);
-int saveIndexToFile(HashTable* index);
+int saveIndexToFile(char* file, HashTable* index);
 
 HashTable* Index;
 
@@ -97,6 +97,7 @@ int main(int argc, char** argv) {
       NormalizeWord(word);
       updateIndex(word, doc_id, Index);
     }
+    free(doc);
   }
 
 
@@ -104,9 +105,9 @@ int main(int argc, char** argv) {
     // LOG( "done!");
   if (STATUS_LOG == 1) {
     printf("\nLogging complete!\n");
-    HashTablePrintWords(Index);
+    //HashTablePrintWords(Index);
   }
-  saveFile(argv[2], Index);
+  saveIndexToFile(target_file, Index);
      
   //6. CleanDynamicList (wordindex)
 
@@ -269,9 +270,8 @@ int getDocID(char* filename, char* dir) {
 */
 int updateIndex(char* word, int docID, HashTable* index) {
   //TODO - Problems initializing
-  WordNode* wNode;
 
-  if (HashTableLookUpWord(index, word, &wNode)) { /* Word is in table */
+  if (HashTableLookUpWord(index, word)) { /* Word is in table */
     /* Update docID for word */
     return HashTableUpdateWord(index, word, docID);
   }
@@ -289,8 +289,25 @@ int updateIndex(char* word, int docID, HashTable* index) {
 * Returns 1 if successful
 * Returns 0 otherwise
 */
-int saveIndexToFile(HashTable* index) {
-  //TODO
+int saveIndexToFile(char* file, HashTable* index) {
+  /* TODO - Works except printing some html! */
+  FILE* fp;
+  char* buf;
+  int size;
+
+  buf = malloc(BUF_SIZE);
+  size = HashTableLoadWords(index, &buf);
+
+  fp = fopen(file, "w+");
+  if (fp) {
+    Fputs(buf, fp);
+    fclose(fp);
+    return 1;
+  }
+  if (fp == NULL) {
+    fprintf(stderr, "Error opening file\n");
+    return 0;
+  }
   return 0;
 }
 
