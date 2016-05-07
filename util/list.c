@@ -85,7 +85,7 @@ void listAddDoc(List* list, DocumentNode* dNode) {
 * initList - Initializes singly-linked list
 */
 List* initList() {
-  List* list = malloc(sizeof(list));
+  List* list = malloc(sizeof(List));
   list->head = NULL;
   list->tail = NULL;
   return list;

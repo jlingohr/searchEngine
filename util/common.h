@@ -61,9 +61,10 @@ typedef struct List {
 *   1- page identifer
 *   2- Number of occurences
 */
-typedef struct _DocumentNode {
+typedef struct DocumentNode {
   int document_id;              /* Document identifer */
   int page_word_frequency;      /* Number of occurrences of the word */
+  struct DocumentNode* next;
 } DocumentNode;
 
 /*
@@ -71,9 +72,9 @@ typedef struct _DocumentNode {
 * in a list
 */
 
-typedef struct _WordNode {
+typedef struct WordNode {
   char word[WORD_LENGTH];       /* The word */
-  List* page;           /* Pointer to first element of the page list */
+  DocumentNode* page;           /* Pointer to first element of the page list */
 } WordNode;
 
 

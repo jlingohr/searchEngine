@@ -29,8 +29,9 @@ char* loadDoc(char* filename);
 int getDocID(char* filename, char* dir);
 int updateIndex(char* word, int docID, HashTable* index);
 int saveIndexToFile(HashTable* index);
-WordNode* initWNode(char* word, int docID);
-int updateDNode(List* dNodeList, int docID);
+void initWNode(WordNode* wNode, char* word, int docID);
+int updateDNode(DocumentNode* dNode, int docID);
+void initDNode(DocumentNode* dNode, int docID);
 
 HashTable* Index;
 
@@ -270,7 +271,8 @@ int updateIndex(char* word, int docID, HashTable* index) {
   WordNode* wNode;
 
   if (!HashTableLookUpWord(index, word, &wNode)) { /* Word is not in index */
-    wNode = initWNode(word, docID);
+    wNode = malloc(sizeof(WordNode));
+    initWNode(wNode, word, docID);
     return HashTableAddWord(index, word);
   }
   /* Word is already in index */
@@ -295,37 +297,35 @@ int saveIndexToFile(HashTable* index) {
 
 /*
 * initDNode - allocates DocumentNode and assigns initial values
+* @dNode: DocumentNode to be initialized
 * @docID: document id
 *
-* Returns pointer to newly allocated DocumentNode
 */
-DocumentNode* initDNode(int docID) {
-  DocumentNode* dNode = malloc(sizeof(DocumentNode));
+void initDNode(DocumentNode* dNode, int docID) {
   dNode->document_id = docID;
   dNode->page_word_frequency = 1;
-  return dNode;
+  dNode->next = NULL;
 }
 
 /*
-* initWNode - Allocated WordNode and assigns initial values
+* initWNode - Initializes WordNode and assigns initial values
+* @wNode: WordNote to initialize 
 * @word: Word the node corresponds to
 * @docID: Document ID for new WordNode
 *
-* Returns a pointer to newly allocated WordNode
 */
-WordNode* initWNode(char* word, int docID) {
-  /* TODO - Check for memory leaks */
+void initWNode(WordNode* wNode, char* word, int docID) {
+  /* TODO - BUGS here with assigning dNOde to list;
+  Check for memory leaks */
+  DocumentNode* dNode; 
 
-  /* Allocate WordNode and copu over word */
-  WordNode* wNode = malloc(sizeof(WordNode));
+  /* copy over word */
   strcpy(wNode->word, word);
 
-  /* Allocate DocumentNode and initialize a new list */
-  DocumentNode* dNode = initDNode(docID);
-  wNode->page = initList();
-  listAddDoc(wNode->page, dNode);
-
-  return wNode;
+  /* Allocate DocumentNode */
+  dNode = malloc(sizeof(DocumentNode));
+  initDNode(dNode, docID);
+  wNode->page = dNode;
 }
 
 /*
@@ -336,17 +336,24 @@ WordNode* initWNode(char* word, int docID) {
 *
 * Returns 1 on success
 */
-int updateDNode(List* dNodeList, int docID) {
+int updateDNode(DocumentNode* dNode, int docID) {
   /* TODO - Decouple! */
-  DocumentNode* node;
+  DocumentNode* cur;
+  DocumentNode* next;
 
-  node = (DocumentNode*)dNodeList->tail->data;
-  if (node->document_id != docID) {
-    DocumentNode* dNode = initDNode(docID);
-    listAddDoc(dNodeList, dNode);
+  cur = dNode;
+  /* Find last document */
+  while ((next = cur->next)) {
+    cur = next;
   }
-  else {
-    node->document_id++;
+  /* Check document ID */
+  if (cur->document_id != docID) { /* Create new DocumentNode */
+    DocumentNode* node = malloc(sizeof(DocumentNode));
+    initDNode(node, docID);
   }
+  else
+    cur->page_word_frequency++;
+
   return 1;
+
 }

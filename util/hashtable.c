@@ -60,9 +60,10 @@ int HashTableAddURL(HashTable* ht, char* url) {
 */
 int HashTableLookUpURL(HashTable* ht, char* url, char** buf) {
   int found;
+  char* tmp;
 
-  if((found = HashTableLookUp(ht, url, (element_t*)buf, HashString, cmpStrings))) {
-    *buf = (char*)buf;
+  if((found = HashTableLookUp(ht, url, (element_t*)&tmp, HashString, cmpStrings))) {
+    *buf = tmp;
   }
   else {
     buf = NULL;
@@ -127,9 +128,10 @@ int HashTableAddWord(HashTable* ht, char* word) {
 */
 int HashTableLookUpWord(HashTable* ht, char* word, WordNode** wNode) {
   int found;
+  WordNode* tmp;
 
-  if ((found = HashTableLookUp(ht, word, (element_t*)wNode, HashString, cmpWNode))) {
-    *wNode = (WordNode*)wNode;
+  if ((found = HashTableLookUp(ht, word, (element_t*)&tmp, HashString, cmpWNode))) {
+    *wNode = tmp;
   }
   else {
     wNode = NULL;
