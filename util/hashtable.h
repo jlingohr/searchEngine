@@ -29,7 +29,7 @@ typedef struct HashTableNode {
 } HashTableNode;
 
 typedef struct HashTable {
-    element_t table[MAX_HASH_SLOT];     // actual hashtable
+    HashTableNode *table[MAX_HASH_SLOT];     // actual hashtable
     unsigned int size;
     unsigned int n;
 } HashTable;
