@@ -274,12 +274,13 @@ void cleanHashWord(HashTable* ht) {
     while (node) {
       wNode = (WordNode*)node->data;
       listDeleteDNode(wNode->page);
-      node = wNode->next;
       free(wNode);
-
-      
+      node = node->next;
+      /* also free node? */      
     }
+    free(ht->table[i]);
   }
+  free(ht);
 }
 
 /*************************

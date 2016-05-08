@@ -30,10 +30,13 @@ int getDocID(char* filename, char* dir);
 int updateIndex(char* word, int docID, HashTable* index);
 int saveIndexToFile(char* file, HashTable* index);
 void cleanIndex(HashTable* Index);
+HashTable* readFile(char* filename);
 
-HashTable* Index;
+
 
 int main(int argc, char** argv) {
+  HashTable* Index;
+
   char *target_directory, *target_file, *test_old, *test_new;
   char* prev_file;
   char** filenames;
@@ -113,21 +116,20 @@ int main(int argc, char** argv) {
   //6. CleanDynamicList (wordindex)
   cleanIndex(Index);
 
-  // if testing then proceed
+  /* For testing (argc == 5) */
+  if (argc == 5) {
+    LOG("Testing index\n");
 
-  //7.  If (5 == argc) then 
+    /*7. Reload index from file and rewrite to new file
+      wordindex = readFile(argv[3]) */
+    Index = readFile(argv[3]);
 
-     //8. LOG ("Testing index\n");
+    /*8. saveFile (argv[4]. wordindex) */
+    LOG("Test complete\n");
 
-     //9. Reload the index from the file and rewrite it to a new file
-       // wordindex = readFile(argv[3]);
+    /*9. cleanDynamicList(wordindex) */
+  }
 
-    //10. saveFile (argv[4], wordindex);
-       // LOG("test complete\n");
-
-    //11. CleanDynamicList (wordindex);
-
-  //12. Done.
 
   return 0; 
 }
@@ -317,5 +319,31 @@ int saveIndexToFile(char* file, HashTable* index) {
 */
 void cleanIndex(HashTable* index) {
   cleanHashWord(index);
+}
+
+/*
+* readFile - Read an inverted index in from file and
+* construct a new index, i.e. the original.
+* @filename: Name of file to construct from
+*
+* Returns pointer to a hashtable/index
+*/
+HashTable* readFile(char* filename) {
+  /* TODO */
+  HashTable* index;
+  FILE* fp;
+  char buf[BUF_SIZE];
+  char* c;
+
+  /* Initialize new HashTable */
+  index = initHashTable();
+
+  if ((fp = fopen(filename, "r+"))) {
+    /* Read lines in file into a buff */
+
+    /* Parse each line */
+
+    /* Add each line to the hashtable */
+  }
 }
 
