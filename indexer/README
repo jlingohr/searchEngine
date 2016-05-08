@@ -8,3 +8,8 @@ Requirements
 2- write the index to a file to store, e.g., index.dat
 3- read the index from thefile (i.e., index.dat) and recreate the index data structures
 4- write the index to a different file (new_index.dat) for comparison with index.dat (should be identical)
+
+TODOS:
+----------
+
+Double check refactoring didnt affect crawler.c

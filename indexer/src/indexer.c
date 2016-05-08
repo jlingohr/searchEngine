@@ -29,6 +29,7 @@ char* loadDoc(char* filename);
 int getDocID(char* filename, char* dir);
 int updateIndex(char* word, int docID, HashTable* index);
 int saveIndexToFile(char* file, HashTable* index);
+void cleanIndex(HashTable* Index);
 
 HashTable* Index;
 
@@ -110,6 +111,7 @@ int main(int argc, char** argv) {
   saveIndexToFile(target_file, Index);
      
   //6. CleanDynamicList (wordindex)
+  cleanIndex(Index);
 
   // if testing then proceed
 
@@ -244,7 +246,6 @@ char* loadDoc(char* filename) {
 * Returns integer identifying document
 */
 int getDocID(char* filename, char* dir) {
-  //TODO
   int pos;
   char* id;
 
@@ -269,7 +270,6 @@ int getDocID(char* filename, char* dir) {
 * Returns 0 otherwise
 */
 int updateIndex(char* word, int docID, HashTable* index) {
-  //TODO - Problems initializing
 
   if (HashTableLookUpWord(index, word)) { /* Word is in table */
     /* Update docID for word */
@@ -309,5 +309,13 @@ int saveIndexToFile(char* file, HashTable* index) {
     return 0;
   }
   return 0;
+}
+
+/*
+* cleanIndex - Cleans up memory
+* @index: table to clean
+*/
+void cleanIndex(HashTable* index) {
+  cleanHashWord(index);
 }
 

@@ -83,8 +83,19 @@ DocumentNode* listGetLastDNode(List* list) {
   return (DocumentNode*)listGetLast(list);
 }
 
+/*
+* listDeleteDNode - Wrapper to delete list of DocumentNode
+*/
+void listDeleteDNode(List* list) {
+  listDelete(deleteDNode, list);
+}
 
-
+/*
+* deleteDNode - Helper to free DocumentNodes
+*/
+void deleteDNode(element_t dNode) {
+  free(dNode);
+}
 /*************************
 * Generic List Macros 
 *************************/
@@ -149,15 +160,16 @@ element_t listGetLast(List* list) {
   return list->tail->data;
 }
 
+
 /*
-* listForEach - Execute function f for each element of list list
-* @f: function to call
-* list: List to iterate through
+* listDelete - Delete the list
 */
-void listForEach(void (*f)(element_t), List* list) {
-  ListNode* cur = list->head;
-  while (cur) {
-    // TODO
+void listDelete(void (*f)(element_t), List* list) {
+  ListNode* cur;
+
+  while ((cur = listRemove(list))) {
+    f(cur->data);
+    free(cur);
   }
 }
 

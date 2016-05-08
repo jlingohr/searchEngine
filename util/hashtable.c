@@ -224,6 +224,7 @@ void concat(element_t* av, element_t bv) {
 }
 
 
+
 /*
 * HashTableLoadWords - load hashtable values into string buffer. Each word
 * is loaded followed by (1) number indicating how many documents the word is in;
@@ -259,6 +260,27 @@ int HashTableLoadWords(HashTable* ht, char** buf) {
 }
 
 
+/*
+* cleanHashWord - Cleans up memory for hashtable
+* of WordNodes
+* @ht: table to clean
+*/
+void cleanHashWord(HashTable* ht) {
+  /* TODO - FInish this */
+  HashTableNode* node;
+  WordNode* wNode;
+  for (int i = 0; i < ht->size; i++) {
+    node = ht->table[i];
+    while (node) {
+      wNode = (WordNode*)node->data;
+      listDeleteDNode(wNode->page);
+      node = wNode->next;
+      free(wNode);
+
+      
+    }
+  }
+}
 
 /*************************
 * Hashtable Macros 

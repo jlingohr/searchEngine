@@ -41,12 +41,16 @@ void dec_ref(WebPage* page);
 /* DocumentNode wrappers */
 void listAddDoc(List* list, DocumentNode* dNode);
 DocumentNode* listGetLastDNode(List* list);
+void listDeleteDNode(List* list);
+void deleteDNode(element_t dNode);
+
 
 /* Generic List macros */
 void listAdd(List* list, element_t elem);
 List* initList();
 ListNode* listRemove(List* list);
 element_t listGetLast(List* list);
+void listDelete(void (*f)(element_t),List* list);
 
 void listForEach(void (*f)(element_t), List* list);
 void listFoldString(void (*f) (element_t*, element_t), char** v, List* a);

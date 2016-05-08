@@ -60,6 +60,7 @@ int HashWNode(const element_t wNodev, int mod);
 WordNode* initWNode(char* word, int docID);
 void HashTablePrintWords(HashTable* ht);
 int HashTableLoadWords(HashTable* ht, char** buf);
+void cleanHashWord(HashTable* ht);
 
 /* Hashtable macros */
 HashTable* initHashTable();
