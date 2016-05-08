@@ -140,6 +140,17 @@ int HashTableAddWord(HashTable* ht, char* word, int docID) {
 }
 
 /*
+* HashTableAddWNode - Adds a complete WordNode to the table
+* @ht: table to add to
+* @wNode: WordNode adding
+*
+*/
+void HashTableAddWNode(HashTable* ht, WordNode* wNode) {
+  HashTableAdd(ht, wNode, HashWNode);
+}
+
+
+/*
 * HashTableLookUpWord - Searches for word in hashtable index
 * @ht: Table we are looking in
 * @word: Word searching for

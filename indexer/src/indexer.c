@@ -33,7 +33,7 @@ int updateIndex(char* word, int docID, HashTable* index);
 int saveIndexToFile(char* file, HashTable* index);
 void cleanIndex(HashTable* Index);
 HashTable* readFile(char* filename);
-void handleLine(char* line);
+void handleLine(HashTable* index, char* line);
 
 
 
@@ -122,6 +122,7 @@ int main(int argc, char** argv) {
   /* For testing (argc == 5) */
   if (argc == 5) {
     //LOG(argv[3]);
+    printf("Rebuilding index...\n");
 
     /*7. Reload index from file and rewrite to new file
       wordindex = readFile(argv[3]) */
@@ -129,9 +130,13 @@ int main(int argc, char** argv) {
 
     /*8. saveFile (argv[4]. wordindex) */
     //LOG("Test complete\n");
+    saveIndexToFile(argv[4], Index);
+    printf("Test complete\n");
 
     /*9. cleanDynamicList(wordindex) */
+    cleanIndex(Index);
   }
+  //free(Index);
 
 
   return 0; 
@@ -360,7 +365,7 @@ HashTable* readFile(char* filename) {
       } while (c != EOF && c != '\n');
       buf[pos] = 0;
       /* Line now in buf */
-      handleLine(buf);
+      handleLine(index, buf);
     } while (c != EOF);
     fclose(fp);
   }
@@ -370,9 +375,65 @@ HashTable* readFile(char* filename) {
 
 /*
 * handleLine - Parse line and insert in hashtable
+* @index: table in which to insert
 * @line: Line to parse
 */
-void handleLine(char* line) {
-  /* TODO - Construct index */
-  printf("%s\n", line);
+void handleLine(HashTable* index, char* line) {
+  /* TODO - Buggy doc_id from conversion */
+  char word[BUF_SIZE];
+  char *pch;
+  int num_tokens, num_docs, doc_id, freq;
+  List* dNodeList;
+  DocumentNode* dNode;
+  WordNode* wNode;
+
+  /* Initialize list */
+  num_tokens = 0;
+  dNodeList = initList();
+
+  pch = strtok(line, " ");
+  while (pch != NULL) {
+    if (num_tokens == 0) {
+      /* First token is the word */
+      strcpy(word, pch);
+      printf("word: %s, ", word);
+    }
+    else if (num_tokens == 1) {
+      /* Second token is number of DocumentNodes */
+      num_docs = atoi(pch);
+      printf("no_docs: %d, ", num_docs);
+    }
+    else {
+      if (num_tokens%2) {
+        /* Odd numbered are document ids */
+        /* This is buggy */
+        doc_id = atoi(pch);
+        printf("doc_id: %d, ", doc_id);
+      }
+      else {
+        /* Even numbered are number of occurences in doc
+        forms a pair (a,b) we add as a DocumentNode */
+        freq = atoi(pch);
+
+        /* Build DocumentNode */
+        dNode = malloc(sizeof(DocumentNode));
+        dNode->document_id = doc_id;
+        dNode->page_word_frequency = freq;
+
+        /* Construct list of DocumentNodes */
+        listAddDoc(dNodeList, dNode);
+        printf("freq: %d\n", freq);
+
+      }
+    }
+    num_tokens++;
+    pch = strtok(NULL, " ");
+  }
+  /* construct WordNode and add to index */
+  wNode = malloc(sizeof(WordNode));
+  strcpy(wNode->word, word);
+  wNode->page = dNodeList;
+  HashTableAddWNode(index, wNode);
+
+  
 }

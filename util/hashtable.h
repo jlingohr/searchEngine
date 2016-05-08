@@ -62,6 +62,8 @@ void HashTablePrintWords(HashTable* ht);
 int HashTableLoadWords(HashTable* ht, char** buf);
 void cleanHashWord(HashTable* ht);
 
+void HashTableAddWNode(HashTable* ht, WordNode* wNode);
+
 /* Hashtable macros */
 HashTable* initHashTable();
 int HashTableAdd(HashTable* ht, element_t key, int (*f)(element_t, int));

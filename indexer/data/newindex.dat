@@ -1,0 +1,816 @@
+anything 2 32767 1 7 0 
+devices 2 7 1 7 0 
+concerns 2 7 1 7 0 
+nbsp 3 7 1 1281 2 4760 0 
+mehling 2 4760 1 7 0 
+beginning 2 7 1 7 0 
+distributed 2 7 1 7 0 
+tu 2 7 1 7 0 
+valgrind 2 7 1 7 0 
+lectures 3 7 1 7 2 14 0 
+a 3 14 1 357 2 42 0 
+b 2 42 1 7 0 
+c 3 7 1 98 2 42 0 
+e 2 42 1 28 0 
+g 2 28 1 28 0 
+i 3 28 1 63 2 28 0 
+j 2 28 1 7 0 
+l 2 7 1 28 0 
+p 2 28 1 14 0 
+s 2 21 1 28 0 
+students 2 14 1 21 0 
+t 2 28 1 35 0 
+w 2 35 1 7 0 
+x 3 7 1 7 2 35 0 
+calendar 2 35 2 7 0 
+midnight 2 7 2 28 0 
+communication 2 28 1 7 0 
+http 3 7 1 7 2 7 0 
+introduction 2 7 2 7 0 
+honor 2 7 1 21 0 
+examples 2 21 2 7 0 
+very 3 7 1 21 2 14 0 
+assignment 2 14 1 21 0 
+control 2 21 1 21 0 
+previously 2 21 1 7 0 
+about 2 7 1 42 0 
+asked 2 42 1 7 0 
+subject 2 7 1 7 0 
+mcilroy 2 7 2 7 0 
+skills 2 7 1 42 0 
+from 2 42 1 49 0 
+others 2 49 1 7 0 
+demo 3 7 1 21 2 21 0 
+case 2 21 1 7 0 
+experience 2 7 1 21 0 
+him 2 21 1 7 0 
+overall 2 7 1 7 0 
+pizza 2 7 2 7 0 
+blackwood 2 7 1 14 0 
+phase 2 14 1 14 0 
+weekday 2 14 1 7 0 
+life 2 7 1 7 0 
+assignments 2 7 1 98 0 
+paradigms 2 98 1 7 0 
+tinyserarch 2 7 1 7 0 
+unpleasant 2 7 1 7 0 
+lots 2 7 1 7 0 
+beautful 2 7 2 7 0 
+compare 2 7 1 7 0 
+love 2 7 1 7 0 
+seven 2 7 1 7 0 
+begins 2 7 2 7 0 
+friendly 2 7 1 7 0 
+lot 2 7 1 14 0 
+not 3 14 1 70 2 14 0 
+support 2 14 1 7 0 
+dumps 2 7 1 7 0 
+twenty 2 7 1 7 0 
+integration 2 7 1 7 0 
+manage 2 7 2 7 0 
+filters 2 7 1 7 0 
+report 3 7 1 7 2 7 0 
+examinations 2 7 2 7 0 
+ptrs 2 7 2 7 0 
+come 3 7 1 7 2 7 0 
+state 2 7 1 7 0 
+working 2 7 1 14 0 
+some 2 14 1 14 0 
+friday 3 14 1 28 2 63 0 
+spirit 2 63 1 7 0 
+that 3 7 1 105 2 14 0 
+what 2 14 1 21 0 
+contoller 2 21 1 7 0 
+repository 2 7 1 7 0 
+code 3 7 1 168 2 35 0 
+versions 2 35 2 7 0 
+rather 2 7 1 7 0 
+sign 2 7 1 7 0 
+harder 2 7 1 7 0 
+captures 2 7 1 7 0 
+manner 2 7 1 7 0 
+sheet 2 7 1 21 0 
+knowledge 2 21 1 14 0 
+chapters 2 14 2 21 0 
+job 2 21 1 7 0 
+rob 2 7 1 7 0 
+spring 2 7 2 21 0 
+down 2 21 1 7 0 
+by 3 7 1 63 2 14 0 
+should 2 14 1 14 0 
+directed 2 14 1 7 0 
+multi 2 7 1 7 0 
+carson 2 7 1 14 0 
+circumstance 2 7 1 7 0 
+fancy 2 14 1 7 0 
+complete 2 7 2 7 0 
+penalties 2 7 1 14 0 
+leap 2 14 1 21 0 
+really 2 21 1 21 0 
+collaboration 2 21 1 7 0 
+our 3 7 1 28 2 7 0 
+which 2 7 1 14 0 
+size 2 14 2 14 0 
+posts 2 14 1 7 0 
+please 3 14 1 49 2 14 0 
+between 2 7 1 14 0 
+addison 2 14 1 7 0 
+discuss 2 7 1 21 0 
+amount 2 21 1 7 0 
+rui 2 7 2 7 0 
+sudi 2 7 1 14 0 
+finish 2 14 1 7 0 
+tools 2 7 1 42 0 
+giving 2 42 1 7 0 
+into 3 7 1 28 2 7 0 
+pass 2 7 1 7 0 
+raced 2 7 1 7 0 
+art 2 7 2 21 0 
+know 3 21 1 14 2 14 0 
+represents 2 14 1 7 0 
+coffee 2 7 1 7 0 
+project 3 7 1 105 2 28 0 
+informing 2 28 1 7 0 
+sudikoff 3 7 1 49 2 7 0 
+has 2 7 1 14 0 
+tas 2 14 1 7 0 
+reinforced 2 7 1 7 0 
+through 3 7 1 21 2 7 0 
+given 2 7 1 7 0 
+loaded 2 7 2 7 0 
+unclear 2 7 1 7 0 
+organized 2 7 1 14 0 
+sense 2 14 2 7 0 
+open 2 7 1 14 0 
+quiz 2 14 2 14 0 
+ends 2 14 2 7 0 
+work 3 7 1 49 2 7 0 
+culled 2 7 1 7 0 
+individually 2 7 1 7 0 
+online 2 7 1 7 0 
+policies 2 7 1 7 0 
+running 2 7 1 7 0 
+schedule 3 7 1 35 2 28 0 
+starting 2 7 1 7 0 
+suspension 2 28 1 7 0 
+depth 3 7 1 7 2 7 0 
+extended 2 7 1 7 0 
+exposed 2 7 1 14 0 
+and 3 14 1 546 2 140 0 
+end 2 140 2 21 0 
+bronson 2 21 1 7 0 
+ask 2 7 1 7 0 
+caters 2 7 1 7 0 
+server 2 7 1 7 0 
+programming 3 7 1 217 2 49 0 
+simple 2 49 1 14 0 
+thread 2 14 1 7 0 
+white 2 7 1 14 0 
+people 2 14 1 14 0 
+bash 2 14 1 14 0 
+help 3 14 1 28 2 14 0 
+ever 2 14 1 7 0 
+over 3 7 1 14 2 21 0 
+subversion 2 21 2 7 0 
+according 2 7 1 7 0 
+person 2 7 1 7 0 
+processes 3 7 1 7 2 7 0 
+lecturer 2 7 1 7 0 
+call 2 7 1 7 0 
+meet 2 7 2 7 0 
+tutorial 2 7 2 7 0 
+teaching 2 7 1 7 0 
+complex 2 7 1 21 0 
+tba 2 21 2 7 0 
+period 2 7 2 21 0 
+most 2 21 1 7 0 
+but 3 7 1 63 2 28 0 
+industry 2 28 1 14 0 
+out 3 14 1 14 2 49 0 
+put 2 7 1 14 0 
+progress 2 49 1 7 0 
+approximately 2 14 1 7 0 
+real 2 7 1 7 0 
+tuesday 2 7 2 28 0 
+small 2 28 1 28 0 
+automatically 2 28 1 7 0 
+during 2 7 2 7 0 
+graded 3 7 1 21 2 7 0 
+client 2 7 1 7 0 
+them 2 7 1 7 0 
+under 2 7 1 7 0 
+less 2 7 1 7 0 
+distribute 2 7 1 7 0 
+think 3 7 1 7 2 7 0 
+section 3 7 1 21 2 14 0 
+seriously 2 7 1 7 0 
+being 2 14 1 7 0 
+shown 2 7 1 7 0 
+stop 2 7 1 7 0 
+midterm 2 7 1 7 0 
+html 2 7 2 7 0 
+passes 2 7 1 21 0 
+ansi 2 21 1 14 0 
+seok 2 14 1 14 0 
+develop 2 14 1 14 0 
+warm 2 14 1 7 0 
+robots 2 7 1 14 0 
+these 3 7 1 49 2 14 0 
+deliver 2 14 1 7 0 
+easier 2 14 1 7 0 
+quizzes 2 7 2 7 0 
+pointers 2 7 2 42 0 
+files 2 42 2 21 0 
+arrangements 2 21 1 7 0 
+practical 2 7 1 7 0 
+behalf 2 7 1 7 0 
+reflect 2 7 1 7 0 
+topics 2 7 1 7 0 
+laptop 2 7 1 7 0 
+standard 2 7 2 7 0 
+stressed 2 7 1 7 0 
+stating 2 7 1 7 0 
+laboratory 2 7 1 21 0 
+alone 2 21 1 7 0 
+memory 3 7 1 7 2 7 0 
+fanghao 2 7 1 7 0 
+too 2 7 1 7 0 
+below 3 7 1 7 2 7 0 
+academic 2 7 2 7 0 
+sockets 2 7 1 7 0 
+brian 2 7 1 7 0 
+part 2 7 1 49 0 
+crawler 3 49 1 7 2 28 0 
+weekdays 2 28 1 7 0 
+include 2 7 1 7 0 
+shell 3 7 1 63 2 49 0 
+tell 2 49 1 14 0 
+well 2 14 1 7 0 
+locked 2 7 1 21 0 
+even 3 21 1 14 2 7 0 
+share 2 7 1 14 0 
+course 3 14 1 112 2 14 0 
+thing 2 14 1 14 0 
+grasp 2 14 1 7 0 
+breaks 2 7 1 7 0 
+coding 3 7 1 14 2 7 0 
+keep 2 7 1 14 0 
+prior 2 14 1 7 0 
+methodology 2 7 2 7 0 
+domain 2 7 1 7 0 
+extra 2 7 1 14 0 
+leaders 3 14 1 14 2 14 0 
+implementation 2 14 1 42 0 
+scheduled 2 42 2 7 0 
+exams 2 7 1 7 0 
+script 2 7 1 7 0 
+edu 3 7 1 63 2 7 0 
+order 2 7 1 7 0 
+debugging 3 7 1 28 2 21 0 
+each 3 21 1 21 2 7 0 
+questions 2 7 1 14 0 
+gcc 2 14 1 7 0 
+together 2 7 1 21 0 
+three 2 7 1 7 0 
+reading 2 7 1 7 0 
+brief 2 21 1 7 0 
+summary 2 7 1 7 0 
+guarantee 2 7 2 7 0 
+motion 2 7 1 21 0 
+announcements 2 21 1 7 0 
+kernighan 2 7 1 7 0 
+class 2 7 1 42 0 
+term 2 42 2 14 0 
+his 2 14 2 7 0 
+essence 2 7 1 7 0 
+reliable 2 7 1 7 0 
+fanglin 2 7 1 21 0 
+just 2 21 1 14 0 
+must 2 14 1 7 0 
+regarding 2 7 1 14 0 
+lines 2 14 1 21 0 
+machines 2 21 1 7 0 
+development 2 7 1 35 0 
+detailed 2 35 2 7 0 
+final 3 7 1 35 2 28 0 
+nice 2 28 1 7 0 
+front 2 7 1 7 0 
+goals 2 7 1 7 0 
+can 3 7 1 42 2 14 0 
+fourth 2 14 1 7 0 
+lan 2 7 2 7 0 
+gprofile 2 7 1 7 0 
+hackers 3 7 1 14 2 14 0 
+segfaulted 2 14 1 7 0 
+eight 2 7 1 7 0 
+expect 2 7 1 7 0 
+might 2 7 1 7 0 
+assistants 2 7 1 7 0 
+right 2 7 1 7 0 
+tight 2 7 1 7 0 
+number 3 7 1 7 2 7 0 
+against 2 7 1 21 0 
+hyung 2 21 1 14 0 
+conversant 2 14 1 7 0 
+computing 2 7 1 7 0 
+engine 3 7 1 21 2 35 0 
+something 2 35 1 7 0 
+leaks 2 7 1 7 0 
+hacking 2 7 1 7 0 
+projects 3 7 1 28 2 14 0 
+rtos 2 14 1 7 0 
+language 2 7 1 7 0 
+books 2 7 1 28 0 
+racing 2 28 1 7 0 
+structure 2 7 2 7 0 
+exercises 2 7 1 14 0 
+learning 2 14 1 7 0 
+science 3 7 1 7 2 7 0 
+contol 2 7 1 7 0 
+fill 2 7 1 7 0 
+getting 3 7 1 7 2 14 0 
+challenges 2 14 1 7 0 
+will 3 7 1 217 2 49 0 
+integrated 2 49 1 7 0 
+penalty 2 7 1 14 0 
+debug 2 14 1 7 0 
+while 2 7 1 7 0 
+first 2 7 1 28 0 
+partial 2 28 2 7 0 
+change 2 7 2 7 0 
+improve 2 7 2 7 0 
+submissions 2 7 1 7 0 
+copters 2 7 1 7 0 
+feel 2 7 1 7 0 
+classes 2 7 2 14 0 
+techniques 2 14 1 14 0 
+roman 2 14 2 7 0 
+significant 2 7 1 21 0 
+gained 2 21 1 7 0 
+major 2 7 1 7 0 
+sieve 2 7 2 7 0 
+font 2 7 2 28 0 
+write 2 28 1 28 0 
+hands 2 28 1 7 0 
+head 2 7 1 7 0 
+program 2 7 1 21 0 
+read 2 21 2 49 0 
+optional 2 49 1 7 0 
+reviews 2 7 2 14 0 
+require 2 14 1 14 0 
+good 3 14 1 21 2 14 0 
+saturday 2 14 1 14 0 
+query 3 14 1 7 2 7 0 
+medical 2 7 1 7 0 
+doors 2 7 1 21 0 
+ides 2 21 1 14 0 
+systems 2 14 1 28 0 
+desk 2 28 1 7 0 
+easy 2 7 1 14 0 
+great 3 14 1 14 2 7 0 
+new 3 7 1 7 2 7 0 
+process 2 7 1 14 0 
+line 2 14 1 7 0 
+grade 2 7 1 77 0 
+preprocessor 2 77 2 7 0 
+day 3 7 1 7 2 21 0 
+may 3 21 1 14 2 56 0 
+say 2 7 1 7 0 
+solve 2 56 1 7 0 
+teamwork 2 7 1 7 0 
+way 2 7 1 7 0 
+clarity 2 7 1 7 0 
+campbell 3 7 1 21 2 7 0 
+expulsion 2 7 1 7 0 
+material 2 7 1 7 0 
+searching 2 7 2 7 0 
+every 2 7 1 14 0 
+crash 2 14 1 7 0 
+family 3 7 1 7 2 14 0 
+turn 2 7 1 7 0 
+ten 2 14 1 7 0 
+product 2 7 1 7 0 
+ta 3 7 1 35 2 7 0 
+talk 3 7 1 21 2 7 0 
+classic 3 7 1 7 2 7 0 
+maintainable 2 7 1 7 0 
+two 3 7 1 21 2 7 0 
+weekend 3 7 1 7 2 14 0 
+breaking 2 14 1 7 0 
+back 2 7 1 7 0 
+see 3 7 1 28 2 14 0 
+book 3 14 1 56 2 14 0 
+similar 2 28 1 7 0 
+solutions 2 14 1 28 0 
+look 2 7 1 7 0 
+checks 2 7 1 7 0 
+severe 2 7 1 7 0 
+takes 2 7 1 7 0 
+tinysearchengine 2 7 1 14 0 
+would 3 14 1 35 2 7 0 
+including 2 7 1 7 0 
+group 3 7 1 28 2 14 0 
+interested 2 14 1 7 0 
+provide 2 7 1 21 0 
+body 2 21 2 7 0 
+sheets 2 7 1 7 0 
+richard 2 7 1 7 0 
+their 3 7 1 7 2 7 0 
+also 2 7 1 28 0 
+sharing 2 28 1 14 0 
+strong 2 14 1 7 0 
+there 3 7 1 49 2 14 0 
+where 2 56 1 21 0 
+wednesday 3 14 1 7 2 56 0 
+ahead 2 21 1 7 0 
+edition 2 7 1 14 0 
+held 3 14 1 7 2 7 0 
+signed 2 7 1 7 0 
+unix 2 7 1 21 0 
+hand 2 21 1 21 0 
+april 2 21 2 35 0 
+explicit 2 35 1 7 0 
+addition 2 7 1 14 0 
+access 2 14 1 49 0 
+effort 2 49 1 7 0 
+all 3 7 1 70 2 7 0 
+become 2 7 1 7 0 
+library 3 7 1 7 2 7 0 
+id 2 7 1 14 0 
+habits 2 14 1 7 0 
+particularly 2 7 1 7 0 
+developed 2 7 1 7 0 
+linux 3 7 1 49 2 14 0 
+preferred 2 14 1 7 0 
+start 2 7 2 7 0 
+includes 2 7 1 7 0 
+editors 2 7 1 7 0 
+problem 2 7 1 35 0 
+bring 2 7 1 7 0 
+rules 2 35 1 7 0 
+hey 2 7 2 7 0 
+key 2 7 1 14 0 
+the 3 14 1 798 2 133 0 
+here 2 133 1 14 0 
+series 2 14 1 14 0 
+were 2 14 1 7 0 
+hate 2 7 1 7 0 
+late 2 7 1 56 0 
+min 2 56 1 14 0 
+be 3 14 1 161 2 21 0 
+simplicity 2 21 1 7 0 
+me 2 7 1 14 0 
+gnu 2 14 1 14 0 
+we 3 14 1 126 2 14 0 
+happy 2 14 1 7 0 
+original 2 7 1 7 0 
+resources 2 7 1 7 0 
+responsible 2 7 1 7 0 
+specific 2 7 1 7 0 
+using 3 7 1 35 2 7 0 
+weekly 2 7 1 7 0 
+make 3 7 1 28 2 7 0 
+other 2 7 1 42 0 
+commitment 2 42 1 7 0 
+die 2 28 1 14 0 
+take 2 7 1 28 0 
+extension 2 14 1 7 0 
+form 2 7 1 7 0 
+kramer 2 7 1 14 0 
+large 2 14 1 14 0 
+ship 2 14 1 7 0 
+tinysearch 2 7 2 28 0 
+if 3 28 1 84 2 14 0 
+of 3 14 1 266 2 84 0 
+expose 2 84 1 7 0 
+you 3 7 1 350 2 56 0 
+office 2 56 1 14 0 
+weeks 3 14 1 14 2 7 0 
+done 2 7 1 14 0 
+building 3 14 1 7 2 7 0 
+unsure 2 7 1 7 0 
+indexer 3 7 1 7 2 14 0 
+winter 2 14 1 7 0 
+understandable 2 7 1 7 0 
+matthew 2 7 1 21 0 
+begin 2 21 2 7 0 
+embedded 2 7 1 35 0 
+submitted 2 35 1 28 0 
+fired 2 28 1 7 0 
+correctness 2 7 1 7 0 
+source 2 7 1 56 0 
+mutex 2 56 2 7 0 
+neil 2 7 1 7 0 
+search 2 7 1 7 0 
+why 2 7 1 7 0 
+unit 2 7 2 7 0 
+requiring 2 7 1 7 0 
+writing 3 7 1 28 2 7 0 
+interface 2 7 2 7 0 
+dynamic 2 7 2 7 0 
+port 2 7 2 7 0 
+cursory 2 7 2 7 0 
+need 3 7 1 28 2 7 0 
+andrew 2 7 1 7 0 
+caveat 2 7 1 14 0 
+computer 3 14 1 28 2 7 0 
+started 3 14 1 7 2 14 0 
+th 2 7 1 7 0 
+specifically 2 7 1 21 0 
+important 2 21 1 7 0 
+everything 2 7 1 7 0 
+result 2 7 1 7 0 
+dartmouth 3 7 1 98 2 14 0 
+grading 2 14 1 14 0 
+solving 2 14 1 21 0 
+cvs 2 7 1 7 0 
+swipe 2 21 1 7 0 
+teaches 2 7 1 7 0 
+answer 2 7 1 14 0 
+segfaults 2 14 1 21 0 
+designed 2 21 1 7 0 
+have 2 7 1 56 0 
+anyone 2 56 1 7 0 
+data 2 7 2 28 0 
+vital 2 28 1 7 0 
+design 3 7 1 91 2 42 0 
+kang 2 42 1 14 0 
+command 2 14 1 7 0 
+wang 2 7 2 7 0 
+name 2 7 1 7 0 
+dig 2 7 2 7 0 
+programs 2 7 1 14 0 
+famous 2 14 2 7 0 
+however 2 7 1 14 0 
+week 3 14 1 7 2 70 0 
+standalone 2 7 1 14 0 
+submit 3 14 1 7 2 7 0 
+since 2 70 1 14 0 
+free 2 14 1 28 0 
+requires 2 28 1 7 0 
+xhour 2 7 2 7 0 
+resubmitted 2 7 1 7 0 
+policy 2 7 1 42 0 
+anywhere 2 42 1 7 0 
+how 3 7 1 35 2 7 0 
+labs 3 7 1 77 2 7 0 
+holiday 2 7 1 7 0 
+message 2 7 1 7 0 
+text 2 7 1 7 0 
+made 2 7 1 14 0 
+orc 2 14 1 7 0 
+hope 2 7 1 7 0 
+arrays 2 7 2 14 0 
+one 2 14 1 42 0 
+threads 3 42 1 14 2 7 0 
+engineering 2 7 1 7 0 
+launch 2 7 1 7 0 
+lecture 2 7 2 175 0 
+environment 2 175 1 7 0 
+syllabus 2 7 1 7 0 
+textbook 2 7 2 7 0 
+lab 3 7 1 119 2 91 0 
+student 2 91 1 14 0 
+don 2 14 1 21 0 
+than 2 21 1 21 0 
+goes 2 21 2 49 0 
+things 3 49 1 7 2 7 0 
+strings 2 7 2 21 0 
+matter 2 21 1 7 0 
+pesky 2 7 2 14 0 
+slide 2 14 2 7 0 
+mind 2 7 1 7 0 
+moral 2 7 1 7 0 
+exterior 2 7 1 7 0 
+example 2 7 2 7 0 
+thursday 3 7 1 21 2 42 0 
+reference 2 42 2 7 0 
+socket 3 7 1 28 2 7 0 
+card 2 7 1 21 0 
+periods 2 21 2 7 0 
+sobell 2 7 1 7 0 
+myself 2 7 1 7 0 
+tangible 2 7 1 7 0 
+emergencies 2 7 1 7 0 
+left 2 7 1 14 0 
+monday 3 14 1 14 2 119 0 
+citation 2 119 1 7 0 
+different 2 7 1 7 0 
+board 2 7 1 14 0 
+stuff 2 7 1 7 0 
+similarly 2 14 1 7 0 
+ll 2 7 1 7 0 
+demanding 2 7 1 7 0 
+competition 2 7 1 7 0 
+initial 2 7 2 7 0 
+assessment 2 7 1 7 0 
+public 2 7 1 7 0 
+functions 2 7 2 21 0 
+june 2 21 2 49 0 
+this 3 49 1 91 2 7 0 
+etc 2 7 1 7 0 
+recitations 2 7 2 7 0 
+utility 2 7 2 7 0 
+wonders 2 7 2 7 0 
+hours 2 7 1 84 0 
+yours 2 84 1 14 0 
+leader 2 14 1 7 0 
+sets 2 7 1 7 0 
+am 2 7 1 14 0 
+deducted 2 7 1 21 0 
+tutorials 2 14 2 7 0 
+pm 3 21 1 77 2 21 0 
+nacocopter 2 21 1 7 0 
+ethan 2 7 1 14 0 
+mindset 2 14 1 7 0 
+above 2 7 1 7 0 
+air 2 7 1 7 0 
+beta 2 7 1 7 0 
+any 2 7 1 35 0 
+credit 2 35 1 14 0 
+assessed 2 14 1 7 0 
+get 2 7 1 35 0 
+learn 2 35 1 21 0 
+photo 2 21 1 7 0 
+like 3 7 1 7 2 7 0 
+mark 2 7 1 7 0 
+pike 2 7 1 7 0 
+contact 2 7 1 14 0 
+closely 2 7 2 7 0 
+thank 2 14 2 7 0 
+revision 2 7 1 14 0 
+cheating 2 14 1 7 0 
+around 2 7 1 7 0 
+gdb 3 7 1 7 2 7 0 
+an 2 7 1 14 0 
+unless 2 14 1 7 0 
+in 3 7 1 231 2 56 0 
+incentive 2 7 1 7 0 
+on 2 56 1 203 0 
+times 3 203 1 7 2 21 0 
+challenging 2 21 1 14 0 
+robot 2 14 1 7 0 
+covering 2 7 1 7 0 
+still 2 7 1 7 0 
+concepts 2 35 1 7 0 
+chapter 2 7 2 35 0 
+are 3 7 1 182 2 14 0 
+pre 2 14 2 7 0 
+core 2 7 1 14 0 
+more 3 14 1 28 2 7 0 
+medium 3 7 1 7 2 14 0 
+making 2 7 1 7 0 
+promote 2 14 1 14 0 
+taking 2 14 1 14 0 
+hacker 2 14 1 21 0 
+allocation 2 7 2 7 0 
+address 2 21 2 7 0 
+web 3 7 1 7 2 7 0 
+isn 2 7 1 7 0 
+plan 3 7 1 14 2 7 0 
+commencement 2 7 2 7 0 
+do 3 7 1 49 2 7 0 
+hesitate 2 7 1 7 0 
+implement 2 7 1 21 0 
+io 2 7 2 7 0 
+no 3 21 1 49 2 14 0 
+so 3 14 1 35 2 7 0 
+to 3 7 1 385 2 56 0 
+had 2 56 1 7 0 
+better 2 7 2 7 0 
+speak 2 7 1 7 0 
+teams 2 7 1 28 0 
+notes 3 28 1 7 2 7 0 
+clear 2 7 1 14 0 
+figure 2 14 1 14 0 
+much 2 14 2 7 0 
+last 2 7 2 7 0 
+gestures 2 7 1 7 0 
+eclipse 2 7 1 7 0 
+recommend 2 7 1 28 0 
+scale 2 28 1 7 0 
+testing 3 7 1 14 2 21 0 
+taken 2 7 1 7 0 
+clinic 2 21 2 7 0 
+tse 2 7 1 7 0 
+use 3 7 1 28 2 7 0 
+piazza 2 7 1 7 0 
+before 3 7 1 7 2 14 0 
+professional 2 14 1 7 0 
+another 2 7 1 7 0 
+obtain 2 7 1 7 0 
+flying 2 7 1 7 0 
+up 2 7 1 35 0 
+various 2 35 1 14 0 
+warning 2 14 1 7 0 
+been 2 7 1 7 0 
+scripts 2 7 1 14 0 
+four 2 14 1 7 0 
+hour 3 7 1 14 2 14 0 
+your 3 14 1 126 2 28 0 
+resubmit 2 28 1 7 0 
+after 2 7 1 21 0 
+serif 2 21 2 7 0 
+exciting 2 7 1 7 0 
+copter 2 7 1 7 0 
+snippets 2 7 1 14 0 
+they 3 14 1 7 2 7 0 
+fun 2 7 1 7 0 
+jun 2 7 1 14 0 
+run 2 14 1 21 0 
+break 2 21 2 7 0 
+five 2 7 1 7 0 
+activity 2 7 1 7 0 
+jonathan 2 7 1 14 0 
+remaining 2 14 1 7 0 
+software 3 7 1 84 2 7 0 
+jointly 2 7 1 21 0 
+tiny 2 21 1 7 0 
+money 2 7 1 7 0 
+svns 2 7 2 7 0 
+review 3 7 1 28 2 7 0 
+puzzle 2 7 2 7 0 
+nanocopters 2 7 1 42 0 
+gary 2 42 1 7 0 
+bing 2 7 1 14 0 
+due 2 14 2 7 0 
+stones 2 7 1 7 0 
+march 2 7 2 14 0 
+structures 2 14 2 14 0 
+following 2 14 1 14 0 
+sunday 3 14 1 14 2 14 0 
+time 2 14 1 21 0 
+system 3 21 1 28 2 7 0 
+solution 3 7 1 7 2 7 0 
+svn 3 7 1 7 2 7 0 
+gr 2 7 1 14 0 
+or 2 7 1 105 0 
+only 2 14 1 7 0 
+examination 2 105 2 21 0 
+memorial 2 21 2 14 0 
+www 3 14 1 7 2 7 0 
+demos 2 7 2 7 0 
+details 3 7 1 7 2 7 0 
+turned 2 7 1 7 0 
+groups 2 7 1 7 0 
+score 2 7 1 21 0 
+doug 2 21 2 14 0 
+forty 2 14 1 7 0 
+team 3 7 1 49 2 7 0 
+lib 2 7 2 7 0 
+note 2 7 1 35 0 
+appropriate 2 35 1 7 0 
+cannot 2 7 1 21 0 
+own 2 21 2 14 0 
+as 3 14 1 70 2 21 0 
+behind 2 21 1 7 0 
+cs 3 7 1 98 2 35 0 
+span 2 7 2 7 0 
+event 2 7 1 7 0 
+undergrad 2 35 1 7 0 
+is 3 7 1 168 2 14 0 
+os 2 14 2 7 0 
+us 2 7 1 14 0 
+account 2 14 1 14 0 
+google 2 14 1 14 0 
+chen 2 14 1 28 0 
+for 3 28 1 182 2 42 0 
+then 2 42 1 7 0 
+with 3 28 1 56 2 14 0 
+when 2 7 1 28 0 
+best 2 14 2 7 0 
+west 2 7 1 14 0 
+confidence 2 14 1 7 0 
+abstraction 2 7 1 7 0 
+activated 2 7 1 14 0 
+wesley 2 14 1 7 0 
+instructor 2 7 1 28 0 
+never 2 28 1 7 0 
+at 2 7 1 42 0 
+commands 3 42 1 21 2 21 0 
+green 2 28 1 7 0 
+gt 2 21 1 28 0 
+it 3 7 1 84 2 7 0 
+lt 2 7 1 56 0 
+percent 2 56 1 21 0 
+guide 2 21 1 7 0 
+joseph 2 7 1 7 0 
+amazed 2 7 1 7 0 
+self 2 7 1 7 0 
+joint 2 7 1 42 0 
+point 2 42 2 7 0 
+buy 2 7 1 14 0 
+member 2 14 1 7 0 
+understand 3 7 1 7 2 7 0 
+stay 2 14 1 7 0 
+show 2 7 1 14 0 
+disabilities 2 7 1 7 0 
+type 2 7 1 7 0 
+practice 2 7 1 7 0 
+gain 2 7 1 14 0 
+main 2 7 1 7 0 
+millisecond 2 14 1 7 0 
+based 2 7 1 7 0 
+languages 2 7 1 7 0 
+necessary 0 
+necessary 2 7 1 21 0 
