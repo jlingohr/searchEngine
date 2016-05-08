@@ -13,3 +13,5 @@ TODOS:
 ----------
 
 Double check refactoring didnt affect crawler.c
+Tidy up
+Seperate modules/Libraries

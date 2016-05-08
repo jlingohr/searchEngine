@@ -6,6 +6,8 @@
 * ./indexer  [TARGET_DIRECTORY] [RESULTS FILENAME] [RESULTS FILENAME] [REWRITEN FILENAME]
 *
 * To run: ./index ../crawler/data/ ./data/index.dat
+*
+* To Test: ./index ../crawler/data/ ./data/index.dat ./data/index.dat ./data/newindex.dat
 */
 
 #include <stdio.h>                           // printf
@@ -31,6 +33,7 @@ int updateIndex(char* word, int docID, HashTable* index);
 int saveIndexToFile(char* file, HashTable* index);
 void cleanIndex(HashTable* Index);
 HashTable* readFile(char* filename);
+void handleLine(char* line);
 
 
 
@@ -118,14 +121,14 @@ int main(int argc, char** argv) {
 
   /* For testing (argc == 5) */
   if (argc == 5) {
-    LOG("Testing index\n");
+    //LOG(argv[3]);
 
     /*7. Reload index from file and rewrite to new file
       wordindex = readFile(argv[3]) */
     Index = readFile(argv[3]);
 
     /*8. saveFile (argv[4]. wordindex) */
-    LOG("Test complete\n");
+    //LOG("Test complete\n");
 
     /*9. cleanDynamicList(wordindex) */
   }
@@ -332,18 +335,44 @@ HashTable* readFile(char* filename) {
   /* TODO */
   HashTable* index;
   FILE* fp;
-  char buf[BUF_SIZE];
-  char* c;
+  char *buf, c;
+  int size, pos;
 
   /* Initialize new HashTable */
   index = initHashTable();
+  size = BUF_SIZE;
+  buf = (char*)malloc(size);
 
-  if ((fp = fopen(filename, "r+"))) {
+
+  if ((fp = fopen(filename, "r"))) {
     /* Read lines in file into a buff */
-
-    /* Parse each line */
-
-    /* Add each line to the hashtable */
+    do {
+      pos = 0;
+      do { /* read one line */
+        c = fgetc(fp);
+        if (c != EOF)
+          buf[pos++] = (char)c;
+        if (pos >= size - 1) {
+          /* Increase buffer size */
+          size *= 2;
+          buf = (char*)realloc(buf, size);
+        }
+      } while (c != EOF && c != '\n');
+      buf[pos] = 0;
+      /* Line now in buf */
+      handleLine(buf);
+    } while (c != EOF);
+    fclose(fp);
   }
+  free(buf);
+  return index;
 }
 
+/*
+* handleLine - Parse line and insert in hashtable
+* @line: Line to parse
+*/
+void handleLine(char* line) {
+  /* TODO - Construct index */
+  printf("%s\n", line);
+}
