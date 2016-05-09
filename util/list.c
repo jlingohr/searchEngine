@@ -189,11 +189,9 @@ void listFoldString(void (*f) (element_t*, element_t), char** v, List* a) {
     sprintf(dNode_buf, "%d %d ", dNode->document_id, dNode->page_word_frequency);
     cur = cur->next;
     strcat(tmp, dNode_buf);
-    //printf("%s", tmp);
   }
-  //sprintf(*v, " %d ", a->len);
   f((element_t*)v, (element_t)tmp);
-  strcat(*v, "\n");
+  //strcat(*v, "\n");
   free(tmp);
   free(dNode_buf);
 

@@ -1,364 +1,364 @@
-anything 9 1 8 10 1 13 1 15 1 22 2 23 1 24 1 26 1 3 1 
-reloaded 1 24 3 
+anything 9 1 9 10 1 13 1 15 1 22 2 23 1 24 1 26 1 3 1 
 boostrapped 1 11 1 
-starts 7 12 4 14 1 16 1 20 1 23 4 26 2 8 1 
+reloaded 1 24 3 
 ccontinued 1 10 1 
-devices 1 1 8 
-getpid 1 14 1 
+starts 7 12 4 14 1 16 1 20 1 23 4 26 2 8 1 
+devices 1 1 9 
 wants 3 12 1 20 2 8 2 
+getpid 1 14 1 
 neat 1 21 1 
 ordred 1 24 1 
-concerns 1 1 8 
+concerns 1 1 9 
 worthless 1 20 2 
 idx 1 7 1 
-nbsp 7 1 1464 11 4 2 680 3 334 4 6 5 8 6 11 
+nbsp 7 1 1647 11 4 2 680 3 334 4 6 5 8 6 11 
 accessible 1 24 2 
 solaris 1 10 1 
 failed 3 16 2 21 1 25 2 
+mehling 1 1 9 
 mailed 1 24 1 
-mehling 1 1 8 
 procedural 1 10 1 
 api 3 20 1 26 1 7 2 
-beginning 4 1 8 10 6 24 1 26 1 
-culmunating 1 25 1 
+beginning 4 1 9 10 6 24 1 26 1 
 statements 5 10 1 13 1 20 1 22 1 26 1 
+culmunating 1 25 1 
+distributed 6 1 9 11 1 14 1 24 1 26 1 4 1 
 doesn 4 11 1 21 1 7 2 9 1 
-distributed 6 1 8 11 1 14 1 24 1 26 1 4 1 
 eyes 1 20 1 
 fact 9 10 1 11 1 13 1 15 3 20 2 21 1 23 1 24 1 8 4 
 inset 1 15 1 
 lu 2 14 1 8 1 
 nu 1 22 1 
 pointer 8 10 1 13 42 14 20 15 18 16 9 17 7 20 4 24 12 
-boot 1 7 1 
 reship 1 21 1 
+boot 1 7 1 
 savefile 1 24 1 
+tu 1 1 9 
 documents 4 12 2 15 1 24 9 25 1 
-tu 1 1 8 
-valgrind 5 1 8 17 16 20 24 25 1 6 1 
-lectures 8 1 8 11 2 12 1 16 1 2 2 4 1 7 2 8 22 
+valgrind 5 1 9 17 16 20 24 25 1 6 1 
+lectures 8 1 9 11 2 12 1 16 1 2 2 4 1 7 2 8 22 
 proat 1 17 1 
 root 3 3 1 8 4 9 1 
-cup 1 15 1 
 create 15 11 2 12 1 14 4 15 2 16 1 18 1 20 1 22 1 23 1 24 7 26 1 3 1 7 1 8 4 9 7 
-urltobevisited 2 16 8 21 1 
+cup 1 15 1 
 escape 2 11 1 7 1 
+urltobevisited 2 16 8 21 1 
 fully 2 17 1 25 1 
 workload 2 12 1 23 1 
 interaction 3 17 1 20 1 26 1 
 owner 1 8 7 
-a 26 1 408 10 1313 11 648 12 480 13 1487 14 2673 15 441 16 2053 17 1046 18 449 19 4 2 6 20 2136 21 822 22 606 23 551 24 704 25 349 26 339 3 17 4 11 5 7 6 11 7 1987 8 1889 9 1221 
+a 26 1 459 10 1313 11 648 12 480 13 1487 14 2673 15 441 16 2053 17 1046 18 449 19 4 2 6 20 2136 21 822 22 606 23 551 24 704 25 349 26 339 3 17 4 11 5 7 6 11 7 1987 8 1889 9 1221 
+b 8 1 9 11 2 13 18 17 2 20 4 21 2 7 4 8 2 
 bugs 5 12 1 13 3 17 9 20 33 21 17 
-b 8 1 8 11 2 13 18 17 2 20 4 21 2 7 4 8 2 
-consideration 1 25 1 
-continues 1 14 1 
+c 24 1 126 10 103 11 108 12 10 13 68 14 42 15 3 16 11 17 59 18 65 2 6 20 84 21 41 22 23 23 17 24 16 25 11 26 2 3 5 4 1 6 7 7 56 8 20 9 2 
 sensorlab 1 11 2 
-c 24 1 112 10 103 11 108 12 10 13 68 14 42 15 3 16 11 17 59 18 65 2 6 20 84 21 41 22 23 23 17 24 16 25 11 26 2 3 5 4 1 6 7 7 56 8 20 9 2 
+continues 1 14 1 
+consideration 1 25 1 
 d 14 10 23 13 20 14 30 15 8 16 1 17 33 18 1 20 10 21 15 24 7 25 1 7 12 8 7 9 2 
-e 23 1 32 10 21 11 105 12 22 13 12 14 54 15 31 16 7 17 102 18 2 20 30 21 36 22 16 23 20 24 18 25 22 26 12 3 1 4 1 6 1 7 18 8 19 9 10 
+e 23 1 36 10 21 11 105 12 22 13 12 14 54 15 31 16 7 17 102 18 2 20 30 21 36 22 16 23 20 24 18 25 22 26 12 3 1 4 1 6 1 7 18 8 19 9 10 
 f 8 17 13 18 16 22 7 23 1 24 1 7 6 8 1 9 1 
-g 21 1 32 11 3 12 5 13 5 14 1 15 4 16 4 17 1 18 7 20 16 21 6 22 7 23 4 24 7 25 8 26 8 3 1 4 1 6 1 7 7 8 13 
+g 21 1 36 11 3 12 5 13 5 14 1 15 4 16 4 17 1 18 7 20 16 21 6 22 7 23 4 24 7 25 8 26 8 3 1 4 1 6 1 7 7 8 13 
 h 12 10 20 11 12 13 10 14 21 15 9 16 10 18 19 20 3 21 1 22 5 25 1 7 2 
+i 24 1 81 10 26 11 14 12 22 13 35 14 35 15 14 16 4 17 10 18 2 19 1 2 4 20 51 21 66 22 7 23 6 24 11 25 10 26 4 5 3 6 5 7 18 8 16 9 8 
 increment 2 13 1 14 1 
-i 24 1 72 10 26 11 14 12 22 13 35 14 35 15 14 16 4 17 10 18 2 19 1 2 4 20 51 21 66 22 7 23 6 24 11 25 10 26 4 5 3 6 5 7 18 8 16 9 8 
-j 5 1 8 10 5 13 4 14 1 5 1 
+j 5 1 9 10 5 13 4 14 1 5 1 
 k 4 10 1 11 1 12 3 7 2 
-l 11 1 32 10 3 11 7 13 1 14 6 18 2 20 2 6 1 7 25 8 18 9 1 
-m 7 11 2 12 6 14 4 16 1 23 3 7 2 9 8 
+l 11 1 36 10 3 11 7 13 1 14 6 18 2 20 2 6 1 7 25 8 18 9 1 
 maxsize 1 10 3 
+m 7 11 2 12 6 14 4 16 1 23 3 7 2 9 8 
 n 13 10 19 12 2 13 23 14 92 15 10 16 6 17 4 20 4 21 34 22 4 23 2 24 2 7 6 
 o 10 10 1 11 1 15 3 16 3 18 44 20 3 22 1 24 1 7 2 8 2 
-p 10 1 16 10 9 11 4 12 3 13 38 14 53 16 1 21 3 22 11 7 1 
-rudimentary 2 13 1 17 1 
+p 10 1 18 10 9 11 4 12 3 13 38 14 53 16 1 21 3 22 11 7 1 
 r 8 10 1 11 2 14 1 20 2 22 13 7 3 8 65 9 3 
+rudimentary 2 13 1 17 1 
+s 24 1 36 10 54 11 8 12 8 13 32 14 30 15 2 16 9 17 12 18 1 20 14 21 18 22 15 23 8 24 6 25 7 26 4 3 3 4 1 5 6 6 1 7 43 8 25 9 12 
+students 11 1 27 15 1 16 1 23 3 24 1 25 3 3 2 5 1 6 1 7 3 9 1 
 configuration 2 8 1 9 1 
-students 11 1 24 15 1 16 1 23 3 24 1 25 3 3 2 5 1 6 1 7 3 9 1 
-s 24 1 32 10 54 11 8 12 8 13 32 14 30 15 2 16 9 17 12 18 1 20 14 21 18 22 15 23 8 24 6 25 7 26 4 3 3 4 1 5 6 6 1 7 43 8 25 9 12 
+t 19 1 45 11 5 12 3 13 1 14 11 15 2 16 3 17 3 20 4 21 6 22 1 23 1 24 1 25 1 26 1 5 1 7 9 8 4 9 4 
 default 7 10 1 17 1 18 1 20 1 24 2 7 1 8 1 
-t 19 1 40 11 5 12 3 13 1 14 11 15 2 16 3 17 3 20 4 21 6 22 1 23 1 24 1 25 1 26 1 5 1 7 9 8 4 9 4 
 u 2 22 2 8 2 
-v 3 17 1 20 2 8 1 
 valid 5 10 1 12 3 16 1 17 2 23 4 
-w 11 1 8 11 5 12 9 17 3 21 2 23 9 24 5 3 2 4 1 7 1 9 2 
-x 23 1 8 10 1304 11 780 12 405 13 1414 14 2698 15 365 16 1997 17 1264 18 416 19 4 2 5 20 2096 21 784 22 572 23 512 24 583 25 305 26 300 3 4 7 1911 8 1817 9 1184 
+v 3 17 1 20 2 8 1 
+w 11 1 9 11 5 12 9 17 3 21 2 23 9 24 5 3 2 4 1 7 1 9 2 
+x 23 1 9 10 1304 11 780 12 405 13 1414 14 2698 15 365 16 1997 17 1264 18 416 19 4 2 5 20 2096 21 784 22 572 23 512 24 583 25 305 26 300 3 4 7 1911 8 1817 9 1184 
 y 4 14 3 22 1 7 7 8 2 
 z 3 22 1 6 1 8 2 
 mallocing 1 14 1 
-operated 1 8 1 
 overview 1 3 1 
-creative 1 25 1 
+operated 1 8 1 
 calendar 1 2 1 
+creative 1 25 1 
 dadd 4 14 1 20 1 21 2 25 2 
 forgotten 1 21 1 
 articles 1 5 3 
 reload 1 24 6 
-complexity 4 12 1 15 2 20 2 24 1 
 sqr 1 10 6 
+complexity 4 12 1 15 2 20 2 24 1 
 learnt 4 17 1 21 1 25 1 8 1 
 midnight 2 2 4 3 2 
 resource 1 6 2 
-controlled 1 4 1 
+communication 2 1 9 7 1 
 stand 1 18 1 
-communication 2 1 8 7 1 
-http 26 1 8 10 1 11 37 12 44 13 1 14 2 15 2 16 2 17 26 18 2 19 1 2 1 20 3 21 1 22 1 23 46 24 2 25 97 26 1 3 2 4 1 5 1 6 1 7 2 8 1 9 3 
+controlled 1 4 1 
+http 26 1 9 10 1 11 37 12 44 13 1 14 2 15 2 16 2 17 26 18 2 19 1 2 1 20 3 21 1 22 1 23 46 24 2 25 97 26 1 3 2 4 1 5 1 6 1 7 2 8 1 9 3 
 introduction 7 10 1 11 1 13 1 14 1 17 1 2 1 6 1 
 nothing 5 10 1 16 1 21 2 23 1 25 1 
 boundaries 2 20 1 21 9 
-swicthes 1 8 1 
 skipping 1 24 1 
+swicthes 1 8 1 
 untrusted 1 7 1 
 moved 1 11 1 
 originator 1 11 1 
 runing 1 18 1 
 short 9 11 1 12 1 20 2 21 1 25 1 3 1 6 1 7 4 8 2 
-honor 2 1 24 25 2 
+honor 2 1 27 25 2 
 suggestions 1 3 1 
-eye 1 4 1 
 examples 10 10 1 13 4 14 2 17 1 18 2 2 1 20 2 21 5 25 2 8 1 
-very 17 1 24 11 2 13 6 14 4 15 7 17 4 18 3 2 2 20 12 21 4 24 1 25 5 26 1 3 2 7 4 8 4 9 4 
-immediately 2 21 1 26 1 
+eye 1 4 1 
+very 17 1 27 11 2 13 6 14 4 15 7 17 4 18 3 2 2 20 12 21 4 24 1 25 5 26 1 3 2 7 4 8 4 9 4 
 initialise 1 14 2 
+immediately 2 21 1 26 1 
 multiples 1 13 1 
 addressing 1 22 1 
-simplify 1 24 1 
 conditional 3 10 2 20 3 21 1 
+simplify 1 24 1 
 div 1 11 1 
 humans 1 21 1 
-luck 3 22 1 25 1 26 1 
 levels 2 12 2 7 1 
+luck 3 22 1 25 1 26 1 
+assignment 12 1 27 11 1 12 1 13 2 15 1 21 1 22 1 23 2 24 3 25 3 26 4 9 2 
 aacfgkmnnqsttvvxxy 1 7 1 
-assignment 12 1 24 11 1 12 1 13 2 15 1 21 1 22 1 23 2 24 3 25 3 26 4 9 2 
 radar 1 21 1 
-sbin 1 8 3 
 sizes 2 13 1 14 1 
+sbin 1 8 3 
 third 5 10 1 12 2 16 1 23 1 25 1 
 loops 3 17 1 20 3 21 2 
 management 11 12 2 14 3 16 1 17 2 20 2 23 1 24 2 25 1 3 1 6 1 7 2 
-bug 4 13 2 17 3 20 15 21 14 
 build 11 12 2 15 1 18 8 20 2 21 1 23 5 24 5 25 9 26 2 6 1 9 1 
-control 15 1 24 10 1 11 2 12 1 15 3 16 1 17 1 20 2 21 4 22 1 25 1 3 1 4 1 7 1 9 10 
+bug 4 13 2 17 3 20 15 21 14 
+control 15 1 27 10 1 11 2 12 1 15 3 16 1 17 1 20 2 21 4 22 1 25 1 3 1 4 1 7 1 9 10 
 incremet 1 14 2 
+previously 4 1 9 10 1 14 1 25 1 
 places 4 12 1 20 1 23 1 25 1 
-previously 4 1 8 10 1 14 1 25 1 
 anded 1 22 1 
-borne 1 8 3 
 reverse 4 20 2 22 1 7 1 8 1 
-catch 2 20 2 21 1 
-copyright 1 17 1 
+borne 1 8 3 
 collecting 1 11 1 
+copyright 1 17 1 
+catch 2 20 2 21 1 
 words 6 11 2 12 1 24 6 25 11 5 1 8 1 
 hex 2 13 1 14 2 
 ints 2 13 1 14 1 
 match 1 15 2 
-about 22 1 48 10 1 11 6 12 3 13 5 14 1 15 1 16 3 17 2 18 1 20 8 21 5 22 2 23 3 24 6 25 2 26 1 3 1 5 1 6 1 7 12 9 1 
+about 22 1 54 10 1 11 6 12 3 13 5 14 1 15 1 16 3 17 2 18 1 20 8 21 5 22 2 23 3 24 6 25 2 26 1 3 1 5 1 6 1 7 12 9 1 
 sought 1 10 1 
 tex 2 11 5 8 31 
 used 19 10 16 11 3 12 2 13 14 14 4 15 11 16 3 17 3 18 7 20 5 21 4 22 4 23 3 24 11 25 2 6 1 7 4 8 8 9 1 
-asked 5 1 8 23 1 24 1 3 2 5 1 
+asked 5 1 9 23 1 24 1 3 2 5 1 
+subject 3 1 9 15 1 18 1 
 cv 1 25 1 
-subject 3 1 8 15 1 18 1 
-deadlink 1 23 4 
 throughout 3 10 1 18 1 5 1 
-mv 1 8 2 
+deadlink 1 23 4 
 mcilroy 1 2 1 
+mv 1 8 2 
 programer 1 16 1 
-skills 7 1 48 17 1 20 1 21 1 22 1 4 3 7 6 
+skills 7 1 54 17 1 20 1 21 1 22 1 4 3 7 6 
 trying 6 11 1 13 3 18 1 20 2 21 1 8 1 
 unused 1 14 1 
-from 24 1 56 10 6 11 13 12 11 13 3 14 7 15 10 16 13 17 12 18 7 19 1 20 22 21 18 22 11 23 9 24 22 25 11 26 12 3 2 4 2 5 2 7 17 8 14 9 5 
-install 2 7 7 8 1 
+from 24 1 63 10 6 11 13 12 11 13 3 14 7 15 10 16 13 17 12 18 7 19 1 20 22 21 18 22 11 23 9 24 22 25 11 26 12 3 2 4 2 5 2 7 17 8 14 9 5 
 incrementally 3 12 1 21 1 23 1 
+install 2 7 7 8 1 
 modified 3 26 1 8 1 9 1 
 phd 3 12 1 23 1 25 1 
 replacement 2 12 1 26 1 
 tweak 1 21 1 
-others 11 1 8 10 1 11 1 12 1 20 1 21 3 22 1 5 1 7 1 8 8 9 1 
+others 11 1 9 10 1 11 1 12 1 20 1 21 3 22 1 5 1 7 1 8 8 9 1 
 pesudocode 1 19 2 
-demo 6 1 24 17 1 2 3 25 1 4 2 7 4 
-users 7 11 1 12 1 15 1 17 1 20 1 7 4 8 2 
+demo 6 1 27 17 1 2 3 25 1 4 2 7 4 
 editor 3 11 1 18 2 7 8 
+users 7 11 1 12 1 15 1 17 1 20 1 7 4 8 2 
 getchar 1 21 4 
-queue 1 21 1 
-automate 1 21 4 
 arvind 4 11 4 12 1 24 1 25 1 
+automate 1 21 4 
+queue 1 21 1 
 recompile 2 18 3 23 1 
 interactive 3 11 1 22 4 8 1 
-pdf 1 5 1 
 parsed 2 16 1 22 1 
-business 3 11 1 25 1 7 1 
+pdf 1 5 1 
 base 3 10 4 13 1 25 2 
+business 3 11 1 25 1 7 1 
+case 19 1 9 10 1 12 3 13 2 14 4 15 9 16 6 17 1 18 3 20 4 21 4 22 1 23 1 24 6 25 4 26 1 7 3 8 6 9 1 
 sequences 1 21 1 
-case 19 1 8 10 1 12 3 13 2 14 4 15 9 16 6 17 1 18 3 20 4 21 4 22 1 23 1 24 6 25 4 26 1 7 3 8 6 9 1 
+experience 4 1 27 12 1 20 2 5 2 
 ease 2 14 1 17 1 
-experience 4 1 24 12 1 20 2 5 2 
 aim 2 20 1 7 2 
-strategy 3 20 1 21 1 5 1 
-capturing 1 20 1 
 scanf 2 10 2 14 1 
+capturing 1 20 1 
+strategy 3 20 1 21 1 5 1 
 depends 2 11 2 7 1 
 violated 1 21 1 
-him 3 1 8 17 1 5 1 
+him 3 1 9 17 1 5 1 
 jim 3 12 1 16 1 23 1 
 kim 1 23 1 
 outfile 1 21 1 
 abstract 3 16 4 20 1 25 1 
 reuse 3 24 2 25 1 3 1 
-entrepreneurial 1 7 1 
 util 3 20 2 24 6 25 5 
+entrepreneurial 1 7 1 
 vim 1 6 2 
 initially 1 22 1 
-passing 3 12 1 13 4 17 1 
 protocol 1 11 5 
+passing 3 12 1 13 4 17 1 
 stderr 1 14 1 
 taxing 1 26 1 
 int 9 10 35 13 37 14 41 15 2 16 8 20 28 21 14 24 8 7 3 
-overall 5 1 8 11 1 12 2 24 1 7 1 
+overall 5 1 9 11 1 12 2 24 1 7 1 
 pizza 1 2 1 
-blackwood 1 1 16 
-culprit 1 21 1 
+blackwood 1 1 18 
 survey 1 12 2 
+culprit 1 21 1 
 danferous 1 20 1 
 initialises 1 14 1 
-phase 6 1 16 12 4 18 2 20 5 21 1 7 2 
+phase 6 1 18 12 4 18 2 20 5 21 1 7 2 
 adding 6 13 1 14 1 15 1 17 1 21 1 9 9 
 certain 7 15 7 17 1 20 1 24 1 26 1 5 1 8 1 
+weekday 2 1 9 7 1 
 globbing 1 8 1 
-weekday 2 1 8 7 1 
-limiting 1 20 1 
+life 9 1 9 11 1 12 1 15 1 16 1 20 2 23 1 8 1 9 1 
 loader 1 18 1 
-life 9 1 8 11 1 12 1 15 1 16 1 20 2 23 1 8 1 9 1 
-assignments 7 1 112 12 1 23 1 3 8 7 7 8 2 9 3 
-csrs 1 25 4 
+limiting 1 20 1 
+assignments 7 1 126 12 1 23 1 3 8 7 7 8 2 9 3 
 crawlinghttp 2 12 1 23 1 
+csrs 1 25 4 
 determining 2 20 1 6 1 
 efficiently 1 8 1 
 architectural 2 11 2 12 2 
 benefit 1 23 1 
 faq 2 6 1 9 1 
-paradigms 2 1 8 7 1 
-avg 1 21 6 
-action 8 15 2 18 1 19 2 21 1 22 1 23 1 24 2 8 1 
+paradigms 2 1 9 7 1 
 actually 3 10 1 13 2 21 1 
+action 8 15 2 18 1 19 2 21 1 22 1 23 1 24 2 8 1 
+avg 1 21 6 
 ranked 2 11 3 25 4 
-tinyserarch 1 1 8 
+tinyserarch 1 1 9 
 mkdir 2 8 1 9 3 
 plessey 1 21 1 
 analyses 1 20 1 
-coded 6 17 1 20 4 21 2 24 1 25 1 7 1 
 cots 1 12 1 
+coded 6 17 1 20 4 21 2 24 1 25 1 7 1 
 discussion 6 12 2 14 1 15 1 20 1 5 1 6 1 
+unpleasant 2 1 9 10 1 
 unqiue 1 12 1 
-unpleasant 2 1 8 10 1 
 wouldn 3 12 1 16 1 23 1 
-lots 3 1 8 13 1 7 1 
+lots 3 1 9 13 1 7 1 
 prinft 1 20 1 
 beautful 1 2 1 
 suitable 3 22 1 23 1 24 1 
 experimental 1 6 1 
 preferences 1 7 1 
-assigned 3 13 1 14 1 3 1 
 amazon 2 11 1 5 1 
+assigned 3 13 1 14 1 3 1 
 raised 1 11 1 
+compare 5 1 9 13 1 14 2 15 2 24 2 
 counts 3 20 1 24 1 3 1 
-compare 5 1 8 13 1 14 2 15 2 24 2 
 todayshow 2 12 1 23 1 
 fri 1 9 1 
 hw 2 12 4 16 1 
 rw 3 11 1 7 4 8 39 
 sw 2 12 1 8 3 
 did 6 11 2 14 1 20 3 21 5 24 1 25 2 
-love 2 1 8 5 2 
+love 2 1 9 5 2 
 move 9 11 1 12 1 13 1 14 1 16 1 18 1 7 1 8 5 9 1 
 objects 4 10 2 12 1 13 3 14 1 
 pid 1 8 1 
 qid 1 11 1 
-reported 2 24 1 8 1 
 reserved 2 10 1 25 1 
+reported 2 24 1 8 1 
+seven 1 1 9 
 collectively 1 25 1 
-seven 1 1 8 
 general 8 11 5 14 6 15 5 16 2 17 1 20 2 24 1 7 1 
 institute 1 11 1 
 mentally 1 21 1 
-repsoitory 1 3 1 
 relevant 4 14 1 16 1 3 1 8 1 
+repsoitory 1 3 1 
 seconds 5 10 1 11 3 16 1 20 7 26 2 
 ddnode 1 21 1 
 isolation 2 12 1 24 1 
 myname 1 14 2 
 accidently 2 13 1 8 1 
-begins 2 2 1 22 1 
 ref 1 11 1 
+begins 2 2 1 22 1 
 context 4 20 2 25 2 7 3 8 1 
 dumb 1 21 1 
 email 1 3 1 
-friendly 1 1 8 
+friendly 1 1 9 
 recoding 1 12 1 
-strcutures 2 17 3 20 2 
-super 2 14 1 20 1 
-scheme 3 11 1 25 1 7 1 
 constant 2 10 4 15 2 
+scheme 3 11 1 25 1 7 1 
+super 2 14 1 20 1 
+strcutures 2 17 3 20 2 
 usr 4 10 5 17 1 20 1 8 9 
 xfffffff 1 7 1 
-print 12 10 2 12 1 13 4 14 1 17 36 20 2 22 9 23 2 24 1 26 1 7 1 8 1 
 primary 1 10 1 
-alphanumeric 1 7 1 
+print 12 10 2 12 1 13 4 14 1 17 36 20 2 22 9 23 2 24 1 26 1 7 1 8 1 
 acceptable 1 24 1 
+alphanumeric 1 7 1 
 deems 1 15 1 
 identical 2 10 1 8 1 
 jazz 1 25 1 
 list 15 10 1 12 9 14 6 15 77 16 29 17 23 18 9 20 3 22 1 23 6 24 33 25 4 26 1 6 2 8 16 
 opening 1 7 1 
 away 4 10 1 13 1 21 1 7 1 
-bot 1 4 6 
 researchers 1 17 1 
+bot 1 4 6 
 copying 5 13 1 15 3 17 1 23 1 7 1 
 dot 2 22 1 8 5 
 echoconserver 1 26 1 
 got 3 11 1 15 1 20 1 
-lot 5 1 16 11 1 17 1 26 1 3 1 
-not 24 1 80 10 11 11 4 12 17 13 10 14 16 15 14 16 20 17 18 18 13 2 2 20 27 21 20 22 4 23 18 24 14 25 16 26 4 3 5 5 1 6 5 7 17 8 23 9 4 
-origins 3 17 1 20 1 7 1 
+lot 5 1 18 11 1 17 1 26 1 3 1 
+not 24 1 90 10 11 11 4 12 17 13 10 14 16 15 14 16 20 17 18 18 13 2 2 20 27 21 20 22 4 23 18 24 14 25 16 26 4 3 5 5 1 6 5 7 17 8 23 9 4 
 ouput 2 10 1 13 1 
+origins 3 17 1 20 1 7 1 
 assign 2 14 1 25 1 
-support 10 1 8 10 1 11 1 13 1 15 1 20 1 22 1 25 1 7 2 8 1 
-twenty 1 1 8 
-dumps 2 1 8 20 1 
-integration 5 1 8 12 3 20 1 21 3 7 3 
+support 10 1 9 10 1 11 1 13 1 15 1 20 1 22 1 25 1 7 2 8 1 
+dumps 2 1 9 20 1 
+twenty 1 1 9 
+integration 5 1 9 12 3 20 1 21 3 7 3 
 manage 5 16 1 2 1 23 1 24 1 9 3 
-chmod 2 8 10 9 1 
 copied 4 13 2 15 1 26 1 8 1 
-filters 1 1 8 
+chmod 2 8 10 9 1 
+filters 1 1 9 
 interprets 1 18 1 
 long 7 13 2 14 1 15 2 20 1 25 1 7 1 8 2 
-report 3 1 8 2 1 7 3 
+report 3 1 9 2 1 7 3 
 examinations 1 2 1 
 forwards 1 13 1 
 libray 1 25 1 
 miluzzo 1 25 8 
 ptrs 1 2 1 
 awarded 1 25 1 
-suggest 3 17 2 24 2 25 1 
+come 15 1 9 11 1 12 1 15 2 16 1 17 1 2 1 20 1 24 2 25 1 3 1 4 1 5 2 7 3 8 1 
+state 6 1 9 10 1 11 2 15 1 25 1 8 1 
 creating 3 15 2 6 1 8 2 
-state 6 1 8 10 1 11 2 15 1 25 1 8 1 
-come 15 1 8 11 1 12 1 15 2 16 1 17 1 2 1 20 1 24 2 25 1 3 1 4 1 5 2 7 3 8 1 
-working 14 1 16 10 1 12 1 17 1 18 1 20 3 21 3 22 1 26 1 4 1 5 1 7 2 8 2 9 6 
+suggest 3 17 2 24 2 25 1 
+working 14 1 18 10 1 12 1 17 1 18 1 20 3 21 3 22 1 26 1 4 1 5 1 7 2 8 2 9 6 
 home 7 12 1 20 1 21 1 23 1 7 6 8 9 9 2 
+some 22 1 18 10 3 11 5 12 4 13 3 14 5 15 7 16 3 17 4 18 1 20 13 21 13 23 2 24 3 25 6 26 2 3 2 4 4 6 1 7 7 8 4 9 2 
 characters 9 10 12 13 5 14 2 17 1 18 2 21 8 22 1 7 1 8 5 
-some 22 1 16 10 3 11 5 12 4 13 3 14 5 15 7 16 3 17 4 18 1 20 13 21 13 23 2 24 3 25 6 26 2 3 2 4 4 6 1 7 7 8 4 9 2 
 discussions 1 7 1 
-friday 5 1 32 2 9 5 8 7 1 8 1 
+friday 5 1 36 2 9 5 8 7 1 8 1 
 garcia 5 11 2 12 1 24 1 25 1 4 1 
-remain 2 24 1 26 1 
 boring 2 20 1 21 1 
+remain 2 24 1 26 1 
+spirit 1 1 9 
 scaling 1 15 1 
-spirit 1 1 8 
-that 24 1 120 10 26 11 31 12 36 13 19 14 19 15 41 16 30 17 26 18 19 2 2 20 57 21 55 22 9 23 30 24 74 25 35 26 21 3 7 4 3 5 2 7 39 8 37 9 16 
+that 24 1 135 10 26 11 31 12 36 13 19 14 19 15 41 16 30 17 26 18 19 2 2 20 57 21 55 22 9 23 30 24 74 25 35 26 21 3 7 4 3 5 2 7 39 8 37 9 16 
 followed 5 16 1 20 2 21 1 7 1 8 1 
+what 20 1 27 11 4 12 8 13 7 14 7 15 2 16 4 17 6 18 1 20 22 21 12 22 5 23 6 24 4 25 3 3 1 5 1 6 1 7 7 8 8 
 works 10 13 2 15 1 17 1 18 1 20 4 21 5 22 1 24 3 26 2 9 1 
-what 20 1 24 11 4 12 8 13 7 14 7 15 2 16 4 17 6 18 1 20 22 21 12 22 5 23 6 24 4 25 3 3 1 5 1 6 1 7 7 8 8 
 interact 2 24 1 4 1 
 across 6 15 2 17 1 21 1 4 1 7 2 8 1 
-contoller 1 1 8 
+contoller 1 1 9 
 outstanding 1 21 1 
 allocate 2 10 2 14 8 
 truncates 1 17 1 
@@ -374,50 +374,50 @@ rewritten 1 24 2
 stdlib 5 10 4 13 1 14 4 20 1 7 1 
 pointed 6 12 2 13 1 14 2 15 1 20 1 23 1 
 allowing 1 14 1 
-readonly 1 7 4 
 release 4 16 2 20 1 21 1 24 1 
+readonly 1 7 4 
 contain 2 10 3 15 1 
 engineers 1 20 1 
 fff 2 13 12 17 1 
-initarray 1 14 3 
 iff 3 12 1 16 1 23 1 
+initarray 1 14 3 
 jobs 2 12 1 23 1 
 off 10 12 4 15 1 17 1 20 2 21 2 23 1 24 2 25 3 5 1 7 2 
-felt 1 21 1 
 force 4 17 1 20 1 21 1 25 1 
+felt 1 21 1 
 integer 6 10 5 13 1 15 2 17 1 24 2 26 1 
 ptr 3 13 19 16 1 20 4 
 regards 1 24 1 
-check 16 11 2 13 1 14 12 15 6 16 1 17 20 20 3 21 11 22 2 23 5 24 4 25 4 3 1 7 4 8 4 9 3 
-str 2 10 4 13 5 
 specify 4 10 1 13 2 18 4 7 1 
+str 2 10 4 13 5 
+check 16 11 2 13 1 14 12 15 6 16 1 17 20 20 3 21 11 22 2 23 5 24 4 25 4 3 1 7 4 8 4 9 3 
 molina 4 11 2 12 1 24 1 25 1 
 perform 4 10 1 14 1 22 2 8 1 
-repository 6 1 8 11 1 12 1 24 1 3 1 9 9 
-code 25 1 192 10 18 11 1 12 21 13 23 14 16 15 13 16 22 17 47 18 1 2 5 20 98 21 86 22 8 23 6 24 31 25 40 26 4 3 14 4 2 5 1 6 1 7 56 8 6 9 12 
+repository 6 1 9 11 1 12 1 24 1 3 1 9 9 
+code 25 1 216 10 18 11 1 12 21 13 23 14 16 15 13 16 22 17 47 18 1 2 5 20 98 21 86 22 8 23 6 24 31 25 40 26 4 3 14 4 2 5 1 6 1 7 56 8 6 9 12 
 determined 2 10 1 21 1 
 usages 1 9 1 
-versions 8 11 1 18 1 2 1 20 1 24 1 25 1 26 1 9 1 
 follow 9 11 2 12 2 16 1 17 1 18 1 20 1 21 1 25 1 7 1 
+versions 8 11 1 18 1 2 1 20 1 24 1 25 1 26 1 9 1 
 initialed 1 14 1 
 mode 4 12 1 22 6 23 1 8 2 
 node 1 16 3 
 particular 5 10 1 20 4 22 1 24 1 8 1 
-administration 1 7 1 
 apply 5 12 3 20 1 21 1 23 1 25 1 
+administration 1 7 1 
+rather 11 1 9 13 3 14 1 15 3 16 1 20 1 22 3 23 1 24 1 25 1 8 1 
 brute 2 21 1 25 1 
-rather 11 1 8 13 3 14 1 15 3 16 1 20 1 22 3 23 1 24 1 25 1 8 1 
 stdio 5 10 8 13 4 14 3 20 1 7 1 
 flow 8 10 1 12 4 16 8 17 1 19 2 20 3 24 1 25 1 
 ago 1 11 1 
-rarity 1 8 1 
 relates 2 20 1 22 1 
+rarity 1 8 1 
+sign 7 1 9 10 1 24 4 25 7 26 1 7 1 9 1 
 slow 4 15 2 20 1 21 1 3 1 
-sign 7 1 8 10 1 24 4 25 7 26 1 7 1 9 1 
-want 17 11 2 12 1 14 1 15 5 16 1 17 1 18 1 20 3 22 1 24 2 25 2 26 1 3 1 4 1 7 5 8 4 9 8 
 generator 1 11 1 
-likeparthead 1 11 4 
+want 17 11 2 12 1 14 1 15 5 16 1 17 1 18 1 20 3 22 1 24 2 25 2 26 1 3 1 4 1 7 5 8 4 9 8 
 locations 4 10 1 13 2 20 1 8 1 
+likeparthead 1 11 4 
 multiplication 1 13 1 
 argv 6 13 3 14 1 17 5 20 9 21 2 7 2 
 sublists 1 15 1 
@@ -425,72 +425,72 @@ extracting 1 11 1
 logging 1 7 10 
 occurences 1 24 1 
 addelement 4 14 1 15 1 16 1 20 1 
-reveals 1 21 1 
 routine 2 14 1 17 1 
-synonymous 2 13 1 8 1 
+reveals 1 21 1 
 curremnt 1 11 1 
-unlikely 2 14 1 16 2 
+synonymous 2 13 1 8 1 
 enter 7 10 2 16 1 21 1 22 15 25 1 3 2 8 1 
-harder 2 1 8 7 1 
-incremented 4 12 1 14 1 16 1 23 1 
+unlikely 2 14 1 16 2 
+harder 2 1 9 7 1 
 inter 1 12 1 
+incremented 4 12 1 14 1 16 1 23 1 
 allocating 1 14 2 
-captures 5 1 8 12 1 16 1 20 1 7 1 
+captures 5 1 9 12 1 16 1 20 1 7 1 
 drops 1 17 1 
 gracia 1 4 1 
 higher 3 10 1 12 1 25 1 
-manner 8 1 8 10 1 15 1 16 1 18 1 20 2 25 1 8 1 
+manner 8 1 9 10 1 15 1 16 1 18 1 20 2 25 1 8 1 
+sheet 1 1 27 
 shall 5 10 1 12 2 17 1 23 1 24 1 
-sheet 1 1 24 
-declaration 2 13 2 24 1 
 describe 3 10 1 16 1 18 1 
-knowledge 3 1 16 21 1 7 1 
+declaration 2 13 2 24 1 
+knowledge 3 1 18 21 1 7 1 
 rmdir 1 8 1 
-chapters 2 2 3 6 2 
 conversely 3 13 1 15 1 21 1 
+chapters 2 2 3 6 2 
 hashing 1 15 4 
-job 7 1 8 12 1 18 1 21 1 25 1 7 2 8 2 
-rob 4 1 8 11 2 21 1 4 1 
+job 7 1 9 12 1 18 1 21 1 25 1 7 2 8 2 
+rob 4 1 9 11 2 21 1 4 1 
 spring 1 2 3 
-degree 1 20 2 
+down 8 1 9 11 3 12 6 13 1 17 3 20 12 22 1 8 1 
 driving 1 13 1 
-down 8 1 8 11 3 12 6 13 1 17 3 20 12 22 1 8 1 
+degree 1 20 2 
 efforts 1 25 1 
 washing 1 21 1 
-illegal 3 17 1 20 2 21 1 
-interchange 1 13 1 
 inclusion 1 10 1 
+interchange 1 13 1 
+illegal 3 17 1 20 2 21 1 
+by 23 1 81 10 14 11 6 12 10 13 15 14 6 15 16 16 9 17 11 18 5 2 2 20 27 21 8 22 5 23 5 24 12 25 6 26 28 5 1 6 2 7 16 8 28 9 3 
 becomes 1 20 1 
-by 23 1 72 10 14 11 6 12 10 13 15 14 6 15 16 16 9 17 11 18 5 2 2 20 27 21 8 22 5 23 5 24 12 25 6 26 28 5 1 6 2 7 16 8 28 9 3 
-checker 1 20 1 
-costly 1 20 1 
+should 21 1 18 10 7 12 5 13 1 14 1 15 5 16 8 17 9 18 2 20 3 21 17 22 13 23 9 24 14 25 23 26 14 3 2 4 1 5 2 7 1 9 2 
 segment 1 20 1 
-should 21 1 16 10 7 12 5 13 1 14 1 15 5 16 8 17 9 18 2 20 3 21 17 22 13 23 9 24 14 25 23 26 14 3 2 4 1 5 2 7 1 9 2 
-directed 5 1 8 10 1 23 1 24 1 7 1 
+costly 1 20 1 
+checker 1 20 1 
+directed 5 1 9 10 1 23 1 24 1 7 1 
 within 5 10 4 14 1 20 1 7 2 8 1 
 helps 1 20 1 
-mostly 5 11 2 15 1 16 1 20 3 25 1 
+multi 3 1 9 10 3 7 1 
 my 16 10 1 11 5 13 6 14 1 15 1 17 1 19 1 20 6 21 7 23 1 24 1 25 3 6 1 7 5 8 5 9 4 
-multi 3 1 8 10 3 7 1 
-andreas 4 11 2 12 1 24 1 25 1 
+mostly 5 11 2 15 1 16 1 20 3 25 1 
 assume 6 10 1 15 4 22 1 24 4 25 3 7 2 
-closing 1 26 1 
+andreas 4 11 2 12 1 24 1 25 1 
+carson 1 1 18 
+circumstance 1 1 9 
 sensor 4 11 1 25 4 26 11 4 3 
-circumstance 1 1 8 
-carson 1 1 16 
-fancy 3 1 8 4 1 7 1 
-movl 1 7 3 
+closing 1 26 1 
+fancy 3 1 9 4 1 7 1 
 matches 3 11 2 25 1 7 1 
+movl 1 7 3 
 pictures 1 4 1 
-bffff 1 10 3 
 bytes 6 10 1 14 9 17 4 20 14 7 1 8 1 
+bffff 1 10 3 
 complete 16 10 2 11 1 12 7 16 4 17 3 2 1 20 2 22 1 23 4 24 3 25 8 26 1 3 1 7 2 8 3 9 4 
 intiatlise 1 14 1 
 natrually 1 20 1 
-penalties 5 1 16 12 1 23 1 24 2 25 4 
+penalties 5 1 18 12 1 23 1 24 2 25 4 
 armed 2 12 1 5 1 
-rubric 3 22 1 23 1 24 1 
 related 6 10 1 12 1 13 1 15 3 20 1 23 1 
+rubric 3 22 1 23 1 24 1 
 clarifications 1 4 1 
 manuals 1 7 2 
 printout 1 17 1 
@@ -498,78 +498,78 @@ advanced 4 13 1 18 1 6 2 7 2
 segfault 5 21 2 23 1 24 1 25 1 3 1 
 degugging 1 20 1 
 heap 4 14 5 15 1 17 3 20 3 
-leap 2 1 24 4 3 
+leap 2 1 27 4 3 
 abstractions 1 5 2 
+really 13 1 27 10 1 11 1 12 1 15 1 17 2 20 2 21 4 25 1 6 1 7 2 8 1 9 1 
 both 9 10 1 12 1 13 3 15 2 18 1 22 2 23 1 25 4 8 2 
-really 13 1 24 10 1 11 1 12 1 15 1 17 2 20 2 21 4 25 1 6 1 7 2 8 1 9 1 
+collaboration 2 1 9 7 1 
 calling 2 20 1 22 1 
-collaboration 2 1 8 7 1 
 machine 5 20 1 22 3 26 1 7 23 8 2 
 nur 1 22 1 
-our 20 1 32 10 3 11 3 12 5 13 2 14 3 15 11 16 5 18 3 2 1 20 4 21 4 22 1 24 3 25 14 26 1 5 1 7 5 8 7 9 5 
+our 20 1 36 10 3 11 3 12 5 13 2 14 3 15 11 16 5 18 3 2 1 20 4 21 4 22 1 24 3 25 14 26 1 5 1 7 5 8 7 9 5 
 password 4 3 4 7 9 8 4 9 9 
 retrieve 5 12 2 15 3 23 1 24 1 26 1 
 comprises 1 22 1 
 guis 1 7 1 
 andl 1 7 1 
-criticism 1 18 1 
-spiffy 3 12 1 16 1 23 1 
-stages 3 12 1 25 1 7 1 
-collects 1 11 1 
 calls 7 10 1 16 2 20 4 21 2 23 1 24 3 7 3 
-username 3 3 3 7 1 9 1 
+collects 1 11 1 
+stages 3 12 1 25 1 7 1 
+spiffy 3 12 1 16 1 23 1 
+criticism 1 18 1 
 extensions 3 25 1 3 1 7 1 
-which 21 1 16 10 11 11 3 12 11 13 7 14 9 15 6 16 9 17 6 18 12 20 15 21 3 22 5 23 6 24 8 25 2 26 1 3 3 7 9 8 16 9 4 
+username 3 3 3 7 1 9 1 
+which 21 1 18 10 11 11 3 12 11 13 7 14 9 15 6 16 9 17 6 18 12 20 15 21 3 22 5 23 6 24 8 25 2 26 1 3 3 7 9 8 16 9 4 
 introduces 2 22 1 9 1 
 meets 1 3 1 
 needed 13 10 3 11 2 13 1 14 2 15 1 18 1 20 2 21 1 22 1 25 1 3 1 4 1 7 2 
 artoftesting 1 21 1 
 refer 5 12 1 13 2 25 1 3 1 4 1 
-separated 2 22 1 8 1 
 size 12 10 4 13 2 14 10 15 3 16 2 17 1 2 2 20 10 21 1 25 1 7 2 8 2 
+separated 2 22 1 8 1 
 enables 1 20 1 
 loop 5 10 3 16 1 17 3 20 1 21 11 
 neighboring 1 15 1 
 obvious 5 10 1 15 1 17 1 20 1 21 1 
-conjecture 1 16 1 
 cho 4 11 2 12 1 24 1 25 1 
-describing 5 22 1 23 1 24 1 26 2 3 1 
+conjecture 1 16 1 
 direct 1 20 2 
-finished 3 11 1 14 1 26 1 
+describing 5 22 1 23 1 24 1 26 2 3 1 
 freshman 1 10 1 
+finished 3 11 1 14 1 26 1 
 getpage 3 16 3 17 5 20 1 
 listening 2 11 1 26 1 
 builts 1 20 1 
 confused 1 13 3 
 forwarded 2 20 1 7 1 
-who 3 20 15 21 1 22 1 
 word 4 10 3 12 3 24 40 25 12 
+who 3 20 15 21 1 22 1 
 handout 1 23 2 
-defensively 5 17 1 22 4 23 1 24 1 25 1 
 dnode 4 14 22 15 43 16 18 17 12 
+defensively 5 17 1 22 4 23 1 24 1 25 1 
 hosts 1 7 1 
 inode 1 8 1 
-please 15 1 56 10 1 12 1 2 2 20 2 22 4 23 4 24 8 25 6 26 1 3 4 4 1 5 1 7 6 8 1 
-posts 1 1 8 
-between 17 1 16 10 3 11 1 12 2 13 1 14 3 15 1 16 1 18 2 20 4 21 2 24 2 25 3 26 4 3 1 7 3 8 1 
+posts 1 1 9 
+please 15 1 63 10 1 12 1 2 2 20 2 22 4 23 4 24 8 25 6 26 1 3 4 4 1 5 1 7 6 8 1 
+between 17 1 18 10 3 11 1 12 2 13 1 14 3 15 1 16 1 18 2 20 4 21 2 24 2 25 3 26 4 3 1 7 3 8 1 
 detect 2 11 1 24 1 
 noindent 1 11 4 
-communicate 2 26 1 7 1 
 spend 4 12 2 16 1 20 1 23 1 
+communicate 2 26 1 7 1 
 dealing 6 10 2 12 1 13 1 14 1 15 1 21 1 
 homepage 1 11 2 
 representation 4 18 1 22 1 26 1 7 1 
-spaces 1 18 7 
 column 1 10 2 
-fix 7 13 1 18 1 20 3 21 6 23 1 24 1 25 2 
+spaces 1 18 7 
 fetch 3 12 1 16 3 23 1 
+fix 7 13 1 18 1 20 3 21 6 23 1 24 1 25 2 
 weight 1 12 1 
 meaningless 1 13 1 
 nestings 1 10 1 
-addison 3 1 8 11 3 21 1 
+addison 3 1 9 11 3 21 1 
 six 1 7 1 
+discuss 19 1 27 10 1 11 7 12 2 13 1 14 1 15 3 16 5 17 3 18 1 20 6 21 2 23 3 24 2 25 1 5 1 7 2 8 5 9 1 
 deals 2 22 1 23 1 
-discuss 19 1 24 10 1 11 7 12 2 13 1 14 1 15 3 16 5 17 3 18 1 20 6 21 2 23 3 24 2 25 1 5 1 7 2 8 5 9 1 
 user 15 10 6 12 6 13 1 14 5 16 9 17 5 20 2 21 1 22 14 23 6 24 2 25 9 6 2 7 5 8 9 
 massive 1 20 1 
 publication 1 11 1 
@@ -579,92 +579,92 @@ determine 8 13 1 15 2 17 5 18 1 21 1 23 2 26 1 8 1
 volume 5 11 2 12 1 20 1 24 1 25 1 
 gz 1 23 2 
 leave 6 21 1 22 1 23 1 24 1 26 1 7 2 
-amount 9 1 8 11 1 12 2 15 1 16 1 18 1 23 2 25 2 7 1 
+amount 9 1 9 11 1 12 2 15 1 16 1 18 1 23 2 25 2 7 1 
 rui 1 2 1 
-subset 1 8 1 
-symbol 2 14 1 7 1 
+sudi 1 1 18 
 specs 4 12 2 16 1 20 1 23 1 
-sudi 1 1 16 
+symbol 2 14 1 7 1 
+subset 1 8 1 
 track 4 17 1 20 5 8 1 9 1 
-incorrectly 1 13 2 
 intuitive 1 12 1 
+incorrectly 1 13 2 
 old 3 10 1 14 2 21 1 
 ascii 3 10 2 13 1 17 1 
 retrieving 4 12 1 23 1 24 1 25 1 
 translates 1 7 1 
-enabled 1 7 1 
-usenet 1 6 1 
 unfortunately 1 13 2 
+usenet 1 6 1 
+enabled 1 7 1 
+finish 3 1 9 15 1 18 1 
 folder 2 8 1 9 1 
-finish 3 1 8 15 1 18 1 
 holder 1 10 1 
 modularity 2 12 1 22 1 
 checkout 5 11 1 24 1 25 1 7 1 9 6 
 dependency 1 18 2 
 managing 1 9 1 
-tools 11 1 48 11 1 12 1 16 3 20 11 21 5 23 1 6 2 7 7 8 1 9 2 
+tools 11 1 54 11 1 12 1 16 3 20 11 21 5 23 1 6 2 7 7 8 1 9 2 
 extracturls 3 16 4 17 2 20 1 
-giving 2 1 8 24 1 
+giving 2 1 9 24 1 
 living 1 13 1 
 objets 1 13 1 
 painless 1 5 2 
 balance 1 7 1 
-sensitive 1 7 1 
 subscripts 2 10 1 21 1 
+sensitive 1 7 1 
 void 8 10 8 13 20 14 30 15 3 16 10 17 2 20 7 21 2 
-into 19 1 32 11 6 12 6 13 3 14 4 15 15 16 14 17 5 18 5 2 1 20 3 21 6 22 4 24 4 25 7 26 3 7 11 8 3 9 6 
+into 19 1 36 11 6 12 6 13 3 14 4 15 15 16 14 17 5 18 5 2 1 20 3 21 6 22 4 24 4 25 7 26 3 7 11 8 3 9 6 
 linker 2 18 3 7 6 
-milliseconds 1 20 2 
 myadr 1 14 2 
+milliseconds 1 20 2 
 onto 2 22 1 7 1 
-pass 10 1 8 10 1 13 4 17 1 18 1 21 1 22 2 24 1 25 1 7 1 
-raced 2 1 8 4 1 
-cygwin 2 6 1 7 4 
+pass 10 1 9 10 1 13 4 17 1 18 1 21 1 22 2 24 1 25 1 7 1 
+raced 2 1 9 4 1 
 stored 12 10 1 12 4 13 1 14 1 15 3 16 4 22 1 23 4 24 5 25 3 7 1 9 2 
+cygwin 2 6 1 7 4 
 position 2 15 6 24 5 
 latex 1 7 4 
 nasty 1 21 1 
 obeylines 1 11 1 
-puttytut 1 3 2 
 predicatble 1 20 1 
+puttytut 1 3 2 
 art 7 12 1 2 3 20 4 21 2 22 1 25 1 5 2 
 centrally 1 10 1 
 warnings 4 16 1 20 1 23 1 24 1 
-know 12 1 16 11 4 14 2 15 5 2 2 20 2 21 7 24 1 25 3 6 1 7 6 8 2 
+know 12 1 18 11 4 14 2 15 5 2 2 20 2 21 7 24 1 25 3 6 1 7 6 8 2 
 okswap 1 13 1 
-represents 9 1 8 11 1 12 4 13 1 16 2 18 1 21 1 24 3 8 1 
-carry 3 13 1 20 1 9 1 
+represents 9 1 9 11 1 12 4 13 1 16 2 18 1 21 1 24 3 8 1 
 strcmp 1 10 5 
-facility 2 13 1 21 1 
+carry 3 13 1 20 1 9 1 
 financial 1 12 1 
+facility 2 13 1 21 1 
 habit 1 9 1 
-isdirectory 1 20 1 
 indirection 1 13 4 
+isdirectory 1 20 1 
 larry 1 11 2 
 nearby 2 17 1 20 1 
-accept 2 26 1 8 2 
 additional 2 21 1 25 1 
-coffee 1 1 8 
+accept 2 26 1 8 2 
+coffee 1 1 9 
 methods 1 10 3 
 nusers 4 20 1 7 1 8 10 9 1 
-project 14 1 120 11 2 12 4 14 2 18 2 2 4 20 1 22 1 26 3 3 4 4 14 7 16 8 12 9 3 
+project 14 1 135 11 2 12 4 14 2 18 2 2 4 20 1 22 1 26 3 3 4 4 14 7 16 8 12 9 3 
 written 13 11 2 12 3 13 3 14 1 20 3 21 7 22 1 24 4 25 1 26 2 7 4 8 4 9 1 
-invalid 4 13 1 17 1 20 7 7 1 
-insights 1 11 1 
 instance 2 10 1 24 1 
+insights 1 11 1 
+invalid 4 13 1 17 1 20 7 7 1 
 outputs 7 12 1 15 1 16 4 21 1 22 2 23 2 24 2 
-parker 1 25 4 
 professor 2 11 2 3 1 
+parker 1 25 4 
 reduce 2 18 1 20 1 
 grows 2 15 1 20 2 
-interactions 2 11 1 20 2 
+informing 2 1 9 22 1 
 initialize 4 10 1 14 1 16 1 17 5 
-informing 2 1 8 22 1 
+interactions 2 11 1 20 2 
 nifty 1 7 1 
 blocks 3 15 1 17 2 20 9 
-segafult 2 17 1 20 1 
+sudikoff 6 1 63 2 1 26 1 3 4 6 2 7 10 
 stops 3 12 1 20 1 23 1 
-sudikoff 6 1 56 2 1 26 1 3 4 6 2 7 10 
+segafult 2 17 1 20 1 
 dijkstra 2 20 3 21 1 
 uncovered 1 20 1 
 basic 4 11 1 7 2 8 1 9 1 
@@ -672,51 +672,51 @@ corporate 1 11 2
 unstated 1 22 1 
 ists 1 11 4 
 blindly 2 21 1 26 1 
-has 20 1 16 10 8 11 1 12 11 13 5 14 3 15 5 16 1 17 7 18 2 20 5 21 2 22 1 23 9 24 15 25 4 26 3 7 5 8 7 9 3 
+has 20 1 18 10 8 11 1 12 11 13 5 14 3 15 5 16 1 17 7 18 2 20 5 21 2 22 1 23 9 24 15 25 4 26 3 7 5 8 7 9 3 
 pas 1 11 1 
 availability 1 13 1 
 successfully 1 25 1 
+tas 1 1 9 
 tarball 4 15 1 16 1 23 4 24 2 
-tas 1 1 8 
-webpage 8 11 7 12 20 15 4 16 7 17 1 20 1 23 17 7 5 
 was 13 10 1 11 1 12 8 13 1 14 1 17 1 20 14 21 6 23 1 24 3 26 1 7 1 8 1 
-intentionally 1 20 1 
+webpage 8 11 7 12 20 15 4 16 7 17 1 20 1 23 17 7 5 
 issues 9 11 2 12 1 18 2 20 1 25 1 26 2 3 1 6 1 7 1 
+intentionally 1 20 1 
 perhaps 2 10 1 17 1 
 active 2 26 1 7 1 
-recontruct 1 24 1 
+reinforced 1 1 9 
 breakdown 3 17 1 22 2 7 1 
-reinforced 1 1 8 
+recontruct 1 24 1 
 cmd 2 7 1 8 1 
-through 19 1 24 10 3 11 3 12 7 13 2 14 2 15 3 16 4 17 3 2 1 20 12 21 7 22 1 23 2 24 2 26 1 7 8 8 1 9 1 
+through 19 1 27 10 3 11 3 12 7 13 2 14 2 15 3 16 4 17 3 2 1 20 12 21 7 22 1 23 2 24 2 26 1 7 8 8 1 9 1 
 earlier 3 18 1 20 1 21 1 
-given 12 1 8 14 1 15 7 16 6 17 1 20 3 22 2 24 1 25 2 3 4 5 1 8 2 
+given 12 1 9 14 1 15 7 16 6 17 1 20 3 22 2 24 1 25 2 3 4 5 1 8 2 
 loaded 2 2 1 24 4 
-respond 1 26 2 
 rapjr 1 25 8 
+respond 1 26 2 
 terminals 1 8 2 
-unclear 1 1 8 
+unclear 1 1 9 
 farms 1 11 1 
 addressed 2 22 1 24 1 
-terminating 1 13 1 
 dependent 3 12 1 16 1 18 3 
+terminating 1 13 1 
 mememory 2 17 1 20 1 
-printed 4 20 2 21 1 7 1 8 1 
 pieces 3 12 1 21 1 23 1 
+printed 4 20 2 21 1 7 1 8 1 
 seem 3 16 1 25 1 6 1 
 tale 1 5 1 
 encourage 1 3 1 
 kemeny 1 25 4 
-organized 2 1 16 7 1 
-conditionals 1 18 1 
+organized 2 1 18 7 1 
 sense 8 13 2 15 2 17 1 18 1 2 1 21 3 24 2 8 1 
+conditionals 1 18 1 
 dump 3 17 1 26 1 7 1 
 goto 1 20 2 
-open 7 1 16 11 2 21 2 22 1 24 2 26 1 7 3 
+open 7 1 18 11 2 21 2 22 1 24 2 26 1 7 3 
 browser 2 11 4 9 1 
-strategies 2 20 2 21 1 
-copy 11 13 3 14 2 17 1 21 1 22 1 24 1 26 1 3 1 6 1 7 2 9 5 
 collected 1 12 1 
+copy 11 13 3 14 2 17 1 21 1 22 1 24 1 26 1 3 1 6 1 7 2 9 5 
+strategies 2 20 2 21 1 
 defines 7 10 2 11 2 14 1 15 2 16 3 18 8 22 1 
 malloced 3 17 4 20 2 21 1 
 property 1 15 1 
@@ -727,167 +727,167 @@ ends 1 2 1
 fgets 1 14 2 
 wordlist 1 24 6 
 interfaces 2 12 1 6 1 
-algn 1 7 1 
 advising 1 25 1 
+algn 1 7 1 
 reproduce 2 11 1 20 1 
-dst 1 13 18 
 thereafter 1 10 1 
+dst 1 13 18 
 est 2 23 1 24 1 
 variables 9 10 2 12 2 13 18 14 2 16 5 17 4 18 4 20 2 8 1 
 asks 1 10 1 
-rewrite 1 21 1 
 recompute 1 15 1 
-superset 1 9 1 
-scripst 1 6 1 
+rewrite 1 21 1 
 status 8 12 2 21 4 22 4 23 3 24 1 7 1 8 4 9 7 
+scripst 1 6 1 
+superset 1 9 1 
 fork 1 8 2 
-background 1 26 1 
 recognized 1 10 1 
-work 15 1 56 12 3 13 3 17 1 18 2 2 1 20 8 21 7 23 1 24 2 25 5 26 1 3 2 7 5 8 1 
+background 1 26 1 
+work 15 1 63 12 3 13 3 17 1 18 2 2 1 20 8 21 7 23 1 24 2 25 5 26 1 3 2 7 5 8 1 
 hiding 1 12 2 
-interace 1 25 1 
 york 5 11 1 12 5 16 5 17 1 23 5 
+interace 1 25 1 
 assuming 9 15 2 16 1 17 1 20 2 24 1 25 1 7 2 8 3 9 2 
-replaces 1 7 1 
 recall 11 11 1 12 1 14 1 15 1 16 2 17 1 18 1 20 1 21 1 23 1 8 2 
-consistent 4 17 1 20 1 21 3 22 1 
+replaces 1 7 1 
+culled 1 1 9 
 comparison 7 10 2 14 1 15 1 16 1 17 1 25 1 3 1 
-culled 1 1 8 
+consistent 4 17 1 20 1 21 3 22 1 
 desig 1 20 1 
-initializes 1 16 1 
+individually 3 1 9 22 1 7 1 
 inline 1 10 3 
-individually 3 1 8 22 1 7 1 
+initializes 1 16 1 
 mov 1 7 3 
-nov 2 7 2 8 3 
 newline 2 11 2 21 9 
-online 5 1 8 6 2 7 4 8 1 9 1 
+nov 2 7 2 8 3 
+online 5 1 9 6 2 7 4 8 1 9 1 
+policies 2 1 9 7 1 
 pulled 1 25 1 
-policies 2 1 8 7 1 
-thin 1 25 1 
 deallocating 1 14 1 
+thin 1 25 1 
 element 7 10 7 11 1 12 1 13 11 15 27 23 1 24 9 
 forget 2 14 1 7 1 
 appear 3 10 1 20 1 8 1 
-running 11 1 8 11 1 17 3 18 1 20 6 24 3 25 3 26 3 6 1 7 8 8 4 
+running 11 1 9 11 1 17 3 18 1 20 6 24 3 25 3 26 3 6 1 7 8 8 4 
+schedule 4 1 45 2 4 3 1 7 2 
 cluster 5 14 1 15 6 16 1 17 1 21 1 
-schedule 4 1 40 2 4 3 1 7 2 
 thought 3 10 1 12 1 20 1 
 eventually 1 20 1 
 flat 2 20 1 7 1 
 available 8 10 3 14 1 22 1 23 1 24 1 6 3 8 1 9 1 
 beware 1 18 1 
-suspension 1 1 8 
-starting 12 1 8 10 5 12 4 15 4 16 1 17 1 18 1 23 3 24 1 26 1 7 1 9 1 
+starting 12 1 9 10 5 12 4 15 4 16 1 17 1 18 1 23 3 24 1 26 1 7 1 9 1 
+suspension 1 1 9 
 explosion 1 8 1 
 face 2 11 4 20 1 
 illustratse 1 20 2 
-progressive 1 24 2 
 probably 9 11 2 12 2 13 1 16 1 17 1 20 3 21 1 23 1 8 1 
-abs 1 7 1 
+progressive 1 24 2 
 abbreviated 1 7 1 
-race 1 4 4 
-recursion 1 22 1 
-backwards 1 13 1 
+abs 1 7 1 
 bbs 1 11 1 
-calloc 1 14 3 
+backwards 1 13 1 
+recursion 1 22 1 
+race 1 4 4 
 storage 5 10 3 11 1 14 3 24 3 25 1 
+calloc 1 14 3 
+depth 26 1 9 10 1 11 1 12 26 13 1 14 8 15 8 16 34 17 24 18 1 19 1 2 1 20 3 21 8 22 1 23 27 24 3 25 8 26 1 3 1 4 1 5 1 6 1 7 1 8 1 9 1 
 typedef 4 14 8 15 6 16 6 24 6 
-depth 26 1 8 10 1 11 1 12 26 13 1 14 8 15 8 16 34 17 24 18 1 19 1 2 1 20 3 21 8 22 1 23 27 24 3 25 8 26 1 3 1 4 1 5 1 6 1 7 1 8 1 9 1 
-extended 1 1 8 
+extended 1 1 9 
 malloc 9 13 1 14 32 15 17 16 2 17 4 20 14 21 9 23 1 24 3 
-spruce 2 7 32 8 45 
-sublime 1 6 2 
 stylesheet 1 11 1 
+sublime 1 6 2 
+spruce 2 7 32 8 45 
 defined 11 10 13 12 2 13 1 14 2 15 2 16 1 18 3 20 1 23 1 24 2 25 1 
-exposed 2 1 16 7 1 
+exposed 2 1 18 7 1 
 objs 1 18 17 
-and 26 1 624 10 51 11 71 12 89 13 76 14 52 15 76 16 61 17 76 18 34 19 3 2 20 20 110 21 67 22 58 23 52 24 105 25 111 26 44 3 32 4 13 5 15 6 7 7 127 8 78 9 25 
+and 26 1 702 10 51 11 71 12 89 13 76 14 52 15 76 16 61 17 76 18 34 19 3 2 20 20 110 21 67 22 58 23 52 24 105 25 111 26 44 3 32 4 13 5 15 6 7 7 127 8 78 9 25 
 stack 3 13 2 14 1 7 8 
 dnd 2 3 1 9 3 
 end 15 10 1 11 2 13 1 14 7 15 24 16 9 17 13 2 3 20 3 21 5 24 6 25 3 5 1 7 1 9 1 
 getdocumentid 1 24 2 
 noting 1 10 1 
-bronson 3 1 8 10 3 22 1 
+bronson 3 1 9 10 3 22 1 
 und 1 7 1 
 whether 4 13 1 14 2 24 1 5 1 
 nelements 1 10 2 
-asynchronous 1 7 1 
+ask 6 1 9 11 1 17 1 20 1 25 1 8 1 
 able 13 10 1 11 1 12 3 13 2 16 1 17 1 18 1 22 1 23 2 24 5 25 1 7 2 8 3 
-ask 6 1 8 11 1 17 1 20 1 25 1 8 1 
+asynchronous 1 7 1 
 checked 5 10 1 20 2 21 1 24 1 9 2 
 extracts 2 12 3 23 1 
 failure 3 13 1 16 8 21 1 
 appearances 1 9 1 
-controller 1 4 1 
+caters 1 1 9 
 somewhat 1 14 1 
-caters 1 1 8 
-encrypted 2 7 2 9 1 
+controller 1 4 1 
 updateindex 1 24 2 
+encrypted 2 7 2 9 1 
 hierarchical 1 8 1 
 influenced 1 21 1 
 addr 2 10 1 14 3 
-subl 1 7 3 
+server 9 1 9 11 7 12 2 16 3 23 2 26 81 3 1 4 1 9 2 
 specifics 1 25 1 
-server 9 1 8 11 7 12 2 16 3 23 2 26 81 3 1 4 1 9 2 
+subl 1 7 3 
 evidence 2 20 1 25 1 
 generalized 1 15 2 
 maa 2 12 1 23 1 
 principles 1 12 2 
 assumption 1 15 1 
-study 7 12 1 13 1 14 1 17 1 20 2 22 1 24 1 
 com 2 11 3 9 2 
+study 7 12 1 13 1 14 1 17 1 20 2 22 1 24 1 
 trail 1 20 1 
 welcome 3 12 1 17 1 7 3 
 ideally 2 17 1 20 1 
-programming 19 1 248 10 1 11 4 13 1 14 1 2 7 20 5 21 9 22 4 24 2 25 1 26 8 3 8 4 4 5 4 6 8 7 15 8 6 9 1 
+programming 19 1 279 10 1 11 4 13 1 14 1 2 7 20 5 21 9 22 4 24 2 25 1 26 8 3 8 4 4 5 4 6 8 7 15 8 6 9 1 
 rwxrwxrwx 1 8 1 
+simple 17 1 18 11 4 12 4 13 2 14 1 18 6 20 7 21 7 22 2 23 2 24 7 25 7 26 1 3 1 7 3 8 1 9 3 
 consider 10 10 1 11 1 13 4 14 1 15 1 20 3 21 2 22 2 24 2 8 1 
-simple 17 1 16 11 4 12 4 13 2 14 1 18 6 20 7 21 7 22 2 23 2 24 7 25 7 26 1 3 1 7 3 8 1 9 3 
 directories 5 18 2 25 3 7 1 8 15 9 1 
-probabilistic 1 21 1 
 profile 3 20 4 7 1 8 2 
+probabilistic 1 21 1 
 atoi 1 13 2 
 captured 4 15 1 16 1 18 1 20 1 
-thread 1 1 8 
-extend 1 22 1 
-emphasis 1 12 2 
+thread 1 1 9 
 entered 7 10 1 17 1 21 2 22 1 25 1 7 1 8 3 
-white 2 1 16 13 1 
+emphasis 1 12 2 
+extend 1 22 1 
+white 2 1 18 13 1 
 readfiletomemoryordie 1 20 1 
-sources 2 20 1 22 1 
 sent 10 10 1 11 2 12 2 15 1 16 1 23 3 26 1 7 5 8 6 9 1 
-faster 1 15 1 
+sources 2 20 1 22 1 
 function 16 10 15 11 3 12 1 13 4 14 11 15 12 16 11 17 18 20 18 21 3 22 5 23 3 24 13 26 1 6 1 7 8 
+faster 1 15 1 
 went 4 13 1 20 1 26 1 9 1 
-people 12 1 16 11 2 12 4 13 3 14 23 16 1 20 4 21 1 23 2 25 4 7 1 9 2 
+people 12 1 18 11 2 12 4 13 3 14 23 16 1 20 4 21 1 23 2 25 4 7 1 9 2 
 resets 1 26 1 
 communications 3 12 2 20 2 7 2 
 outside 1 11 1 
 precisely 1 13 1 
-component 2 24 1 25 7 
 choices 2 15 1 26 1 
+component 2 24 1 25 7 
 variety 3 12 1 14 1 22 1 
-bash 12 1 16 11 1 12 1 16 1 22 2 23 2 24 10 25 2 3 1 6 6 7 3 8 27 
+bash 12 1 18 11 1 12 1 16 1 22 2 23 2 24 10 25 2 3 1 6 6 7 3 8 27 
 compute 5 13 1 14 1 21 1 22 3 26 3 
 goliath 1 11 1 
-hints 2 22 3 25 1 
+help 14 1 36 14 1 15 1 2 2 20 16 21 1 22 4 23 3 24 3 3 1 5 1 7 7 8 2 9 2 
 hash 11 10 3 11 2 14 21 15 84 16 17 17 7 20 9 21 13 23 2 24 25 25 2 
-help 14 1 32 14 1 15 1 2 2 20 16 21 1 22 4 23 3 24 3 3 1 5 1 7 7 8 2 9 2 
+hints 2 22 3 25 1 
 megabtes 2 12 1 23 1 
 dimesntional 1 10 1 
-exceeded 1 16 1 
 examine 5 10 1 17 1 20 1 25 1 8 1 
+exceeded 1 16 1 
 promoted 1 10 3 
 byte 5 10 3 13 2 14 2 22 2 26 2 
-ever 1 1 8 
+ever 1 1 9 
+over 17 1 18 10 1 12 1 14 1 15 5 16 1 17 1 2 3 20 2 21 1 23 1 25 2 26 2 4 1 5 1 7 6 9 1 
 outs 2 12 1 23 1 
-over 17 1 16 10 1 12 1 14 1 15 5 16 1 17 1 2 3 20 2 21 1 23 1 25 2 26 2 4 1 5 1 7 6 9 1 
 puts 1 7 5 
 avoid 4 10 1 20 1 8 1 9 3 
 remote 4 26 1 3 2 4 1 7 19 
 string 12 10 15 13 2 14 2 15 5 16 11 17 8 21 2 22 1 23 1 24 7 26 1 7 5 
-decimal 1 22 1 
 terminated 6 10 1 13 1 14 1 15 2 16 1 21 2 
+decimal 1 22 1 
 untrue 1 10 1 
 hostname 2 11 1 7 2 
 mathematics 1 10 1 
@@ -895,193 +895,193 @@ automatic 3 16 1 21 1 22 4
 routers 1 15 1 
 subversion 6 2 1 24 1 25 1 26 1 3 1 9 5 
 dict 5 14 18 15 10 16 2 17 21 21 13 
-memor 1 14 1 
 msecs 1 11 1 
+memor 1 14 1 
 putty 2 6 1 7 5 
-according 3 1 8 25 1 26 2 
+according 3 1 9 25 1 26 2 
 removes 1 7 1 
-processes 6 1 8 10 1 2 1 26 2 7 2 8 3 
-person 7 1 8 10 2 13 1 14 11 20 1 21 1 7 2 
+person 7 1 9 10 2 13 1 14 11 20 1 21 1 7 2 
+processes 6 1 9 10 1 2 1 26 2 7 2 8 3 
 current 12 11 2 12 5 14 1 15 3 16 19 17 10 21 2 23 5 24 1 25 1 26 6 8 2 
 insecure 1 7 1 
-lecturer 5 1 8 12 1 16 1 18 1 21 1 
+lecturer 5 1 9 12 1 16 1 18 1 21 1 
 parts 5 15 1 16 1 18 1 22 1 26 1 
+call 11 1 9 10 6 11 3 14 2 16 2 20 9 21 1 22 6 23 3 24 2 7 7 
 customer 3 12 9 20 4 21 1 
-call 11 1 8 10 6 11 3 14 2 16 2 20 9 21 1 22 6 23 3 24 2 7 7 
 deeply 2 12 1 17 1 
-untar 1 23 1 
 excellent 3 11 1 20 1 26 1 
+untar 1 23 1 
 fall 2 3 1 7 1 
 gtk 1 6 1 
 meet 4 12 2 2 1 20 1 3 6 
 raymond 1 5 3 
-sall 1 7 1 
 country 1 21 1 
+sall 1 7 1 
 tutorial 5 11 2 2 1 6 7 7 7 9 2 
-echo 5 22 4 24 3 7 2 8 6 9 3 
 evaluate 1 10 1 
+echo 5 22 4 24 3 7 2 8 6 9 3 
 wall 4 18 15 20 2 24 3 26 1 
 mapping 2 15 1 24 1 
 aren 1 17 1 
-teaching 6 1 8 12 1 17 1 20 1 7 4 8 12 
+teaching 6 1 9 12 1 17 1 20 1 7 4 8 12 
 reducing 1 20 1 
-complex 11 1 24 11 1 12 1 15 2 16 1 20 1 21 1 24 2 3 1 7 1 9 1 
+complex 11 1 27 11 1 12 1 15 2 16 1 20 1 21 1 24 2 3 1 7 1 9 1 
 tba 1 2 1 
 exceed 3 12 1 16 1 23 1 
 microprocessor 1 7 4 
-productive 1 20 1 
 period 6 11 1 12 1 16 1 2 3 22 1 23 1 
+productive 1 20 1 
 accounts 1 7 2 
 cost 4 12 2 20 2 25 1 8 1 
 downloaded 2 15 1 16 1 
 validating 1 21 1 
 host 4 11 5 22 12 26 2 7 3 
 lost 2 20 4 21 1 
-most 13 1 8 10 2 12 2 13 1 15 2 17 1 18 1 20 3 21 1 5 1 7 1 8 5 9 1 
+most 13 1 9 10 2 12 2 13 1 15 2 17 1 18 1 20 3 21 1 5 1 7 1 8 5 9 1 
 post 2 13 1 21 4 
-but 25 1 72 10 5 11 7 12 8 13 9 14 5 15 9 16 3 17 9 18 1 2 4 20 24 21 16 22 7 23 3 24 7 25 7 26 2 3 7 4 1 5 3 6 2 7 14 8 7 9 6 
-cut 4 18 1 20 2 22 1 25 1 
+but 25 1 81 10 5 11 7 12 8 13 9 14 5 15 9 16 3 17 9 18 1 2 4 20 24 21 16 22 7 23 3 24 7 25 7 26 2 3 7 4 1 5 3 6 2 7 14 8 7 9 6 
 statically 1 14 2 
-delve 1 7 1 
+cut 4 18 1 20 2 22 1 25 1 
 tells 5 11 1 18 2 20 3 7 1 9 1 
+delve 1 7 1 
 emerged 1 12 1 
-industry 6 1 16 11 1 12 4 21 1 5 1 7 1 
-out 22 1 16 10 5 11 3 12 3 13 3 14 2 15 3 16 4 17 8 18 5 2 7 20 14 21 11 22 5 23 4 24 10 25 6 26 3 3 3 7 18 8 5 9 5 
-progress 2 1 8 7 1 
-put 11 1 16 12 5 14 1 16 1 21 1 22 2 23 3 24 1 26 1 3 1 7 5 
+industry 6 1 18 11 1 12 4 21 1 5 1 7 1 
+out 22 1 18 10 5 11 3 12 3 13 3 14 2 15 3 16 4 17 8 18 5 2 7 20 14 21 11 22 5 23 4 24 10 25 6 26 3 3 3 7 18 8 5 9 5 
+put 11 1 18 12 5 14 1 16 1 21 1 22 2 23 3 24 1 26 1 3 1 7 5 
+progress 2 1 9 7 1 
 believe 1 20 1 
 someone 2 20 1 21 3 
 dotted 1 7 1 
 indexing 2 12 1 24 2 
 relieve 1 11 1 
 token 1 10 1 
-approximately 5 1 8 15 1 17 1 25 1 3 1 
+approximately 5 1 9 15 1 17 1 25 1 3 1 
 removed 2 21 1 9 1 
 compile 11 10 5 13 3 14 2 16 2 20 2 21 1 22 1 23 1 25 2 6 1 7 2 
 deal 3 10 1 12 1 21 1 
 expecting 1 21 1 
 lurking 1 17 1 
-real 13 1 8 11 1 12 1 14 1 16 1 17 1 20 1 21 1 22 2 23 1 26 3 5 1 7 3 
-tuesday 2 2 4 3 1 
-typing 3 11 1 18 3 26 1 
+real 13 1 9 11 1 12 1 14 1 16 1 17 1 20 1 21 1 22 2 23 1 26 3 5 1 7 3 
 tosscoin 1 10 4 
+typing 3 11 1 18 3 26 1 
+tuesday 2 2 4 3 1 
 foundational 1 11 1 
 results 6 10 1 12 2 23 1 24 4 25 8 7 1 
-sume 1 21 1 
-stricky 1 17 1 
-carefully 4 13 1 21 1 25 2 8 1 
+small 8 1 36 12 3 15 4 21 1 22 1 7 3 8 1 9 1 
 spec 10 12 14 15 2 16 33 17 3 20 12 23 3 24 2 25 4 5 1 7 2 
-small 8 1 32 12 3 15 4 21 1 22 1 7 3 8 1 9 1 
+carefully 4 13 1 21 1 25 2 8 1 
+stricky 1 17 1 
+sume 1 21 1 
 emulation 1 7 1 
+automatically 9 1 9 12 1 13 1 16 1 18 1 22 3 23 2 24 3 7 1 
 analyze 2 20 1 7 2 
-automatically 9 1 8 12 1 13 1 16 1 18 1 22 3 23 2 24 3 7 1 
 cover 9 11 1 18 1 21 1 22 1 23 1 24 1 25 1 6 1 7 4 
-directly 3 25 1 4 1 7 3 
 during 5 2 1 20 1 25 1 4 2 7 1 
+directly 3 25 1 4 1 7 3 
 waits 2 26 3 8 1 
 keeps 6 12 1 13 1 15 1 16 1 24 1 9 1 
 propose 1 17 1 
-silence 1 8 1 
-sofware 1 24 1 
-spointers 1 15 1 
 cool 10 11 1 13 1 15 1 17 1 21 1 25 3 26 1 3 1 7 3 8 1 
+spointers 1 15 1 
+sofware 1 24 1 
+silence 1 8 1 
 tedious 2 18 1 21 1 
 ids 1 23 1 
 purposes 1 24 1 
 already 10 11 2 12 3 14 3 15 2 16 5 17 1 20 2 21 4 23 3 7 1 
-tool 8 16 2 17 1 18 3 20 14 25 1 3 1 7 4 9 1 
 departmental 3 11 1 12 1 23 1 
+tool 8 16 2 17 1 18 3 20 14 25 1 3 1 7 4 9 1 
 respository 1 3 1 
 documentation 2 7 2 9 1 
-graded 5 1 24 2 1 25 2 3 3 7 1 
-photos 1 4 1 
+graded 5 1 27 2 1 25 2 3 3 7 1 
 procedures 1 10 1 
+photos 1 4 1 
 blind 1 13 1 
 speeding 1 15 2 
 themselves 2 10 1 21 1 
 extracted 2 15 1 16 1 
-visible 1 7 1 
-viz 6 12 1 17 1 23 1 24 1 25 1 3 1 
 founders 1 11 1 
+viz 6 12 1 17 1 23 1 24 1 25 1 3 1 
+visible 1 7 1 
 morning 1 6 1 
-paremeters 1 17 1 
 probability 1 15 1 
+paremeters 1 17 1 
 answers 1 6 1 
 relation 1 15 1 
 solved 1 21 1 
 translation 2 12 2 16 2 
 mailbox 1 12 1 
 allocated 5 14 3 15 2 17 1 20 2 21 1 
-client 4 1 8 11 3 26 37 7 2 
-them 19 1 8 10 2 11 6 14 3 15 1 16 1 17 2 20 4 21 6 22 1 23 2 24 2 25 3 3 1 4 2 5 2 7 4 8 1 9 2 
+client 4 1 9 11 3 26 37 7 2 
+them 19 1 9 10 2 11 6 14 3 15 1 16 1 17 2 20 4 21 6 22 1 23 2 24 2 25 3 3 1 4 2 5 2 7 4 8 1 9 2 
 elf 1 7 2 
 maintain 5 12 2 15 3 18 1 23 1 7 1 
-refactor 2 24 2 25 3 
 robotics 4 12 2 23 2 26 2 4 1 
+refactor 2 24 2 25 3 
 supporting 1 10 1 
-under 8 1 8 10 1 12 2 17 1 20 3 21 2 7 5 9 4 
-less 8 1 8 12 4 17 3 18 1 21 3 23 4 26 2 7 1 
+under 8 1 9 10 1 12 2 17 1 20 3 21 2 7 5 9 4 
+less 8 1 9 12 4 17 3 18 1 21 3 23 4 26 2 7 1 
 modification 3 12 1 24 1 8 3 
 rigorous 1 20 1 
-think 11 1 8 10 1 12 2 13 2 16 2 2 1 20 5 21 5 23 1 24 1 7 1 
-distribute 3 1 8 15 1 17 1 
+distribute 3 1 9 15 1 17 1 
+think 11 1 9 10 1 12 2 13 2 16 2 2 1 20 5 21 5 23 1 24 1 7 1 
 inconsistently 1 21 1 
 norwich 1 14 2 
-caching 1 9 1 
-community 3 12 1 16 1 23 1 
-sometimes 7 12 1 18 1 20 2 21 2 22 1 5 2 6 1 
+section 9 1 27 2 2 20 1 21 1 24 4 25 2 3 9 5 1 7 10 
+seriously 1 1 9 
 smaller 1 12 1 
-seriously 1 1 8 
-section 9 1 24 2 2 20 1 21 1 24 4 25 2 3 9 5 1 7 10 
+sometimes 7 12 1 18 1 20 2 21 2 22 1 5 2 6 1 
+community 3 12 1 16 1 23 1 
+caching 1 9 1 
 declarations 1 10 4 
 fixing 2 12 1 21 1 
 queuing 1 15 1 
-being 12 1 8 10 3 11 1 13 1 15 3 16 2 20 3 21 3 22 1 25 1 7 2 8 2 
+being 12 1 9 10 3 11 1 13 1 15 3 16 2 20 3 21 3 22 1 25 1 7 2 8 2 
 terminate 2 14 1 21 1 
-guidance 1 24 1 
 grow 1 15 1 
+guidance 1 24 1 
 introductory 1 6 1 
 ourselves 1 21 1 
+shown 12 1 9 11 1 12 1 15 3 20 1 21 3 23 1 24 2 25 1 26 2 4 1 8 1 
+stop 7 1 9 12 1 16 1 20 1 21 1 23 1 7 1 
 strlen 4 10 1 13 2 14 2 21 1 
-stop 7 1 8 12 1 16 1 20 1 21 1 23 1 7 1 
-shown 12 1 8 11 1 12 1 15 3 20 1 21 3 23 1 24 2 25 1 26 2 4 1 8 1 
 jerry 1 5 1 
-midterm 1 1 8 
+midterm 1 1 9 
 continuously 5 11 1 12 1 14 1 16 1 23 1 
 exists 4 14 1 21 1 24 3 8 1 
 akin 2 10 1 8 3 
 reusing 1 25 1 
 exhaustively 2 12 1 23 1 
 breakpoint 1 17 3 
-skin 1 21 1 
 single 12 10 3 15 6 16 1 17 1 18 1 20 2 21 1 22 1 23 1 24 3 7 1 8 1 
+skin 1 21 1 
 faults 1 20 1 
 html 25 10 1 11 57 12 17 13 1 14 1 15 4 16 18 17 3 18 6 19 1 2 1 20 3 21 1 22 1 23 21 24 5 25 13 26 1 3 2 4 1 5 1 6 1 7 12 8 8 9 2 
 interprocess 1 20 2 
 linked 7 12 1 15 23 16 5 17 1 20 1 21 2 24 17 
 methodoloy 1 12 1 
+passes 5 1 27 25 1 3 1 7 1 8 2 
 problematic 1 18 1 
-passes 5 1 24 25 1 3 1 7 1 8 2 
 tcsh 1 8 5 
 effective 2 15 1 20 3 
 joining 1 11 1 
 libraries 4 17 2 18 2 21 1 7 2 
-ansi 3 1 16 10 1 24 2 
-computers 5 13 1 20 1 26 1 6 1 7 1 
+ansi 3 1 18 10 1 24 2 
+seok 1 1 18 
 company 3 12 1 20 1 21 3 
-seok 1 1 16 
+computers 5 13 1 20 1 26 1 6 1 7 1 
 findfilesinpath 1 24 5 
-comparing 1 15 1 
 sub 9 12 2 16 1 18 1 20 2 21 1 24 2 25 2 7 3 9 2 
+comparing 1 15 1 
+develop 6 1 18 12 3 21 2 22 2 23 4 7 6 
 dicuss 2 11 1 20 1 
-develop 6 1 16 12 3 21 2 22 2 23 4 7 6 
-warm 1 1 8 
-robots 3 1 16 4 3 7 2 
+warm 1 1 9 
+robots 3 1 18 4 3 7 2 
 containing 5 11 1 13 1 15 1 24 12 25 2 
-deliver 4 1 8 20 1 25 2 7 1 
-these 24 1 56 10 5 11 2 12 12 13 6 14 3 15 2 16 5 17 7 18 2 19 1 2 2 20 16 21 8 22 2 23 8 24 3 25 3 26 1 3 4 5 3 6 1 7 10 8 10 
+these 24 1 63 10 5 11 2 12 12 13 6 14 3 15 2 16 5 17 7 18 2 19 1 2 2 20 16 21 8 22 2 23 8 24 3 25 3 26 1 3 4 5 3 6 1 7 10 8 10 
+deliver 4 1 9 20 1 25 2 7 1 
+easier 4 1 9 15 1 16 1 7 2 
 exploit 1 24 1 
-easier 4 1 8 15 1 16 1 7 2 
 yes 9 11 1 12 3 16 1 17 2 20 5 21 1 23 1 25 1 9 2 
 quizzes 1 2 1 
 described 2 10 1 7 1 
@@ -1090,60 +1090,60 @@ understood 2 10 1 7 1
 larger 1 18 1 
 marked 3 14 1 15 2 16 1 
 references 5 12 1 13 4 20 1 7 2 8 1 
-cleanup 3 16 3 17 2 20 1 
 cross 2 10 1 4 1 
-terms 10 13 1 14 1 16 2 17 1 20 3 21 1 22 1 23 1 24 1 4 1 
+cleanup 3 16 3 17 2 20 1 
 definition 6 10 6 11 1 12 2 13 1 16 2 22 1 
-wheel 1 8 1 
+terms 10 13 1 14 1 16 2 17 1 20 3 21 1 22 1 23 1 24 1 4 1 
 geteuid 1 20 2 
+wheel 1 8 1 
 coder 1 13 1 
-wisdom 1 5 1 
 wget 8 11 11 12 2 15 1 17 3 20 1 23 5 24 1 9 22 
+wisdom 1 5 1 
 ada 2 12 2 20 1 
 rodata 1 7 5 
 deadline 3 24 1 25 1 3 1 
 functionally 3 17 1 20 3 25 1 
-gnulinker 1 7 1 
 website 4 11 1 12 1 16 1 23 1 
+gnulinker 1 7 1 
 markup 1 11 2 
-pda 1 7 1 
 pointers 13 13 31 14 14 15 8 16 4 17 9 2 6 20 4 21 1 22 1 23 1 24 3 6 2 7 1 
-accounted 1 20 2 
+pda 1 7 1 
 aspect 1 18 1 
+accounted 1 20 2 
 redirected 1 20 1 
 completed 6 12 2 15 1 17 1 23 1 24 1 25 1 
 tasking 1 12 1 
 pretty 3 17 1 20 1 3 1 
-breeze 1 3 1 
 replaced 3 10 2 20 1 22 1 
+breeze 1 3 1 
 startingcrawler 1 17 1 
 files 18 10 9 11 3 12 8 14 1 15 2 16 6 17 2 18 27 2 3 20 6 22 2 23 14 24 28 25 13 26 6 7 9 8 36 9 10 
 implicit 4 10 1 18 1 22 1 24 1 
 nicely 1 21 1 
-arrangements 1 1 8 
-tasks 3 20 1 25 1 7 1 
+arrangements 1 1 9 
 duplicate 3 11 2 12 1 23 1 
-practical 1 1 8 
-briefly 3 26 1 3 1 5 1 
+tasks 3 20 1 25 1 7 1 
+practical 1 1 9 
 receive 2 10 2 25 1 
+briefly 3 26 1 3 1 5 1 
 defaults 2 18 1 25 1 
-whitespace 1 18 1 
 window 2 11 2 7 3 
+whitespace 1 18 1 
 horrible 1 21 1 
 ideal 1 15 1 
 advantages 1 13 1 
+behalf 1 1 9 
 retrieved 6 12 4 15 2 16 1 23 2 24 2 26 3 
-behalf 1 1 8 
 essential 1 20 1 
-import 1 9 6 
 illustration 2 15 1 24 1 
+import 1 9 6 
 parse 3 11 4 15 1 24 1 
+reflect 3 1 9 22 1 5 1 
 breakpoints 2 17 1 20 2 
-reflect 3 1 8 22 1 5 1 
-contribution 1 7 1 
 suppression 2 17 1 20 1 
-topics 2 1 8 7 1 
-laptop 5 1 8 22 1 3 1 4 2 7 5 
+contribution 1 7 1 
+topics 2 1 9 7 1 
+laptop 5 1 9 22 1 3 1 4 2 7 5 
 subsequent 3 12 1 16 2 23 1 
 technical 2 11 1 17 4 
 ubuntu 1 7 2 
@@ -1152,39 +1152,39 @@ demonstrated 1 5 1
 wepage 1 12 1 
 ifdef 1 20 3 
 manipulating 1 22 1 
-box 1 7 2 
 recursive 1 10 2 
-tapes 1 8 1 
+box 1 7 2 
 dummy 1 14 2 
+tapes 1 8 1 
 val 1 10 18 
 operations 6 12 1 16 1 22 3 23 1 24 1 25 1 
 completely 2 17 1 20 1 
 vectors 1 10 3 
 orphan 1 20 1 
 paepcke 4 11 2 12 1 24 1 25 1 
+stressed 1 1 9 
+stating 3 1 9 10 1 7 1 
 sleep 6 12 2 16 5 23 2 26 1 7 1 8 1 
-stating 3 1 8 10 1 7 1 
-stressed 1 1 8 
 macsshppc 1 7 1 
 protection 1 8 1 
 adjacent 2 13 1 24 1 
-security 2 11 1 7 1 
 content 5 11 7 13 1 17 16 3 1 7 1 
-drafts 1 8 1 
+security 2 11 1 7 1 
 divide 2 12 1 21 1 
+drafts 1 8 1 
 interger 1 13 1 
-laboratory 2 1 24 7 3 
+laboratory 2 1 27 7 3 
+alone 2 1 9 20 1 
 attention 1 9 2 
-alone 2 1 8 20 1 
-tagged 2 12 2 23 1 
 definitions 8 10 2 13 1 14 1 16 2 18 1 20 1 25 1 7 1 
+tagged 2 12 2 23 1 
 excerise 1 24 1 
 initlists 2 16 3 17 4 
-awk 1 8 1 
 attitude 2 21 1 5 1 
+awk 1 8 1 
 releasing 1 14 1 
-scales 1 14 1 
 strict 2 12 6 23 6 
+scales 1 14 1 
 inserts 1 24 1 
 suffice 1 11 1 
 urllist 2 12 1 23 1 
@@ -1192,75 +1192,75 @@ whoami 1 20 20
 listen 1 11 1 
 moving 3 13 1 18 1 8 5 
 although 1 10 3 
-bzero 3 14 7 15 5 21 2 
 random 3 10 1 14 3 5 1 
+bzero 3 14 7 15 5 21 2 
 crawl 9 11 4 12 6 15 2 16 6 17 1 20 1 21 1 23 4 25 1 
 firefox 1 7 2 
 outcomes 1 22 1 
 associated 12 11 1 12 3 14 2 15 12 16 3 17 1 20 1 22 1 23 2 24 1 25 2 7 3 
-cycled 1 26 1 
 splat 2 17 1 20 1 
-disassembly 1 7 1 
+cycled 1 26 1 
 tea 1 15 2 
+disassembly 1 7 1 
 numcols 1 10 3 
 properties 1 21 1 
-adlets 1 24 1 
-alread 1 16 1 
 arguments 6 10 1 16 2 21 2 24 2 7 1 8 9 
+alread 1 16 1 
+adlets 1 24 1 
 dhcp 4 11 1 12 5 14 1 23 5 
 either 11 10 1 12 1 13 1 15 2 17 1 18 1 21 2 23 1 5 1 8 2 9 1 
 response 6 11 6 12 2 23 3 25 2 26 1 8 1 
 decision 1 12 1 
 hint 1 12 1 
+memory 14 1 9 10 6 13 13 14 53 15 3 17 6 18 1 2 1 20 12 21 2 24 7 25 7 26 1 7 1 
 mac 3 20 1 6 1 7 11 
-memory 14 1 8 10 6 13 13 14 53 15 3 17 6 18 1 2 1 20 12 21 2 24 7 25 7 26 1 7 1 
 pages 10 11 7 12 13 16 1 17 1 18 1 23 13 25 1 5 13 7 1 8 2 
 qsort 1 14 2 
 binaries 1 8 1 
 stress 1 21 1 
 txt 1 9 12 
+fanghao 1 1 9 
 forcing 2 17 1 20 1 
-fanghao 1 1 8 
 junior 1 10 2 
 stale 2 12 1 23 2 
-too 12 1 8 11 1 12 2 13 3 15 1 20 2 23 1 25 1 26 1 5 2 7 2 8 1 
+too 12 1 9 11 1 12 2 13 3 15 1 20 2 23 1 25 1 26 1 5 2 7 2 8 1 
 focusses 1 11 1 
 galehead 2 7 1 8 13 
 hello 3 10 1 13 6 7 19 
 instrument 1 20 1 
-plaintext 1 9 1 
 punctuation 2 13 1 7 1 
+plaintext 1 9 1 
+below 24 1 9 10 2 11 1 12 3 13 4 14 4 15 3 16 1 17 2 18 6 19 1 2 1 20 7 21 3 22 6 23 3 24 4 25 3 26 2 3 2 4 1 7 3 8 3 9 5 
 request 4 11 4 12 2 23 3 26 9 
-below 24 1 8 10 2 11 1 12 3 13 4 14 4 15 3 16 1 17 2 18 6 19 1 2 1 20 7 21 3 22 6 23 3 24 4 25 3 26 2 3 2 4 1 7 3 8 3 9 5 
 editing 2 7 3 9 1 
 finally 4 20 4 25 2 26 1 9 1 
 interpreter 2 7 2 8 2 
 meant 1 7 1 
-asking 1 20 1 
-academic 2 2 1 5 1 
 attempt 5 12 1 15 1 21 1 23 1 8 2 
+academic 2 2 1 5 1 
+asking 1 20 1 
+sockets 5 1 9 25 2 3 1 4 1 7 3 
 spolsky 1 5 9 
-sockets 5 1 8 25 2 3 1 4 1 7 3 
 getdatawithkey 2 20 1 25 3 
 msec 2 12 2 20 1 
-brian 4 1 8 10 1 11 2 21 1 
+brian 4 1 9 10 1 11 2 21 1 
 similarity 1 24 1 
 thick 1 15 1 
 bubble 1 20 1 
-certainly 2 24 1 7 1 
 subnetting 1 22 1 
+certainly 2 24 1 7 1 
 throwing 1 10 1 
 fishing 3 11 12 12 1 24 1 
 initialization 3 14 1 16 1 17 3 
-part 15 1 56 12 2 15 1 16 4 18 2 20 2 21 2 22 2 23 3 24 6 25 7 26 5 5 3 7 12 8 2 
+part 15 1 63 12 2 15 1 16 4 18 2 20 2 21 2 22 2 23 3 24 6 25 7 26 5 5 3 7 12 8 2 
 anchor 1 11 2 
 buildindexfromdirectory 1 24 2 
-crawler 16 1 8 11 10 12 91 14 5 15 13 16 44 17 20 18 10 2 4 20 13 21 3 23 84 24 19 25 26 3 3 7 1 
-descendents 1 20 1 
+crawler 16 1 9 11 10 12 91 14 5 15 13 16 44 17 20 18 10 2 4 20 13 21 3 23 84 24 19 25 26 3 3 7 1 
 todo 1 12 1 
+descendents 1 20 1 
 error 10 12 2 13 2 14 1 17 4 20 9 21 6 22 2 23 3 24 4 8 4 
+weekdays 2 1 9 7 1 
 wishing 1 7 1 
-weekdays 2 1 8 7 1 
 resumed 1 24 1 
 violations 1 25 1 
 initialising 1 20 1 
@@ -1269,102 +1269,102 @@ bsd 1 7 1
 consultant 2 20 1 21 1 
 twice 2 11 1 14 1 
 hsd 2 7 3 8 1 
+include 19 1 9 10 32 11 1 12 3 13 5 14 13 15 2 16 6 18 5 20 5 21 2 22 3 23 3 24 4 26 1 3 1 7 3 8 1 9 1 
 inputs 7 12 1 15 1 16 3 21 1 22 2 23 1 24 1 
-include 19 1 8 10 32 11 1 12 3 13 5 14 13 15 2 16 6 18 5 20 5 21 2 22 3 23 3 24 4 26 1 3 1 7 3 8 1 9 1 
-allocs 2 17 1 20 2 
-analysis 4 11 1 20 1 25 1 6 1 
 array 8 10 40 13 24 14 27 15 7 17 3 20 12 21 12 24 1 
+analysis 4 11 1 20 1 25 1 6 1 
+allocs 2 17 1 20 2 
 smartly 1 17 1 
 interacting 3 20 1 22 1 23 1 
 assured 2 12 1 15 1 
-shell 12 1 72 11 1 17 3 2 7 22 6 23 1 24 3 25 1 3 3 6 1 7 20 8 69 
-maxmium 1 17 1 
+shell 12 1 81 11 1 17 3 2 7 22 6 23 1 24 3 25 1 3 3 6 1 7 20 8 69 
 modifying 2 13 1 24 2 
+maxmium 1 17 1 
 openssh 1 7 1 
 remotely 1 7 5 
-camera 1 4 2 
 sell 1 21 1 
+camera 1 4 2 
+tell 3 1 18 10 1 11 1 
 drives 1 8 1 
-tell 3 1 16 10 1 11 1 
-eof 2 21 11 26 1 
 encounters 1 12 1 
+eof 2 21 11 26 1 
+well 15 1 9 10 1 11 2 12 4 13 1 15 1 16 1 20 1 21 4 22 1 23 1 24 1 25 2 7 3 8 1 
 guaranteed 1 10 1 
-well 15 1 8 10 1 11 2 12 4 13 1 15 1 16 1 20 1 21 4 22 1 23 1 24 1 25 2 7 3 8 1 
 internet 6 11 2 12 1 22 2 24 1 25 2 26 2 
-locked 2 1 24 7 3 
+locked 2 1 27 7 3 
 almost 3 15 1 25 2 26 1 
 compares 1 10 1 
-denoted 1 15 3 
 transfer 3 11 3 12 2 23 1 
+denoted 1 15 3 
+even 9 1 18 12 3 14 1 18 1 2 1 20 2 21 2 23 1 25 1 
 else 5 13 1 14 1 20 3 21 4 24 3 
-even 9 1 16 12 3 14 1 18 1 2 1 20 2 21 2 23 1 25 1 
 length 11 10 5 11 1 12 2 14 5 15 14 16 6 17 3 20 2 21 1 23 2 24 2 
 metrosense 1 11 6 
 pinpoint 1 20 1 
 biculturalism 1 5 1 
-generates 2 12 1 24 1 
 generally 1 10 1 
+generates 2 12 1 24 1 
 htm 1 11 1 
 idiom 1 21 11 
-shouldn 1 9 1 
 console 1 7 1 
-formula 1 20 1 
+shouldn 1 9 1 
 fills 1 14 2 
+formula 1 20 1 
 inform 4 12 3 16 7 23 3 7 1 
 nbytes 1 14 1 
 argn 1 8 1 
-share 2 1 16 6 1 
+share 2 1 18 6 1 
 depending 2 7 1 8 1 
 graph 1 20 3 
 mutable 1 4 1 
-ability 2 13 1 24 1 
 attribute 1 11 1 
+ability 2 13 1 24 1 
+course 20 1 144 10 1 11 4 12 1 13 1 14 2 16 1 17 2 18 3 2 2 20 4 22 1 24 2 25 3 3 1 4 1 5 1 7 22 8 3 9 2 
 connection 3 11 1 26 6 7 1 
-course 20 1 128 10 1 11 4 12 1 13 1 14 2 16 1 17 2 18 3 2 2 20 4 22 1 24 2 25 3 3 1 4 1 5 1 7 22 8 3 9 2 
+thing 10 1 18 10 1 17 1 20 1 21 2 22 2 24 1 25 2 7 3 9 1 
 trivial 1 6 1 
-thing 10 1 16 10 1 17 1 20 1 21 2 22 2 24 1 25 2 7 3 9 1 
-grasp 1 1 8 
-lurk 2 20 1 21 2 
+grasp 1 1 9 
 legally 1 13 1 
+lurk 2 20 1 21 2 
 overflow 1 20 1 
 adjusts 1 13 1 
-breaks 3 1 8 21 1 22 1 
-contexts 2 17 2 20 4 
+breaks 3 1 9 21 1 22 1 
+coding 14 1 18 12 5 15 2 17 5 2 1 20 10 21 3 22 2 23 1 24 4 25 3 26 1 3 4 9 1 
 sscanf 2 17 2 21 2 
-coding 14 1 16 12 5 15 2 17 5 2 1 20 10 21 3 22 2 23 1 24 4 25 3 26 1 3 4 9 1 
+contexts 2 17 2 20 4 
 deep 2 12 2 20 1 
 wait 5 12 1 16 1 23 1 7 4 9 1 
 importantly 7 10 2 14 1 15 1 17 1 23 1 8 1 9 2 
-keep 12 1 16 10 1 12 1 14 1 15 1 16 1 18 1 20 1 21 1 22 1 24 2 7 1 
-pathnames 1 8 2 
+keep 12 1 18 10 1 12 1 14 1 15 1 16 1 18 1 20 1 21 1 22 1 24 2 7 1 
+prior 3 1 9 11 1 4 1 
 printstats 1 10 4 
-prior 3 1 8 11 1 4 1 
-cflow 1 20 11 
-covered 3 17 2 20 1 7 1 
+pathnames 1 8 2 
 contiguous 3 10 3 13 1 14 2 
+covered 3 17 2 20 1 7 1 
+cflow 1 20 11 
 clues 1 20 1 
 farid 3 12 2 23 2 25 1 
 methodology 7 11 2 12 9 16 3 2 1 20 4 25 1 7 1 
 operational 3 17 1 20 1 25 1 
-buried 1 20 1 
 broad 1 12 1 
+buried 1 20 1 
 sums 1 14 1 
-domain 5 1 8 12 2 16 2 23 2 7 1 
+domain 5 1 9 12 2 16 2 23 2 7 1 
+extra 4 1 18 24 2 25 4 3 1 
 urlslists 3 16 5 17 2 21 1 
-extra 4 1 16 24 2 25 4 3 1 
 opinionated 1 5 1 
 pretend 1 20 1 
 asterisk 1 13 2 
 responding 1 22 1 
-cumulative 1 20 2 
-strcpy 3 13 13 14 1 21 1 
 supports 5 10 1 11 1 18 1 7 3 8 2 
+strcpy 3 13 13 14 1 21 1 
+cumulative 1 20 2 
 underlying 1 7 2 
 gccs 1 10 1 
 headers 1 7 1 
-leaders 3 1 16 2 2 3 1 
-network 4 22 20 3 1 4 1 7 2 
+leaders 3 1 18 2 2 3 1 
 numheads 1 10 3 
+network 4 22 20 3 1 4 1 7 2 
 parenthesis 1 20 1 
 associate 2 11 2 20 1 
 dubgging 1 20 1 
@@ -1372,89 +1372,89 @@ highlighted 1 20 1
 newbie 2 21 1 5 1 
 born 1 7 1 
 slash 1 8 1 
-implementation 21 1 48 10 1 11 5 12 8 13 1 14 2 15 8 16 23 17 2 18 1 19 1 20 4 21 1 22 3 23 4 24 5 25 5 26 1 7 4 8 1 9 1 
+implementation 21 1 54 10 1 11 5 12 8 13 1 14 2 15 8 16 23 17 2 18 1 19 1 20 4 21 1 22 3 23 4 24 5 25 5 26 1 7 4 8 1 9 1 
 korn 1 8 1 
-scheduled 1 2 1 
-cuting 1 18 1 
 suggests 2 10 1 21 1 
-developers 1 20 1 
+cuting 1 18 1 
+scheduled 1 2 1 
 dtd 4 11 3 12 9 17 2 23 9 
-exams 1 1 8 
+developers 1 20 1 
+exams 1 1 9 
 assembly 1 7 5 
-criticized 1 8 1 
+script 9 1 9 11 1 16 1 20 1 22 6 23 7 24 14 25 8 7 1 
 std 4 18 15 20 2 24 2 7 1 
-script 9 1 8 11 1 16 1 20 1 22 6 23 7 24 14 25 8 7 1 
+criticized 1 8 1 
 directorty 1 17 1 
-edu 26 1 72 10 1 11 30 12 47 13 1 14 3 15 8 16 8 17 27 18 1 19 1 2 1 20 3 21 1 22 1 23 50 24 1 25 98 26 4 3 4 4 1 5 1 6 1 7 19 8 4 9 10 
+edu 26 1 81 10 1 11 30 12 47 13 1 14 3 15 8 16 8 17 27 18 1 19 1 2 1 20 3 21 1 22 1 23 50 24 1 25 98 26 4 3 4 4 1 5 1 6 1 7 19 8 4 9 10 
 modular 3 12 1 24 1 25 2 
 preprocessors 1 10 1 
 display 8 10 2 11 1 14 5 17 3 22 3 25 4 26 1 7 1 
 feeling 2 17 1 25 1 
 xhtml 3 12 12 17 3 23 12 
-meaningful 3 22 2 23 1 24 1 
 misunderstandings 1 20 1 
-order 9 1 8 15 3 18 2 20 1 24 5 26 1 3 1 7 3 8 2 
+meaningful 3 22 2 23 1 24 1 
+order 9 1 9 15 3 18 2 20 1 24 5 26 1 3 1 7 3 8 2 
 reasons 3 18 1 24 2 5 1 
 snap 1 11 2 
-debugging 12 1 32 13 2 16 1 17 5 18 1 2 3 20 18 21 5 24 2 25 1 4 1 7 1 
-each 24 1 24 10 8 11 1 12 14 13 2 14 3 15 12 16 7 17 4 18 1 2 1 20 2 21 1 22 3 23 9 24 10 25 8 26 3 3 3 4 1 5 1 7 6 8 4 9 4 
+debugging 12 1 36 13 2 16 1 17 5 18 1 2 3 20 18 21 5 24 2 25 1 4 1 7 1 
+each 24 1 27 10 8 11 1 12 14 13 2 14 3 15 12 16 7 17 4 18 1 2 1 20 2 21 1 22 3 23 9 24 10 25 8 26 3 3 3 4 1 5 1 7 6 8 4 9 4 
 protypes 1 14 1 
-questions 7 1 16 11 1 22 2 25 1 3 2 5 1 6 2 
+questions 7 1 18 11 1 22 2 25 1 3 2 5 1 6 2 
 hum 1 26 4 
 sum 7 10 1 13 13 14 6 20 1 21 12 25 2 8 2 
 maximum 8 10 2 12 1 14 1 15 2 16 2 23 1 24 1 25 1 
 blown 1 14 1 
-commandname 1 8 1 
-connections 2 26 1 7 1 
 special 6 10 2 13 1 15 1 24 2 7 2 8 8 
+connections 2 26 1 7 1 
+commandname 1 8 1 
 documentid 1 24 3 
 uniquenes 1 15 1 
-gcc 7 1 8 16 1 18 17 20 6 21 1 7 19 8 1 
+gcc 7 1 9 16 1 18 17 20 6 21 1 7 19 8 1 
 contains 8 15 1 18 1 22 1 23 1 24 5 26 3 3 1 8 2 
 wraps 1 26 1 
 ignore 2 11 1 9 1 
 parameters 7 10 8 12 1 13 1 17 5 22 1 23 1 24 2 
-alphabetical 1 8 1 
 always 12 13 3 15 3 17 4 20 6 21 6 22 1 23 1 24 2 26 3 5 1 7 1 8 2 
-derivatives 1 8 1 
-treasure 2 4 1 7 1 
+alphabetical 1 8 1 
 difference 7 13 1 18 1 21 3 24 1 25 1 26 5 9 1 
+treasure 2 4 1 7 1 
+derivatives 1 8 1 
 integers 3 10 1 13 2 14 4 
-credits 2 24 1 25 3 
-specified 3 14 2 7 2 8 1 
 coin 1 10 4 
-three 13 1 8 11 2 12 1 16 1 20 1 21 1 23 2 24 4 25 1 26 2 3 1 7 2 8 2 
-together 12 1 24 12 3 14 1 15 1 18 1 22 3 24 1 25 6 26 1 3 2 7 1 8 1 
+specified 3 14 2 7 2 8 1 
+credits 2 24 1 25 3 
+together 12 1 27 12 3 14 1 15 1 18 1 22 3 24 1 25 6 26 1 3 2 7 1 8 1 
+three 13 1 9 11 2 12 1 16 1 20 1 21 1 23 2 24 4 25 1 26 2 3 1 7 2 8 2 
 filename 9 10 5 12 1 14 2 16 1 20 1 22 1 23 1 24 7 8 4 
 leading 2 17 1 20 1 
 performs 2 22 1 7 1 
-brief 5 1 8 22 1 23 1 24 1 7 2 
-reading 10 1 8 13 1 17 3 20 1 21 2 22 1 26 6 5 5 7 6 8 4 
+reading 10 1 9 13 1 17 3 20 1 21 2 22 1 26 6 5 5 7 6 8 4 
+brief 5 1 9 22 1 23 1 24 1 7 2 
 shortage 1 12 1 
 gotchas 1 12 1 
-sufficient 3 16 1 7 1 9 1 
+summary 4 1 9 17 3 20 6 25 3 
 collision 4 15 2 17 2 20 1 24 1 
-summary 4 1 8 17 3 20 6 25 3 
+sufficient 3 16 1 7 1 9 1 
 guarantee 2 15 1 2 1 
-humidity 1 26 30 
 heads 1 10 12 
+humidity 1 26 30 
 leads 2 11 2 15 1 
-motion 3 1 24 4 1 5 1 
+motion 3 1 27 4 1 5 1 
 notion 1 16 1 
-potion 1 22 3 
 pohl 1 14 1 
+potion 1 22 3 
+announcements 2 1 9 4 1 
 alarmed 1 21 1 
-announcements 2 1 8 4 1 
-bashrc 1 8 4 
 reads 3 20 1 21 2 24 2 
+bashrc 1 8 4 
 yourself 4 10 1 20 3 21 1 4 1 
-kernighan 4 1 8 10 1 11 2 21 1 
+kernighan 4 1 9 10 1 11 2 21 1 
 pseky 1 20 1 
 respect 2 17 1 21 3 
+class 19 1 54 10 1 11 20 12 2 13 1 17 3 18 1 20 2 21 1 22 3 23 7 24 1 25 2 3 2 5 7 6 1 7 8 8 2 9 1 
 causes 1 20 1 
-class 19 1 48 10 1 11 20 12 2 13 1 17 3 18 1 20 2 21 1 22 3 23 7 24 1 25 2 3 2 5 7 6 1 7 8 8 2 9 1 
-term 11 12 1 14 2 16 2 2 2 23 1 24 1 3 1 5 2 7 5 8 1 9 1 
 doctype 3 11 2 12 3 23 3 
+term 11 12 1 14 2 16 2 2 2 23 1 24 1 3 1 5 2 7 5 8 1 9 1 
 future 2 8 3 9 1 
 wrx 1 8 2 
 his 8 11 1 12 1 16 1 2 1 20 1 21 2 23 1 9 1 
@@ -1463,7 +1463,7 @@ placed 4 12 1 13 1 20 1 8 1
 routines 1 7 1 
 cleans 1 17 1 
 dream 1 24 1 
-essence 6 1 8 12 1 21 2 22 1 25 1 7 2 
+essence 6 1 9 12 1 21 2 22 1 25 1 7 2 
 presentation 1 7 1 
 radical 2 12 1 20 1 
 const 3 10 1 13 2 14 3 
@@ -1471,259 +1471,259 @@ documen 1 24 1
 omitted 1 10 2 
 prefix 3 16 2 17 3 22 11 
 emulates 1 26 1 
-reliable 3 1 8 11 2 26 1 
-formal 4 10 3 13 1 18 1 7 1 
+reliable 3 1 9 11 2 26 1 
 file 20 10 15 11 8 12 14 13 1 14 11 15 3 16 17 17 11 18 14 20 10 21 5 22 14 23 19 24 69 25 9 26 6 3 1 7 15 8 44 9 10 
-locally 2 20 1 9 3 
+formal 4 10 3 13 1 18 1 7 1 
 locates 1 10 1 
+locally 2 20 1 9 3 
 mask 1 22 16 
 normal 2 23 1 24 1 
 again 13 12 3 14 3 15 2 16 1 18 1 21 2 22 2 23 4 24 2 26 5 7 2 8 1 9 1 
-solid 1 20 1 
 common 10 10 3 11 1 15 2 17 1 20 2 21 2 24 2 25 3 7 3 9 1 
-task 6 12 1 20 1 21 1 4 1 7 1 8 1 
+solid 1 20 1 
 table 12 11 2 12 2 14 5 15 27 16 7 17 2 20 4 21 3 23 1 24 8 25 2 7 1 
+task 6 12 1 20 1 21 1 4 1 7 1 8 1 
 happening 1 7 1 
 niclane 1 25 7 
 buserr 1 13 1 
 formatting 2 18 2 22 1 
 law 1 5 2 
-repeatable 1 20 1 
 rarely 1 10 1 
-saw 1 24 1 
+repeatable 1 20 1 
 consist 1 15 1 
+saw 1 24 1 
 denies 1 8 1 
 endif 3 10 1 14 1 20 2 
 traditionally 1 10 1 
-fanglin 1 1 24 
+fanglin 1 1 27 
 indicate 4 10 1 13 4 25 1 8 2 
-just 18 1 16 12 3 13 3 14 2 15 1 16 4 17 1 20 6 21 2 22 2 23 2 24 2 25 3 26 2 6 1 7 3 8 8 9 2 
+just 18 1 18 12 3 13 3 14 2 15 1 16 4 17 1 20 6 21 2 22 2 23 2 24 2 25 3 26 2 6 1 7 3 8 8 9 2 
 langauge 1 10 1 
-must 14 1 8 10 1 11 1 12 4 14 2 15 1 16 3 18 2 20 1 23 5 24 4 25 4 8 4 9 1 
+must 14 1 9 10 1 11 1 12 4 14 2 15 1 16 3 18 2 20 1 23 5 24 4 25 4 8 4 9 1 
 potentially 3 15 1 17 1 20 1 
-regarding 2 1 16 4 1 
+regarding 2 1 18 4 1 
 occurs 2 20 2 24 1 
 pefect 1 20 1 
-structured 2 12 1 25 1 
 sensing 1 11 2 
-differences 3 13 1 20 2 25 1 
+structured 2 12 1 25 1 
 declare 2 10 2 13 2 
+differences 3 13 1 20 2 25 1 
 ldflags 1 18 2 
 directions 1 15 1 
-lines 9 1 24 10 4 11 3 12 1 17 3 18 2 20 7 23 1 3 3 
+lines 9 1 27 10 4 11 3 12 1 17 3 18 2 20 7 23 1 3 3 
+machines 10 1 9 12 1 20 2 21 2 22 1 26 1 3 2 6 1 7 10 8 2 
 meetings 2 12 2 7 1 
-machines 10 1 8 12 1 20 2 21 2 22 1 26 1 3 2 6 1 7 10 8 2 
 aquamacs 1 6 1 
 curdst 1 13 2 
-terse 1 8 2 
+development 8 1 45 12 2 17 1 20 6 21 4 4 1 5 1 7 5 
 transmission 1 11 1 
-development 8 1 40 12 2 17 1 20 6 21 4 4 1 5 1 7 5 
+terse 1 8 2 
 expressiveness 1 13 1 
 oriented 2 12 2 16 1 
 printf 9 10 23 13 18 14 33 17 7 20 20 22 1 26 1 7 3 8 1 
 arrows 1 15 1 
 bounds 1 10 1 
-chsh 1 8 8 
-session 2 17 1 7 2 
-store 10 10 1 11 2 14 1 15 2 16 2 17 2 22 1 24 2 25 1 9 3 
 square 1 10 2 
+store 10 10 1 11 2 14 1 15 2 16 2 17 2 22 1 24 2 25 1 9 3 
+session 2 17 1 7 2 
+chsh 1 8 8 
 detailed 9 12 2 14 1 15 1 16 6 17 1 2 1 25 1 4 1 7 4 
 hyphen 2 7 1 8 1 
 ideas 4 12 2 15 1 25 2 7 1 
 logical 1 25 3 
 newsinfo 1 25 4 
-completeness 2 15 1 16 1 
 supported 3 13 1 14 2 8 1 
+completeness 2 15 1 16 1 
 expected 7 10 2 13 1 17 1 20 1 21 1 23 1 24 1 
 located 6 10 3 22 1 23 1 24 1 26 1 3 1 
 option 8 11 1 18 1 20 2 22 2 23 1 7 3 8 6 9 1 
 quality 2 24 1 25 1 
 rel 1 11 1 
-stat 2 23 1 24 1 
 confident 1 20 1 
-final 11 1 40 17 1 18 1 2 4 21 1 23 1 24 2 25 3 26 1 4 3 7 2 
-nice 9 1 8 11 2 15 2 18 1 20 1 21 1 24 1 25 1 7 4 
+stat 2 23 1 24 1 
+final 11 1 45 17 1 18 1 2 4 21 1 23 1 24 2 25 3 26 1 4 3 7 2 
+nice 9 1 9 11 2 15 2 18 1 20 1 21 1 24 1 25 1 7 4 
 osx 1 7 3 
 argc 5 13 3 14 1 17 1 20 9 7 3 
 dissembler 1 7 1 
-vice 1 8 1 
+front 4 1 9 13 1 24 1 25 1 
 views 1 5 1 
-front 4 1 8 13 1 24 1 25 1 
-goals 15 1 8 10 1 11 1 12 1 13 1 14 1 15 1 16 1 18 1 20 1 21 1 22 1 7 1 8 1 9 1 
+vice 1 8 1 
+goals 15 1 9 10 1 11 1 12 1 13 1 14 1 15 1 16 1 18 1 20 1 21 1 22 1 7 1 8 1 9 1 
 panic 2 16 2 21 1 
 accessing 2 13 2 7 1 
-suggested 1 9 2 
+can 25 1 54 10 7 11 9 12 11 13 14 14 2 15 14 16 3 17 15 18 8 2 2 20 39 21 11 22 7 23 7 24 16 25 5 26 8 3 2 4 3 5 2 6 1 7 36 8 22 9 9 
 sophisticated 4 11 1 18 2 20 1 25 2 
-can 25 1 48 10 7 11 9 12 11 13 14 14 2 15 14 16 3 17 15 18 8 2 2 20 39 21 11 22 7 23 7 24 16 25 5 26 8 3 2 4 3 5 2 6 1 7 36 8 22 9 9 
-fourth 1 1 8 
+suggested 1 9 2 
+fourth 1 1 9 
 jan 4 11 1 23 1 24 1 8 6 
 lan 1 2 1 
 man 5 22 4 23 1 6 1 7 29 8 2 
-rewarded 1 25 1 
-rerun 2 21 1 23 1 
 ran 2 20 3 25 2 
+rerun 2 21 1 23 1 
+rewarded 1 25 1 
 virtual 1 7 4 
-gprofile 1 1 8 
-hackers 5 1 16 2 2 3 1 4 1 5 1 
+gprofile 1 1 9 
+hackers 5 1 18 2 2 3 1 4 1 5 1 
 info 1 7 3 
-signals 1 7 1 
-subnetwork 1 22 1 
-scalable 1 15 1 
 crawled 9 11 1 12 6 14 1 15 3 16 4 17 1 20 1 23 6 24 1 
+scalable 1 15 1 
+subnetwork 1 22 1 
+signals 1 7 1 
 designers 2 20 1 8 1 
 wherever 1 10 1 
 synopsis 3 11 1 23 1 7 1 
-inverted 2 20 1 24 28 
 indicating 2 10 1 15 1 
+inverted 2 20 1 24 28 
 retrieval 2 11 3 24 1 
+segfaulted 2 1 9 3 3 
 chain 3 21 2 7 6 8 1 
-segfaulted 2 1 8 3 3 
 talking 1 11 2 
 undeclared 1 24 2 
 frames 1 7 1 
 walking 1 9 1 
-permissible 1 8 1 
 page 12 10 3 11 7 12 14 15 4 16 26 17 11 21 3 23 11 24 3 25 2 3 1 4 3 
-conforms 1 7 1 
+permissible 1 8 1 
 smart 5 13 2 15 2 20 1 21 5 8 1 
+conforms 1 7 1 
 detail 6 10 1 16 1 17 1 20 2 23 1 7 2 
 unique 9 10 1 11 1 12 5 15 18 16 4 17 2 22 1 23 5 24 3 
 invokes 2 25 1 8 1 
 lose 1 22 1 
 nose 1 20 1 
-drwx 3 7 10 8 34 9 1 
 talks 1 20 1 
-expect 8 1 8 10 1 17 2 20 1 21 1 23 1 24 1 25 1 
-eight 1 1 8 
+drwx 3 7 10 8 34 9 1 
+eight 1 1 9 
+expect 8 1 9 10 1 17 2 20 1 21 1 23 1 24 1 25 1 
 via 5 15 1 20 1 23 1 8 1 9 2 
-letters 1 25 1 
 light 4 17 1 20 1 26 36 7 1 
-might 12 1 8 11 1 12 1 16 2 17 3 20 5 21 1 23 1 24 1 25 5 26 1 9 2 
+letters 1 25 1 
+might 12 1 9 11 1 12 1 16 2 17 3 20 5 21 1 23 1 24 1 25 5 26 1 9 2 
 profiling 1 20 2 
-assistants 1 1 8 
+assistants 1 1 9 
+right 11 1 9 10 1 11 1 15 2 17 1 18 2 20 4 21 2 26 1 7 1 8 3 
 reconstruct 1 24 5 
-right 11 1 8 10 1 11 1 15 2 17 1 18 2 20 4 21 2 26 1 7 1 8 3 
 sight 1 16 1 
-decrementing 1 14 2 
+tight 1 1 9 
 transitional 2 11 2 17 2 
-tight 1 1 8 
+decrementing 1 14 2 
 equated 1 13 1 
 value 11 10 12 12 1 13 4 14 7 15 15 20 1 23 1 24 4 26 4 8 1 9 1 
-number 21 1 8 10 14 11 4 12 6 14 5 15 7 16 3 17 4 18 5 2 1 20 19 21 2 23 2 24 12 25 8 26 1 5 2 6 1 7 8 8 9 9 2 
-contained 1 21 1 
+number 21 1 9 10 14 11 4 12 6 14 5 15 7 16 3 17 4 18 5 2 1 20 19 21 2 23 2 24 12 25 8 26 1 5 2 6 1 7 8 8 9 9 2 
 strictly 1 10 3 
-dec 2 7 13 8 45 
+contained 1 21 1 
 draws 1 25 1 
+dec 2 7 13 8 45 
 efficient 5 13 1 15 2 18 2 24 1 8 1 
 figures 1 11 1 
 known 5 20 1 21 1 22 1 7 1 8 2 
 packet 2 12 1 15 1 
-against 13 1 24 11 2 12 4 15 1 16 1 20 1 21 1 22 1 23 3 24 2 25 3 7 1 9 1 
+against 13 1 27 11 2 12 4 15 1 16 1 20 1 21 1 22 1 23 3 24 2 25 3 7 1 9 1 
 revisions 1 12 1 
 sec 1 26 1 
 edit 2 18 1 9 1 
-hyung 1 1 16 
+hyung 1 1 18 
 iso 1 11 1 
 numer 1 17 1 
-reward 1 20 1 
-reproducible 1 20 1 
-randomly 3 14 1 15 1 22 1 
 range 3 12 1 15 1 21 3 
-combination 1 8 3 
+randomly 3 14 1 15 1 22 1 
+reproducible 1 20 1 
+reward 1 20 1 
+conversant 2 1 9 7 1 
 connect 3 11 1 26 2 7 1 
-conversant 2 1 8 7 1 
+combination 1 8 3 
 update 5 15 2 19 1 20 1 8 1 9 4 
 performed 3 10 1 18 1 25 1 
-computing 4 1 8 11 3 15 1 21 1 
+computing 4 1 9 11 3 15 1 21 1 
 wordnode 1 24 29 
-click 3 3 1 7 1 9 1 
 composed 3 15 1 24 2 25 2 
+click 3 3 1 7 1 9 1 
+engine 12 1 27 11 17 12 3 14 3 15 1 16 1 2 5 23 2 24 13 25 38 3 3 7 2 
 examining 2 17 1 20 1 
-engine 12 1 24 11 17 12 3 14 3 15 1 16 1 2 5 23 2 24 13 25 38 3 3 7 2 
 flush 1 16 1 
-legal 1 12 1 
 longer 6 10 1 14 2 15 1 16 1 20 1 25 1 
+legal 1 12 1 
 approaches 2 12 1 20 2 
-capital 1 25 1 
+something 9 1 9 11 2 12 1 17 1 20 1 21 1 23 1 24 1 25 1 
 solely 1 21 1 
-something 9 1 8 11 2 12 1 17 1 20 1 21 1 23 1 24 1 25 1 
+capital 1 25 1 
 wish 8 12 1 13 3 18 1 22 1 23 1 24 1 25 3 8 1 
-leaks 7 1 8 14 1 17 4 20 7 21 1 24 5 25 8 
+leaks 7 1 9 14 1 17 4 20 7 21 1 24 5 25 8 
 buffer 5 13 3 16 1 17 6 20 4 21 2 
 submission 3 25 1 3 4 7 1 
-edgecases 1 21 1 
 unstable 2 17 1 20 1 
-hacking 6 1 8 12 1 13 2 20 2 21 1 4 1 
+edgecases 1 21 1 
+hacking 6 1 9 12 1 13 2 20 2 21 1 4 1 
 smarter 2 13 1 25 1 
 dangerously 1 13 1 
 invoked 2 20 1 22 1 
 looking 10 11 2 12 3 13 1 16 1 17 1 20 1 21 1 23 2 25 2 7 2 
 miscellaneous 1 7 1 
-programmer 5 14 2 16 1 18 2 20 2 21 2 
-prototype 7 10 1 12 2 15 1 16 6 22 1 24 1 25 1 
+projects 7 1 36 11 1 12 1 18 1 2 2 4 1 7 2 
 points 8 10 1 13 1 14 6 15 9 16 4 17 1 24 1 25 3 
-projects 7 1 32 11 1 12 1 18 1 2 2 4 1 7 2 
-rtos 2 1 8 4 1 
+prototype 7 10 1 12 2 15 1 16 6 22 1 24 1 25 1 
+programmer 5 14 2 16 1 18 2 20 2 21 2 
+rtos 2 1 9 4 1 
 unlucky 2 12 1 15 1 
 getadr 1 22 3 
-language 14 1 8 10 1 11 1 12 7 13 3 14 1 16 10 20 1 21 3 22 1 23 2 6 1 7 5 8 2 
+language 14 1 9 10 1 11 1 12 7 13 3 14 1 16 10 20 1 21 3 22 1 23 2 6 1 7 5 8 2 
 nested 1 10 3 
-books 7 1 32 11 1 12 2 20 2 23 1 6 3 8 1 
+books 7 1 36 11 1 12 2 20 2 23 1 6 3 8 1 
 compared 2 10 1 15 1 
-trusted 1 7 1 
-thingy 1 4 1 
 tested 6 12 2 20 3 21 2 23 1 24 1 25 1 
+thingy 1 4 1 
+trusted 1 7 1 
 universal 1 6 1 
 looks 10 10 4 11 1 13 1 14 4 17 2 20 2 21 2 6 1 7 3 8 1 
 matt 1 4 1 
 nutshell 2 6 1 7 1 
-pipelining 1 7 1 
 pwd 3 20 1 7 4 8 10 
-racing 2 1 8 4 1 
-converter 1 6 1 
+pipelining 1 7 1 
+racing 2 1 9 4 1 
 structure 12 11 1 12 1 14 10 15 28 16 8 17 7 2 1 20 7 22 1 24 15 25 3 7 2 
-exercises 3 1 16 22 1 7 2 
-learning 3 1 8 25 1 7 1 
+converter 1 6 1 
+exercises 3 1 18 22 1 7 2 
+learning 3 1 9 25 1 7 1 
 asserts 1 21 3 
+science 9 1 9 11 2 17 3 2 1 3 1 4 1 5 1 6 1 9 2 
+contol 1 1 9 
 slightly 1 25 1 
-contol 1 1 8 
-science 9 1 8 11 2 17 3 2 1 3 1 4 1 5 1 6 1 9 2 
-unexpected 2 17 1 21 7 
 unrealistic 1 15 1 
-fill 3 1 8 14 1 7 1 
-getting 8 1 8 11 1 12 2 17 2 2 2 20 1 23 1 7 3 
+unexpected 2 17 1 21 7 
+fill 3 1 9 14 1 7 1 
+getting 8 1 9 11 1 12 2 17 2 2 2 20 1 23 1 7 3 
 kill 1 8 1 
 recorded 1 24 1 
-complain 1 21 1 
-setting 3 15 1 8 1 9 1 
+challenges 2 1 9 22 1 
 sizeof 4 10 3 14 15 15 4 21 3 
-challenges 2 1 8 22 1 
-will 26 1 248 10 8 11 27 12 37 13 10 14 6 15 12 16 23 17 13 18 15 19 1 2 7 20 24 21 12 22 16 23 41 24 41 25 31 26 20 3 25 4 8 5 4 6 1 7 41 8 19 9 8 
+setting 3 15 1 8 1 9 1 
+complain 1 21 1 
+will 26 1 279 10 8 11 27 12 37 13 10 14 6 15 12 16 23 17 13 18 15 19 1 2 7 20 24 21 12 22 16 23 41 24 41 25 31 26 20 3 25 4 8 5 4 6 1 7 41 8 19 9 8 
 howto 1 9 2 
 inconsistencies 1 21 1 
 specification 3 11 2 12 1 16 6 
 document 6 11 2 12 3 23 4 24 32 25 102 6 1 
 webpages 6 11 12 12 10 16 2 17 1 23 7 24 3 
-integrated 3 1 8 12 1 7 1 
+integrated 3 1 9 12 1 7 1 
+penalty 4 1 18 25 3 3 3 7 1 
 possibly 4 10 1 12 1 20 1 21 1 
-penalty 4 1 16 25 3 3 3 7 1 
 algorithmic 2 12 1 16 1 
-circular 1 15 2 
 critical 2 12 1 24 1 
-debug 11 1 8 12 1 13 1 17 7 18 2 20 16 21 2 22 1 23 1 3 1 7 1 
+circular 1 15 2 
+debug 11 1 9 12 1 13 1 17 7 18 2 20 16 21 2 22 1 23 1 3 1 7 1 
 verb 1 11 1 
-while 15 1 8 10 2 11 1 13 5 14 2 16 2 17 3 20 3 21 9 23 1 24 2 25 1 26 1 7 3 8 1 
-adobe 1 8 1 
+while 15 1 9 10 2 11 1 13 5 14 2 16 2 17 3 20 3 21 9 23 1 24 2 25 1 26 1 7 3 8 1 
 asparker 1 25 2 
-budding 1 7 1 
+adobe 1 8 1 
 responds 1 11 3 
+budding 1 7 1 
 continue 6 10 1 14 1 16 3 17 1 20 1 25 1 
-first 21 1 32 10 4 11 4 12 2 13 17 15 10 16 5 17 5 18 1 20 11 21 8 22 1 23 3 24 5 25 7 26 6 3 3 4 2 7 12 8 6 9 5 
+first 21 1 36 10 4 11 4 12 2 13 17 15 10 16 5 17 5 18 1 20 11 21 8 22 1 23 3 24 5 25 7 26 6 3 3 4 2 7 12 8 6 9 5 
 implies 1 16 1 
 restoring 1 9 1 
 correction 1 20 1 
-dragonfly 1 25 4 
 directory 15 10 6 12 10 16 8 17 2 18 1 20 1 22 1 23 14 24 18 25 12 26 5 3 6 7 8 8 43 9 17 
+dragonfly 1 25 4 
 handles 1 21 3 
 srandom 1 14 1 
 thus 3 10 1 13 4 18 1 
@@ -1739,23 +1739,23 @@ existing 6 18 1 24 5 25 1 26 3 7 1 8 1
 obe 1 14 1 
 alternatively 2 10 1 13 1 
 brought 2 20 2 21 1 
-configuring 1 7 1 
-shipped 1 20 1 
 change 14 12 2 14 1 15 1 17 3 2 1 20 1 21 1 24 2 25 4 26 2 3 1 7 1 8 9 9 3 
+shipped 1 20 1 
+configuring 1 7 1 
 didn 2 24 1 9 1 
 exec 1 18 13 
 improve 4 12 1 2 1 24 5 25 1 
-redefined 1 8 1 
 record 2 10 1 20 1 
-syms 1 7 1 
+redefined 1 8 1 
+submissions 2 1 9 25 1 
 corresponding 1 15 1 
-submissions 2 1 8 25 1 
+syms 1 7 1 
 exam 1 7 1 
 venerable 1 5 1 
 niftytelnet 1 7 1 
 bothered 1 9 1 
-comcast 2 7 3 8 1 
 callercallee 1 20 1 
+comcast 2 7 3 8 1 
 delete 2 8 7 9 7 
 usually 7 10 1 11 1 12 1 18 1 20 1 21 1 8 1 
 xauthority 1 8 1 
@@ -1764,51 +1764,51 @@ multiple 11 11 2 12 1 16 2 17 1 18 2 20 1 21 1 23 4 24 1 25 1 9 1
 programmers 6 10 2 13 1 14 1 20 3 21 2 7 1 
 creep 2 20 2 21 1 
 approx 3 16 1 24 1 7 1 
-committing 1 9 1 
+copters 2 1 9 3 1 
 stands 1 14 3 
-copters 2 1 8 3 1 
+committing 1 9 1 
 exception 4 14 1 15 1 16 1 8 1 
 elements 8 10 2 11 1 14 6 15 16 17 2 20 1 21 2 24 2 
-feel 6 1 8 11 1 20 2 22 1 25 3 7 1 
-implementations 1 9 1 
+feel 6 1 9 11 1 20 2 22 1 25 3 7 1 
 identified 4 16 1 20 1 21 1 7 1 
+implementations 1 9 1 
 limit 4 10 1 15 1 20 2 21 1 
 ordered 2 15 1 24 1 
 accumulative 1 14 2 
-bitwise 1 22 3 
 redesign 1 12 2 
-clusters 3 14 1 15 2 16 1 
+bitwise 1 22 3 
 classes 6 10 1 2 2 3 3 7 1 8 1 9 5 
+clusters 3 14 1 15 2 16 1 
+techniques 5 1 18 12 2 17 1 20 7 25 1 
 thoughts 2 11 1 5 1 
-techniques 5 1 16 12 2 17 1 20 7 25 1 
-hidden 1 8 3 
-honors 3 12 1 23 1 25 1 
 handled 1 10 1 
+honors 3 12 1 23 1 25 1 
+hidden 1 8 3 
 initializing 1 15 5 
 midertem 1 7 1 
 nearly 4 10 1 17 2 20 2 21 1 
 shu 1 3 1 
-thu 1 9 3 
 discussed 14 11 3 12 1 15 1 16 3 17 2 18 2 20 4 21 2 22 1 23 3 24 4 25 3 26 1 7 1 
+thu 1 9 3 
 href 2 11 16 16 1 
 putchar 2 14 1 21 1 
 roman 1 2 1 
-significant 7 1 24 11 1 15 2 18 1 21 2 3 2 7 3 
+significant 7 1 27 11 1 15 2 18 1 21 2 3 2 7 3 
 flowgraphs 1 20 1 
-gained 1 1 8 
+gained 1 1 9 
 implicitly 1 10 1 
-major 7 1 8 11 4 12 2 15 1 16 6 20 2 24 1 
+major 7 1 9 11 4 12 2 15 1 16 6 20 2 24 1 
 paragraph 1 15 1 
 aka 4 21 2 23 1 7 3 8 1 
 released 1 14 1 
 citizen 1 7 1 
-transmitted 1 7 1 
 trap 1 10 1 
+transmitted 1 7 1 
 utf 1 11 1 
 wrap 1 26 1 
 interpreters 1 7 1 
-button 1 21 1 
 builds 4 18 1 20 1 24 1 25 1 
+button 1 21 1 
 summarize 1 24 1 
 handing 1 7 1 
 local 5 14 1 25 2 7 5 8 5 9 7 
@@ -1823,301 +1823,301 @@ normalizeurl 1 20 1
 aditikabir 1 24 1 
 selection 1 22 1 
 electrical 1 11 1 
-fugu 1 7 1 
-familiarity 2 21 1 8 1 
 font 2 11 9 2 4 
-write 20 1 32 10 1 11 2 12 3 13 1 14 3 15 1 16 4 18 2 20 9 21 16 22 8 23 5 24 16 25 4 26 6 3 2 4 2 7 9 8 10 
+familiarity 2 21 1 8 1 
+fugu 1 7 1 
+write 20 1 36 10 1 11 2 12 3 13 1 14 3 15 1 16 4 18 2 20 9 21 16 22 8 23 5 24 16 25 4 26 6 3 2 4 2 7 9 8 10 
+hands 2 1 9 4 1 
 hashindex 2 15 3 24 1 
-hands 2 1 8 4 1 
 aggregate 2 10 2 13 1 
 repeat 1 26 1 
 sequence 4 10 3 18 1 24 1 8 2 
 experiennce 2 17 1 20 1 
-head 7 1 8 10 1 11 5 13 4 17 1 20 2 7 1 
+head 7 1 9 10 1 11 5 13 4 17 1 20 2 7 1 
 lead 4 12 3 17 1 20 1 7 1 
 nailing 1 20 1 
-program 20 1 24 10 18 12 10 13 3 14 12 15 4 16 4 17 4 18 6 20 8 21 10 22 31 23 15 24 13 25 1 26 4 3 2 6 1 7 16 8 11 
+program 20 1 27 10 18 12 10 13 3 14 12 15 4 16 4 17 4 18 6 20 8 21 10 22 31 23 15 24 13 25 1 26 4 3 2 6 1 7 16 8 11 
 read 19 10 2 11 1 12 5 15 1 16 2 17 3 2 7 20 15 21 2 22 3 23 1 24 14 25 5 26 5 3 1 5 5 7 5 8 21 9 1 
 sailing 1 7 1 
 device 1 4 1 
-optional 3 1 8 3 1 8 1 
+optional 3 1 9 3 1 8 1 
 phew 1 17 1 
-rooted 1 8 1 
 reviews 2 2 2 20 2 
+rooted 1 8 1 
 unusual 5 22 1 23 1 24 1 26 1 3 1 
-fails 6 14 1 20 4 21 2 24 1 25 1 8 1 
 floating 1 10 1 
+fails 6 14 1 20 4 21 2 24 1 25 1 8 1 
 moderate 1 20 1 
 news 3 12 1 23 1 4 1 
-snapshot 1 24 1 
 speaking 1 10 2 
-destination 1 13 2 
+snapshot 1 24 1 
 tails 1 10 6 
+destination 1 13 2 
 verbose 2 17 1 20 1 
 loaddocument 1 24 2 
-require 7 1 16 10 1 13 1 20 2 24 1 7 1 8 1 
-good 20 1 24 12 9 13 1 14 3 15 3 16 4 17 4 18 2 2 2 20 9 21 12 22 1 23 1 24 8 25 7 26 1 4 1 6 3 7 6 8 4 
+require 7 1 18 10 1 13 1 20 2 24 1 7 1 8 1 
+good 20 1 27 12 9 13 1 14 3 15 3 16 4 17 4 18 2 2 2 20 9 21 12 22 1 23 1 24 8 25 7 26 1 4 1 6 3 7 6 8 4 
 hood 1 7 4 
-shl 1 7 1 
+saturday 1 1 18 
 swat 3 17 1 20 2 21 1 
-saturday 1 1 16 
+shl 1 7 1 
 days 4 11 1 20 1 3 4 7 1 
 versa 1 8 1 
-guery 1 25 1 
 wright 2 12 1 16 1 
-integrate 1 12 1 
+guery 1 25 1 
 years 3 12 1 14 4 4 2 
+integrate 1 12 1 
 zeroise 1 14 1 
+query 8 1 9 11 8 12 3 2 1 24 9 25 40 3 3 7 1 
 ams 2 12 2 23 2 
-query 8 1 8 11 8 12 3 2 1 24 9 25 40 3 3 7 1 
-strike 1 21 1 
 says 2 12 1 20 1 
+strike 1 21 1 
 ways 4 13 3 21 4 7 1 8 1 
-equal 3 15 4 21 2 25 1 
 urlnode 6 14 12 15 18 16 14 17 21 21 2 24 1 
+equal 3 15 4 21 2 25 1 
 vms 1 7 1 
-medical 1 1 8 
+medical 1 1 9 
 paradigm 1 24 1 
 computes 6 10 2 11 1 14 1 21 1 22 1 26 1 
-doors 2 1 24 7 3 
-ides 2 1 16 7 1 
+doors 2 1 27 7 3 
+ides 2 1 18 7 1 
 rewriten 1 24 1 
 phases 2 12 1 7 1 
+systems 10 1 36 11 3 12 4 14 1 18 3 20 6 24 1 4 1 7 2 9 2 
 condition 3 15 1 20 2 21 5 
-systems 10 1 32 11 3 12 4 14 1 18 3 20 6 24 1 4 1 7 2 9 2 
+desk 4 1 9 13 3 17 1 20 4 
 dictionary 7 14 25 15 25 16 10 17 20 21 2 24 5 25 2 
-desk 4 1 8 13 3 17 1 20 4 
-easy 10 1 16 11 2 12 3 15 2 20 3 22 1 25 1 7 2 8 1 9 1 
-great 10 1 16 12 2 13 1 15 1 2 1 20 2 21 3 25 3 7 1 8 1 
+easy 10 1 18 11 2 12 3 15 2 20 3 22 1 25 1 7 2 8 1 9 1 
+great 10 1 18 12 2 13 1 15 1 2 1 20 2 21 3 25 3 7 1 8 1 
 intact 1 17 1 
-adopt 1 25 1 
-adhoc 1 24 1 
 asap 1 19 1 
+adhoc 1 24 1 
+adopt 1 25 1 
 buf 2 14 3 21 2 
 treat 1 13 1 
-updating 1 9 1 
 edge 3 17 4 20 4 21 3 
+updating 1 9 1 
 implementing 1 16 1 
 algorithm 7 12 1 15 4 16 1 20 1 22 1 25 1 7 1 
 stamps 1 18 1 
 diagram 1 19 1 
 few 6 10 3 11 1 12 1 15 2 18 1 7 1 
-new 22 1 8 10 2 11 1 12 15 13 2 14 6 15 2 16 6 17 1 18 3 2 1 21 5 22 1 23 13 24 19 25 4 26 3 3 1 4 1 7 2 8 6 9 7 
-process 15 1 16 12 6 14 3 15 4 16 1 17 1 18 2 20 1 21 3 23 3 24 2 25 1 26 1 7 7 8 10 
-simulating 1 26 1 
+new 22 1 9 10 2 11 1 12 15 13 2 14 6 15 2 16 6 17 1 18 3 2 1 21 5 22 1 23 13 24 19 25 4 26 3 3 1 4 1 7 2 8 6 9 7 
+process 15 1 18 12 6 14 3 15 4 16 1 17 1 18 2 20 1 21 3 23 3 24 2 25 1 26 1 7 7 8 10 
 currently 2 24 1 6 1 
+simulating 1 26 1 
 fine 2 16 2 7 2 
 interesting 2 25 1 8 1 
-line 21 1 8 10 2 11 3 12 12 13 3 14 8 16 5 17 8 18 3 20 30 21 3 22 3 23 8 24 5 25 6 26 1 4 1 6 1 7 10 8 5 9 4 
+line 21 1 9 10 2 11 3 12 12 13 3 14 8 16 5 17 8 18 3 20 30 21 3 22 3 23 8 24 5 25 6 26 1 4 1 6 1 7 10 8 5 9 4 
 requesting 1 14 1 
-concurrent 2 26 2 9 1 
 considered 7 10 1 12 3 22 2 23 2 24 1 26 1 3 1 
+concurrent 2 26 2 9 1 
 disks 1 8 1 
 utilities 3 24 1 7 1 8 3 
-grade 7 1 88 21 3 23 3 24 3 25 6 3 3 7 1 
+grade 7 1 99 21 3 23 3 24 3 25 6 3 3 7 1 
 preprocessor 3 10 16 18 1 2 1 
-constrain 1 8 1 
-configured 2 17 1 8 1 
 conversation 1 11 1 
+configured 2 17 1 8 1 
+constrain 1 8 1 
+day 7 1 9 10 1 11 2 15 1 2 3 20 2 4 1 
 defensive 3 20 1 21 5 22 1 
-day 7 1 8 10 1 11 2 15 1 2 3 20 2 4 1 
 versus 1 13 1 
 idea 9 13 2 14 1 15 1 16 2 20 1 21 3 24 1 26 3 8 1 
-may 14 1 16 10 12 12 5 13 7 14 1 15 3 17 1 2 8 20 8 21 1 24 1 3 7 7 5 8 9 
+may 14 1 18 10 12 12 5 13 7 14 1 15 3 17 1 2 8 20 8 21 1 24 1 3 7 7 5 8 9 
 avgtest 1 21 1 
 refactoring 3 24 5 25 4 3 1 
+say 10 1 9 10 2 11 1 14 1 15 4 17 1 20 3 21 2 24 1 9 1 
+solve 3 1 9 20 1 21 1 
 commonly 3 13 1 7 2 9 1 
-solve 3 1 8 20 1 21 1 
-say 10 1 8 10 2 11 1 14 1 15 4 17 1 20 3 21 2 24 1 9 1 
+teamwork 1 1 9 
 directives 1 10 7 
-teamwork 1 1 8 
+way 14 1 9 10 2 12 3 13 4 18 1 20 2 21 6 24 3 25 2 26 1 3 1 5 1 7 3 8 2 
 gaps 1 7 1 
-way 14 1 8 10 2 12 3 13 4 18 1 20 2 21 6 24 3 25 2 26 1 3 1 5 1 7 3 8 2 
 maps 1 12 1 
 painful 1 3 1 
 appalling 1 20 1 
 evenbetter 1 21 1 
-adjudication 1 24 1 
 allow 4 13 2 14 1 16 2 20 1 
+adjudication 1 24 1 
 brainstorm 1 7 1 
-clarity 2 1 8 12 4 
-fodor 1 25 4 
+clarity 2 1 9 12 4 
 view 5 11 2 18 1 7 2 8 1 9 1 
+fodor 1 25 4 
 goal 8 12 1 14 1 15 1 18 1 20 1 24 2 25 1 7 3 
 ide 1 7 3 
 literal 1 10 2 
 care 5 10 1 14 1 18 3 22 1 7 1 
-fare 1 8 1 
 fairness 3 23 1 24 1 25 1 
+fare 1 8 1 
 gritty 1 7 1 
 powerful 3 11 2 13 1 17 2 
 rare 2 17 1 20 1 
+campbell 26 1 27 10 1 11 9 12 1 13 1 14 4 15 3 16 2 17 2 18 1 19 1 2 1 20 5 21 1 22 1 23 1 24 1 25 30 26 1 3 3 4 1 5 1 6 1 7 51 8 157 9 51 
 sweet 1 7 1 
-campbell 26 1 24 10 1 11 9 12 1 13 1 14 4 15 3 16 2 17 2 18 1 19 1 2 1 20 5 21 1 22 1 23 1 24 1 25 30 26 1 3 3 4 1 5 1 6 1 7 51 8 157 9 51 
-expulsion 1 1 8 
-ware 1 20 1 
-webserver 4 11 5 12 1 15 1 23 1 
+expulsion 1 1 9 
 greater 3 10 1 12 1 26 1 
-material 7 1 8 11 1 16 1 20 1 21 2 7 5 8 1 
+webserver 4 11 5 12 1 15 1 23 1 
+ware 1 20 1 
+material 7 1 9 11 1 16 1 20 1 21 2 7 5 8 1 
 nano 1 4 1 
-someones 1 20 1 
 searching 11 11 7 12 1 14 1 15 4 16 1 17 1 2 1 20 2 24 1 25 1 7 1 
-decomposes 1 25 1 
+someones 1 20 1 
 difficult 3 10 1 20 5 22 1 
+decomposes 1 25 1 
+every 7 1 18 10 1 11 2 18 1 26 4 7 2 8 1 
 undef 1 10 1 
-every 7 1 16 10 1 11 2 18 1 26 4 7 2 8 1 
 highest 1 10 1 
 incorrect 3 21 1 22 2 25 2 
 modify 2 10 4 8 2 
 parsing 4 15 1 16 1 24 1 8 1 
 abcdef 1 13 1 
 rwx 2 8 2 9 1 
+crash 2 1 9 21 1 
 several 1 15 1 
-crash 2 1 8 21 1 
 today 14 10 1 11 1 12 1 13 1 14 1 15 1 16 3 18 1 19 1 20 1 21 2 7 4 8 1 9 1 
-family 5 1 8 11 2 2 2 6 1 7 1 
+family 5 1 9 11 2 2 2 6 1 7 1 
 javaschools 1 5 1 
 observations 2 25 1 7 1 
 prints 10 10 3 12 2 13 1 14 2 17 1 20 3 22 2 23 3 24 1 7 1 
 assist 2 15 1 16 1 
 ben 1 5 1 
 compiles 3 18 1 20 1 3 1 
-trash 1 8 4 
 disassembling 1 7 1 
+trash 1 8 4 
 enormously 3 20 1 21 1 5 1 
 len 2 10 3 13 12 
 pen 2 13 2 20 1 
 anecdotal 3 12 1 20 1 5 1 
 runnable 1 7 1 
 conditionally 1 20 1 
+turn 4 1 9 15 1 20 2 24 1 
+ten 1 1 9 
 demands 1 14 2 
-ten 1 1 8 
-turn 4 1 8 15 1 20 2 24 1 
 vermont 2 11 12 12 1 
-yourlinuxaccount 1 9 1 
 ident 1 7 1 
+yourlinuxaccount 1 9 1 
+product 6 1 9 12 1 21 2 23 1 24 1 25 1 
 prompts 1 8 1 
-product 6 1 8 12 1 21 2 23 1 24 1 25 1 
-structs 2 13 1 14 4 
 sees 1 10 1 
-talk 10 1 24 11 3 13 1 16 1 18 1 2 1 20 2 24 1 5 1 7 2 
-ta 4 1 40 2 1 25 1 3 3 
+structs 2 13 1 14 4 
+ta 4 1 45 2 1 25 1 3 3 
+talk 10 1 27 11 3 13 1 16 1 18 1 2 1 20 2 24 1 5 1 7 2 
 eric 1 5 4 
-inputing 1 25 1 
 issued 2 12 1 23 1 
+inputing 1 25 1 
 analyzes 1 20 1 
 returns 7 10 2 13 2 14 4 16 7 17 1 21 3 24 10 
 map 2 15 1 16 1 
-draw 2 20 1 22 1 
 transport 2 11 1 8 3 
+draw 2 20 1 22 1 
 friends 3 16 1 17 1 20 1 
 plain 8 10 1 11 2 12 1 16 1 18 1 25 1 7 2 8 7 
 reachable 1 20 1 
 states 2 18 1 20 1 
 tags 2 11 10 24 2 
 filesnames 1 8 1 
-lma 1 7 1 
 loss 2 20 1 22 1 
+lma 1 7 1 
 makefiles 2 18 2 25 1 
-statement 1 8 1 
 changing 5 17 1 20 1 24 1 25 1 8 4 
+statement 1 8 1 
 toss 1 10 7 
-vma 1 7 1 
 favorite 1 7 1 
+vma 1 7 1 
 insertion 1 15 3 
 origial 1 9 1 
 apple 1 17 2 
 ranking 3 11 1 12 2 25 10 
-stream 4 11 1 21 1 26 1 7 1 
 constructs 1 10 1 
+stream 4 11 1 21 1 26 1 7 1 
 debugged 2 17 1 20 1 
 hompage 1 11 2 
-classic 3 1 8 2 1 22 1 
-deleting 2 8 1 9 2 
+classic 3 1 9 2 1 22 1 
 doing 7 12 1 17 1 21 1 25 1 3 1 8 1 9 2 
+deleting 2 8 1 9 2 
 field 1 24 1 
-going 4 20 1 25 1 26 1 3 1 
 gprof 3 20 10 25 1 7 1 
-maintainable 1 1 8 
-submitting 5 22 1 23 1 24 1 25 1 9 1 
+going 4 20 1 25 1 26 1 3 1 
+maintainable 1 1 9 
 correct 12 10 3 12 1 13 2 16 4 17 5 20 1 21 2 22 1 24 2 3 1 8 5 9 1 
+submitting 5 22 1 23 1 24 1 25 1 9 1 
 elif 1 10 2 
-generation 1 6 1 
 whenever 1 12 1 
+generation 1 6 1 
 leak 3 14 1 17 1 20 5 
 peak 1 7 1 
 ritchie 1 10 1 
-sorry 1 8 1 
 stabilization 1 20 1 
-two 21 1 24 10 5 11 1 12 3 13 7 14 1 15 4 16 2 17 1 2 1 20 2 22 1 23 4 24 2 25 3 26 3 3 1 4 2 6 1 7 5 8 2 
+sorry 1 8 1 
+two 21 1 27 10 5 11 1 12 3 13 7 14 1 15 4 16 2 17 1 2 1 20 2 22 1 23 4 24 2 25 3 26 3 3 1 4 2 6 1 7 5 8 2 
 uniquely 1 8 1 
+weekend 3 1 9 2 2 7 1 
 worry 3 11 1 12 1 14 1 
-weekend 3 1 8 2 2 7 1 
 hunting 2 12 1 23 1 
 networking 1 7 2 
 aee 1 20 5 
-reiterate 1 20 1 
+breaking 2 1 9 12 1 
 bee 1 10 6 
-breaking 2 1 8 12 1 
+reiterate 1 20 1 
 cryptic 1 8 1 
 hexadecimal 1 7 1 
 produce 5 18 2 20 1 22 1 25 1 7 3 
-back 14 1 8 11 4 13 1 14 1 20 2 21 2 22 1 23 1 24 5 25 1 5 1 7 3 8 3 9 2 
-sections 2 3 2 7 4 
+back 14 1 9 11 4 13 1 14 1 20 2 21 2 22 1 23 1 24 5 25 1 5 1 7 3 8 3 9 2 
+see 22 1 36 10 2 11 1 12 5 13 4 15 3 16 2 17 5 18 1 2 2 20 4 21 5 22 7 23 3 24 7 25 4 26 2 3 3 4 2 7 10 8 6 9 2 
 sript 1 25 1 
-see 22 1 32 10 2 11 1 12 5 13 4 15 3 16 2 17 5 18 1 2 2 20 4 21 5 22 7 23 3 24 7 25 4 26 2 3 3 4 2 7 10 8 6 9 2 
+sections 2 3 2 7 4 
 funded 1 11 1 
 whereas 1 10 1 
 hack 4 15 1 20 2 21 1 7 4 
 indented 1 18 1 
 lack 2 13 1 7 1 
-book 9 1 64 12 1 14 1 2 2 21 1 22 1 6 2 8 1 9 1 
-solutions 8 1 32 22 2 23 1 24 3 25 1 26 2 7 2 8 1 
-similar 7 1 8 10 1 12 1 14 3 18 1 24 1 26 4 
+book 9 1 72 12 1 14 1 2 2 21 1 22 1 6 2 8 1 9 1 
+similar 7 1 9 10 1 12 1 14 3 18 1 24 1 26 4 
+solutions 8 1 36 22 2 23 1 24 3 25 1 26 2 7 2 8 1 
 formatted 1 26 1 
-intervals 1 20 1 
 inspection 2 20 2 21 2 
+intervals 1 20 1 
+look 19 1 9 10 2 11 2 12 5 13 8 14 3 15 2 16 4 17 7 18 2 20 5 21 5 22 1 23 5 24 3 25 2 7 13 8 3 9 1 
 location 6 10 1 11 1 13 1 15 1 20 2 21 1 
-look 19 1 8 10 2 11 2 12 5 13 8 14 3 15 2 16 4 17 7 18 2 20 5 21 5 22 1 23 5 24 3 25 2 7 13 8 3 9 1 
 magic 2 12 2 16 1 
 pushl 1 7 2 
 centric 1 11 2 
-documentnodes 1 24 5 
-took 3 12 2 18 1 20 1 
 datatypes 1 10 2 
+took 3 12 2 18 1 20 1 
+documentnodes 1 24 5 
 forces 1 10 1 
 increments 1 14 1 
 makes 8 12 1 14 1 15 1 18 1 24 1 25 2 7 1 8 1 
-object 6 12 1 13 1 14 1 16 1 18 6 7 4 
 once 12 11 1 12 6 13 1 17 8 20 13 21 3 22 1 23 3 24 2 26 3 4 1 7 1 
+object 6 12 1 13 1 14 1 16 1 18 6 7 4 
 augment 1 7 1 
 resulting 2 21 1 25 2 
-chance 2 20 1 22 1 
+checks 6 1 9 12 2 17 1 21 1 24 2 8 1 
+severe 1 1 9 
 could 16 10 1 11 3 12 4 14 2 15 3 16 2 17 2 20 5 21 6 22 1 23 2 24 3 25 5 6 1 8 5 9 1 
-severe 1 1 8 
-checks 6 1 8 12 2 17 1 21 1 24 2 8 1 
-displaying 1 20 1 
+chance 2 20 1 22 1 
+takes 7 1 9 12 1 18 3 22 1 23 1 24 1 7 2 
 tag 2 11 6 14 1 
-takes 7 1 8 12 1 18 3 22 1 23 1 24 1 7 2 
+displaying 1 20 1 
 wakes 1 8 1 
 independent 3 10 1 12 1 16 6 
 nlater 1 14 1 
 alphasort 1 24 2 
 second 12 10 1 11 1 12 3 14 2 16 2 20 2 21 1 23 2 24 1 26 9 7 1 8 1 
-tinysearchengine 3 1 16 14 1 3 3 
+tinysearchengine 3 1 18 14 1 3 3 
 forming 1 8 1 
-would 18 1 40 10 2 11 1 12 7 13 3 14 3 15 4 16 4 17 1 2 1 20 4 21 7 23 5 24 5 25 2 26 1 7 2 8 7 
+would 18 1 45 10 2 11 1 12 7 13 3 14 3 15 4 16 4 17 1 2 1 20 4 21 7 23 5 24 5 25 2 26 1 7 2 8 7 
+including 13 1 9 10 2 13 1 14 2 15 1 16 2 17 1 22 2 23 1 24 3 25 1 7 1 8 3 
 indeed 2 20 3 8 2 
-including 13 1 8 10 2 13 1 14 2 15 1 16 2 17 1 22 2 23 1 24 3 25 1 7 1 8 3 
-loadeddocument 1 24 3 
 listed 2 20 2 6 1 
+loadeddocument 1 24 3 
 modules 4 11 2 12 2 20 1 25 1 
 pandoc 1 6 1 
 applied 1 21 1 
 bottom 1 12 1 
 configure 2 22 1 9 1 
-wikipedia 4 18 1 22 1 24 1 6 1 
 gb 1 11 2 
+wikipedia 4 18 1 22 1 24 1 6 1 
 kb 2 11 1 7 1 
 mb 2 12 2 23 2 
 opinion 1 20 1 
@@ -2125,46 +2125,46 @@ pencil 1 15 1
 readme 9 15 3 16 3 22 1 23 1 24 4 25 7 26 2 3 2 9 19 
 tb 1 11 3 
 forms 1 10 1 
-group 9 1 32 11 2 15 1 2 2 25 1 4 1 7 2 8 6 9 1 
-interested 3 1 8 11 7 16 1 
-provide 15 1 24 10 2 11 2 12 2 14 1 16 1 17 1 22 1 23 2 24 3 25 2 26 1 4 1 7 3 8 1 
+group 9 1 36 11 2 15 1 2 2 25 1 4 1 7 2 8 6 9 1 
+interested 3 1 9 11 7 16 1 
+provide 15 1 27 10 2 11 2 12 2 14 1 16 1 17 1 22 1 23 2 24 3 25 2 26 1 4 1 7 3 8 1 
 distinguish 1 25 1 
 ebp 1 7 4 
 hitting 1 21 1 
 labeled 1 21 1 
 mechanism 3 10 1 15 1 8 1 
 station 1 21 1 
-destinatio 1 13 1 
 downloads 1 11 1 
-enters 5 10 2 14 3 17 1 22 3 8 1 
+destinatio 1 13 1 
 entire 1 10 1 
+enters 5 10 2 14 3 17 1 22 3 8 1 
 maintained 2 15 3 16 1 
 answering 1 25 1 
-refactored 2 24 2 25 1 
 body 3 11 3 2 1 25 1 
+refactored 2 24 2 25 1 
 enhancements 1 7 1 
 adjunct 1 24 1 
 reside 1 8 1 
-subnet 1 22 10 
+sheets 1 1 9 
 shalls 1 12 1 
-sheets 1 1 8 
+subnet 1 22 10 
 happened 1 20 1 
-ash 1 8 1 
 architect 1 7 1 
+ash 1 8 1 
 bsh 1 8 1 
-csh 1 8 2 
 selecting 1 7 1 
+csh 1 8 2 
 equation 1 12 1 
-ksh 1 8 1 
 katahdin 1 11 1 
+ksh 1 8 1 
 quite 2 11 1 15 1 
-rsh 1 7 1 
+richard 1 1 9 
 recompilation 1 20 1 
-richard 1 1 8 
-ssh 3 7 30 8 3 9 2 
+rsh 1 7 1 
 suite 1 13 1 
+ssh 3 7 30 8 3 9 2 
+their 18 1 9 10 4 12 4 13 3 14 1 16 1 17 2 18 1 2 1 20 5 21 1 22 1 23 2 24 3 25 1 3 3 7 2 8 2 
 typists 1 8 1 
-their 18 1 8 10 4 12 4 13 3 14 1 16 1 17 2 18 1 2 1 20 5 21 1 22 1 23 2 24 3 25 1 3 3 7 2 8 2 
 fewer 2 17 1 20 1 
 htmlxmlns 1 17 1 
 introducing 1 10 1 
@@ -2174,95 +2174,95 @@ corresponds 1 24 1
 equiv 1 11 1 
 xvfz 1 23 1 
 indicated 4 10 1 13 1 17 1 20 1 
-layer 1 7 1 
 logout 6 22 1 23 1 24 1 26 1 7 2 8 1 
+layer 1 7 1 
 members 1 10 1 
-also 23 1 32 10 6 11 3 12 5 13 4 14 1 15 6 16 6 17 4 18 4 20 3 21 3 22 5 23 5 24 5 25 4 26 2 3 3 4 1 6 1 7 10 8 6 9 6 
-canna 1 21 2 
+also 23 1 36 10 6 11 3 12 5 13 4 14 1 15 6 16 6 17 4 18 4 20 3 21 3 22 5 23 5 24 5 25 4 26 2 3 3 4 1 6 1 7 10 8 6 9 6 
+sharing 2 1 18 15 1 
 cycle 5 12 5 17 1 20 3 23 3 5 1 
-sharing 2 1 16 15 1 
+canna 1 21 2 
 inspections 1 20 1 
-quest 1 24 1 
 anypoint 1 17 1 
+quest 1 24 1 
+strong 3 1 9 20 1 7 1 
 chars 2 14 1 16 1 
-strong 3 1 8 20 1 7 1 
 without 11 10 1 12 1 13 2 14 1 16 2 20 1 23 1 24 3 25 3 3 1 8 1 
 receives 3 12 2 23 1 24 5 
+there 23 1 63 10 5 11 5 12 9 13 5 15 13 16 4 17 5 18 1 2 2 20 14 21 12 22 2 23 6 24 14 25 11 26 1 3 5 4 1 6 2 7 17 8 10 9 2 
 title 3 11 4 17 1 25 1 
-there 23 1 56 10 5 11 5 12 9 13 5 15 13 16 4 17 5 18 1 2 2 20 14 21 12 22 2 23 6 24 14 25 11 26 1 3 5 4 1 6 2 7 17 8 10 9 2 
-wednesday 5 1 8 2 8 3 1 7 1 8 1 
-where 20 1 24 10 1 11 4 12 3 13 3 14 2 15 7 16 4 17 1 18 2 20 6 21 10 22 2 23 1 24 6 25 1 26 2 3 3 7 1 8 3 
+where 20 1 27 10 1 11 4 12 3 13 3 14 2 15 7 16 4 17 1 18 2 20 6 21 10 22 2 23 1 24 6 25 1 26 2 3 3 7 1 8 3 
+wednesday 5 1 9 2 8 3 1 7 1 8 1 
 limited 2 22 1 26 1 
 nlane 1 15 1 
-ahead 2 1 8 7 1 
+ahead 2 1 9 7 1 
 birthday 1 9 12 
-edition 2 1 16 6 2 
+edition 2 1 18 6 2 
 happen 4 14 1 21 1 24 1 8 2 
-rps 1 22 3 
 reflects 1 21 1 
+rps 1 22 3 
 secure 1 7 8 
 visual 1 18 1 
 guru 1 5 1 
 ages 1 10 3 
-brackets 2 25 1 8 1 
-reconstructs 1 24 1 
-bc 1 20 1 
 rigourous 1 10 1 
-closer 1 21 1 
+bc 1 20 1 
+reconstructs 1 24 1 
+brackets 2 25 1 8 1 
 cc 4 17 2 18 17 20 1 24 1 
-thereof 1 8 1 
-dc 2 15 2 17 2 
+closer 1 21 1 
 digits 2 14 1 8 1 
+dc 2 15 2 17 2 
+thereof 1 8 1 
 ec 2 17 2 7 2 
 fc 1 7 1 
-held 3 1 8 2 1 7 1 
+held 3 1 9 2 1 7 1 
 lc 1 7 2 
 pc 2 3 1 7 1 
 accessed 3 13 1 15 1 8 1 
 recreate 1 24 2 
-serve 4 12 1 16 1 23 1 26 1 
+signed 2 1 9 9 1 
 consisting 1 10 1 
-signed 2 1 8 9 1 
+serve 4 12 1 16 1 23 1 26 1 
 david 1 11 1 
-gotta 1 5 1 
-wayne 4 25 1 3 1 7 1 9 1 
-wc 2 11 1 17 2 
 wanted 7 10 1 11 1 20 1 6 1 7 2 8 1 9 1 
+wc 2 11 1 17 2 
+wayne 4 25 1 3 1 7 1 9 1 
+gotta 1 5 1 
 xc 2 14 1 7 1 
 makfile 1 25 1 
 numeric 1 13 1 
 translating 2 16 1 20 1 
+unix 6 1 27 10 1 5 3 6 2 7 5 8 2 
 explanatory 1 13 1 
-unix 6 1 24 10 1 5 3 6 2 7 5 8 2 
 worth 1 8 1 
 item 3 17 1 3 1 7 1 
 macro 4 10 3 12 1 18 1 23 1 
 numpeople 1 14 4 
 blog 1 4 1 
-scp 1 7 4 
-combinations 1 25 1 
 searches 2 15 1 8 1 
-dnodes 6 14 2 15 23 16 5 17 6 20 1 24 1 
+combinations 1 25 1 
+scp 1 7 4 
 tcp 3 11 1 26 6 7 1 
-hand 5 1 24 10 1 18 1 4 1 8 2 
+dnodes 6 14 2 15 23 16 5 17 6 20 1 24 1 
+hand 5 1 27 10 1 18 1 4 1 8 2 
 involvement 1 7 1 
 rand 2 10 3 14 1 
 possible 12 12 1 13 2 14 1 15 3 17 1 20 3 21 1 22 1 24 1 3 1 7 2 9 1 
 april 2 2 5 3 6 
 relate 2 5 1 7 1 
-comprising 1 25 1 
-suse 2 17 1 20 1 
-creates 9 12 2 14 1 17 1 21 1 23 2 24 2 25 1 7 1 9 1 
 contents 7 10 10 13 13 14 6 16 1 17 1 7 7 8 4 
-paste 2 18 1 25 1 
+creates 9 12 2 14 1 17 1 21 1 23 2 24 2 25 1 7 1 9 1 
+suse 2 17 1 20 1 
+comprising 1 25 1 
 paper 5 11 3 12 2 13 3 20 1 22 6 
-sending 2 26 1 9 1 
+paste 2 18 1 25 1 
 sumarray 1 14 3 
-eth 1 22 2 
+sending 2 26 1 9 1 
+explicit 3 1 9 10 2 15 2 
 excuting 1 17 1 
-explicit 3 1 8 10 2 15 2 
-variants 1 8 1 
+eth 1 22 2 
 fail 3 12 1 20 4 21 1 
+variants 1 8 1 
 waste 1 21 3 
 mail 2 7 2 8 12 
 nail 1 26 1 
@@ -2273,117 +2273,117 @@ wth 1 17 1
 haev 1 24 1 
 improvement 1 20 1 
 profiled 1 20 3 
-addition 10 1 16 12 1 16 1 17 2 20 2 23 1 24 1 25 4 3 1 7 2 
-relative 1 8 4 
-bear 2 7 1 8 7 
+addition 10 1 18 12 1 16 1 17 2 20 2 23 1 24 1 25 4 3 1 7 2 
 billion 1 11 2 
+bear 2 7 1 8 7 
+relative 1 8 4 
 sends 2 11 3 26 1 
 frequent 1 10 1 
 leaves 1 17 1 
 mathland 2 12 1 23 1 
 near 2 10 1 11 1 
-quickly 8 12 1 14 1 20 1 21 1 23 1 24 1 3 1 7 1 
 august 4 11 2 12 1 24 1 25 1 
+quickly 8 12 1 14 1 20 1 21 1 23 1 24 1 3 1 7 1 
 category 1 26 1 
 funny 2 5 1 8 3 
 year 4 25 1 3 1 4 1 9 1 
+access 10 1 63 10 1 13 4 15 2 16 2 20 4 24 2 26 1 7 9 8 6 
 age 2 10 3 14 10 
-access 10 1 56 10 1 13 4 15 2 16 2 20 4 24 2 26 1 7 9 8 6 
-toolkit 2 4 1 6 1 
-deictionary 1 17 1 
 technology 4 11 3 12 1 24 1 25 1 
+deictionary 1 17 1 
+toolkit 2 4 1 6 1 
 quicksort 1 22 2 
 srcned 1 20 1 
-effort 2 1 8 15 1 
-all 23 1 80 10 8 11 2 12 14 13 5 14 4 15 4 16 9 17 16 18 4 2 1 20 17 21 8 22 6 23 7 24 11 25 10 26 2 3 2 4 3 7 17 8 12 9 3 
+effort 2 1 9 15 1 
+all 23 1 90 10 8 11 2 12 14 13 5 14 4 15 4 16 9 17 16 18 4 2 1 20 17 21 8 22 6 23 7 24 11 25 10 26 2 3 2 4 3 7 17 8 12 9 3 
+become 4 1 9 14 1 16 1 7 3 
 builtin 1 8 4 
-become 4 1 8 14 1 16 1 7 3 
 computed 3 10 1 24 2 25 1 
-dll 1 7 2 
-disconnect 1 26 1 
-door 1 20 1 
 displayarray 1 14 5 
+door 1 20 1 
+disconnect 1 26 1 
+dll 1 7 2 
 poor 2 15 1 21 2 
 restate 1 21 1 
 units 2 20 1 25 1 
 keys 1 15 6 
 lawyers 1 12 1 
-respectively 7 13 1 18 1 21 1 24 2 25 2 26 1 8 1 
 boolean 2 12 1 23 1 
+respectively 7 13 1 18 1 21 1 24 2 25 2 26 1 8 1 
 contes 1 14 2 
 requests 4 11 2 12 1 15 1 26 5 
-constrained 1 13 1 
 created 9 11 1 12 4 14 2 16 1 18 2 23 3 24 4 7 1 9 1 
-library 11 1 8 10 1 14 2 18 1 2 1 20 1 22 1 24 2 25 9 6 1 7 3 
+constrained 1 13 1 
+library 11 1 9 10 1 14 2 18 1 2 1 20 1 22 1 24 2 25 9 6 1 7 3 
 manual 6 11 1 17 1 18 1 20 1 7 8 8 2 
 offers 1 7 1 
 pseudo 7 12 2 15 1 16 9 17 2 20 2 24 1 7 1 
 attempts 1 21 1 
-cd 5 24 1 26 1 7 1 8 15 9 3 
-considerably 1 21 1 
 sorting 2 14 1 22 1 
-treated 1 12 1 
+considerably 1 21 1 
+cd 5 24 1 26 1 7 1 8 15 9 3 
 though 4 10 1 12 1 14 1 8 1 
-extensibility 1 24 1 
+treated 1 12 1 
 ed 1 10 2 
+extensibility 1 24 1 
 hd 1 14 3 
-id 8 1 16 11 5 12 3 23 3 24 5 25 96 7 2 8 1 
+id 8 1 18 11 5 12 3 23 3 24 5 25 96 7 2 8 1 
 ld 3 10 1 14 1 7 2 
 od 1 7 1 
 pd 1 11 1 
 againt 1 15 1 
 carried 1 15 1 
 td 1 11 1 
-habits 2 1 8 7 1 
+habits 2 1 9 7 1 
 meaning 7 10 1 12 1 14 1 18 1 23 1 7 2 8 2 
+particularly 5 1 9 10 1 12 1 20 1 21 1 
 ports 2 11 1 7 1 
-particularly 5 1 8 10 1 12 1 20 1 21 1 
-sorts 2 17 1 20 1 
 character 7 10 7 11 1 13 16 17 1 18 3 21 12 8 4 
-disk 2 8 1 9 1 
+sorts 2 17 1 20 1 
+developed 7 1 9 16 1 21 3 23 1 25 1 4 1 8 1 
 drwxr 3 25 1 7 3 8 12 
-developed 7 1 8 16 1 21 3 23 1 25 1 4 1 8 1 
+disk 2 8 1 9 1 
 feeds 1 11 1 
-linux 13 1 56 10 3 15 1 16 2 2 2 20 3 22 5 3 3 4 2 6 4 7 47 8 20 9 1 
+linux 13 1 63 10 3 15 1 16 2 2 2 20 3 22 5 3 3 4 2 6 4 7 47 8 20 9 1 
 needs 12 11 2 12 6 14 3 16 3 17 2 20 1 21 1 22 3 23 4 26 3 5 1 6 1 
+preferred 2 1 9 10 1 
 procurement 2 12 2 21 1 
-preferred 2 1 8 10 1 
 roll 1 20 1 
-situations 1 12 1 
-crawlers 5 11 1 12 3 16 3 23 3 24 1 
 constructors 1 10 2 
+crawlers 5 11 1 12 3 16 3 23 3 24 1 
+situations 1 12 1 
 introduced 1 10 1 
 means 13 12 5 13 3 15 1 17 2 18 1 20 2 21 1 23 2 24 4 25 2 7 2 8 7 9 2 
-concept 1 25 1 
-specifici 1 24 1 
-swap 1 13 9 
 start 19 10 1 11 3 12 5 14 7 15 22 16 9 17 24 18 3 2 1 20 8 21 5 22 1 23 5 24 8 26 2 4 1 5 1 7 2 8 5 
+swap 1 13 9 
+specifici 1 24 1 
+concept 1 25 1 
 enable 1 7 1 
 inserting 1 15 2 
 bins 1 24 1 
 connecting 3 11 2 12 2 23 3 
-terminal 7 20 2 21 1 22 1 23 1 24 1 26 2 7 7 
 darjeeling 1 15 1 
-includes 13 1 8 12 3 15 2 16 5 18 1 20 1 23 1 24 1 25 3 26 1 6 1 7 3 8 1 
+terminal 7 20 2 21 1 22 1 23 1 24 1 26 2 7 7 
+includes 13 1 9 12 3 15 2 16 5 18 1 20 1 23 1 24 1 25 3 26 1 6 1 7 3 8 1 
 mathtrek 2 12 1 23 1 
 administered 1 24 1 
-refinement 1 12 1 
 basics 1 11 1 
+refinement 1 12 1 
+editors 2 1 9 6 1 
 examin 1 17 1 
-editors 2 1 8 6 1 
 wins 1 22 3 
 mdphd 3 12 1 23 1 25 1 
+problem 12 1 45 11 2 12 3 14 1 15 1 16 1 17 3 20 10 21 7 23 1 24 1 7 2 
 practices 1 21 1 
-problem 12 1 40 11 2 12 3 14 1 15 1 16 1 17 3 20 10 21 7 23 1 24 1 7 2 
 allowed 2 17 1 9 1 
-rules 4 1 8 10 1 18 9 22 1 
-bring 3 1 8 21 1 7 1 
-committed 1 9 5 
+bring 3 1 9 21 1 7 1 
+rules 4 1 9 10 1 18 9 22 1 
 collective 1 23 1 
+committed 1 9 5 
 declaring 1 13 1 
 worst 2 14 1 16 1 
 hey 6 12 2 16 2 2 1 21 1 23 1 5 1 
-key 9 1 16 14 10 15 32 16 12 17 8 20 8 24 4 25 1 7 1 
+key 9 1 18 14 10 15 32 16 12 17 8 20 8 24 4 25 1 7 1 
 requirement 6 12 9 15 1 16 5 20 6 23 4 24 2 
 true 8 10 1 12 1 14 1 15 1 16 1 23 1 24 2 8 1 
 pipe 2 26 2 8 1 
@@ -2391,28 +2391,28 @@ approach 4 12 1 17 1 20 5 21 1
 restored 1 9 1 
 conflicting 1 9 1 
 occurred 3 20 1 21 1 25 1 
-stoted 1 12 1 
 continued 2 10 1 14 1 
+stoted 1 12 1 
 addresses 4 10 1 13 10 22 3 24 1 
 register 2 13 1 7 1 
-crashed 3 23 1 24 1 25 1 
-snipped 3 12 1 20 1 23 1 
 compiled 5 10 1 16 1 18 4 20 1 24 1 
-the 26 1 912 10 219 11 129 12 302 13 138 14 157 15 324 16 260 17 197 18 134 19 2 2 19 20 284 21 162 22 154 23 196 24 388 25 217 26 187 3 34 4 35 5 14 6 11 7 314 8 239 9 69 
-evolves 1 21 1 
+snipped 3 12 1 20 1 23 1 
+crashed 3 23 1 24 1 25 1 
+the 26 1 1026 10 219 11 129 12 302 13 138 14 157 15 324 16 260 17 197 18 134 19 2 2 19 20 284 21 162 22 154 23 196 24 388 25 217 26 187 3 34 4 35 5 14 6 11 7 314 8 239 9 69 
 entry 5 10 1 15 1 24 1 6 1 7 3 
+evolves 1 21 1 
 variable 10 10 3 13 5 14 1 15 2 17 1 18 2 20 2 25 1 7 1 8 5 
-here 23 1 16 10 1 11 1 12 4 13 5 14 5 15 5 16 4 17 2 18 2 20 4 21 6 22 3 23 5 24 3 25 5 26 3 4 1 5 1 6 2 7 6 8 4 9 2 
+here 23 1 18 10 1 11 1 12 4 13 5 14 5 15 5 16 4 17 2 18 2 20 4 21 6 22 3 23 5 24 3 25 5 26 3 4 1 5 1 6 2 7 6 8 4 9 2 
 manua 1 6 1 
 authenticate 1 7 1 
 research 4 11 3 12 1 23 1 25 4 
-symbolic 1 8 3 
+series 9 1 18 11 4 13 1 18 1 20 1 21 2 23 1 24 1 25 2 
 style 8 11 2 20 1 21 1 22 2 23 1 24 1 25 3 26 1 
-series 9 1 16 11 4 13 1 18 1 20 1 21 2 23 1 24 1 25 2 
+symbolic 1 8 3 
 trivially 1 13 1 
-fbff 2 13 12 17 1 
 format 8 12 1 16 3 18 1 22 1 23 1 24 2 7 4 8 2 
-were 11 1 8 10 1 11 1 12 1 13 2 17 1 18 1 20 2 25 2 7 2 8 1 
+fbff 2 13 12 17 1 
+were 11 1 9 10 1 11 1 12 1 13 2 17 1 18 1 20 2 25 2 7 2 8 1 
 xemacs 1 8 1 
 insufficient 1 14 1 
 adirondacks 1 24 1 
@@ -2420,60 +2420,60 @@ xml 2 12 3 23 3
 inspect 1 17 3 
 passed 8 10 1 13 2 17 1 18 1 24 1 25 1 26 1 8 1 
 reflected 1 20 1 
-deployed 1 21 1 
 date 8 11 2 20 1 23 1 24 1 3 2 4 1 7 1 8 1 
-hate 1 1 8 
-late 4 1 64 12 1 3 1 7 1 
+deployed 1 21 1 
+hate 1 1 9 
+late 4 1 72 12 1 3 1 7 1 
 prs 1 18 22 
-bin 4 15 4 24 1 7 3 8 36 
 rate 1 13 1 
+bin 4 15 4 24 1 7 3 8 36 
 storing 3 15 1 16 1 24 1 
 dangers 1 20 1 
 imagine 7 11 1 12 2 16 2 21 1 23 2 24 1 9 1 
 lin 1 20 1 
-min 2 1 16 14 1 
+min 2 1 18 14 1 
 nancopters 1 4 2 
 occurence 1 24 1 
 pointing 2 13 2 15 2 
 actions 2 18 1 8 1 
+be 25 1 207 10 19 11 7 12 28 13 15 14 7 15 24 16 14 17 13 18 10 2 3 20 30 21 25 22 6 23 26 24 35 25 21 26 6 3 8 4 6 5 3 6 3 7 26 8 29 9 3 
 referring 2 10 1 8 1 
-be 25 1 184 10 19 11 7 12 28 13 15 14 7 15 24 16 14 17 13 18 10 2 3 20 30 21 25 22 6 23 26 24 35 25 21 26 6 3 8 4 6 5 3 6 3 7 26 8 29 9 3 
+simplicity 3 1 9 12 3 25 1 
 scalar 2 10 1 13 1 
-simplicity 3 1 8 12 3 25 1 
 techie 1 16 1 
-ge 1 20 1 
 win 3 10 1 22 4 4 1 
+ge 1 20 1 
 he 6 11 2 16 1 20 1 25 1 5 1 7 1 
 ie 1 11 1 
-me 10 1 16 11 3 12 1 20 1 21 1 22 1 5 1 6 2 7 1 9 1 
+me 10 1 18 11 3 12 1 20 1 21 1 22 1 5 1 6 2 7 1 9 1 
 re 2 21 1 22 1 
-se 1 8 5 
-clarify 2 22 1 25 1 
 saying 1 21 1 
+clarify 2 22 1 25 1 
+se 1 8 5 
 ve 1 6 1 
-we 25 1 144 10 19 11 46 12 26 13 36 14 16 15 62 16 35 17 25 18 16 2 2 20 37 21 26 22 10 23 17 24 36 25 27 26 7 3 8 4 8 5 8 6 2 7 48 8 38 9 21 
-gnu 10 1 16 11 2 12 1 17 2 18 4 20 2 23 2 6 2 7 16 8 1 
+gnu 10 1 18 11 2 12 1 17 2 18 4 20 2 23 2 6 2 7 16 8 1 
+we 25 1 162 10 19 11 46 12 26 13 36 14 16 15 62 16 35 17 25 18 16 2 2 20 37 21 26 22 10 23 17 24 36 25 27 26 7 3 8 4 8 5 8 6 2 7 48 8 38 9 21 
+happy 4 1 9 10 1 14 1 21 1 
 hundreds 1 15 1 
-happy 4 1 8 10 1 14 1 21 1 
-original 6 1 8 12 3 13 2 24 3 3 1 8 1 
-backward 1 15 3 
+original 6 1 9 12 3 13 2 24 3 3 1 8 1 
 responsibility 1 10 1 
+backward 1 15 3 
 capable 3 14 1 24 1 26 1 
 kelly 1 14 1 
 level 12 11 1 12 3 16 4 17 2 20 1 21 1 24 1 26 1 4 1 7 1 8 2 9 1 
 misunderstanding 1 20 1 
 networks 1 11 1 
-readability 1 24 1 
-relying 1 20 1 
+resources 6 1 9 12 1 16 3 17 1 6 4 8 1 
 runtime 2 15 1 20 1 
-resources 6 1 8 12 1 16 3 17 1 6 4 8 1 
+relying 1 20 1 
+readability 1 24 1 
 sep 1 17 1 
 thumb 1 20 1 
 generators 1 10 1 
 perror 1 14 1 
 rank 3 11 2 12 1 25 3 
-scheduler 1 15 1 
 studies 1 11 1 
+scheduler 1 15 1 
 transfered 1 11 1 
 place 5 10 1 15 2 17 1 20 2 8 1 
 refinements 1 12 1 
@@ -2483,75 +2483,75 @@ far 3 20 1 25 1 4 1
 getipadress 1 22 1 
 mar 2 7 2 8 2 
 proceed 1 24 1 
-responsible 4 1 8 20 1 26 1 7 1 
+responsible 4 1 9 20 1 26 1 7 1 
 saves 6 12 2 14 1 15 1 21 1 23 2 24 2 
 tar 1 23 3 
 ecampbell 1 11 2 
 method 4 10 2 17 1 18 1 21 1 
 notice 4 10 4 11 1 13 3 9 1 
 appending 1 15 1 
-specifications 3 16 1 5 2 7 1 
 crawlingwww 2 12 1 23 1 
-depths 1 25 1 
+specifications 3 16 1 5 2 7 1 
 displays 3 10 1 14 3 7 1 
+depths 1 25 1 
 hunt 2 4 1 7 1 
 output 15 10 2 12 5 13 4 14 2 16 3 17 4 19 2 20 5 21 3 23 4 24 2 25 3 26 1 7 8 8 1 
 radio 2 12 3 20 3 
+specific 5 1 9 10 3 16 2 18 1 23 1 
 skill 3 24 1 26 1 7 1 
-specific 5 1 8 10 3 16 2 18 1 23 1 
-using 22 1 40 10 11 11 8 12 1 13 9 14 6 15 5 17 2 18 2 2 1 20 10 21 3 22 4 23 3 24 4 25 4 26 5 3 3 4 2 7 29 8 9 9 2 
-weekly 2 1 8 7 2 
+using 22 1 45 10 11 11 8 12 1 13 9 14 6 15 5 17 2 18 2 2 1 20 10 21 3 22 4 23 3 24 4 25 4 26 5 3 3 4 2 7 29 8 9 9 2 
+weekly 2 1 9 7 2 
 installer 1 7 2 
 myarray 1 10 1 
-recover 2 21 1 9 1 
 bake 2 12 2 21 1 
+recover 2 21 1 9 1 
 textual 1 10 5 
 until 12 12 1 13 3 15 2 17 3 18 1 20 4 21 2 22 1 24 1 25 1 26 1 7 1 
 inclusions 1 10 1 
 knew 1 21 1 
-make 22 1 32 11 2 12 2 13 3 14 3 15 6 16 8 17 5 18 40 2 1 20 11 21 6 22 7 23 14 24 17 25 16 26 2 3 4 6 2 7 7 8 2 9 2 
-other 16 1 48 10 2 11 3 12 2 15 4 16 2 17 3 18 2 20 3 21 4 22 1 24 5 25 3 7 8 8 4 9 1 
-asynchronously 2 12 3 24 1 
+make 22 1 36 11 2 12 2 13 3 14 3 15 6 16 8 17 5 18 40 2 1 20 11 21 6 22 7 23 14 24 17 25 16 26 2 3 4 6 2 7 7 8 2 9 2 
+other 16 1 54 10 2 11 3 12 2 15 4 16 2 17 3 18 2 20 3 21 4 22 1 24 5 25 3 7 8 8 4 9 1 
 quoted 1 10 1 
-commitment 2 1 8 7 1 
-take 17 1 32 11 6 13 1 14 2 16 3 17 2 18 1 20 2 21 4 22 2 23 1 24 2 25 5 3 2 4 1 5 1 7 10 
-die 2 1 16 4 1 
+asynchronously 2 12 3 24 1 
+commitment 2 1 9 7 1 
+die 2 1 18 4 1 
+take 17 1 36 11 6 13 1 14 2 16 3 17 2 18 1 20 2 21 4 22 2 23 1 24 2 25 5 3 2 4 1 5 1 7 10 
 priority 2 15 1 3 1 
 reach 2 13 2 25 1 
 significance 1 13 1 
-tie 1 22 1 
 debugger 4 17 8 18 1 20 4 7 1 
+tie 1 22 1 
 heck 1 17 1 
 provably 1 25 1 
 repeatedly 1 14 1 
 stick 1 7 1 
-deadlinks 1 23 1 
-tension 1 20 1 
 tosses 1 10 9 
-extension 4 1 8 10 2 11 1 24 1 
+tension 1 20 1 
+deadlinks 1 23 1 
+extension 4 1 9 10 2 11 1 24 1 
 hanging 1 17 1 
 introduce 7 10 1 12 2 13 1 16 1 21 1 23 1 9 1 
 loads 2 18 1 24 1 
 arbitrary 2 16 1 7 1 
 strng 1 10 1 
-form 7 1 8 10 1 11 1 12 1 20 1 21 1 7 2 
-identifier 2 22 1 24 11 
+form 7 1 9 10 1 11 1 12 1 20 1 21 1 7 2 
 initdictionary 2 20 1 21 1 
-bss 1 7 3 
-reports 2 12 1 23 1 
+identifier 2 22 1 24 11 
 requested 3 10 1 14 2 26 1 
-scissors 1 22 6 
-seg 2 13 1 20 2 
-studied 1 12 1 
-steps 4 12 1 17 3 20 2 5 1 
+reports 2 12 1 23 1 
+bss 1 7 3 
 css 1 11 2 
+steps 4 12 1 17 3 20 2 5 1 
+studied 1 12 1 
+seg 2 13 1 20 2 
+scissors 1 22 6 
 darwin 1 17 1 
 formulating 1 16 1 
 grouped 2 15 1 8 1 
-kramer 1 1 16 
-large 11 1 16 12 3 15 2 16 3 18 2 20 5 21 1 23 3 24 2 7 4 9 2 
-oss 1 21 1 
+kramer 1 1 18 
+large 11 1 18 12 3 15 2 16 3 18 2 20 5 21 1 23 3 24 2 7 4 9 2 
 otherwise 6 10 1 14 1 15 1 16 1 24 2 3 1 
+oss 1 21 1 
 blitz 3 3 2 7 1 9 2 
 saveindextofile 1 24 1 
 frequency 2 24 5 25 2 
@@ -2560,96 +2560,96 @@ index 12 11 5 12 6 13 1 14 1 15 18 17 13 20 2 23 4 24 109 25 13 26 2 9 1
 leakes 1 24 1 
 automates 1 18 2 
 readings 1 26 9 
+ship 1 1 9 
 scan 1 24 1 
-ship 1 1 8 
-df 1 7 1 
 tinysearch 11 11 15 12 11 14 2 15 1 16 2 19 1 2 4 21 4 23 4 24 8 25 31 
+df 1 7 1 
 ff 1 7 3 
-games 1 7 1 
 whatever 1 11 1 
-if 24 1 96 10 10 11 5 12 16 13 6 14 17 15 22 16 13 17 19 18 12 2 2 20 23 21 32 22 9 23 12 24 17 25 22 26 4 3 5 5 2 6 2 7 24 8 16 9 5 
+games 1 7 1 
+if 24 1 108 10 10 11 5 12 16 13 6 14 17 15 22 16 13 17 19 18 12 2 2 20 23 21 32 22 9 23 12 24 17 25 22 26 4 3 5 5 2 6 2 7 24 8 16 9 5 
 lf 1 8 1 
 names 7 12 1 13 1 15 1 22 3 24 4 25 1 8 7 
+of 25 1 342 10 111 11 52 12 89 13 54 14 74 15 97 16 70 17 37 18 42 2 12 20 128 21 60 22 38 23 43 24 100 25 69 26 25 3 13 4 6 5 13 6 5 7 65 8 54 9 21 
 observe 3 12 2 23 2 24 1 
-of 25 1 304 10 111 11 52 12 89 13 54 14 74 15 97 16 70 17 37 18 42 2 12 20 128 21 60 22 38 23 43 24 100 25 69 26 25 3 13 4 6 5 13 6 5 7 65 8 54 9 21 
 rf 1 9 2 
 typical 2 13 1 8 1 
 forked 2 26 1 8 1 
 xf 1 7 2 
 define 10 10 22 11 1 14 14 15 2 16 16 17 1 18 1 20 1 22 1 25 1 
+expose 1 1 9 
 execute 8 12 1 13 1 18 1 20 3 23 1 25 1 7 6 8 23 
-expose 1 1 8 
 freeing 1 17 1 
 worked 3 18 1 21 3 25 1 
-you 25 1 400 10 5 11 22 12 19 13 14 14 12 15 15 16 9 17 51 18 20 2 8 20 85 21 62 22 37 23 31 24 65 25 65 26 24 3 24 4 7 5 5 6 4 7 89 8 23 9 25 
+you 25 1 450 10 5 11 22 12 19 13 14 14 12 15 15 16 9 17 51 18 20 2 8 20 85 21 62 22 37 23 31 24 65 25 65 26 24 3 24 4 7 5 5 6 4 7 89 8 23 9 25 
 numerically 2 15 1 22 1 
-office 1 1 16 
+office 1 1 18 
 peusdo 1 17 1 
-attack 1 17 1 
 abstracts 2 12 1 7 1 
+attack 1 17 1 
 refine 1 12 1 
 channel 1 7 2 
+weeks 6 1 18 12 1 2 1 20 1 4 1 7 2 
 gmon 1 20 1 
-weeks 6 1 16 12 1 2 1 20 1 4 1 7 2 
 nokia 1 11 1 
 protocols 1 11 1 
 radically 2 17 1 20 1 
-seeing 2 20 1 9 1 
-scaled 1 14 2 
 stanford 4 11 3 12 1 24 1 25 1 
+scaled 1 14 2 
+seeing 2 20 1 9 1 
 frees 3 14 3 17 1 20 2 
 assertion 1 21 3 
+done 15 1 18 11 1 12 3 15 1 16 2 17 4 20 2 21 1 22 2 23 6 24 3 25 1 26 1 6 1 7 3 
 trees 2 7 1 9 1 
-done 15 1 16 11 1 12 3 15 1 16 2 17 4 20 2 21 1 22 2 23 6 24 3 25 1 26 1 6 1 7 3 
-gone 2 20 2 9 1 
 gracefully 1 17 1 
+gone 2 20 2 9 1 
 illustrate 1 21 2 
 none 1 14 1 
+building 7 1 9 12 1 18 4 2 1 24 1 25 6 7 1 
 becoming 2 24 1 8 1 
-building 7 1 8 12 1 18 4 2 1 24 1 25 6 7 1 
 suppressed 2 17 2 20 5 
-unsure 1 1 8 
+unsure 1 1 9 
 incrementing 3 12 2 14 2 23 2 
 managed 1 12 1 
 pulls 3 22 1 25 1 7 2 
 buggy 1 20 14 
-seturlasvisited 3 16 6 17 2 20 1 
 count 3 11 1 24 1 9 33 
+seturlasvisited 3 16 6 17 2 20 1 
 translate 2 16 1 7 3 
 inc 1 17 1 
 matching 1 25 1 
 overwritten 1 8 1 
 patching 1 20 1 
-sting 1 7 1 
-speed 7 13 2 14 1 15 3 16 1 20 2 24 1 7 1 
 char 9 10 7 13 45 14 16 15 5 16 14 20 12 21 6 24 12 7 2 
+speed 7 13 2 14 1 15 3 16 1 20 2 24 1 7 1 
+sting 1 7 1 
 english 3 12 1 16 1 21 1 
 onward 2 24 1 3 1 
 received 3 10 1 26 2 3 1 
 successive 2 12 1 13 1 
 feature 2 10 1 13 2 
+indexer 11 1 9 11 4 12 2 15 1 19 6 2 2 21 1 24 47 25 23 3 3 7 1 
 imcomplete 1 14 1 
-indexer 11 1 8 11 4 12 2 15 1 19 6 2 2 21 1 24 47 25 23 3 3 7 1 
-consists 4 15 1 25 1 7 1 8 1 
-snippet 11 10 2 11 6 12 2 13 1 15 5 17 1 20 1 21 5 23 3 24 1 7 1 
 subscript 3 10 1 20 1 21 1 
+snippet 11 10 2 11 6 12 2 13 1 15 5 17 1 20 1 21 5 23 3 24 1 7 1 
+consists 4 15 1 25 1 7 1 8 1 
 dual 1 7 1 
 follows 13 12 5 14 1 15 2 17 2 18 2 20 3 21 1 22 1 23 2 24 4 25 3 7 1 8 2 
-winter 2 1 8 25 1 
-harness 2 21 1 25 1 
+winter 2 1 9 25 1 
 history 2 11 2 8 1 
-improving 1 20 1 
+harness 2 21 1 25 1 
 itself 7 10 2 11 1 15 2 24 2 26 1 4 1 8 2 
+improving 1 20 1 
 robust 2 21 1 25 1 
 discover 1 20 1 
-understandable 2 1 8 12 1 
-matthew 2 1 24 20 2 
-arithmetic 2 13 8 14 1 
+understandable 2 1 9 12 1 
+matthew 2 1 27 20 2 
 quick 8 11 1 12 1 16 1 17 3 20 1 3 1 6 1 7 1 
+arithmetic 2 13 8 14 1 
 begin 5 10 2 12 1 16 1 2 1 8 2 
 systematically 1 21 1 
+embedded 8 1 45 11 7 12 4 15 1 23 4 3 1 4 3 7 1 
 expands 1 11 1 
-embedded 8 1 40 11 7 12 4 15 1 23 4 3 1 4 3 7 1 
 identifiers 1 24 4 
 removal 1 15 1 
 docs 2 17 1 20 1 
@@ -2659,185 +2659,185 @@ represent 5 11 1 12 1 22 1 24 1 8 2
 compilie 1 14 1 
 its 18 10 9 11 4 12 11 13 9 14 5 15 2 16 3 17 1 18 1 20 2 21 6 22 8 23 5 24 4 25 1 7 15 8 6 9 2 
 keyword 4 10 1 12 1 24 1 7 2 
-pts 1 8 2 
 properly 1 17 1 
+pts 1 8 2 
 beautifully 1 21 1 
-cmbx 1 11 2 
 searched 5 11 1 12 1 15 3 17 1 7 1 
+cmbx 1 11 2 
 hardware 1 7 1 
 imped 1 20 1 
 logically 1 21 1 
 bg 1 8 1 
+submitted 6 1 36 23 1 24 1 25 1 3 1 7 1 
 sessions 1 3 1 
-submitted 6 1 32 23 1 24 1 25 1 3 1 7 1 
 deallocated 2 16 2 17 1 
 erroneous 1 23 1 
 fg 1 8 1 
 yourreponame 1 3 2 
-lg 1 8 1 
 logged 3 22 3 7 1 8 1 
+lg 1 8 1 
 og 1 8 1 
-pg 3 14 1 20 3 22 1 
 processing 8 12 3 14 1 16 5 17 3 20 1 23 2 24 1 25 1 
+pg 3 14 1 20 3 22 1 
 remember 4 13 2 17 2 20 1 24 1 
 strongly 3 20 1 21 2 8 1 
 derives 1 15 1 
 ug 5 12 3 23 3 25 2 7 3 8 5 
-vg 1 20 5 
 feof 1 14 1 
+vg 1 20 5 
 wild 1 21 1 
 mentioned 5 17 2 18 1 20 1 26 2 3 1 
 constants 3 10 7 13 1 16 1 
-tokens 1 8 1 
 documentnode 1 24 9 
+tokens 1 8 1 
 unencrypted 1 9 2 
-fired 2 1 8 12 1 
+fired 2 1 9 12 1 
 hired 1 12 1 
 outu 1 17 1 
+correctness 4 1 9 12 1 17 1 22 3 
 stripped 1 11 1 
-correctness 4 1 8 12 1 17 1 22 3 
 largest 1 21 1 
 nend 1 9 1 
 operate 3 16 1 22 1 24 1 
 progressively 3 12 1 20 1 22 1 
 assumes 4 10 1 21 2 24 1 8 1 
-send 2 26 1 6 1 
-sensors 2 26 3 7 1 
 convention 3 10 2 13 1 22 1 
-tricky 2 17 4 20 4 
+sensors 2 26 3 7 1 
+send 2 26 1 6 1 
 telnet 2 11 2 7 1 
+tricky 2 17 4 20 4 
 explain 4 10 1 13 1 15 2 25 1 
-helped 1 20 1 
 hashed 1 15 1 
+helped 1 20 1 
 illustrates 1 14 1 
+source 16 1 72 10 2 11 3 13 3 14 1 15 1 16 2 17 1 18 11 20 8 24 5 25 8 26 2 3 2 7 4 9 17 
 consistently 3 10 1 13 1 25 1 
-source 16 1 64 10 2 11 3 13 3 14 1 15 1 16 2 17 1 18 11 20 8 24 5 25 8 26 2 3 2 7 4 9 17 
 finding 2 20 4 24 2 
 quicker 2 24 1 7 1 
-contrast 1 7 1 
 covers 2 22 1 7 1 
-displayed 2 25 1 8 3 
+contrast 1 7 1 
 ddebug 1 20 3 
+displayed 2 25 1 8 3 
 estimate 1 15 1 
 mutex 1 2 1 
-neil 1 1 8 
-behavior 2 22 1 24 1 
+neil 1 1 9 
 removewhitespace 1 20 1 
-commit 1 9 4 
-complaining 2 17 1 20 1 
-choice 4 15 1 20 2 22 2 24 1 
+behavior 2 22 1 24 1 
 closed 4 11 1 16 2 17 1 7 1 
+choice 4 15 1 20 2 22 2 24 1 
+complaining 2 17 1 20 1 
+commit 1 9 4 
 finds 8 11 1 12 4 13 1 17 1 20 1 21 1 23 3 8 2 
 insightful 1 5 1 
 minds 1 13 1 
-search 14 1 8 11 20 12 4 15 10 16 3 17 1 18 2 20 1 23 2 24 2 25 7 7 2 8 3 9 1 
-why 10 1 8 12 2 13 2 15 1 16 3 20 1 21 2 23 2 6 1 9 1 
+search 14 1 9 11 20 12 4 15 10 16 3 17 1 18 2 20 1 23 2 24 2 25 7 7 2 8 3 9 1 
+why 10 1 9 12 2 13 2 15 1 16 3 20 1 21 2 23 2 6 1 9 1 
 proxies 1 11 1 
-choose 1 15 1 
 saved 6 11 1 12 5 16 1 20 1 23 6 24 5 
-toward 3 16 1 7 1 9 1 
+choose 1 15 1 
 delay 3 12 1 16 2 23 1 
+toward 3 16 1 7 1 9 1 
 unit 9 12 3 16 1 17 1 2 1 20 2 21 5 23 1 25 14 7 1 
 grep 2 11 1 8 5 
 incomplete 2 14 1 9 1 
-paths 2 12 1 21 1 
 present 7 10 1 12 2 16 2 17 1 18 1 21 1 23 1 
+paths 2 12 1 21 1 
 sometime 2 12 1 20 1 
 faculty 4 17 1 7 14 8 79 9 1 
 interacts 2 20 1 26 2 
 advised 2 25 1 9 1 
-requiring 2 1 8 7 1 
-container 1 7 1 
+requiring 2 1 9 7 1 
 called 18 10 1 11 4 12 2 13 2 15 7 16 1 17 3 20 2 21 2 22 2 23 1 24 9 25 3 3 1 4 1 7 4 8 5 9 5 
-deeper 1 7 1 
+container 1 7 1 
 derived 1 25 1 
-writing 14 1 32 12 3 16 2 17 1 18 2 2 1 20 3 21 5 22 1 23 2 24 5 25 1 26 1 7 1 
+deeper 1 7 1 
+writing 14 1 36 12 3 16 2 17 1 18 2 2 1 20 3 21 5 22 1 23 2 24 5 25 1 26 1 7 1 
 allocates 1 14 6 
 router 2 12 1 20 3 
 columbia 1 11 1 
 undefined 1 10 1 
-interchanged 1 13 1 
 interface 9 12 1 18 14 2 1 21 1 22 2 25 1 7 1 8 1 9 1 
+interchanged 1 13 1 
 jeff 1 21 2 
 remove 8 11 1 12 2 20 1 21 1 23 1 7 2 8 2 9 3 
 conquer 1 12 1 
-decide 1 7 1 
 dynamic 10 12 1 14 6 15 5 17 1 2 1 20 1 24 1 25 1 6 1 7 1 
+decide 1 7 1 
 experimenting 1 7 1 
 port 4 11 3 2 1 26 2 7 4 
-addressbook 1 8 2 
 assumed 2 13 1 25 1 
-bootstrap 1 16 1 
+addressbook 1 8 2 
 bus 2 13 1 20 1 
-connects 1 26 2 
-cursory 1 2 1 
+bootstrap 1 16 1 
 sort 9 11 1 12 2 14 1 20 18 21 2 22 12 23 1 24 3 8 2 
+cursory 1 2 1 
+connects 1 26 2 
 thematic 1 7 1 
 usage 9 12 3 14 1 16 4 17 3 20 1 22 3 23 4 24 1 25 1 
-need 23 1 32 10 2 11 5 12 3 13 4 14 3 15 7 16 1 17 6 18 4 2 1 20 12 21 2 22 2 23 6 24 15 25 3 26 3 3 1 6 1 7 16 8 6 9 6 
+need 23 1 36 10 2 11 5 12 3 13 4 14 3 15 7 16 1 17 6 18 4 2 1 20 12 21 2 22 2 23 6 24 15 25 3 26 3 3 1 6 1 7 16 8 6 9 6 
 bean 1 9 1 
 seed 7 10 1 12 27 16 8 17 8 21 1 23 20 25 1 
 detects 4 10 1 12 1 16 1 23 1 
 mean 6 12 1 16 1 17 1 23 1 8 1 9 1 
 printing 1 22 1 
-andrew 7 1 8 11 2 13 1 14 2 25 8 7 1 9 5 
+andrew 7 1 9 11 2 13 1 14 2 25 8 7 1 9 5 
+caveat 2 1 18 7 1 
 ch 1 20 2 
-caveat 2 1 16 7 1 
 definitely 1 20 2 
 hypens 1 7 1 
 nh 2 7 3 8 1 
+computer 16 1 36 10 1 11 2 13 3 16 1 17 3 2 1 20 4 22 9 24 1 3 1 4 1 5 1 6 1 7 7 9 2 
+started 10 1 9 10 1 16 1 17 4 2 2 21 1 24 1 7 8 8 1 9 1 
 sh 6 22 3 23 4 24 3 25 10 8 2 9 81 
-started 10 1 8 10 1 16 1 17 4 2 2 21 1 24 1 7 8 8 1 9 1 
-computer 16 1 32 10 1 11 2 13 3 16 1 17 3 2 1 20 4 22 9 24 1 3 1 4 1 5 1 6 1 7 7 9 2 
+th 2 1 9 6 2 
 double 11 10 2 12 1 14 2 15 16 16 8 17 2 20 1 21 9 24 4 3 1 7 1 
-th 2 1 8 6 2 
-information 14 10 1 11 11 12 4 14 1 15 7 16 3 22 6 23 1 24 3 3 1 4 4 7 10 8 2 9 1 
 included 5 10 3 20 1 23 3 24 3 25 1 
+information 14 10 1 11 11 12 4 14 1 15 7 16 3 22 6 23 1 24 3 3 1 4 4 7 10 8 2 9 1 
 numrows 1 10 3 
 periodic 1 7 1 
-explanation 1 25 1 
 enemy 2 17 1 20 1 
+explanation 1 25 1 
 php 4 12 23 17 16 23 23 25 11 
 arbitrarily 1 15 1 
 rule 2 20 1 8 1 
-conventions 1 7 2 
 sentinel 1 10 1 
+conventions 1 7 2 
 named 7 10 2 14 2 20 1 22 1 23 1 24 1 26 1 
-symbols 1 17 2 
+specifically 6 1 27 18 2 21 1 24 1 25 1 8 1 
 soon 2 13 1 4 1 
-specifically 6 1 24 18 2 21 1 24 1 25 1 8 1 
+symbols 1 17 2 
 eta 3 11 1 12 2 23 2 
 proposal 1 12 1 
-combine 1 8 1 
 successful 4 10 1 20 1 24 2 8 1 
+combine 1 8 1 
 infomative 1 7 1 
 consuming 1 20 1 
 getpwuid 1 20 2 
+important 19 1 9 10 1 11 2 12 6 14 2 15 2 16 5 17 1 18 2 20 5 21 1 22 2 23 1 24 3 25 1 26 1 3 1 7 2 9 1 
 ifndef 1 14 1 
-important 19 1 8 10 1 11 2 12 6 14 2 15 2 16 5 17 1 18 2 20 5 21 1 22 2 23 1 24 3 25 1 26 1 3 1 7 2 9 1 
-comment 4 15 1 17 1 7 3 9 2 
 comprehensive 1 11 1 
+comment 4 15 1 17 1 7 3 9 2 
 freed 2 17 1 20 2 
 xterm 1 7 9 
 ipc 1 20 2 
 ppc 2 17 1 20 1 
 charset 1 11 1 
 theses 2 12 1 23 1 
-everything 2 1 8 25 3 
+everything 2 1 9 25 3 
 idiomatic 1 21 8 
-result 6 1 8 10 6 12 2 15 2 24 1 25 1 
-tips 4 17 17 21 2 24 1 5 1 
-describes 4 15 1 16 1 24 1 25 1 
+result 6 1 9 10 6 12 2 15 2 24 1 25 1 
 toit 4 11 2 12 1 24 1 25 1 
+describes 4 15 1 16 1 24 1 25 1 
+tips 4 17 17 21 2 24 1 5 1 
 helpful 2 12 2 20 2 
 convince 2 20 1 21 2 
+dartmouth 26 1 126 10 1 11 30 12 48 13 1 14 3 15 7 16 9 17 30 18 1 19 1 2 2 20 3 21 2 22 1 23 51 24 2 25 99 26 4 3 4 4 1 5 1 6 2 7 21 8 4 9 12 
 tunes 2 12 1 23 1 
-dartmouth 26 1 112 10 1 11 30 12 48 13 1 14 3 15 7 16 9 17 30 18 1 19 1 2 2 20 3 21 2 22 1 23 51 24 2 25 99 26 4 3 4 4 1 5 1 6 2 7 21 8 4 9 12 
+grading 6 1 18 21 1 22 3 23 4 24 3 7 3 
 genuine 1 21 1 
-grading 6 1 16 21 1 22 3 23 4 24 3 7 3 
 newly 1 15 1 
-playing 2 20 1 22 2 
 principle 2 12 1 14 1 
+playing 2 20 1 22 2 
 realized 1 16 1 
 sartmouth 1 15 1 
 fire 2 20 1 5 1 
@@ -2845,110 +2845,110 @@ generic 4 13 1 14 1 15 2 18 1
 logfile 2 12 1 23 1 
 promise 1 3 1 
 revised 1 10 3 
-charts 1 20 1 
+solving 3 1 27 20 1 7 2 
 skeptical 1 12 1 
-solving 3 1 24 20 1 7 2 
+charts 1 20 1 
 defining 3 10 3 14 1 20 2 
 license 1 17 1 
 accepts 1 10 1 
 child 1 26 1 
 global 5 10 2 17 1 20 2 22 1 7 1 
 minimize 1 16 1 
-rlogin 1 7 2 
-backbone 1 25 1 
-beyond 5 17 1 20 4 21 1 7 1 9 1 
 believer 1 12 1 
-completes 4 12 1 23 1 4 1 8 1 
+beyond 5 17 1 20 4 21 1 7 1 9 1 
+backbone 1 25 1 
+rlogin 1 7 2 
+cvs 4 1 9 16 1 6 1 9 1 
+swipe 1 1 9 
 stage 5 12 1 16 1 20 1 23 1 25 1 
-swipe 1 1 8 
-cvs 4 1 8 16 1 6 1 9 1 
-teaches 1 1 8 
+completes 4 12 1 23 1 4 1 8 1 
+teaches 1 1 9 
 interrogate 1 10 1 
 jaded 1 5 1 
 perils 1 5 1 
+answer 4 1 18 11 1 21 2 25 2 
 average 2 20 2 21 3 
-answer 4 1 16 11 1 21 2 25 2 
 blasting 1 12 1 
-cynicism 1 5 1 
 checking 7 10 3 12 1 13 3 17 2 20 4 21 2 8 1 
-extraordinaire 1 5 1 
+cynicism 1 5 1 
 established 2 26 1 7 1 
+extraordinaire 1 5 1 
 repo 2 3 1 9 6 
-skip 5 11 1 18 1 20 1 21 1 7 1 
+segfaults 7 1 27 17 2 20 3 23 3 24 5 25 5 3 2 
 compiler 7 10 9 18 5 20 4 23 1 24 2 7 8 8 1 
-segfaults 7 1 24 17 2 20 3 23 3 24 5 25 5 3 2 
-designed 6 1 8 12 1 15 2 20 2 24 2 7 2 
+skip 5 11 1 18 1 20 1 21 1 7 1 
+designed 6 1 9 12 1 15 2 20 2 24 2 7 2 
 fi 1 24 1 
 hi 1 7 1 
-individual 1 18 1 
 ii 1 16 1 
+individual 1 18 1 
 joel 1 5 15 
 latest 2 4 1 8 1 
 applying 1 12 1 
-reserve 1 15 1 
-built 5 12 1 24 1 25 1 4 2 8 1 
 rely 1 11 1 
+built 5 12 1 24 1 25 1 4 2 8 1 
+reserve 1 15 1 
 select 1 8 1 
 vi 2 6 3 7 1 
 gave 3 12 1 25 1 5 1 
-have 23 1 64 10 6 11 11 12 6 13 8 14 6 15 16 16 6 17 15 18 8 20 26 21 18 22 3 23 3 24 15 25 19 26 3 3 6 4 5 5 3 7 19 8 12 9 4 
+have 23 1 72 10 6 11 11 12 6 13 8 14 6 15 16 16 6 17 15 18 8 20 26 21 18 22 3 23 3 24 15 25 19 26 3 3 6 4 5 5 3 7 19 8 12 9 4 
 junghoo 4 11 2 12 1 24 1 25 1 
-passwords 2 8 1 9 2 
 presence 2 20 2 21 1 
+passwords 2 8 1 9 2 
 retrieves 3 12 6 23 4 26 1 
-swatting 1 21 1 
-cites 1 21 1 
-calleecaller 1 20 1 
-strorage 1 14 1 
 save 6 12 1 16 3 18 2 21 3 23 2 24 6 
+strorage 1 14 1 
+calleecaller 1 20 1 
+cites 1 21 1 
+swatting 1 21 1 
 denise 1 11 1 
 holding 1 15 1 
 indexes 3 11 1 15 1 26 1 
 jensen 1 6 1 
 likely 7 12 3 16 1 17 3 18 1 20 2 21 3 23 1 
 parses 4 12 4 23 3 24 4 8 2 
-anyone 2 1 8 15 1 
-staff 2 17 5 7 1 
-contractors 1 12 1 
+anyone 2 1 9 15 1 
 sites 2 11 2 12 1 
+contractors 1 12 1 
+staff 2 17 5 7 1 
 tip 5 21 16 22 1 23 2 24 3 26 3 
 urls 8 11 12 12 21 15 10 16 15 17 7 20 1 23 12 25 2 
 flags 3 20 5 24 5 7 1 
 wiki 1 24 1 
-mirror 1 9 1 
 many 16 10 2 12 8 13 2 14 1 15 2 17 2 18 1 20 16 21 7 22 1 23 1 24 4 25 4 26 1 6 1 8 4 
+mirror 1 9 1 
 documented 1 25 1 
 upon 1 26 1 
 fresh 1 20 1 
 holds 6 14 1 15 5 16 10 24 3 25 2 7 1 
 obtaining 1 15 1 
-strdup 1 14 1 
-space 5 13 1 14 7 15 5 18 2 25 3 
 components 7 11 5 12 3 20 1 24 2 25 3 26 1 3 2 
+space 5 13 1 14 7 15 5 18 2 25 3 
+strdup 1 14 1 
 data 19 10 8 11 3 12 16 13 5 14 18 15 48 16 45 17 37 19 4 2 4 20 20 21 7 22 4 23 7 24 31 25 7 26 42 7 8 9 2 
 welcometothedartmouthcomputersc 1 17 1 
-ifdefs 2 20 1 21 1 
 initlist 2 17 3 20 1 
+ifdefs 2 20 1 21 1 
 linking 3 15 2 18 3 7 2 
 per 8 12 1 15 2 16 5 20 2 23 1 24 1 25 1 26 2 
 aware 1 8 1 
-semi 1 4 1 
-scandir 1 24 12 
 convincing 1 20 1 
+scandir 1 24 12 
+semi 1 4 1 
 getenv 1 20 2 
 internal 6 10 1 12 1 17 3 18 1 23 1 24 3 
-subdirectories 2 8 1 9 2 
-submited 3 23 1 24 1 25 1 
-comet 1 11 1 
 substitution 1 10 2 
+comet 1 11 1 
+submited 3 23 1 24 1 25 1 
+subdirectories 2 8 1 9 2 
 denied 1 8 1 
-vital 2 1 8 7 1 
+vital 2 1 9 7 1 
 grunt 1 21 1 
 increase 4 12 1 22 1 23 1 24 1 
 links 8 11 1 12 4 18 1 23 4 24 1 6 1 7 3 8 1 
 reached 4 12 1 16 1 23 1 26 1 
-shellscript 1 8 2 
 cat 4 21 2 24 8 25 4 8 1 
+shellscript 1 8 2 
 dat 5 14 1 22 4 24 29 25 2 26 6 
 vconfiiew 1 7 1 
 hat 1 7 1 
@@ -2956,101 +2956,101 @@ load 4 12 3 24 1 25 1 7 3
 parallel 2 11 1 9 1 
 reduced 1 15 1 
 sat 2 21 1 7 3 
-design 23 1 104 10 1 11 18 12 41 13 1 14 1 15 16 16 24 17 3 18 1 19 2 2 6 20 26 21 5 22 1 23 9 24 14 25 16 26 4 3 5 7 10 8 6 9 1 
+design 23 1 117 10 1 11 18 12 41 13 1 14 1 15 16 16 24 17 3 18 1 19 2 2 6 20 26 21 5 22 1 23 9 24 14 25 16 26 4 3 5 7 10 8 6 9 1 
 producing 3 16 1 21 1 7 1 
 argument 5 10 1 17 1 22 1 7 1 8 3 
 reloc 1 7 2 
 step 3 17 14 20 5 7 1 
 woeful 1 20 1 
-kang 1 1 16 
+kang 1 1 18 
 lang 2 12 6 23 6 
 permits 1 10 1 
+command 16 1 9 11 3 12 9 15 1 16 4 17 10 18 9 20 9 22 17 23 8 24 9 25 6 6 1 7 36 8 41 9 2 
 scoping 1 10 1 
-command 16 1 8 11 3 12 9 15 1 16 4 17 10 18 9 20 9 22 17 23 8 24 9 25 6 6 1 7 36 8 41 9 2 
 further 5 10 1 12 1 17 1 20 1 6 1 
 wang 1 2 1 
 libtseutil 1 25 4 
 manifest 2 17 1 20 1 
-push 1 7 3 
-preceded 2 7 1 8 1 
 pick 2 11 1 20 1 
+preceded 2 7 1 8 1 
+push 1 7 3 
 rush 1 20 1 
-shrl 1 7 1 
 came 2 12 1 8 1 
+shrl 1 7 1 
 game 2 18 18 22 17 
 indexed 1 24 1 
-name 18 1 8 10 10 11 6 12 2 13 3 14 6 15 6 16 4 17 2 18 2 20 5 22 2 23 5 24 11 3 2 7 8 8 5 9 5 
-rumored 1 8 1 
-big 2 14 1 25 2 
+name 18 1 9 10 10 11 6 12 2 13 3 14 6 15 6 16 4 17 2 18 2 20 5 22 2 23 5 24 11 3 2 7 8 8 5 9 5 
 blueprint 2 12 1 23 1 
-crawls 2 12 3 23 2 
-connected 4 11 3 12 2 23 3 26 2 
+big 2 14 1 25 2 
+rumored 1 8 1 
 same 19 10 4 11 1 12 1 13 3 14 3 15 17 16 6 17 5 18 2 20 2 21 1 22 3 23 2 24 6 25 5 26 4 7 2 8 1 9 1 
+connected 4 11 3 12 2 23 3 26 2 
+crawls 2 12 3 23 2 
 dig 1 2 1 
 url 12 11 8 12 39 14 26 15 82 16 64 17 44 21 2 23 37 24 2 25 97 3 1 9 12 
 marks 4 12 1 23 1 25 1 4 1 
-programs 15 1 16 10 3 13 2 14 1 16 1 18 1 22 2 23 3 24 2 25 1 3 1 6 1 7 4 8 5 9 1 
+programs 15 1 18 10 3 13 2 14 1 16 1 18 1 22 2 23 3 24 2 25 1 3 1 6 1 7 4 8 5 9 1 
 reasonable 2 15 1 21 1 
-srcs 1 18 8 
 sophomore 1 10 1 
+srcs 1 18 8 
 underperforms 1 21 1 
 famous 4 11 1 15 1 2 1 25 1 
-however 9 1 16 10 1 12 1 15 2 18 1 20 2 26 3 3 1 7 1 
+however 9 1 18 10 1 12 1 15 2 18 1 20 2 26 3 3 1 7 1 
 adapt 1 12 2 
-sws 3 12 1 23 1 25 2 
-starring 1 12 1 
-commence 1 10 1 
 calculating 2 10 2 25 1 
+commence 1 10 1 
+starring 1 12 1 
+sws 3 12 1 23 1 25 2 
 demonstrate 2 20 2 21 1 
 enough 6 10 2 12 1 14 1 20 1 25 2 7 1 
-week 10 1 8 11 1 12 3 17 1 2 10 20 1 23 1 24 3 3 1 5 7 
+week 10 1 9 11 1 12 3 17 1 2 10 20 1 23 1 24 3 3 1 5 7 
 intel 3 11 1 20 1 7 4 
-anymore 1 18 1 
 appears 2 10 4 24 2 
+anymore 1 18 1 
+standalone 4 1 18 12 2 23 2 24 1 
+submit 7 1 9 2 1 23 1 24 3 25 2 26 2 3 4 
+since 11 1 18 11 1 15 2 17 1 18 2 24 1 25 1 3 1 5 1 7 1 8 4 
 cmtt 1 11 1 
-since 11 1 16 11 1 15 2 17 1 18 2 24 1 25 1 3 1 5 1 7 1 8 4 
-submit 7 1 8 2 1 23 1 24 3 25 2 26 2 3 4 
-standalone 4 1 16 12 2 23 2 24 1 
-free 16 1 32 11 2 12 1 14 6 16 4 17 3 20 11 21 5 22 1 23 1 24 4 25 2 3 1 4 1 7 3 8 1 
+free 16 1 36 11 2 12 1 14 6 16 4 17 3 20 11 21 5 22 1 23 1 24 4 25 2 3 1 4 1 7 3 8 1 
 ggdb 3 18 4 20 2 24 3 
-passwd 2 7 3 8 1 
 providing 1 15 1 
-requires 7 1 8 17 1 20 2 21 1 25 1 7 1 8 1 
+passwd 2 7 3 8 1 
+requires 7 1 9 17 1 20 2 21 1 25 1 7 1 8 1 
 subblime 1 6 1 
 tree 5 20 1 24 2 25 6 26 1 9 10 
-xhour 1 2 1 
 heavy 1 18 1 
+xhour 1 2 1 
 ifconfig 1 22 6 
 progbits 1 7 1 
 afra 2 12 1 23 1 
-bull 2 12 2 23 2 
 requirements 8 12 20 16 3 20 4 21 1 22 3 23 2 24 3 25 1 
+bull 2 12 2 23 2 
 strncpy 2 14 1 15 4 
 full 8 12 1 14 2 21 4 22 16 3 2 7 1 8 4 9 3 
 launched 3 12 1 16 1 23 1 
 mallocs 2 20 1 24 1 
 null 9 10 5 13 13 14 13 15 10 16 8 17 4 20 2 21 5 24 3 
 pull 2 25 1 4 1 
-resubmitted 2 1 8 3 1 
+resubmitted 2 1 9 3 1 
 choosing 1 26 1 
 explicitly 3 10 1 18 1 25 1 
-infinite 3 17 1 20 1 21 1 
 increasing 4 12 1 16 1 23 1 25 1 
-policy 4 1 48 11 1 3 1 7 1 
+infinite 3 17 1 20 1 21 1 
+policy 4 1 54 11 1 3 1 7 1 
+anywhere 3 1 9 10 1 13 1 
 arise 2 12 1 20 1 
-anywhere 3 1 8 10 1 13 1 
 block 7 10 1 12 2 14 1 16 2 20 6 23 2 8 2 
 clock 1 26 7 
 urlnodes 3 14 2 15 6 17 5 
-how 22 1 40 10 1 11 11 12 4 14 6 15 6 16 3 17 4 18 1 2 1 20 6 21 6 22 8 23 2 24 5 25 3 26 4 3 6 6 1 7 5 8 2 9 6 
+how 22 1 45 10 1 11 11 12 4 14 6 15 6 16 3 17 4 18 1 2 1 20 6 21 6 22 8 23 2 24 5 25 3 26 4 3 6 6 1 7 5 8 2 9 6 
+labs 12 1 99 12 2 2 1 21 1 22 1 23 2 24 7 25 3 26 3 3 7 7 5 9 18 
 low 1 12 1 
-labs 12 1 88 12 2 2 1 21 1 22 1 23 2 24 7 25 3 26 3 3 7 7 5 9 18 
 majority 1 26 1 
 now 19 10 1 11 1 12 1 13 4 15 1 16 6 17 2 18 5 20 5 21 3 22 1 24 3 25 4 26 1 3 2 4 2 7 4 8 4 9 5 
 press 2 12 1 23 1 
 abbeyworkshop 1 9 1 
-relatively 2 15 1 25 1 
 row 1 10 1 
+relatively 2 15 1 25 1 
 tabs 1 18 2 
 frequently 5 10 2 11 1 13 1 14 2 7 1 
 whereis 1 8 2 
@@ -3058,34 +3058,34 @@ health 1 20 2
 plainfile 1 8 2 
 represented 4 10 1 11 1 20 1 8 1 
 steve 1 6 1 
-holiday 2 1 8 7 1 
+holiday 2 1 9 7 1 
 inserted 1 15 3 
-message 9 1 8 11 1 12 1 14 1 20 1 21 1 7 3 8 2 9 2 
+message 9 1 9 11 1 12 1 14 1 20 1 21 1 7 3 8 2 9 2 
 next 16 10 1 11 3 12 4 14 7 15 5 16 12 17 19 20 8 21 7 23 2 24 10 25 4 26 3 4 1 7 6 8 4 
 procedure 1 10 1 
-resort 1 20 1 
 removing 2 14 1 21 1 
-text 15 1 8 10 1 11 8 12 2 18 1 21 1 22 1 23 3 24 2 25 1 26 1 3 1 6 1 7 10 8 2 
-executeable 1 7 1 
+resort 1 20 1 
+text 15 1 9 10 1 11 8 12 2 18 1 21 1 22 1 23 3 24 2 25 1 26 1 3 1 6 1 7 10 8 2 
 errors 8 10 1 13 1 16 2 17 6 20 34 21 2 24 2 8 1 
+executeable 1 7 1 
 granted 1 16 1 
 honest 1 5 1 
-issue 6 11 2 12 1 20 1 23 1 24 5 25 2 
 instances 4 10 1 12 1 14 1 15 1 
-made 7 1 16 12 2 20 1 21 2 22 2 7 1 9 1 
-orc 1 1 8 
-copies 2 13 2 17 1 
-src 5 11 1 13 16 17 1 18 1 20 1 
+issue 6 11 2 12 1 20 1 23 1 24 5 25 2 
+made 7 1 18 12 2 20 1 21 2 22 2 7 1 9 1 
+orc 1 1 9 
 servers 3 11 1 7 1 9 1 
-hope 4 1 8 10 1 20 1 7 1 
+src 5 11 1 13 16 17 1 18 1 20 1 
+copies 2 13 2 17 1 
+hope 4 1 9 10 1 20 1 7 1 
 minutes 3 12 1 18 1 5 1 
-adjustment 1 24 1 
 adhere 1 24 2 
+adjustment 1 24 1 
 ready 6 11 2 18 1 20 1 3 1 4 1 7 4 
 concern 1 13 1 
 declared 2 10 2 13 1 
-globl 1 7 1 
 generate 2 10 1 24 1 
+globl 1 7 1 
 newstr 1 14 2 
 arrays 8 10 16 13 9 14 5 2 2 20 2 26 1 6 1 7 1 
 tracking 2 18 1 20 3 
@@ -3093,84 +3093,84 @@ ungracefully 1 14 1
 verification 1 20 1 
 hector 4 11 2 12 1 24 1 25 1 
 nagging 1 25 1 
-one 22 1 48 10 3 11 3 12 7 13 6 14 1 15 7 16 2 17 5 18 3 20 6 21 9 22 1 23 5 24 6 25 3 26 7 3 2 4 1 7 4 8 5 9 1 
+one 22 1 54 10 3 11 3 12 7 13 6 14 1 15 7 16 2 17 5 18 3 20 6 21 9 22 1 23 5 24 6 25 3 26 7 3 2 4 1 7 4 8 5 9 1 
 piece 3 15 1 21 2 7 1 
 resolving 3 11 1 12 2 23 3 
 shells 3 23 1 7 1 8 7 
-threads 4 1 16 2 1 4 1 7 3 
+threads 4 1 18 2 1 4 1 7 3 
+engineering 4 1 9 11 1 20 1 7 2 
 utilites 1 14 1 
-engineering 4 1 8 11 1 20 1 7 2 
 harmful 1 20 2 
-launch 5 1 8 12 1 16 1 23 1 25 1 
+launch 5 1 9 12 1 16 1 23 1 25 1 
 lecture 21 10 3 11 5 12 5 13 3 14 4 15 3 16 12 17 1 18 4 19 1 2 25 20 13 21 6 23 1 25 4 26 1 3 2 6 1 7 12 8 10 9 4 
-environment 5 1 8 21 1 22 1 7 4 8 3 
+environment 5 1 9 21 1 22 1 7 4 8 3 
 numtosses 1 10 7 
 acts 3 18 1 21 1 7 1 
-syllabus 2 1 8 7 1 
-textbook 1 2 1 
-dependencies 2 18 6 20 2 
+syllabus 2 1 9 7 1 
 dynamically 1 14 10 
+dependencies 2 18 6 20 2 
+textbook 1 2 1 
 whole 2 10 1 15 3 
 idioms 2 20 1 21 13 
-lab 19 1 136 11 7 12 5 15 2 16 3 17 1 18 5 2 13 20 5 21 1 22 7 23 18 24 18 25 25 26 8 3 37 6 3 7 13 9 92 
+lab 19 1 153 11 7 12 5 15 2 16 3 17 1 18 5 2 13 20 5 21 1 22 7 23 18 24 18 25 25 26 8 3 37 6 3 7 13 9 92 
 mystructures 1 10 3 
 regular 3 24 1 7 1 8 1 
-chan 1 20 1 
+student 4 1 18 25 4 3 2 7 1 
 simply 13 10 2 11 1 13 3 15 2 17 8 18 1 20 1 21 1 22 1 24 3 25 2 26 1 7 2 
-student 4 1 16 25 4 3 2 7 1 
+chan 1 20 1 
+don 12 1 27 11 2 12 2 14 3 15 1 16 1 20 2 21 2 26 1 7 3 8 2 9 1 
 tab 2 11 1 18 9 
-don 12 1 24 11 2 12 2 14 3 15 1 16 1 20 2 21 2 26 1 7 3 8 2 9 1 
 eyeballing 2 17 1 20 1 
 insert 1 15 8 
 literals 1 10 1 
-mon 1 8 1 
 medal 1 3 1 
+mon 1 8 1 
 non 11 10 1 11 1 13 1 15 1 16 1 17 2 20 2 21 1 24 2 25 1 8 1 
 along 7 12 1 13 1 14 1 15 1 16 1 17 1 23 1 
 raghavan 4 11 2 12 1 24 1 25 1 
+than 17 1 27 10 1 11 1 12 2 13 3 14 1 15 3 16 2 17 4 20 5 21 4 22 1 23 1 24 1 26 3 7 1 8 1 
 does 18 10 6 11 6 12 5 13 2 14 5 15 1 16 2 17 2 20 3 21 6 22 3 23 4 24 5 25 3 26 1 6 1 7 1 8 5 
-than 17 1 24 10 1 11 1 12 2 13 3 14 1 15 3 16 2 17 4 20 5 21 4 22 1 23 1 24 1 26 3 7 1 8 1 
 urlslist 4 12 5 16 3 17 1 23 4 
-won 3 22 2 5 1 7 2 
-graphs 1 20 1 
 goes 4 11 1 12 1 2 7 23 1 
+graphs 1 20 1 
+won 3 22 2 5 1 7 2 
 ok 16 10 2 11 1 12 2 16 1 17 1 20 1 21 2 22 1 23 3 24 3 25 1 26 1 4 1 7 5 8 1 9 2 
 article 1 21 1 
 battle 1 4 1 
 synchronous 1 10 1 
-things 7 1 8 11 3 14 1 2 1 21 2 5 1 7 2 
+things 7 1 9 11 3 14 1 2 1 21 2 5 1 7 2 
 uk 1 21 1 
-souce 1 6 1 
-cascade 1 21 1 
-comms 1 12 1 
 strings 6 10 6 13 7 15 1 17 1 2 3 26 2 
+comms 1 12 1 
+cascade 1 21 1 
+souce 1 6 1 
 terminates 2 13 1 21 1 
 execution 12 10 2 12 1 13 1 15 1 20 2 21 2 22 1 23 1 24 1 25 2 7 2 8 2 
 kernel 4 15 1 21 1 7 1 8 3 
+matter 4 1 9 15 1 20 2 9 1 
 micro 2 12 1 21 1 
-matter 4 1 8 15 1 20 2 9 1 
 pesky 6 13 1 14 1 17 2 2 2 20 6 21 3 
-application 4 15 2 18 1 20 1 7 3 
 advance 5 13 1 14 1 21 2 3 1 8 3 
+application 4 15 2 18 1 20 1 7 3 
 bind 1 7 4 
-slide 1 2 1 
 characterized 1 15 1 
+slide 1 2 1 
 drawn 1 14 1 
 find 13 11 2 12 32 13 3 15 4 17 1 20 8 21 3 23 31 24 1 25 1 6 1 7 2 8 6 
-moral 1 1 8 
-mind 3 1 8 21 2 7 1 
+mind 3 1 9 21 2 7 1 
+moral 1 1 9 
 realm 1 9 2 
 confirm 2 20 1 8 1 
 triples 1 8 1 
+exterior 2 1 9 7 1 
 everyones 1 25 1 
-exterior 2 1 8 7 1 
 folks 1 25 1 
 inside 5 11 1 12 2 14 1 23 2 24 1 
 months 1 21 1 
-approximate 1 25 1 
 assure 1 12 1 
-serving 3 12 1 16 1 23 1 
+approximate 1 25 1 
 cited 3 10 1 21 1 7 1 
+serving 3 12 1 16 1 23 1 
 trace 1 20 1 
 example 22 10 11 11 3 12 10 13 6 14 8 15 8 16 2 17 2 18 7 2 1 20 11 21 24 22 6 23 7 24 9 25 6 26 6 3 2 4 1 7 5 8 13 9 4 
 washington 1 6 1 
@@ -3178,123 +3178,123 @@ math 1 21 1
 path 8 14 1 16 2 18 2 21 1 24 7 25 1 7 2 8 15 
 subsequently 1 21 1 
 temp 6 12 4 13 6 16 3 17 4 23 4 26 5 
+thursday 2 1 27 2 6 
 deference 1 13 1 
-thursday 2 1 24 2 6 
 esc 1 20 2 
-foreign 1 11 1 
 fly 3 11 12 12 1 20 1 
+foreign 1 11 1 
 lsc 1 4 1 
 prepended 1 10 1 
-act 1 26 1 
-adjustments 1 24 1 
 awaiting 3 11 2 12 2 23 3 
-readfile 2 24 3 25 2 
+adjustments 1 24 1 
+act 1 26 1 
 reference 5 11 3 13 3 2 1 21 1 6 1 
-socket 8 1 32 11 1 2 1 22 1 26 7 3 1 7 2 8 5 
+readfile 2 24 3 25 2 
+socket 8 1 36 11 1 2 1 22 1 26 7 3 1 7 2 8 5 
 oct 2 7 3 8 2 
 question 2 21 3 22 3 
-screen 3 20 1 26 3 8 1 
+card 3 1 27 22 1 7 3 
 casting 2 13 6 14 2 
-card 3 1 24 22 1 7 3 
+screen 3 20 1 26 3 8 1 
 exceeds 3 12 1 16 2 23 1 
 hard 6 12 2 15 1 17 1 20 2 21 2 3 1 
 inspecting 1 21 1 
-periods 1 2 1 
 pasting 1 18 1 
+periods 1 2 1 
 adelfio 1 24 1 
+sobell 1 1 9 
 seedurl 2 16 1 17 2 
-sobell 1 1 8 
 desktop 1 7 1 
 visit 5 12 2 16 2 17 1 20 1 23 2 
 high 7 12 3 16 2 17 1 20 1 24 1 26 1 7 2 
-mann 1 7 1 
+myself 1 1 9 
 mapped 2 12 1 15 1 
-myself 1 1 8 
+mann 1 7 1 
 proud 1 4 1 
-cater 1 21 2 
-calculated 1 15 1 
 complicated 3 15 1 17 1 9 1 
+calculated 1 15 1 
+cater 1 21 2 
+tangible 1 1 9 
 dangerous 4 13 2 20 2 21 1 8 1 
-tangible 1 1 8 
-emergencies 1 1 8 
-leapyear 1 9 12 
+emergencies 1 1 9 
 later 12 10 1 11 1 12 4 15 1 16 1 17 1 21 1 23 2 26 2 3 1 7 5 8 2 
+leapyear 1 9 12 
 ndisplay 1 10 2 
-ctl 1 7 2 
 correctly 8 10 1 17 2 18 1 22 1 24 2 25 2 3 1 8 2 
+ctl 1 7 2 
 diff 3 17 1 24 4 9 5 
-left 3 1 16 24 1 8 2 
+left 3 1 18 24 1 8 2 
+monday 3 1 18 2 17 3 14 
 myassert 3 14 2 17 2 21 2 
-monday 3 1 16 2 17 3 14 
 adjusted 1 24 1 
 rtl 1 8 1 
-citation 4 1 8 18 1 24 1 25 1 
+citation 4 1 9 18 1 24 1 25 1 
 decomposition 6 11 2 12 5 20 2 22 2 24 2 25 1 
 added 10 12 2 13 2 15 3 16 1 17 1 18 1 23 1 24 2 4 2 7 2 
-different 16 1 8 10 2 11 1 14 1 15 5 18 2 20 1 21 2 22 2 23 1 24 3 25 2 26 1 7 2 8 1 9 1 
+different 16 1 9 10 2 11 1 14 1 15 5 18 2 20 1 21 2 22 2 23 1 24 3 25 2 26 1 7 2 8 1 9 1 
 exactly 2 21 2 26 1 
 lifting 1 18 1 
 prototpe 1 10 1 
 advantage 2 3 1 7 1 
-board 1 1 16 
+board 1 1 18 
 sys 2 11 1 16 1 
 excluding 1 3 1 
 produces 5 12 1 18 1 21 1 23 1 7 2 
-al 1 8 1 
 among 2 7 1 8 1 
+al 1 8 1 
+stuff 1 1 9 
+similarly 2 1 9 7 1 
 snip 4 11 5 12 3 23 3 8 1 
-similarly 2 1 8 7 1 
-stuff 1 1 8 
 dl 2 20 1 9 1 
 wrote 1 12 1 
 impacts 1 12 1 
-ll 9 1 8 17 1 21 1 26 1 3 1 5 2 6 1 7 8 8 3 
+ll 9 1 9 17 1 21 1 26 1 3 1 5 2 6 1 7 8 8 3 
 alphabetically 2 15 1 22 1 
 reset 2 14 1 8 1 
-couple 4 20 1 21 1 3 1 8 1 
-collection 3 11 1 14 1 20 1 
 clearly 7 11 1 15 2 16 1 18 1 20 1 22 2 24 1 
+collection 3 11 1 14 1 20 1 
+couple 4 20 1 21 1 3 1 8 1 
 tiger 1 21 1 
-identity 1 7 1 
 interchangeably 1 13 1 
+identity 1 7 1 
 jbrody 1 25 1 
 lurked 1 21 1 
 append 2 13 1 17 1 
-dynamicmem 1 14 1 
+demanding 2 1 9 25 1 
 duplicates 2 11 1 17 1 
-demanding 2 1 8 25 1 
+dynamicmem 1 14 1 
 operator 3 10 1 13 8 25 2 
-craftsmanship 1 5 1 
-considers 1 21 1 
+competition 1 1 9 
 safari 2 11 1 6 1 
-competition 1 1 8 
+considers 1 21 1 
+craftsmanship 1 5 1 
 decrement 2 13 1 14 2 
 university 6 11 3 12 1 21 1 24 1 25 1 6 1 
 initial 6 11 1 12 1 14 1 2 1 23 1 7 2 
 mygccc 1 18 1 
 operation 10 12 3 14 1 15 2 17 2 20 2 22 2 23 3 24 2 25 1 8 3 
-assessment 2 1 8 7 1 
+assessment 2 1 9 7 1 
 returning 5 10 1 13 1 14 1 24 1 25 1 
 corp 1 11 1 
-prefer 1 7 1 
+public 7 1 9 11 2 12 3 17 1 23 3 7 8 8 7 
 prize 1 4 1 
-public 7 1 8 11 2 12 3 17 1 23 3 7 8 8 7 
+prefer 1 7 1 
 said 5 10 1 12 2 15 1 20 2 21 1 
 functions 15 10 18 12 6 13 2 14 4 15 6 16 4 17 1 2 3 20 5 21 4 22 8 23 3 24 6 25 14 6 1 
 june 1 2 7 
 opinions 1 5 1 
 pronounced 1 10 2 
-adjuncthood 1 24 1 
 adjust 2 14 1 24 1 
+adjuncthood 1 24 1 
 robotcamp 2 12 1 23 1 
 shr 1 7 1 
-probe 1 21 2 
 provides 10 10 3 12 1 14 2 17 1 21 1 23 1 24 1 26 1 7 1 8 2 
+probe 1 21 2 
 atc 12 10 3 11 2 12 7 14 1 17 1 18 9 20 1 22 6 23 5 25 1 7 17 8 15 
-clients 1 26 2 
 cmti 1 11 1 
-this 25 1 104 10 19 11 17 12 15 13 13 14 28 15 27 16 22 17 24 18 9 2 1 20 45 21 15 22 10 23 14 24 28 25 31 26 11 3 9 4 6 5 2 6 2 7 31 8 18 9 10 
-etc 11 1 8 13 1 15 1 18 1 21 1 22 3 23 1 25 3 6 1 7 2 8 1 
+clients 1 26 2 
+this 25 1 117 10 19 11 17 12 15 13 13 14 28 15 27 16 22 17 24 18 9 2 1 20 45 21 15 22 10 23 14 24 28 25 31 26 11 3 9 4 6 5 2 6 2 7 31 8 18 9 10 
+etc 11 1 9 13 1 15 1 18 1 21 1 22 3 23 1 25 3 6 1 7 2 8 1 
 hostport 1 7 2 
 lower 2 25 1 7 1 
 power 4 13 1 20 1 21 1 8 1 
@@ -3303,174 +3303,174 @@ recitations 1 2 1
 utc 1 17 1 
 leaky 2 20 16 5 2 
 negative 1 21 1 
-processed 2 24 1 7 1 
-play 3 20 1 22 1 7 1 
 pairs 2 11 1 15 1 
+play 3 20 1 22 1 7 1 
+processed 2 24 1 7 1 
 utility 8 11 2 18 11 2 1 23 3 25 1 6 1 7 2 8 2 
 wonders 1 2 1 
-hours 5 1 96 18 1 20 1 3 1 7 4 
+hours 5 1 108 18 1 20 1 3 1 7 4 
 adjuncts 1 24 1 
 empty 5 15 1 16 1 21 7 24 1 8 1 
 functional 5 12 2 20 2 24 2 25 1 5 2 
 header 8 10 4 14 16 15 2 16 2 18 2 22 2 23 2 24 1 
-yours 2 1 16 25 1 
+yours 2 1 18 25 1 
+leader 2 1 9 3 1 
 locaion 1 10 1 
-leader 2 1 8 3 1 
 syntax 7 10 1 11 2 13 1 18 2 24 1 7 2 8 4 
-traffic 1 21 1 
 tables 3 11 1 15 6 24 1 
+traffic 1 21 1 
 owned 1 8 1 
 cached 1 11 1 
 artofdebug 1 20 1 
 those 9 11 4 12 5 17 1 18 3 20 5 23 2 25 1 3 1 8 3 
-getaddressfromthelinkstobevisited 3 16 3 17 2 20 1 
-whose 1 14 2 
 gets 9 12 3 18 1 20 1 21 2 23 2 26 4 3 1 7 2 8 1 
+whose 1 14 2 
+getaddressfromthelinkstobevisited 3 16 3 17 2 20 1 
 lets 9 12 1 13 1 16 1 17 1 18 1 20 1 23 1 7 2 8 2 
 mygcc 5 10 1 18 3 20 3 22 1 24 1 
-site 1 17 19 
-studying 4 13 2 20 1 21 1 25 1 
+sets 6 1 9 10 1 12 2 23 2 26 1 7 1 
 customers 4 12 2 16 1 20 1 23 1 
-sets 6 1 8 10 1 12 2 23 2 26 1 7 1 
+studying 4 13 2 20 1 21 1 25 1 
+site 1 17 19 
 experienced 2 20 1 21 1 
 flag 8 12 1 15 1 16 1 17 1 18 1 20 2 23 1 24 1 
+am 6 1 18 20 15 3 1 6 1 7 1 9 1 
 arthimetic 1 13 1 
-am 6 1 16 20 15 3 1 6 1 7 1 9 1 
+deducted 2 1 27 25 1 
 tutorials 2 2 1 6 1 
-deducted 2 1 24 25 1 
 em 1 21 1 
 getnextwordfromhtmldocument 1 24 2 
 hold 5 10 1 13 1 15 3 20 2 22 1 
 misc 2 8 1 9 1 
-pm 4 1 88 2 3 3 9 7 3 
+pm 4 1 99 2 3 3 9 7 3 
 alias 2 18 1 8 5 
-resolves 1 7 1 
-reused 2 24 1 25 1 
-retest 1 21 1 
-rm 5 18 16 24 1 7 2 8 12 9 3 
 reason 2 12 1 16 1 
+rm 5 18 16 24 1 7 2 8 12 9 3 
+retest 1 21 1 
+reused 2 24 1 25 1 
+resolves 1 7 1 
 spent 2 13 1 20 2 
 told 1 12 1 
 vm 1 7 1 
 leve 1 11 1 
-nacocopter 1 1 8 
+nacocopter 1 1 9 
 amp 9 10 12 11 12 12 3 13 18 14 2 17 2 21 4 22 2 7 1 
-sneak 1 16 1 
 cmp 1 10 13 
+sneak 1 16 1 
 toolchain 1 7 1 
 globally 1 10 1 
 localization 1 20 1 
 demensional 1 10 1 
+ethan 1 1 18 
 essense 1 26 1 
-ethan 1 1 16 
 zero 5 10 3 13 1 14 2 21 5 26 3 
 link 13 10 1 11 2 12 32 14 4 15 13 16 5 17 2 18 1 23 32 24 3 25 1 3 1 6 2 
-mindset 2 1 8 7 1 
+mindset 2 1 9 7 1 
 portion 1 22 3 
-above 16 1 8 10 3 11 4 15 4 16 2 17 4 18 3 20 5 21 7 23 1 24 6 25 1 26 6 3 2 8 9 9 1 
+above 16 1 9 10 3 11 4 15 4 16 2 17 4 18 3 20 5 21 7 23 1 24 6 25 1 26 6 3 2 8 9 9 1 
 stores 4 12 2 15 1 23 2 24 4 
 guess 2 14 2 18 1 
 official 1 9 1 
+air 3 1 9 21 1 4 1 
 amongst 1 22 1 
-air 3 1 8 21 1 4 1 
-beta 2 1 8 21 1 
+beta 2 1 9 21 1 
 dir 2 16 2 9 1 
 gives 5 11 3 18 1 22 1 3 1 8 1 
 lives 1 14 2 
 meta 1 11 5 
 because 19 10 3 11 7 12 5 13 3 14 1 15 3 16 1 17 2 18 2 20 5 21 3 22 2 23 2 24 7 25 2 3 1 7 4 8 3 9 1 
-functionname 1 6 1 
-fundamental 2 15 1 9 1 
 forward 2 12 2 15 5 
-warranty 1 17 2 
+fundamental 2 15 1 9 1 
+functionname 1 6 1 
 garbage 2 14 1 20 1 
-any 21 1 40 10 4 11 1 12 4 13 2 14 3 15 3 16 9 17 7 18 3 20 4 21 2 22 3 23 1 24 2 25 12 26 1 6 1 7 3 8 8 9 3 
-carriage 4 11 1 20 2 21 1 8 2 
+warranty 1 17 2 
+any 21 1 45 10 4 11 1 12 4 13 2 14 3 15 3 16 9 17 7 18 3 20 4 21 2 22 3 23 1 24 2 25 12 26 1 6 1 7 3 8 8 9 3 
+credit 4 1 18 24 1 25 4 3 1 
 sergey 1 11 2 
-credit 4 1 16 24 1 25 4 3 1 
-traverse 4 13 1 15 4 17 3 7 1 
+carriage 4 11 1 20 2 21 1 8 2 
 termed 3 10 2 13 1 8 1 
+traverse 4 13 1 15 4 17 3 7 1 
 easily 9 10 1 12 1 13 1 17 1 20 1 21 1 24 1 7 1 9 1 
 portability 1 21 1 
-assessed 1 1 8 
-convenient 1 7 1 
+assessed 1 1 9 
 summit 1 6 1 
+convenient 1 7 1 
+get 24 1 45 10 2 11 12 12 7 13 7 14 1 15 1 16 7 17 6 18 2 20 3 21 5 22 8 23 3 24 5 25 3 26 3 3 2 4 1 5 1 6 1 7 14 8 2 9 3 
 gvim 1 6 1 
-get 24 1 40 10 2 11 12 12 7 13 7 14 1 15 1 16 7 17 6 18 2 20 3 21 5 22 8 23 3 24 5 25 3 26 3 3 2 4 1 5 1 6 1 7 14 8 2 9 3 
 java 6 10 5 12 1 13 4 14 1 16 1 7 3 
+learn 18 1 27 10 1 11 1 12 1 13 1 14 1 15 1 16 1 18 1 20 1 21 1 22 1 25 1 26 1 3 1 7 4 8 2 9 1 
 let 19 10 2 11 2 12 2 13 1 14 4 15 2 16 4 17 1 20 3 21 3 23 2 24 1 25 1 26 1 4 1 6 1 7 10 8 12 9 4 
-learn 18 1 24 10 1 11 1 12 1 13 1 14 1 15 1 16 1 18 1 20 1 21 1 22 1 25 1 26 1 3 1 7 4 8 2 9 1 
 memset 1 14 1 
 net 4 20 1 7 4 8 11 9 1 
-photo 1 1 8 
+photo 1 1 9 
 aspects 5 16 1 22 1 23 1 24 2 25 1 
-ret 1 7 2 
 broken 3 21 2 23 1 7 1 
-scenarios 4 15 1 16 1 20 1 9 1 
+ret 1 7 2 
 set 19 11 2 12 3 13 1 14 4 15 1 16 5 17 8 18 8 20 11 21 6 23 1 24 2 25 1 26 2 3 3 4 2 7 5 8 8 9 3 
+scenarios 4 15 1 16 1 20 1 9 1 
 encounter 2 17 1 20 2 
 hancock 1 20 2 
 yet 5 10 1 11 2 17 1 21 2 6 1 
-like 20 1 8 10 5 11 6 12 10 13 3 14 4 15 2 16 5 17 2 2 1 20 3 21 6 22 1 23 4 24 4 25 3 3 1 5 2 6 1 7 10 
-mark 5 1 8 11 1 15 1 16 4 17 1 
+like 20 1 9 10 5 11 6 12 10 13 3 14 4 15 2 16 5 17 2 2 1 20 3 21 6 22 1 23 4 24 4 25 3 3 1 5 2 6 1 7 10 
+mark 5 1 9 11 1 15 1 16 4 17 1 
+pike 3 1 9 11 2 21 1 
 performance 6 12 4 15 2 20 11 22 1 24 3 7 1 
-pike 3 1 8 11 2 21 1 
+contact 4 1 18 12 1 17 3 23 1 
 closely 5 13 1 14 1 2 1 20 3 21 1 
-contact 4 1 16 12 1 17 3 23 1 
 thank 1 2 1 
-exiting 1 22 1 
-useful 10 14 4 15 1 16 1 20 3 21 5 24 1 6 2 7 5 8 1 9 2 
 estimated 1 11 3 
+useful 10 14 4 15 1 16 1 20 3 21 5 24 1 6 2 7 5 8 1 9 2 
+exiting 1 22 1 
 early 1 12 1 
 putyy 1 7 1 
-absolute 1 8 3 
 adapted 1 14 1 
-revision 2 1 16 9 8 
-cheating 1 1 8 
+absolute 1 8 3 
+revision 2 1 18 9 8 
+cheating 1 1 9 
 windows 3 10 1 3 1 7 9 
-around 9 1 8 11 1 13 1 17 1 20 1 26 3 4 1 7 1 8 5 
+around 9 1 9 11 1 13 1 17 1 20 1 26 3 4 1 7 1 8 5 
 required 4 10 5 14 2 22 1 26 1 
-subdirectory 2 25 1 9 4 
-career 1 21 2 
-smarts 2 14 1 21 1 
 substituted 2 10 2 18 1 
-triplet 1 8 1 
+smarts 2 14 1 21 1 
+career 1 21 2 
+subdirectory 2 25 1 9 4 
 target 7 12 9 16 8 17 2 23 10 24 6 25 3 7 1 
+triplet 1 8 1 
 ground 1 21 1 
 instrumentation 1 20 1 
-gdb 7 1 8 16 3 17 52 18 1 2 1 20 9 7 1 
+gdb 7 1 9 16 3 17 52 18 1 2 1 20 9 7 1 
 laptops 1 3 1 
 values 8 10 1 13 15 14 6 15 2 16 1 21 1 26 2 8 2 
 locate 2 10 2 7 1 
 natural 1 21 2 
-an 22 1 16 10 18 11 9 12 6 13 7 14 10 15 16 16 6 17 4 18 6 20 11 21 22 22 3 23 3 24 19 25 7 26 4 3 1 4 1 7 19 8 10 9 1 
+an 22 1 18 10 18 11 9 12 6 13 7 14 10 15 16 16 6 17 4 18 6 20 11 21 22 22 3 23 3 24 19 25 7 26 4 3 1 4 1 7 19 8 10 9 1 
 dataflow 1 21 1 
+unless 2 1 9 21 1 
 en 7 11 2 12 9 17 1 18 1 23 9 24 1 9 1 
-unless 2 1 8 21 1 
-incentive 2 1 8 25 1 
-in 26 1 264 10 47 11 46 12 63 13 31 14 26 15 73 16 49 17 33 18 19 19 2 2 8 20 102 21 45 22 18 23 46 24 84 25 56 26 21 3 15 4 3 5 5 6 6 7 69 8 59 9 16 
+in 26 1 297 10 47 11 46 12 63 13 31 14 26 15 73 16 49 17 33 18 19 19 2 2 8 20 102 21 45 22 18 23 46 24 84 25 56 26 21 3 15 4 3 5 5 6 6 7 69 8 59 9 16 
+incentive 2 1 9 25 1 
 maintains 2 12 1 24 2 
-on 24 1 232 10 3 11 18 12 26 13 7 14 11 15 9 16 11 17 12 18 7 20 27 21 9 22 10 23 12 24 10 25 16 26 7 3 9 4 7 5 1 6 6 7 49 8 19 9 4 
+on 24 1 261 10 3 11 18 12 26 13 7 14 11 15 9 16 11 17 12 18 7 20 27 21 9 22 10 23 12 24 10 25 16 26 7 3 9 4 7 5 1 6 6 7 49 8 19 9 4 
 prevent 1 13 1 
-builtins 1 8 5 
 rough 1 19 1 
+builtins 1 8 5 
 silent 1 21 1 
-times 15 1 8 10 1 11 1 12 7 13 1 14 1 16 5 17 51 2 3 20 6 21 3 23 6 24 1 26 1 7 1 
-ures 1 20 1 
-explit 1 17 1 
-executing 5 13 1 17 1 20 2 7 3 8 2 
+times 15 1 9 10 1 11 1 12 7 13 1 14 1 16 5 17 51 2 3 20 6 21 3 23 6 24 1 26 1 7 1 
 exist 10 11 1 12 1 14 2 16 5 17 3 20 4 21 2 23 1 24 1 25 1 
+executing 5 13 1 17 1 20 2 7 3 8 2 
+explit 1 17 1 
+ures 1 20 1 
 widely 1 8 1 
-basis 2 22 1 26 1 
 ranges 1 20 1 
-supp 2 17 1 20 2 
+basis 2 22 1 26 1 
 shot 1 11 2 
-ethernet 1 22 2 
+supp 2 17 1 20 2 
 unordered 4 14 1 15 2 16 1 24 1 
+ethernet 1 22 2 
 version 6 16 1 17 1 22 1 3 1 7 2 9 6 
 objdump 1 7 6 
-pushes 1 21 1 
 putting 4 12 1 15 1 21 1 25 3 
+pushes 1 21 1 
 attributes 2 24 1 8 1 
 subsystems 1 12 1 
 traversing 1 15 1 
@@ -3478,130 +3478,130 @@ fault 3 13 1 17 1 20 3
 handy 4 13 1 20 2 8 1 9 1 
 instruction 1 13 1 
 neglect 1 21 1 
-challenging 7 1 16 11 2 23 1 24 1 25 2 3 3 7 1 
+challenging 7 1 18 11 2 23 1 24 1 25 2 3 3 7 1 
 realloc 1 14 1 
 testlog 2 23 2 24 2 
 exercise 1 12 1 
 vowels 1 8 1 
 wireless 2 12 1 4 1 
 plots 1 11 1 
-stated 1 25 1 
 slots 6 14 1 15 1 16 2 17 2 20 2 24 3 
-drawback 1 13 1 
+stated 1 25 1 
 developer 1 12 2 
+drawback 1 13 1 
 meanings 1 13 1 
-philosophy 2 5 1 8 1 
 posix 3 24 1 6 1 7 1 
-robot 2 1 8 4 1 
+philosophy 2 5 1 8 1 
+robot 2 1 9 4 1 
+covering 2 1 9 9 1 
 capture 3 12 1 18 1 9 1 
-covering 2 1 8 9 1 
+still 9 1 9 10 1 12 1 13 1 17 1 20 1 21 1 4 1 9 1 
 consumed 1 13 1 
-still 9 1 8 10 1 12 1 13 1 17 1 20 1 21 1 4 1 9 1 
 humity 1 26 1 
 quit 1 14 2 
+concepts 2 1 9 9 1 
 chapter 5 2 5 20 1 21 3 5 2 9 2 
-concepts 2 1 8 9 1 
 uncover 1 21 1 
-are 26 1 208 10 31 11 23 12 18 13 16 14 13 15 20 16 22 17 13 18 11 19 1 2 2 20 29 21 27 22 8 23 16 24 30 25 12 26 4 3 13 4 2 5 1 6 2 7 34 8 33 9 9 
+are 26 1 234 10 31 11 23 12 18 13 16 14 13 15 20 16 22 17 13 18 11 19 1 2 2 20 29 21 27 22 8 23 16 24 30 25 12 26 4 3 13 4 2 5 1 6 2 7 34 8 33 9 9 
 convert 1 25 1 
 emacs 4 20 2 6 3 7 11 8 1 
-praying 1 21 1 
-pragmatic 1 12 2 
 pre 4 10 1 13 1 2 1 21 6 
+pragmatic 1 12 2 
+praying 1 21 1 
 architecture 5 11 5 12 2 23 1 24 1 7 2 
-safe 1 9 1 
-concise 1 26 1 
+core 2 1 18 20 1 
 staring 1 20 1 
-core 2 1 16 20 1 
+concise 1 26 1 
+safe 1 9 1 
 doctypehtmlpublic 1 17 1 
 unlink 1 10 1 
 keren 1 25 4 
-more 23 1 32 10 3 11 8 12 7 13 3 14 2 15 3 16 5 17 5 18 11 2 1 20 6 21 5 22 2 23 2 24 5 25 4 3 1 4 2 5 3 7 4 8 5 9 5 
+more 23 1 36 10 3 11 8 12 7 13 3 14 2 15 3 16 5 17 5 18 11 2 1 20 6 21 5 22 2 23 2 24 5 25 4 3 1 4 2 5 3 7 4 8 5 9 5 
 problems 8 10 2 12 2 18 1 20 11 21 5 22 1 7 1 8 1 
-chops 1 3 1 
 sides 1 13 1 
+chops 1 3 1 
 xcode 1 7 2 
-making 5 1 8 10 1 12 1 15 2 18 1 
-medium 2 1 8 2 2 
-promote 1 1 16 
+medium 2 1 9 2 2 
+making 5 1 9 10 1 12 1 15 2 18 1 
+promote 1 1 18 
 seperate 1 12 1 
-tackle 1 7 1 
+taking 5 1 18 18 1 22 1 4 1 7 2 
 testers 1 21 1 
-taking 5 1 16 18 1 22 1 4 1 7 2 
-hacker 3 1 24 5 1 7 1 
+tackle 1 7 1 
+hacker 3 1 27 5 1 7 1 
 ing 1 15 5 
 arial 1 11 6 
 beb 1 10 3 
 convinced 1 20 1 
-divided 1 7 1 
 debugs 1 13 1 
+divided 1 7 1 
 feb 1 25 1 
 occurrence 2 21 1 24 2 
 parameter 7 10 5 12 4 13 2 17 2 20 1 22 1 23 3 
-alan 1 9 1 
-adelson 1 24 1 
-allocation 2 14 12 2 1 
 address 15 10 17 11 2 12 3 13 27 14 9 15 2 16 1 17 3 2 1 20 5 22 50 23 2 24 1 26 4 7 6 
+allocation 2 14 12 2 1 
+adelson 1 24 1 
+alan 1 9 1 
 sriram 4 11 2 12 1 24 1 25 1 
 thinking 4 12 1 20 1 21 2 24 1 
 equivalent 5 10 5 13 2 20 2 25 1 7 1 
 forced 1 21 1 
+web 12 1 9 11 24 12 6 2 1 23 3 24 1 25 2 26 1 6 2 7 1 8 1 9 1 
 glibc 2 17 1 20 1 
-web 12 1 8 11 24 12 6 2 1 23 3 24 1 25 2 26 1 6 2 7 1 8 1 9 1 
-isn 2 1 8 7 1 
+isn 2 1 9 7 1 
 nature 1 20 1 
-plan 15 1 16 10 1 11 2 12 1 13 1 14 1 15 1 16 1 18 1 2 1 20 1 21 1 7 5 8 1 9 1 
+plan 15 1 18 10 1 11 2 12 1 13 1 14 1 15 1 16 1 18 1 2 1 20 1 21 1 7 5 8 1 9 1 
 revisit 1 7 1 
-commencement 1 2 1 
 co 1 11 1 
-do 23 1 56 10 2 11 11 12 4 13 2 14 5 15 8 16 8 17 9 18 4 2 1 20 13 21 15 22 3 23 7 24 14 25 11 3 5 4 3 5 3 7 14 8 12 9 3 
+commencement 1 2 1 
+do 23 1 63 10 2 11 11 12 4 13 2 14 5 15 8 16 8 17 9 18 4 2 1 20 13 21 15 22 3 23 7 24 14 25 11 3 5 4 3 5 3 7 14 8 12 9 3 
 go 14 11 3 12 1 13 1 16 1 17 1 18 1 20 4 21 3 23 1 25 1 4 1 6 1 7 2 9 1 
-hesitate 1 1 8 
+hesitate 1 1 9 
+implement 13 1 27 11 4 12 1 15 3 16 2 21 1 22 3 23 3 24 1 25 5 26 3 3 1 7 1 
 io 4 12 1 16 1 2 1 20 3 
-implement 13 1 24 11 4 12 1 15 3 16 2 21 1 22 3 23 3 24 1 25 5 26 3 3 1 7 1 
-no 18 1 56 10 9 12 2 14 3 15 5 17 5 18 4 2 2 20 7 21 5 23 1 24 6 25 3 3 3 4 1 7 8 8 1 9 3 
+no 18 1 63 10 9 12 2 14 3 15 5 17 5 18 4 2 2 20 7 21 5 23 1 24 6 25 3 3 3 4 1 7 8 8 1 9 3 
 oo 2 20 1 7 1 
 previous 7 13 1 14 2 15 1 18 1 21 1 24 1 4 1 
 anothersort 1 8 1 
-baseline 1 4 1 
-binary 4 20 1 22 1 7 5 8 3 
-recently 1 13 1 
 bad 6 12 1 16 2 20 1 23 1 7 1 8 1 
+recently 1 13 1 
+binary 4 20 1 22 1 7 5 8 3 
+baseline 1 4 1 
+so 24 1 45 10 2 11 10 12 8 13 7 14 5 15 3 16 6 17 2 18 3 2 1 20 10 21 5 22 3 23 3 24 11 25 8 26 3 3 1 4 1 5 1 7 12 8 11 9 7 
 configfile 1 7 1 
-so 24 1 40 10 2 11 10 12 8 13 7 14 5 15 3 16 6 17 2 18 3 2 1 20 10 21 5 22 3 23 3 24 11 25 8 26 3 3 1 4 1 5 1 7 12 8 11 9 7 
-to 25 1 440 10 53 11 56 12 81 13 85 14 71 15 112 16 60 17 97 18 41 2 8 20 100 21 67 22 47 23 56 24 147 25 68 26 34 3 23 4 10 5 6 6 12 7 127 8 101 9 46 
-exact 1 26 1 
+to 25 1 495 10 53 11 56 12 81 13 85 14 71 15 112 16 60 17 97 18 41 2 8 20 100 21 67 22 47 23 56 24 147 25 68 26 34 3 23 4 10 5 6 6 12 7 127 8 101 9 46 
 uses 12 10 1 11 4 12 1 13 2 14 2 18 1 21 1 22 4 23 1 24 4 26 2 7 1 
+exact 1 26 1 
 float 1 10 1 
-had 6 1 8 10 1 12 1 20 1 21 1 24 1 
+had 6 1 9 10 1 12 1 20 1 21 1 24 1 
 invoke 1 10 1 
 juicy 1 12 1 
 better 14 12 1 14 1 15 2 17 1 18 2 2 1 20 2 21 7 23 1 24 1 25 4 5 1 7 3 9 1 
-shellscripts 1 8 1 
+speak 1 1 9 
 collect 1 11 2 
-speak 1 1 8 
-tad 1 7 1 
-topic 2 22 1 7 1 
+shellscripts 1 8 1 
+teams 4 1 36 4 2 7 3 9 1 
 description 12 10 3 11 2 13 1 14 3 15 1 16 2 20 1 22 1 23 2 24 1 26 1 7 2 
-teams 4 1 32 4 2 7 3 9 1 
+topic 2 22 1 7 1 
+tad 1 7 1 
 uniqueness 5 12 1 14 1 15 5 16 1 17 3 
 generality 2 12 4 25 1 
 hop 1 15 1 
 letter 3 21 2 5 1 7 1 
-notes 16 1 8 12 3 16 1 17 4 18 1 19 1 2 1 20 4 21 5 25 2 26 1 3 1 6 3 7 12 8 2 9 3 
+notes 16 1 9 12 3 16 1 17 4 18 1 19 1 2 1 20 4 21 5 25 2 26 1 3 1 6 3 7 12 8 2 9 3 
 operating 4 10 3 14 1 21 2 7 1 
 pop 2 11 1 24 1 
-deugger 1 20 1 
-termination 1 17 1 
-dogs 2 12 1 24 1 
 top 6 11 2 12 4 16 1 4 1 8 1 9 1 
+dogs 2 12 1 24 1 
+termination 1 17 1 
+deugger 1 20 1 
 world 3 5 1 7 1 8 2 
 logstaus 1 23 1 
 accordingly 2 25 1 26 1 
 btw 3 20 1 21 1 7 2 
+clear 7 1 18 12 1 13 1 17 2 20 3 21 1 7 1 
 cleanly 1 25 1 
-clear 7 1 16 12 1 13 1 17 2 20 3 21 1 7 1 
-figure 11 1 16 11 8 12 5 15 10 17 2 18 1 19 4 20 2 23 2 24 4 25 2 
+figure 11 1 18 11 8 12 5 15 10 17 2 18 1 19 4 20 2 23 2 24 4 25 2 
 identify 2 12 1 20 2 
 much 12 11 1 12 1 13 2 14 3 16 1 17 2 2 1 20 3 21 3 25 1 5 2 7 3 
 permission 2 7 1 8 22 
@@ -3609,130 +3609,130 @@ bookmark 1 11 1
 such 15 10 2 11 7 13 4 14 1 15 4 16 3 17 2 18 4 20 4 21 2 24 3 25 2 26 2 7 4 8 7 
 apparent 1 24 1 
 addl 1 7 3 
-compliant 1 24 2 
-collisions 3 16 1 21 2 25 1 
-consequence 1 15 1 
 cast 3 10 1 14 1 17 1 
+consequence 1 15 1 
+collisions 3 16 1 21 2 25 1 
+compliant 1 24 2 
 total 7 10 5 14 1 17 1 20 4 22 1 7 2 8 6 
-fast 6 12 2 13 1 14 1 16 3 23 2 9 1 
 visited 7 12 10 14 5 15 6 16 14 17 19 21 1 23 9 
+fast 6 12 2 13 1 14 1 16 3 23 2 9 1 
 last 17 12 1 13 10 14 1 15 5 16 3 17 2 18 1 2 1 21 2 23 1 24 2 25 3 26 2 4 2 7 5 8 3 9 1 
-past 1 4 1 
 pedantic 4 10 1 18 15 20 2 24 2 
-apps 1 7 1 
+past 1 4 1 
 abort 1 21 3 
-catered 1 21 1 
-suppose 2 20 1 25 1 
-spy 4 12 1 16 1 23 1 9 23 
-street 1 12 1 
+apps 1 7 1 
 spect 1 12 1 
+street 1 12 1 
+spy 4 12 1 16 1 23 1 9 23 
+suppose 2 20 1 25 1 
+catered 1 21 1 
 vast 1 26 1 
-gestures 2 1 8 4 1 
+gestures 2 1 9 4 1 
 carr 1 14 1 
 demonstrates 1 10 1 
-eclipse 2 1 8 7 2 
+eclipse 2 1 9 7 2 
 limits 1 21 1 
-maintainability 1 24 1 
 minor 1 20 1 
+maintainability 1 24 1 
+recommend 7 1 36 20 1 21 1 24 1 6 1 8 1 9 1 
 badge 1 5 1 
-recommend 7 1 32 20 1 21 1 24 1 6 1 8 1 9 1 
+scale 2 1 9 11 2 
 cse 1 11 2 
-scale 2 1 8 11 2 
-taken 4 1 8 10 1 13 1 25 3 
-testing 12 1 16 11 2 12 7 16 1 17 1 2 3 20 16 21 26 23 4 24 7 25 8 7 2 
+testing 12 1 18 11 2 12 7 16 1 17 1 2 3 20 16 21 26 23 4 24 7 25 8 7 2 
+taken 4 1 9 10 1 13 1 25 3 
 informs 2 7 1 8 1 
-clinic 1 2 1 
 seminar 3 12 1 23 1 25 4 
+clinic 1 2 1 
+tse 3 1 9 24 1 25 2 
 decremented 1 14 1 
-tse 3 1 8 24 1 25 2 
-use 24 1 32 10 13 11 6 12 7 13 11 14 14 15 7 16 2 17 17 18 4 2 1 20 18 21 11 22 8 23 5 24 15 25 14 26 5 3 3 4 2 6 1 7 27 8 21 9 9 
+use 24 1 36 10 13 11 6 12 7 13 11 14 14 15 7 16 2 17 17 18 4 2 1 20 18 21 11 22 8 23 5 24 15 25 14 26 5 3 3 4 2 6 1 7 27 8 21 9 9 
 herring 1 20 1 
 killed 1 14 1 
 produced 2 23 1 24 1 
 rock 1 22 6 
 courses 3 12 2 23 2 25 2 
-dtdxhtml 1 17 1 
 tests 7 12 1 17 2 20 2 21 8 23 1 24 2 25 10 
+dtdxhtml 1 17 1 
 xmlns 2 12 3 23 3 
 innovation 1 15 1 
-lift 1 25 1 
 logic 6 12 1 16 1 18 12 21 5 24 3 25 1 
-piazza 1 1 8 
+lift 1 25 1 
+piazza 1 1 9 
 queries 3 11 1 24 1 25 6 
-before 21 1 8 10 3 11 2 12 1 13 5 15 3 16 2 17 3 18 1 2 2 20 6 21 7 22 3 23 1 24 6 25 2 26 2 3 2 7 2 8 2 9 3 
+before 21 1 9 10 3 11 2 12 1 13 5 15 3 16 2 17 3 18 1 2 2 20 6 21 7 22 3 23 1 24 6 25 2 26 2 3 2 7 2 8 2 9 3 
 charting 1 20 1 
-dog 2 24 9 25 6 
 textually 1 10 2 
+dog 2 24 9 25 6 
 fclose 1 21 1 
 instead 7 10 4 13 2 15 1 20 1 22 2 25 1 7 1 
 log 10 14 3 16 3 17 1 20 3 21 2 23 3 24 3 7 7 8 3 9 3 
 mycommnd 1 8 1 
 occurrences 3 21 1 24 9 25 3 
-professional 3 1 8 11 3 21 1 
+professional 3 1 9 11 3 21 1 
 hierarchy 1 8 2 
+another 11 1 9 10 3 11 2 13 1 20 1 21 6 22 2 24 7 25 2 7 2 8 5 
 assert 3 14 2 20 1 21 8 
-another 11 1 8 10 3 11 2 13 1 20 1 21 6 22 2 24 7 25 2 7 2 8 5 
 saver 1 8 1 
-discovering 1 20 1 
 direction 1 15 1 
+discovering 1 20 1 
 unspecified 1 14 1 
-obtain 4 1 8 15 1 6 1 7 1 
-convoluted 1 21 1 
-challenged 1 17 1 
+obtain 4 1 9 15 1 6 1 7 1 
 cp 2 13 6 8 2 
+challenged 1 17 1 
+convoluted 1 21 1 
 dp 1 11 1 
+flying 3 1 9 3 1 4 1 
 fp 2 14 3 21 3 
-flying 3 1 8 3 1 4 1 
 writes 6 17 1 18 1 20 2 21 1 23 1 24 1 
 ip 7 11 2 13 17 14 11 15 2 22 25 26 3 7 1 
 jp 2 13 5 14 1 
 kp 1 21 8 
 lp 1 13 3 
-milestones 1 3 2 
 macintosh 5 10 3 18 9 22 6 7 9 8 12 
+milestones 1 3 2 
 designandcrawler 1 12 1 
-up 21 1 40 10 2 11 3 12 2 13 3 14 3 15 5 16 3 17 4 18 1 20 4 21 4 22 2 24 6 25 1 26 4 4 4 6 1 7 8 8 6 9 2 
+up 21 1 45 10 2 11 3 12 2 13 3 14 3 15 5 16 3 17 4 18 1 20 4 21 4 22 2 24 6 25 1 26 4 4 4 6 1 7 8 8 6 9 2 
 vp 1 13 3 
 app 2 21 1 7 2 
-cleandictionary 1 20 1 
 cpp 1 10 1 
+cleandictionary 1 20 1 
 tbd 1 3 1 
 myls 1 8 1 
 provided 5 10 1 13 1 22 1 24 1 7 1 
-switches 3 22 2 7 3 8 7 
-sanity 3 20 1 23 1 8 1 
-shape 1 17 1 
 stepwise 2 12 1 20 1 
+shape 1 17 1 
+sanity 3 20 1 23 1 8 1 
+switches 3 22 2 7 3 8 7 
+various 12 1 18 10 1 12 1 13 4 14 3 15 2 18 1 20 2 23 2 25 1 7 4 9 1 
 familiar 6 14 1 20 2 21 1 24 1 7 2 8 1 
-various 12 1 16 10 1 12 1 13 4 14 3 15 2 18 1 20 2 23 2 25 1 7 4 9 1 
-warning 8 1 8 20 1 22 1 23 1 24 2 25 3 3 1 9 1 
+warning 8 1 9 20 1 22 1 23 1 24 2 25 3 3 1 9 1 
 iteration 1 21 1 
 permissions 3 7 1 8 9 9 1 
 aliases 1 8 1 
 responses 2 12 1 26 1 
-combining 1 25 1 
 central 1 21 1 
+combining 1 25 1 
 fair 1 10 4 
 handle 5 20 1 21 1 22 1 25 4 26 1 
 mainly 1 7 1 
 pair 4 11 1 15 1 16 2 17 1 
-been 14 1 8 10 1 12 3 15 3 16 1 17 3 18 1 20 2 21 2 23 2 24 2 7 1 8 2 9 2 
+been 14 1 9 10 1 12 3 15 3 16 1 17 3 18 1 20 2 21 2 23 2 24 2 7 1 8 2 9 2 
+scripts 7 1 18 12 3 20 1 3 1 7 1 8 1 9 2 
 surely 1 11 1 
-scripts 7 1 16 12 3 20 1 3 1 7 1 8 1 9 2 
 typically 10 10 6 11 1 12 2 13 1 14 1 18 1 20 2 3 2 7 4 8 6 
-four 3 1 8 22 3 7 1 
+four 3 1 9 22 3 7 1 
 guns 1 12 1 
-hour 4 1 16 2 2 3 1 7 3 
+hour 4 1 18 2 2 3 1 7 3 
 maybe 5 11 1 12 1 18 1 20 2 21 2 
 acm 4 11 2 12 1 24 1 25 1 
 runs 10 12 2 17 1 20 3 23 1 24 2 25 4 26 1 3 1 4 1 8 2 
-chunk 1 17 1 
-suns 1 10 1 
 seen 3 10 1 15 1 16 1 
-tour 2 6 1 7 4 
+suns 1 10 1 
+chunk 1 17 1 
 deallocate 1 14 1 
+tour 2 6 1 7 4 
 ulr 1 16 2 
-your 25 1 144 10 1 11 5 12 12 13 4 14 1 15 2 16 6 17 11 18 1 2 4 20 47 21 17 22 30 23 23 24 38 25 48 26 13 3 16 4 6 5 1 6 1 7 21 8 9 9 12 
+your 25 1 162 10 1 11 5 12 12 13 4 14 1 15 2 16 6 17 11 18 1 2 4 20 47 21 17 22 30 23 23 24 38 25 48 26 13 3 16 4 6 5 1 6 1 7 21 8 9 9 12 
 reallocate 1 14 1 
 datastructures 2 15 1 17 1 
 executes 3 21 1 7 2 8 2 
@@ -3741,55 +3741,55 @@ boundary 3 13 1 20 2 21 17
 texbin 1 8 1 
 input 15 10 2 12 6 13 1 14 4 15 3 16 7 17 2 19 2 20 1 21 13 22 15 23 5 24 9 25 7 7 1 
 model 1 7 1 
-alloc 2 20 4 7 4 
 assembler 2 16 1 7 16 
+alloc 2 20 4 7 4 
 sleeping 1 16 1 
 extern 1 16 1 
 wpay 1 15 1 
 lifecycle 1 21 1 
 nanocopter 1 4 1 
 publicly 1 11 1 
-resubmit 5 1 8 23 1 24 1 25 1 3 1 
-sneaky 3 12 1 16 1 23 1 
+resubmit 5 1 9 23 1 24 1 25 1 3 1 
 senior 1 10 1 
+sneaky 3 12 1 16 1 23 1 
 linear 3 15 1 24 1 7 1 
-after 17 1 24 10 1 11 2 12 2 13 4 14 5 15 1 17 5 20 9 21 4 23 1 24 4 26 3 3 3 7 4 8 3 9 2 
-showing 1 20 1 
+after 17 1 27 10 1 11 2 12 2 13 4 14 5 15 1 17 5 20 9 21 4 23 1 24 4 26 3 3 3 7 4 8 3 9 2 
 serif 1 2 1 
+showing 1 20 1 
 drive 3 17 1 20 1 22 1 
+exciting 2 1 9 7 2 
 edsger 2 20 1 21 1 
-exciting 2 1 8 7 2 
-copter 2 1 8 4 3 
+copter 2 1 9 4 3 
 login 8 22 1 23 1 24 1 26 1 3 3 7 10 8 5 9 4 
-archiecture 1 20 1 
 applications 3 15 1 7 2 8 1 
-close 3 14 1 21 2 26 3 
+archiecture 1 20 1 
 shows 8 10 3 12 2 14 1 15 1 19 1 20 2 22 1 24 1 
+close 3 14 1 21 2 26 3 
 types 11 10 6 13 2 14 2 15 2 16 2 18 1 20 6 21 2 22 1 25 2 8 1 
 extremely 2 21 1 3 1 
 generated 2 24 1 25 1 
 ohio 1 11 2 
 postfixes 1 9 1 
-redir 1 20 1 
 bits 2 14 3 22 4 
+redir 1 20 1 
 crawling 4 11 1 12 7 16 4 23 7 
-tried 1 8 1 
-dgb 1 17 1 
 dennis 1 10 1 
+dgb 1 17 1 
+tried 1 8 1 
 features 2 18 2 21 1 
 graphical 2 25 1 6 1 
 hits 1 12 1 
 poorer 1 25 1 
 annual 1 4 1 
+snippets 2 1 18 21 1 
 sits 1 12 1 
-snippets 2 1 16 21 1 
+they 18 1 9 10 5 11 6 12 3 13 1 15 3 16 4 18 2 2 1 20 4 21 3 22 2 23 1 24 3 25 1 5 1 7 7 8 3 
 dependant 1 13 1 
-they 18 1 8 10 5 11 6 12 3 13 1 15 3 16 4 18 2 2 1 20 4 21 3 22 2 23 1 24 3 25 1 5 1 7 7 8 3 
-fun 7 1 8 12 1 17 1 20 1 21 1 4 1 7 1 
+fun 7 1 9 12 1 17 1 20 1 21 1 4 1 7 1 
 grades 1 21 2 
-jun 2 1 16 8 4 
+jun 2 1 18 8 4 
 normalizes 1 26 1 
-run 19 1 24 10 4 12 5 13 9 14 4 17 6 18 3 20 9 21 4 22 1 23 3 24 3 25 24 26 3 3 3 4 2 7 9 8 4 9 1 
+run 19 1 27 10 4 12 5 13 9 14 4 17 6 18 3 20 9 21 4 22 1 23 3 24 3 25 24 26 3 3 3 4 2 7 9 8 4 9 1 
 sun 2 10 1 8 1 
 tun 1 7 2 
 effectively 1 10 1 
@@ -3797,38 +3797,38 @@ imposed 1 20 1
 nitty 1 7 1 
 break 6 17 5 2 1 21 5 22 1 25 1 5 1 
 dive 1 7 1 
-excercises 1 25 1 
 encountered 1 15 1 
+excercises 1 25 1 
+five 2 1 9 13 1 
 fprintf 3 14 1 20 3 21 2 
-five 2 1 8 13 1 
-guessed 1 25 1 
-wrong 5 13 3 17 2 20 1 22 1 8 1 
 give 11 12 3 15 1 16 2 17 3 18 1 20 1 23 1 24 1 25 1 26 1 7 2 
+wrong 5 13 3 17 2 20 1 22 1 8 1 
+guessed 1 25 1 
 live 2 26 1 7 1 
-activity 2 1 8 7 1 
+activity 2 1 9 7 1 
 systematic 2 20 1 21 2 
 xwindows 1 7 1 
-jonathan 1 1 16 
+jonathan 1 1 18 
 allows 12 10 1 13 1 14 2 15 1 17 1 18 2 20 1 22 1 25 2 4 1 7 1 8 1 
-remaining 4 1 8 12 1 16 1 3 1 
-software 24 1 96 10 1 11 2 12 14 13 1 14 1 15 1 16 2 17 4 18 4 19 1 2 1 20 8 21 4 22 3 23 1 24 2 25 1 26 3 3 1 5 2 7 9 8 1 9 2 
+remaining 4 1 9 12 1 16 1 3 1 
+software 24 1 108 10 1 11 2 12 14 13 1 14 1 15 1 16 2 17 4 18 4 19 1 2 1 20 8 21 4 22 3 23 1 24 2 25 1 26 3 3 1 5 2 7 9 8 1 9 2 
 dimensional 1 10 4 
 huge 1 11 1 
-jointly 1 1 24 
+jointly 1 1 27 
 keywords 4 11 15 12 2 24 1 25 3 
 success 3 10 4 7 2 8 1 
-tiny 3 1 8 11 1 25 1 
+tiny 3 1 9 11 1 25 1 
 scientist 1 20 1 
 deallocates 1 14 1 
 village 1 25 2 
-money 3 1 8 20 1 21 2 
-reallocates 1 14 1 
+money 3 1 9 20 1 21 2 
 replace 6 10 1 20 5 21 1 3 1 7 1 9 1 
+reallocates 1 14 1 
 svns 1 2 1 
 initialized 4 12 1 14 1 17 3 23 1 
 least 3 12 2 21 2 23 1 
 adds 1 9 4 
-review 4 1 32 2 1 20 1 7 3 
+review 4 1 36 2 1 20 1 7 3 
 trouble 1 3 1 
 unitialized 1 20 1 
 puzzle 1 2 1 
@@ -3837,86 +3837,86 @@ bit 1 13 1
 similarities 2 11 1 13 1 
 try 13 11 3 12 2 14 1 16 2 17 1 18 2 20 4 21 4 23 2 24 1 25 1 7 4 8 1 
 exit 9 10 4 14 3 16 2 17 4 20 3 21 1 22 4 7 5 8 1 
-fixes 3 18 1 20 1 21 1 
 fit 1 18 1 
+fixes 3 18 1 20 1 21 1 
 git 2 7 1 9 1 
 hit 3 11 1 20 2 21 2 
 makefile 7 18 26 20 1 23 1 24 6 25 3 26 2 3 1 
-nanocopters 2 1 48 4 2 
+nanocopters 2 1 54 4 2 
 operates 2 12 1 20 1 
 authentication 1 9 2 
 blank 1 20 3 
-challenge 3 21 1 24 1 7 1 
-sit 2 20 2 21 2 
-connector 1 17 3 
-crawlerdesign 1 16 1 
 significantly 1 15 1 
-understanding 5 12 2 13 1 22 1 23 1 24 2 
+crawlerdesign 1 16 1 
+connector 1 17 3 
+sit 2 20 2 21 2 
+challenge 3 21 1 24 1 7 1 
 executable 5 10 2 18 9 25 1 7 12 8 3 
+understanding 5 12 2 13 1 22 1 23 1 24 2 
 foundation 2 17 1 7 1 
+gary 1 1 9 
 wit 2 14 1 16 1 
-gary 1 1 8 
 xit 1 22 1 
 lerk 1 20 1 
 prototypes 3 14 2 16 1 22 2 
 asterisks 1 13 2 
+bing 1 1 18 
 redirection 1 13 1 
-bing 1 1 16 
 due 2 2 1 3 2 
 king 2 12 1 20 2 
 menu 1 22 4 
-stones 2 1 8 20 3 
-division 2 13 1 21 1 
+stones 2 1 9 20 3 
 dereference 1 13 2 
+division 2 13 1 21 1 
 vaguard 1 25 1 
 https 3 11 1 3 2 9 7 
 march 2 2 2 3 1 
 structures 16 10 11 11 3 12 3 13 4 14 9 15 18 16 24 17 8 19 2 2 2 20 6 21 1 22 3 23 3 24 15 25 1 
 toolbox 2 21 1 24 1 
-following 21 1 16 10 7 11 4 12 3 13 4 14 5 15 7 16 4 17 1 18 3 20 3 21 3 22 3 23 2 24 11 25 6 26 3 3 1 7 3 8 5 9 2 
-sunday 3 1 16 2 2 3 1 
+following 21 1 18 10 7 11 4 12 3 13 4 14 5 15 7 16 4 17 1 18 3 20 3 21 3 22 3 23 2 24 11 25 6 26 3 3 1 7 3 8 5 9 2 
+sunday 3 1 18 2 2 3 1 
+time 22 1 27 10 10 11 2 12 7 13 10 14 4 15 7 16 3 17 1 18 3 20 11 21 10 23 1 24 5 25 3 26 17 3 1 4 1 5 2 7 3 8 8 9 1 
 department 3 4 1 6 1 7 1 
-time 22 1 24 10 10 11 2 12 7 13 10 14 4 15 7 16 3 17 1 18 3 20 11 21 10 23 1 24 5 25 3 26 17 3 1 4 1 5 2 7 3 8 8 9 1 
 essentially 3 20 2 3 1 7 1 
 notation 1 10 8 
 parser 4 11 2 12 32 17 1 23 32 
-eax 1 7 14 
-expanding 1 24 1 
-extract 3 15 1 16 2 17 2 
 existed 2 11 2 21 1 
-fraction 1 15 1 
+extract 3 15 1 16 2 17 2 
+expanding 1 24 1 
+eax 1 7 14 
 valuable 1 13 1 
+fraction 1 15 1 
 max 7 14 7 15 18 16 14 17 4 20 2 21 11 24 2 
 navigate 1 7 1 
 outline 1 25 1 
 printfs 2 17 1 21 1 
-system 20 1 32 10 4 11 1 12 32 16 3 17 2 18 3 2 1 20 24 21 9 22 4 23 4 24 6 25 16 26 1 3 1 6 1 7 11 8 8 9 3 
-tax 1 20 1 
+system 20 1 36 10 4 11 1 12 32 16 3 17 2 18 3 2 1 20 24 21 9 22 4 23 4 24 6 25 16 26 1 3 1 6 1 7 11 8 8 9 3 
 technically 1 11 2 
+tax 1 20 1 
 expression 2 13 1 21 1 
 intended 1 7 1 
 absence 2 20 2 21 1 
 br 1 11 2 
-cr 2 20 2 8 1 
+solution 8 1 9 15 1 2 1 20 1 21 2 24 1 25 8 3 1 
+svn 9 1 9 2 1 23 1 24 4 25 6 26 3 3 11 6 1 9 70 
 computation 1 13 1 
-svn 9 1 8 2 1 23 1 24 4 25 6 26 3 3 11 6 1 9 70 
-solution 8 1 8 15 1 2 1 20 1 21 2 24 1 25 8 3 1 
+cr 2 20 2 8 1 
 therefore 11 10 3 13 1 15 7 16 1 17 1 21 1 24 1 25 1 26 1 7 1 8 3 
 fields 1 10 1 
-gr 4 1 16 12 3 23 3 25 1 
+gr 4 1 18 12 3 23 3 25 1 
 hr 1 11 1 
 interval 3 12 1 16 4 23 1 
+or 24 1 135 10 13 11 7 12 8 13 6 14 6 15 13 16 4 17 10 18 7 20 17 21 25 22 14 23 5 24 6 25 24 26 1 3 1 4 1 5 3 6 3 7 12 8 32 9 3 
+only 19 1 9 10 8 11 3 12 7 13 5 15 3 16 1 17 1 18 5 20 2 21 4 22 2 23 4 24 3 25 4 26 1 7 3 8 12 9 2 
 options 3 18 3 7 6 8 5 
-only 19 1 8 10 8 11 3 12 7 13 5 15 3 16 1 17 1 18 5 20 2 21 4 22 2 23 4 24 3 25 4 26 1 7 3 8 12 9 2 
-or 24 1 120 10 13 11 7 12 8 13 6 14 6 15 13 16 4 17 10 18 7 20 17 21 25 22 14 23 5 24 6 25 24 26 1 3 1 4 1 5 3 6 3 7 12 8 32 9 3 
 add 10 13 1 14 2 15 5 16 5 17 4 21 2 24 2 7 4 8 1 9 3 
 recursively 1 8 1 
 sr 1 11 2 
-tr 4 11 2 12 3 17 1 23 3 
 datatype 1 10 3 
-elegant 1 21 1 
-examination 1 2 3 
+tr 4 11 2 12 3 17 1 23 3 
 unsigned 2 14 3 16 2 
+examination 1 2 3 
+elegant 1 21 1 
 xr 3 25 1 7 3 8 12 
 memorial 1 2 2 
 aside 1 10 1 
@@ -3929,107 +3929,107 @@ percentage 2 11 1 20 1
 temperature 1 26 39 
 having 6 10 1 12 1 20 1 21 1 8 4 9 1 
 admin 2 11 1 25 1 
-www 26 1 8 10 1 11 25 12 54 13 1 14 3 15 8 16 7 17 29 18 1 19 1 2 1 20 3 21 1 22 1 23 57 24 1 25 98 26 1 3 2 4 1 5 1 6 1 7 2 8 1 9 2 
+www 26 1 9 10 1 11 25 12 54 13 1 14 3 15 8 16 7 17 29 18 1 19 1 2 1 20 3 21 1 22 1 23 57 24 1 25 98 26 1 3 2 4 1 5 1 6 1 7 2 8 1 9 2 
 modifies 1 25 1 
 philosophical 1 21 1 
 returned 9 10 8 14 4 15 1 16 1 18 1 21 1 24 1 26 25 3 2 
-silently 1 10 1 
 cause 3 10 2 20 1 21 1 
-emac 1 6 1 
+silently 1 10 1 
 unr 1 22 1 
+emac 1 6 1 
 families 1 7 1 
 clean 10 12 1 16 2 17 3 18 4 20 2 21 1 24 4 25 1 7 1 9 1 
-technique 1 21 2 
-demos 1 2 1 
 download 4 11 2 12 1 15 1 23 1 
+demos 1 2 1 
+technique 1 21 2 
 filenames 1 8 2 
 winows 1 7 1 
 hide 1 7 1 
 actual 6 10 2 14 2 15 3 16 2 22 1 26 1 
-shipping 1 21 1 
 side 3 10 1 26 1 4 1 
+shipping 1 21 1 
+details 11 1 9 11 1 16 3 17 1 2 1 22 10 25 1 26 1 6 1 7 7 9 1 
 touch 2 18 2 8 2 
-details 11 1 8 11 1 16 3 17 1 2 1 22 10 25 1 26 1 6 1 7 7 9 1 
-gray 1 4 1 
 wide 2 10 1 14 1 
+gray 1 4 1 
 implemented 2 12 2 20 1 
 cases 8 10 1 12 1 15 1 17 3 20 3 21 2 25 4 8 1 
-turned 2 1 8 20 2 
+turned 2 1 9 20 2 
 parent 1 8 1 
-decomposed 1 25 1 
 digging 2 20 1 21 1 
-exceptions 2 14 1 3 2 
+decomposed 1 25 1 
 equivalence 1 10 2 
-groups 7 1 8 12 1 18 1 20 1 23 2 7 1 8 1 
+exceptions 2 14 1 3 2 
+groups 7 1 9 12 1 18 1 20 1 23 2 7 1 8 1 
 numbers 7 10 23 15 1 16 1 17 2 20 2 22 6 24 3 
 valout 2 17 4 20 8 
-issuing 2 18 1 9 1 
 interestingly 1 11 1 
+issuing 2 18 1 9 1 
 packets 2 12 1 20 2 
+score 3 1 27 10 7 25 5 
 comments 9 15 1 17 1 21 1 22 2 23 1 24 1 25 1 3 1 7 3 
-score 3 1 24 10 7 25 5 
 doug 1 2 2 
 arg 1 8 2 
-consults 1 25 1 
 chuck 1 21 1 
-updates 2 24 1 7 1 
+consults 1 25 1 
 updatelistlinktobevisited 3 16 4 17 2 20 1 
-forty 1 1 8 
+updates 2 24 1 7 1 
+forty 1 1 9 
 org 7 11 1 12 9 17 3 18 1 20 1 23 9 24 1 
 prompt 6 22 1 23 1 24 1 26 1 8 1 9 1 
 struct 8 10 2 13 2 14 25 15 10 16 8 17 1 20 1 24 9 
+team 5 1 63 12 2 2 1 4 1 7 6 
 discarding 1 24 1 
-team 5 1 56 12 2 2 1 4 1 7 6 
 expressions 1 10 1 
-hmtl 2 16 1 17 1 
 handling 3 15 1 22 1 26 1 
+hmtl 2 16 1 17 1 
 intelligent 1 15 1 
 lib 6 10 1 17 1 2 1 20 1 7 2 8 7 
 mote 2 26 1 4 1 
-note 22 1 40 10 1 11 2 12 8 13 4 14 9 15 2 16 1 17 5 18 3 20 8 21 3 22 1 23 5 24 12 25 6 26 2 3 4 4 1 7 9 8 6 9 7 
-appropriate 6 1 8 22 2 23 1 24 1 25 1 7 2 
-recompiling 1 18 1 
+note 22 1 45 10 1 11 2 12 8 13 4 14 9 15 2 16 1 17 5 18 3 20 8 21 3 22 1 23 5 24 12 25 6 26 2 3 4 4 1 7 9 8 6 9 7 
+appropriate 6 1 9 22 2 23 1 24 1 25 1 7 2 
 return 16 10 15 11 1 13 9 14 10 15 2 16 4 17 5 20 3 21 8 22 1 23 2 24 6 25 1 26 3 7 1 8 3 
+recompiling 1 18 1 
+cannot 8 1 27 10 1 12 1 15 1 16 3 21 1 23 1 8 2 
 compilation 5 10 2 16 1 18 6 25 1 7 7 
-cannot 8 1 24 10 1 12 1 15 1 16 3 21 1 23 1 8 2 
-excessive 2 13 1 20 1 
 engines 2 11 3 24 1 
+excessive 2 13 1 20 1 
 forever 1 14 3 
 naming 1 10 1 
-occur 2 20 4 21 1 
 own 12 10 2 11 1 12 2 13 1 2 2 22 1 23 2 24 4 25 7 7 2 8 3 9 1 
+occur 2 20 4 21 1 
 professed 1 20 1 
-as 23 1 80 10 21 11 12 12 28 13 12 14 2 15 16 16 19 17 8 18 10 2 3 20 18 21 17 22 5 23 23 24 32 25 22 26 12 3 4 4 1 7 25 8 19 9 3 
-behind 4 1 8 15 1 3 1 7 1 
-span 2 11 16 2 1 
+as 23 1 90 10 21 11 12 12 28 13 12 14 2 15 16 16 19 17 8 18 10 2 3 20 18 21 17 22 5 23 23 24 32 25 22 26 12 3 4 4 1 7 25 8 19 9 3 
+behind 4 1 9 15 1 3 1 7 1 
+cs 26 1 126 10 9 11 31 12 50 13 8 14 5 15 8 16 9 17 32 18 3 19 3 2 5 20 11 21 5 22 3 23 52 24 4 25 118 26 7 3 12 4 7 5 2 6 3 7 35 8 44 9 29 
 surprisingly 1 10 1 
-cs 26 1 112 10 9 11 31 12 50 13 8 14 5 15 8 16 9 17 32 18 3 19 3 2 5 20 11 21 5 22 3 23 52 24 4 25 118 26 7 3 12 4 7 5 2 6 3 7 35 8 44 9 29 
+span 2 11 16 2 1 
+event 1 1 9 
+undergrad 1 1 9 
 es 1 20 1 
-undergrad 1 1 8 
-event 1 1 8 
-functionality 2 24 1 26 1 
 friend 2 17 1 20 2 
-is 25 1 192 10 61 11 31 12 58 13 47 14 52 15 83 16 36 17 45 18 21 2 2 20 89 21 78 22 16 23 24 24 63 25 46 26 22 3 14 4 2 5 1 6 2 7 68 8 58 9 18 
+functionality 2 24 1 26 1 
+is 25 1 216 10 61 11 31 12 58 13 47 14 52 15 83 16 36 17 45 18 21 2 2 20 89 21 78 22 16 23 24 24 63 25 46 26 22 3 14 4 2 5 1 6 2 7 68 8 58 9 18 
 ls 6 11 1 12 1 23 1 7 4 8 63 9 15 
 ms 3 12 1 20 2 23 1 
 os 5 12 3 16 2 2 1 4 1 7 3 
 ps 2 8 7 9 1 
 bundled 1 7 1 
 concurrently 1 9 1 
-us 14 1 16 10 1 11 3 12 1 13 3 15 2 16 2 20 4 21 2 24 1 25 2 3 2 7 1 8 1 
-vs 1 5 1 
-fortunately 1 21 1 
+us 14 1 18 10 1 11 3 12 1 13 3 15 2 16 2 20 4 21 2 24 1 25 2 3 2 7 1 8 1 
 false 6 12 1 14 1 15 1 16 1 23 1 24 2 
+fortunately 1 21 1 
+vs 1 5 1 
 haven 2 17 1 21 2 
 little 6 11 2 13 8 14 2 20 1 5 1 7 2 
-account 8 1 16 18 1 24 1 25 1 3 2 7 5 8 2 9 4 
-room 1 4 1 
-recommended 2 21 1 9 1 
+account 8 1 18 18 1 24 1 25 1 3 2 7 5 8 2 9 4 
 red 3 20 1 7 1 9 1 
+recommended 2 21 1 9 1 
+room 1 4 1 
 signify 1 10 1 
-ted 1 6 1 
-documentlist 1 24 1 
 tittle 1 13 1 
+documentlist 1 24 1 
+ted 1 6 1 
 esp 1 7 12 
 wed 5 17 1 23 1 24 1 3 1 5 1 
 robotica 1 4 1 
@@ -4038,69 +4038,69 @@ found 17 10 2 11 2 12 8 14 2 15 3 16 4 17 1 18 1 20 4 21 1 23 6 24 9 25 1 26 2 4
 indicates 5 10 3 15 1 20 1 8 2 9 1 
 overal 1 11 1 
 pound 1 10 1 
-accidentally 1 9 2 
 queryengine 1 25 14 
+accidentally 1 9 2 
 round 1 22 1 
-separate 2 15 1 8 1 
 cycles 1 12 1 
+separate 2 15 1 8 1 
 enclosed 1 10 1 
-google 7 1 16 11 19 25 2 3 1 5 1 6 1 7 1 
+google 7 1 18 11 19 25 2 3 1 5 1 6 1 7 1 
 hacked 1 21 1 
-chen 1 1 32 
+chen 1 1 36 
 transactions 4 11 2 12 1 24 1 25 1 
-for 25 1 208 10 20 11 16 12 39 13 12 14 32 15 39 16 33 17 19 18 18 2 6 20 34 21 51 22 18 23 25 24 28 25 43 26 14 3 20 4 6 5 4 6 5 7 56 8 28 9 25 
-logstatus 1 12 1 
+for 25 1 234 10 20 11 16 12 39 13 12 14 32 15 39 16 33 17 19 18 18 2 6 20 34 21 51 22 18 23 25 24 28 25 43 26 14 3 20 4 6 5 4 6 5 7 56 8 28 9 25 
 looked 3 12 1 14 1 8 1 
+logstatus 1 12 1 
 moves 4 12 1 20 1 23 1 4 1 
 nor 3 10 2 24 1 8 1 
 alternative 1 9 1 
 republic 1 14 2 
 svnbook 1 9 1 
-then 22 1 8 10 9 11 4 12 12 13 4 14 2 15 19 16 9 17 11 18 6 20 20 21 12 22 3 23 8 24 14 25 14 26 5 3 5 4 1 7 11 8 7 9 3 
-especially 1 9 1 
+then 22 1 9 10 9 11 4 12 12 13 4 14 2 15 19 16 9 17 11 18 6 20 20 21 12 22 3 23 8 24 14 25 14 26 5 3 5 4 1 7 11 8 7 9 3 
 external 5 10 1 12 1 20 1 23 1 24 1 
-when 19 1 32 10 4 11 9 12 9 13 5 14 4 15 1 17 2 18 3 20 11 21 13 22 2 23 6 24 9 26 10 3 3 7 3 8 9 9 3 
-with 24 1 64 10 13 11 9 12 14 13 12 14 14 15 21 16 16 17 10 18 9 2 2 20 26 21 19 22 9 23 10 24 16 25 7 26 7 3 6 4 5 5 1 7 13 8 13 9 6 
+especially 1 9 1 
+with 24 1 72 10 13 11 9 12 14 13 12 14 14 15 21 16 16 17 10 18 9 2 2 20 26 21 19 22 9 23 10 24 16 25 7 26 7 3 6 4 5 5 1 7 13 8 13 9 6 
+when 19 1 36 10 4 11 9 12 9 13 5 14 4 15 1 17 2 18 3 20 11 21 13 22 2 23 6 24 9 26 10 3 3 7 3 8 9 9 3 
 best 7 11 1 2 1 20 5 4 1 5 1 6 1 7 1 
-conventional 1 21 1 
-criteria 1 15 1 
 srand 2 10 3 14 1 
+criteria 1 15 1 
+conventional 1 21 1 
 dest 1 13 3 
 updated 2 11 1 13 1 
 rest 3 12 1 18 1 8 3 
 confusing 1 13 2 
-tty 1 8 1 
 test 13 10 3 11 2 12 7 16 1 20 10 21 31 22 1 23 16 24 21 25 36 3 1 5 1 7 1 
-unrelated 2 17 1 20 1 
+tty 1 8 1 
 explained 1 16 1 
-west 1 1 16 
+unrelated 2 17 1 20 1 
+west 1 1 18 
 lookup 1 12 1 
 bird 1 25 1 
+confidence 7 1 9 12 1 17 1 21 3 23 1 24 1 7 1 
 careful 1 14 1 
-confidence 7 1 8 12 1 17 1 21 3 23 1 24 1 7 1 
 listing 2 20 4 8 1 
 serves 1 7 1 
 heavily 3 12 1 16 1 23 1 
 intermediate 1 6 1 
 purpose 2 14 2 23 1 
-abstraction 7 1 8 12 2 16 1 20 1 25 1 26 1 7 1 
+abstraction 7 1 9 12 2 16 1 20 1 25 1 26 1 7 1 
 controlling 1 4 1 
 traversed 1 15 1 
 fixed 2 13 3 14 1 
-hoping 1 20 2 
 hypertext 1 11 3 
+hoping 1 20 2 
 lists 5 15 11 23 1 24 1 7 1 8 1 
 macros 7 10 2 14 5 15 1 16 1 21 1 23 1 24 1 
-activated 2 1 16 7 2 
-wesley 3 1 8 11 3 21 1 
-instructor 3 1 32 20 1 7 3 
-musolesi 1 25 4 
+activated 2 1 18 7 2 
+wesley 3 1 9 11 3 21 1 
+instructor 3 1 36 20 1 7 3 
 module 5 11 1 12 9 16 13 23 2 25 4 
+musolesi 1 25 4 
 arasu 4 11 2 12 1 24 1 25 1 
-buys 1 20 1 
 rendered 1 11 1 
-story 1 21 1 
+buys 1 20 1 
 conditions 6 12 2 15 1 17 2 20 2 21 6 23 1 
+story 1 21 1 
 instructions 2 10 1 8 1 
 loose 1 11 1 
 moose 2 11 2 24 4 
@@ -4108,44 +4108,44 @@ presented 3 12 1 14 1 16 1
 reality 1 15 1 
 static 1 14 1 
 directive 1 10 12 
-never 5 1 8 15 1 20 2 21 3 5 1 
+never 5 1 9 15 1 20 2 21 3 5 1 
 often 7 10 5 11 1 13 2 17 1 18 1 20 1 8 3 
 papers 2 7 2 8 7 
-accepting 1 26 1 
 algorithms 4 11 2 12 1 20 1 25 1 
-cflags 3 18 16 20 1 24 4 
-changes 6 18 1 20 3 21 1 26 1 3 1 9 8 
-cumbersome 1 17 1 
+accepting 1 26 1 
 switched 2 12 1 20 1 
+cumbersome 1 17 1 
+changes 6 18 1 20 3 21 1 26 1 3 1 9 8 
+cflags 3 18 16 20 1 24 4 
 writable 1 17 1 
-at 24 1 48 10 12 11 8 12 12 13 17 14 10 15 19 16 6 17 21 18 1 20 49 21 21 22 1 23 12 24 8 25 10 26 3 3 3 4 2 5 4 6 2 7 14 8 6 9 4 
-robotic 1 7 1 
-black 1 22 1 
+at 24 1 54 10 12 11 8 12 12 13 17 14 10 15 19 16 6 17 21 18 1 20 49 21 21 22 1 23 12 24 8 25 10 26 3 3 3 4 2 5 4 6 2 7 14 8 6 9 4 
 records 1 12 1 
+black 1 22 1 
+robotic 1 7 1 
+commands 14 1 27 11 1 18 4 2 3 20 1 22 1 23 1 24 1 26 2 3 2 6 2 7 16 8 23 9 5 
 comes 8 12 3 13 1 18 1 20 2 21 1 22 2 7 1 8 1 
-commands 14 1 24 11 1 18 4 2 3 20 1 22 1 23 1 24 1 26 2 3 2 6 2 7 16 8 23 9 5 
-transmitting 1 9 2 
 darn 1 22 1 
-gt 1 1 32 
-green 4 1 8 26 3 4 1 9 38 
+transmitting 1 9 2 
+green 4 1 9 26 3 4 1 9 38 
+gt 1 1 36 
 ht 1 11 4 
-it 25 1 96 10 13 11 24 12 41 13 13 14 23 15 29 16 14 17 17 18 9 2 1 20 38 21 35 22 13 23 23 24 48 25 31 26 12 3 4 4 1 5 2 6 3 7 26 8 27 9 9 
-lt 1 1 64 
+it 25 1 108 10 13 11 24 12 41 13 13 14 23 15 29 16 14 17 17 18 9 2 1 20 38 21 35 22 13 23 23 24 48 25 31 26 12 3 4 4 1 5 2 6 3 7 26 8 27 9 9 
+lt 1 1 72 
 methodologies 1 12 1 
+percent 1 1 27 
 precedence 1 25 2 
-percent 1 1 24 
-college 3 11 1 25 1 6 1 
 st 1 10 1 
-deletes 1 9 2 
+college 3 11 1 25 1 6 1 
 detective 2 20 2 21 2 
+deletes 1 9 2 
 mathew 1 20 1 
 permanently 1 11 1 
 slowly 2 17 1 20 1 
-forwarding 2 20 1 7 1 
 ftp 1 11 1 
-guide 2 1 8 6 1 
-joseph 1 1 8 
-amazed 1 1 8 
+forwarding 2 20 1 7 1 
+guide 2 1 9 6 1 
+joseph 1 1 9 
+amazed 1 1 9 
 serious 1 21 4 
 decompose 1 22 1 
 executed 9 17 1 20 2 22 1 23 1 24 1 26 1 3 1 7 1 8 8 
@@ -4154,66 +4154,66 @@ popular 3 11 1 6 1 8 3
 bricks 1 7 1 
 cryptography 1 7 1 
 eniclane 1 25 1 
-independently 1 24 1 
 identifies 2 15 1 8 1 
+independently 1 24 1 
 processor 2 25 4 7 3 
 apr 2 8 1 9 5 
-tricks 1 8 1 
 technques 2 13 1 20 3 
+tricks 1 8 1 
 halt 1 21 1 
 apis 3 12 1 16 1 6 1 
-self 5 1 8 13 1 20 4 21 1 7 1 
+self 5 1 9 13 1 20 4 21 1 7 1 
 unlike 1 14 1 
 focus 4 11 1 12 1 20 2 22 1 
-joint 2 1 48 3 1 
+joint 2 1 54 3 1 
 manageable 1 12 1 
 point 14 10 5 13 5 14 2 15 9 16 3 17 2 2 1 20 1 21 1 24 2 25 1 7 2 8 1 9 1 
-buy 5 1 16 23 1 24 1 25 1 8 1 
+buy 5 1 18 23 1 24 1 25 1 8 1 
 sample 3 14 1 20 1 26 1 
 dollar 1 11 1 
-guy 1 20 1 
-getnexturl 4 15 2 16 2 17 1 20 1 
 webservers 4 11 1 12 1 16 1 23 1 
+getnexturl 4 15 2 16 2 17 1 20 1 
+guy 1 20 1 
+member 4 1 9 11 2 24 1 7 1 
 manipulate 1 13 1 
-member 4 1 8 11 2 24 1 7 1 
-prev 6 14 4 15 3 16 1 17 10 21 2 24 1 
 provider 1 12 2 
-alt 1 9 1 
+prev 6 14 4 15 3 16 1 17 10 21 2 24 1 
 addword 1 24 1 
+alt 1 9 1 
 switch 8 10 1 12 1 20 2 21 1 22 2 23 1 7 6 8 5 
-understand 12 1 8 11 1 12 3 16 1 17 2 18 1 2 1 20 5 22 1 26 1 7 5 9 1 
+understand 12 1 9 11 1 12 3 16 1 17 2 18 1 2 1 20 5 22 1 26 1 7 5 9 1 
 fopen 3 21 1 22 1 24 1 
 absolutely 1 17 1 
 branches 3 12 2 21 1 25 1 
+stay 2 1 9 26 1 
+show 9 1 18 14 1 15 1 17 2 20 1 22 2 26 1 7 2 8 2 
 changed 6 11 1 13 1 18 6 23 1 8 5 9 1 
-show 9 1 16 14 1 15 1 17 2 20 1 22 2 26 1 7 2 8 2 
-stay 2 1 8 26 1 
-type 14 1 8 10 6 11 5 13 4 14 4 15 1 16 2 17 3 22 5 25 1 6 2 7 3 8 5 9 1 
-disabilities 1 1 8 
+disabilities 1 1 9 
+type 14 1 9 10 6 11 5 13 4 14 4 15 1 16 2 17 3 22 5 25 1 6 2 7 3 8 5 9 1 
 lco 1 7 1 
 entries 5 15 1 17 2 20 2 7 1 8 1 
-practice 5 1 8 11 3 16 1 21 1 24 1 
+practice 5 1 9 11 3 16 1 21 1 24 1 
 recompiled 2 18 2 23 1 
-signing 1 25 1 
-currentposition 1 24 4 
-commented 1 12 1 
 codes 3 10 1 17 1 20 1 
+commented 1 12 1 
+currentposition 1 24 4 
+signing 1 25 1 
 deleted 2 8 1 9 2 
+gain 2 1 18 3 1 
 grinding 1 21 1 
-gain 2 1 16 3 1 
-modes 1 22 2 
+main 15 1 9 10 6 11 3 12 2 13 4 14 6 16 2 17 1 18 17 20 32 22 3 23 1 24 1 25 1 7 11 
+millisecond 1 1 9 
 messages 7 12 1 17 1 22 2 23 2 24 2 7 2 8 4 
-millisecond 1 1 8 
-main 15 1 8 10 6 11 3 12 2 13 4 14 6 16 2 17 1 18 17 20 32 22 3 23 1 24 1 25 1 7 11 
-picky 1 18 1 
+modes 1 22 2 
 pure 1 15 1 
-beautiful 3 17 1 20 1 22 1 
+picky 1 18 1 
+based 11 1 9 12 3 14 4 15 3 16 1 23 2 24 1 25 3 26 1 5 1 7 1 
 repeats 4 12 1 16 1 17 49 23 1 
-based 11 1 8 12 3 14 4 15 3 16 1 23 2 24 1 25 3 26 1 5 1 7 1 
-sure 17 11 2 12 1 14 1 15 3 16 3 17 5 18 1 20 3 21 3 22 6 23 4 24 5 25 4 26 2 3 3 7 2 8 3 
+beautiful 3 17 1 20 1 22 1 
 construct 2 10 2 24 1 
+sure 17 11 2 12 1 14 1 15 3 16 3 17 5 18 1 20 3 21 3 22 6 23 4 24 5 25 4 26 2 3 3 7 2 8 3 
 descriptions 1 14 1 
 flows 1 12 1 
 housekeeping 1 7 2 
-languages 3 1 8 7 1 8 1 
-necessary 6 1 24 10 1 14 1 18 1 24 1 7 3 
+languages 3 1 9 7 1 8 1 
+necessary 6 1 27 10 1 14 1 18 1 24 1 7 3 

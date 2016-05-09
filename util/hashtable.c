@@ -261,7 +261,11 @@ int HashTableLoadWords(HashTable* ht, char** buf) {
 
       sprintf(word_buf, "%s %d ", word, wNode->page->len);
       listFoldString(concat, &word_buf, wNode->page);
+
+      if (strlen(*buf) + strlen(word_buf) - 1 <= sizeof(*buf))
+        buf = realloc(buf, 2*sizeof(buf));
       strcat(*buf, word_buf);
+      strcat(*buf, "\n");
       free(word_buf);
 
       node = node->next;      
@@ -329,15 +333,20 @@ int HashTableAdd(HashTable* ht, element_t key, int (*f)(element_t, int)) {
 
   tmp = malloc(sizeof(HashTableNode));
   tmp->data = key;
+  tmp->next = NULL;
 
   p = f(key, ht->size);
   if (ht->table[p] == NULL) {
     ht->table[p] = tmp;
-    tmp->next = NULL;
+    //tmp->next = NULL;
   }
   else {
-    tmp->next = ht->table[p];
-    ht->table[p] = tmp;
+    HashTableNode* cur = ht->table[p];
+    while (cur->next != NULL)
+      cur = cur->next;
+    cur->next = tmp;
+    //tmp->next = ht->table[p];
+    //ht->table[p] = tmp;
   }
   ht->n++;
   return 1;

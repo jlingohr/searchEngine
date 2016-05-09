@@ -16,6 +16,8 @@
 #include <unistd.h>
 #include <curl/curl.h>                       // curl functionality
 #include <string.h>                          // strncmpr
+#include <pthread.h>
+#include <assert.h>
 
 // ---------------- Local includes  e.g., "file.h"
 #include "../../util/hashtable.h"                       // hashtable functionality
@@ -30,10 +32,16 @@ int checkCommandLine(int argc, char** argv);
 char* loadDoc(char* filename);
 int getDocID(char* filename, char* dir);
 int updateIndex(char* word, int docID, HashTable* index);
-int saveIndexToFile(char* file, HashTable* index);
+//int saveIndexToFile(char* file, HashTable* index);
+void* saveIndexToFile(void* argsv);
 void cleanIndex(HashTable* Index);
 HashTable* readFile(char* filename);
 void handleLine(HashTable* index, char* line);
+
+struct t_block {
+  char* file;
+  HashTable* ht;
+};
 
 
 
@@ -41,9 +49,10 @@ int main(int argc, char** argv) {
   HashTable* Index;
 
   char *target_directory, *target_file, *test_old, *test_new;
-  char* prev_file;
+  //char* prev_file;
   char** filenames;
-  int num_files, saved;
+  int num_files;// saved;
+  pthread_t tid;
   
 
   /*1. Program parameter processing */
@@ -115,8 +124,16 @@ int main(int argc, char** argv) {
     //HashTablePrintWords(Index);
   }
 
-  saved = saveIndexToFile(target_file, Index);
-  while (! saved) {;}
+  /* Asynchronous problem from read/write
+    Could use threads to solve */
+  struct t_block args;
+  args.file = target_file;
+  args.ht = Index;
+  pthread_create(&tid, NULL, saveIndexToFile, &args);
+  pthread_join(tid, NULL);
+
+  //saved = saveIndexToFile(target_file, Index);
+
      
   //6. CleanDynamicList (wordindex)
   cleanIndex(Index);
@@ -128,11 +145,16 @@ int main(int argc, char** argv) {
 
     /*7. Reload index from file and rewrite to new file
       wordindex = readFile(argv[3]) */
-    Index = readFile(argv[3]);
+    Index = readFile(test_old);
 
     /*8. saveFile (argv[4]. wordindex) */
     //LOG("Test complete\n");
-    saveIndexToFile(argv[4], Index);
+    args.file = test_new;
+    args.ht = Index;
+    pthread_create(&tid, NULL, saveIndexToFile, &args);
+    pthread_join(tid, NULL);
+
+    //saveIndexToFile(test_new, Index);
     printf("Test complete\n");
 
     /*9. cleanDynamicList(wordindex) */
@@ -301,11 +323,19 @@ int updateIndex(char* word, int docID, HashTable* index) {
 * Returns 1 if successful
 * Returns 0 otherwise
 */
-int saveIndexToFile(char* file, HashTable* index) {
+//int saveIndexToFile(char* file, HashTable* index)
+void* saveIndexToFile(void* argsv)
+ {
   /* TODO - Works except printing some html! */
   FILE* fp;
-  char* buf;
+  char* buf, *file;
   int size;
+  HashTable* index;
+
+  struct t_block* args = (struct t_block*)argsv;
+
+  file = args->file;
+  index = args->ht;
 
   buf = malloc(BUF_SIZE);
   size = HashTableLoadWords(index, &buf);
@@ -314,7 +344,7 @@ int saveIndexToFile(char* file, HashTable* index) {
   if (fp) {
     Fputs(buf, fp);
     fclose(fp);
-    return 1;
+    return 0;
   }
   if (fp == NULL) {
     fprintf(stderr, "Error opening file\n");
@@ -342,37 +372,26 @@ HashTable* readFile(char* filename) {
   /* TODO */
   HashTable* index;
   FILE* fp;
-  char *buf, c;
-  int size, pos;
+  char *buf;
+  int size;
 
   /* Initialize new HashTable */
   index = initHashTable();
   size = BUF_SIZE;
   buf = (char*)malloc(size);
 
-
-  if ((fp = fopen(filename, "r"))) {
-    /* Read lines in file into a buff */
-    do {
-      pos = 0;
-      do { /* read one line */
-        c = fgetc(fp);
-        if (c != EOF)
-          buf[pos++] = (char)c;
-        if (pos >= size - 1) {
-          /* Increase buffer size */
-          size *= 2;
-          buf = (char*)realloc(buf, size);
-        }
-      } while (c != EOF && c != '\n');
-      buf[pos] = 0;
-      /* Line now in buf */
-      if (buf)
-        handleLine(index, buf);
-    } while (c != EOF);
-    fclose(fp);
+  fp = fopen(filename, "r");
+  ssize_t read;
+  size_t len = 0;
+  char* line = NULL;
+  /* Read each line and parse */
+  while ((read = getline(&line, &len, fp)) != -1) {
+    handleLine(index, line);
   }
-  free(buf);
+  if (line)
+    free(line);
+
+  fclose(fp);
   return index;
 }
 
