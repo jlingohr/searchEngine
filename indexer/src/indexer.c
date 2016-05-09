@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
   char *target_directory, *target_file, *test_old, *test_new;
   char* prev_file;
   char** filenames;
-  int num_files;
+  int num_files, saved;
   
 
   /*1. Program parameter processing */
@@ -114,7 +114,9 @@ int main(int argc, char** argv) {
     printf("\nLogging complete!\n");
     //HashTablePrintWords(Index);
   }
-  saveIndexToFile(target_file, Index);
+
+  saved = saveIndexToFile(target_file, Index);
+  while (! saved) {;}
      
   //6. CleanDynamicList (wordindex)
   cleanIndex(Index);
@@ -365,7 +367,8 @@ HashTable* readFile(char* filename) {
       } while (c != EOF && c != '\n');
       buf[pos] = 0;
       /* Line now in buf */
-      handleLine(index, buf);
+      if (buf)
+        handleLine(index, buf);
     } while (c != EOF);
     fclose(fp);
   }
@@ -388,29 +391,31 @@ void handleLine(HashTable* index, char* line) {
   WordNode* wNode;
 
   /* Initialize list */
-  num_tokens = 0;
+  num_tokens = 1;
   dNodeList = initList();
 
   pch = strtok(line, " ");
   while (pch != NULL) {
-    if (num_tokens == 0) {
+    if (num_tokens == 1) {
       /* First token is the word */
       strcpy(word, pch);
-      printf("word: %s, ", word);
+      //printf("word: %s, ", word);
+      if (HashTableLookUpWord(index, word))
+        return;
     }
-    else if (num_tokens == 1) {
+    else if (num_tokens == 2) {
       /* Second token is number of DocumentNodes */
       num_docs = atoi(pch);
-      printf("no_docs: %d, ", num_docs);
+      //printf("no_docs: %d, ", num_docs);
     }
     else {
-      if (num_tokens%2) {
+      if (num_tokens % 2 == 1) {
         /* Odd numbered are document ids */
         /* This is buggy */
         doc_id = atoi(pch);
-        printf("doc_id: %d, ", doc_id);
+        //printf("doc_id: %d, ", doc_id);
       }
-      else {
+      else if (num_tokens % 2 == 0) {
         /* Even numbered are number of occurences in doc
         forms a pair (a,b) we add as a DocumentNode */
         freq = atoi(pch);
@@ -422,7 +427,7 @@ void handleLine(HashTable* index, char* line) {
 
         /* Construct list of DocumentNodes */
         listAddDoc(dNodeList, dNode);
-        printf("freq: %d\n", freq);
+        //printf("freq: %d\n", freq);
 
       }
     }

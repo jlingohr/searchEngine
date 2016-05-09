@@ -1,0 +1,660 @@
+http://www.cs.dartmouth.edu/~campbell/cs50/make.html
+Depth: 2
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title></title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="make.tex"> 
+<meta name="date" content="2012-04-25 18:21:00"> 
+<link rel="stylesheet" type="text/css" href="make.css"> 
+</head><body 
+>
+<h1 class="likepartHead"><a 
+ id="x1-1000"></a>CS 50 Software Design and Implementation</h1>
+<h1 class="likepartHead"><a 
+ id="x1-2000"></a>Lecture 14</h1>
+<h1 class="likepartHead"><a 
+ id="x1-3000"></a>The Make Utility</h1>
+<!--l. 21--><p class="noindent" >In the this lecture, we will discuss the GNU <span 
+class="cmbx-10">make </span>command for building software systems. In Lab4 you
+hand compiled multiple source files into an executable using the &#8220;mygcc&#8221; command. We will not do this
+anymore - no more issuing mygcc commands from the command line. The make command will do the
+heavy lifting of working out what gets compiled for a program. The GNU make command automatically
+works out which parts of a program with multiple source files need to be recompiled or not; then, it issues
+a set of commands to do the job for you. We will present a number of <span 
+class="cmbx-10">Makefile </span>examples
+from simple to more sophisticated. You will need to write a simple Makefile for the crawler
+lab.
+<h3 class="likesectionHead"><a 
+ id="x1-4000"></a>Goals</h3>
+<!--l. 26--><p class="noindent" >We plan to learn the following from today&#8217;s lecture:
+     <ul class="itemize1">
+     <li class="itemize">Understand the make utility
+     </li>
+     <li class="itemize">Writing a series of Makefiles
+     </li>
+     <li class="itemize">More advanced make features</li></ul>
+<!--l. 35--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-5000"></a>The make utility</h3>
+<!--l. 37--><p class="noindent" >Recall the compilation process we discussed in an earlier class. Source files such as crawler.c, list.c and
+html.c are compiled into object files such as crawler.o, list.o and html.o, respectively. Each object file
+contains a compiled system dependent representation of the source file. The source files include the header
+files as part of the preprocessor phase of the compilation. The linker links the object files and any needed
+                                                                                  
+                                                                                  
+libraries and produces an executable. The loader loads the program into memory ready to
+run.
+<!--l. 39--><p class="noindent" >Include figure here.
+<!--l. 41--><p class="noindent" >Up until now we have been typing out the gcc command lines to build and executable:
+<!--l. 43--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">gcc</span><span 
+class="cmtt-10">&#x00A0;-Wall</span><span 
+class="cmtt-10">&#x00A0;-pedantic</span><span 
+class="cmtt-10">&#x00A0;-std=c99</span><span 
+class="cmtt-10">&#x00A0;-o</span><span 
+class="cmtt-10">&#x00A0;crawler</span><span 
+class="cmtt-10">&#x00A0;crawler.c</span><span 
+class="cmtt-10">&#x00A0;list.c</span><span 
+class="cmtt-10">&#x00A0;html.c</span></span></span>
+<!--l. 45--><p class="noindent" >or more specifically, with our alias mygccc:
+<!--l. 47--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">mygcc</span><span 
+class="cmtt-10">&#x00A0;-o</span><span 
+class="cmtt-10">&#x00A0;crawler</span><span 
+class="cmtt-10">&#x00A0;crawler.c</span><span 
+class="cmtt-10">&#x00A0;list.c</span><span 
+class="cmtt-10">&#x00A0;html.c</span></span></span>
+<!--l. 49--><p class="noindent" >From now on in the course we will use a better method for building systems. We will use the GNU make
+software which automates the building of software systems. You should view the manual pages for the
+make utility. It acts as simple <span 
+class="cmti-10">dependency tracking tool to maintain groups of programs</span>. A <span 
+class="cmbx-10">Makefile</span>
+(which is a plain text file that you write that the make utility interprets) follows a set of rules that
+capture the various actions that must be performed on individual source files in order to build a
+sub-system, such as, crawler. These rules are captured in the Makefile that is typically found in the
+source file directory. You can take a look at the Makefile we returned with lab4 for the prs
+program.
+<!--l. 52--><p class="noindent" >Before we describe the make tool and give some examples of Makefiles lets talk about the reasons for
+moving to a more formal tool for compiling and linking our source code.
+<!--l. 54--><p class="noindent" >First, it is tedious to keep typing out a list of files - maybe a large number of files. The make utility
+automates the compilation and linking process. With make you specify the files and how they fit together
+and make takes care of the rest. A nice part of the make utility is that it also takes care to determine if
+any files (*.c and *.h) have changes since the last <span 
+class="cmti-10">build </span>(where build here means the new executable
+created by make) and if so it takes care to recompile those files. An important aspect of the make utility is
+that it allows the programmer to specify any dependencies between files by writing rules in the Makefile;
+for example, if all the *.c files are dependent on crawler.h then all the files will be recompiled if the
+header file is changed. If, however, only one file is changed (e.g., list.c) then make will only
+recompile that file and then link it with the existing set object files (e.g., html.o). This is
+both efficient and can save a significant amount of time. The lecturer has worked on many
+projects were the build (running the make file) for larger project took 6 hours. I&#8217;d guess that
+you are recompiling crawler every few minutes right now because of fixes you are making.
+Clearly, a good goal of a large project is to only recompile the necessary files and not those
+files that have not changed or have no dependencies on files that have changed. That way
+you can also reduce the build time which makes good sense if you want to try out your new
+fix.
+<!--l. 56--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-6000"></a>A simple Makefile</h3>
+<!--l. 58--><p class="noindent" >The Makefile below includes a number of variable definitions and dependency rules. Variables (where you
+see &#8220; = &#8221;) can be used to define a list of directories to search, set of files, the compiler to use, etc. Make
+                                                                                  
+                                                                                  
+rules can be very simple as in the case of the Makefile below. The make utility supports defined
+variables, conditionals and a number of very sophisticated features (which we will not cover in this
+course). The simple make file below is used for building the prs program for Lab3, as mentioned
+above.
+<!--l. 60--><p class="noindent" >The most important variables are:
+<!--l. 62--><p class="noindent" >CC - which, defines the name of the C compiler to be used and defaults to cc or gcc. In this case gcc is
+defined.<br 
+class="newline" />
+<!--l. 64--><p class="noindent" >CFLAGS - which, defines a set of options passed to the compiler for all source file compilation. In our case
+we specify the same options we have used throughout the course &#8220;-Wall -pedantic -std=c99&#8221;. We can also
+specify the include path to include standard directories (-I) or debugging (-g -ggdb) if we wish.
+<br 
+class="newline" />
+<!--l. 66--><p class="noindent" >LDFLAGS - which, defines a set of options to pass to the linker. In the Makefile below we do not use the
+LDFLAGS variable but this can be used to include application specific libraries (-l) and to set the library
+search path (-L).<br 
+class="newline" />
+<!--l. 68--><p class="noindent" >Other variables of note are:
+<!--l. 70--><p class="noindent" >EXEC - which, defines the name of the executable file.<br 
+class="newline" />
+<!--l. 72--><p class="noindent" >SRCS - which, defines the list of source files.<br 
+class="newline" />
+<!--l. 74--><p class="noindent" >OBJS - which, defines the list of object files. <br 
+class="newline" />
+<!--l. 77--><p class="noindent" ><span 
+class="cmbx-10">Note, that if you cut and paste the Makefile from these lecture notes into an editor you will</span>
+<span 
+class="cmbx-10">likely get format problems and make will not execute correctly. Better to save this file as</span>
+<span 
+class="cmbx-10">one example and edit it. Again, the make command is very picky when it comes to</span>
+<span 
+class="cmbx-10">formatting issues such as tabs, as discussed above.</span>
+<!--l. 79--><p class="noindent" >More specifically:
+<!--l. 81--><p class="noindent" >&#8220;The syntax used by Make gives tab, a whitespace character, a different meaning from the space
+character. This is problematic, since there is usually no visual difference between a tab and a number of
+space characters. Thus, the syntax of make is often subject to criticism.&#8221;
+<!--l. 83--><p class="noindent" >Citation: http://en.wikipedia.org
+<!--l. 86--><p class="noindent" ><span 
+class="cmbx-10">In the example Makefile below commands start with a tab and not spaces. All other</span>
+<span 
+class="cmbx-10">formatting uses single spaces</span>.
+<!--l. 88--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/Makefile3" >Makefile</a>
+<div 
+class="colorbox" id="colorbox1"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">[atc@Macintosh-25</span><span 
+class="cmtt-10">&#x00A0;lab3]$</span><span 
+class="cmtt-10">&#x00A0;more</span><span 
+class="cmtt-10">&#x00A0;Makefile</span><br /><span 
+class="cmtt-10">CC</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;gcc</span><br /><span 
+class="cmtt-10">CFLAGS</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;-Wall</span><span 
+class="cmtt-10">&#x00A0;-pedantic</span><span 
+class="cmtt-10">&#x00A0;-std=c99</span><br /><span 
+class="cmtt-10">EXEC</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;prs</span><br /><span 
+class="cmtt-10">OBJS</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;main.o</span><span 
+class="cmtt-10">&#x00A0;interface.o</span><span 
+class="cmtt-10">&#x00A0;logic.o</span><br /><span 
+class="cmtt-10">SRCS</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;main.c</span><span 
+class="cmtt-10">&#x00A0;interface.c</span><span 
+class="cmtt-10">&#x00A0;logic.c</span><span 
+class="cmtt-10">&#x00A0;game.h</span><br /><span 
+class="cmtt-10">#</span><span 
+class="cmtt-10">&#x00A0;Commands</span><span 
+class="cmtt-10">&#x00A0;start</span><span 
+class="cmtt-10">&#x00A0;with</span><span 
+class="cmtt-10">&#x00A0;TAB</span><span 
+class="cmtt-10">&#x00A0;not</span><span 
+class="cmtt-10">&#x00A0;spaces</span><br /><span 
+class="cmtt-10">$(EXEC):</span><span 
+class="cmtt-10">&#x00A0;$(OBJS)</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;$(CC)</span><span 
+class="cmtt-10">&#x00A0;$(CFLAGS)</span><span 
+class="cmtt-10">&#x00A0;-o</span><span 
+class="cmtt-10">&#x00A0;$(EXEC)</span><span 
+class="cmtt-10">&#x00A0;$(OBJS)</span><br /><span 
+class="cmtt-10">$(OBJS):</span><span 
+class="cmtt-10">&#x00A0;$(SRCS)</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;$(CC)</span><span 
+class="cmtt-10">&#x00A0;$(CFLAGS)</span><span 
+class="cmtt-10">&#x00A0;-c</span><span 
+class="cmtt-10">&#x00A0;$(SRCS)</span><br /><span 
+class="cmtt-10">debug:</span><span 
+class="cmtt-10">&#x00A0;$(SRCS)</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;$(CC)</span><span 
+class="cmtt-10">&#x00A0;$(CFLAGS)</span><span 
+class="cmtt-10">&#x00A0;-g</span><span 
+class="cmtt-10">&#x00A0;-ggdb</span><span 
+class="cmtt-10">&#x00A0;-c</span><span 
+class="cmtt-10">&#x00A0;$(SRCS)</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;$(CC)</span><span 
+class="cmtt-10">&#x00A0;$(CFLAGS)</span><span 
+class="cmtt-10">&#x00A0;-g</span><span 
+class="cmtt-10">&#x00A0;-ggdb</span><span 
+class="cmtt-10">&#x00A0;-o</span><span 
+class="cmtt-10">&#x00A0;$(EXEC)</span><span 
+class="cmtt-10">&#x00A0;$(OBJS)</span><br /><span 
+class="cmtt-10">clean:</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;rm</span><span 
+class="cmtt-10">&#x00A0;-f</span><span 
+class="cmtt-10">&#x00A0;*~</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;rm</span><span 
+class="cmtt-10">&#x00A0;-f</span><span 
+class="cmtt-10">&#x00A0;*#</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;rm</span><span 
+class="cmtt-10">&#x00A0;-f</span><span 
+class="cmtt-10">&#x00A0;./prs</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;rm</span><span 
+class="cmtt-10">&#x00A0;-f</span><span 
+class="cmtt-10">&#x00A0;*.o</span><br /><br /></div></div>
+<!--l. 119--><p class="noindent" >The Makefile default action when simply typing <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">make</span></span></span> builds the prs executable. If the programmer types
+                                                                                  
+                                                                                  
+<span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">make</span><span 
+class="cmtt-10">&#x00A0;debug</span></span></span> then make will build the system with the &#8220;-g -ggdb&#8221; option which allows the GNU debugger
+(gdb) to be run on the executable.
+<!--l. 121--><p class="noindent" >The example Makefile above defines the set of rules and dependencies to follow in order to build the
+executable prs. To make the EXEC you need the OBJS. To get the OBJS you need the SRC. So the make
+follows the rules of starting with the compilation of the SRCS files:
+<!--l. 123--><p class="noindent" ><span 
+class="cmbx-10">tab</span>$(CC) $(CFLAGS) -c $(SRCS)<br 
+class="newline" />
+<!--l. 125--><p class="noindent" >Note that the <span 
+class="cmbx-10">tab </span>(no spaces) is used in the Makefile. The command lines MUST be indented by a tab
+character. Using spaces will not work even if they look right in the editor or when you more or less the
+Makefile. Make sure that you have tabs and not spaces. If you go to the start of the line that has a tab you
+should be able to skip 8 characters by trying to move one. Beware of cuting and pasting sometimes spaces
+are substituted.
+<!--l. 128--><p class="noindent" >Also, not that the -c flag is added to the compilation line. This tells the compiler to only produce object
+files (file.o) and not to run the linker.
+<!--l. 130--><p class="noindent" >Similar rules are defined for the linking phase:
+<!--l. 132--><p class="noindent" ><span 
+class="cmbx-10">tab</span>$(CC) $(CFLAGS) -o $(EXEC) $(OBJS)<br 
+class="newline" />
+<!--l. 134--><p class="noindent" >Now the OBJS are created make can finish its work and produce the executable.
+<!--l. 136--><p class="noindent" >In the following example of the Makefile for the same program the dependencies of the files is explicitly
+states.
+<!--l. 138--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/Makefile1" >Makefile</a>
+<div 
+class="colorbox" id="colorbox2"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">[atc@Macintosh-25</span><span 
+class="cmtt-10">&#x00A0;prs]</span><span 
+class="cmtt-10">&#x00A0;more</span><span 
+class="cmtt-10">&#x00A0;Makefile</span><br /><span 
+class="cmtt-10">CC</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;gcc</span><br /><span 
+class="cmtt-10">OBJS</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;main.o</span><span 
+class="cmtt-10">&#x00A0;interface.o</span><span 
+class="cmtt-10">&#x00A0;logic.o</span><br /><span 
+class="cmtt-10">CFLAGS</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;-Wall</span><span 
+class="cmtt-10">&#x00A0;-pedantic</span><span 
+class="cmtt-10">&#x00A0;-std=c99</span><br /><span 
+class="cmtt-10">EXEC</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;prs</span><br /><span 
+class="cmtt-10">$(EXEC):</span><span 
+class="cmtt-10">&#x00A0;$(OBJS)</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;$(CC)</span><span 
+class="cmtt-10">&#x00A0;$(CFLAGS)</span><span 
+class="cmtt-10">&#x00A0;-o</span><span 
+class="cmtt-10">&#x00A0;$(EXEC)</span><span 
+class="cmtt-10">&#x00A0;$(OBJS)</span><br /><span 
+class="cmtt-10">main.o:</span><span 
+class="cmtt-10">&#x00A0;main.c</span><span 
+class="cmtt-10">&#x00A0;game.h</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;$(CC)</span><span 
+class="cmtt-10">&#x00A0;$(CFLAGS)</span><span 
+class="cmtt-10">&#x00A0;-c</span><span 
+class="cmtt-10">&#x00A0;main.c</span><span 
+class="cmtt-10">&#x00A0;game.g</span><br /><span 
+class="cmtt-10">interface.o:</span><span 
+class="cmtt-10">&#x00A0;interface.c</span><span 
+class="cmtt-10">&#x00A0;game.h</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;$(CC)</span><span 
+class="cmtt-10">&#x00A0;$(CFLAGS)</span><span 
+class="cmtt-10">&#x00A0;-c</span><span 
+class="cmtt-10">&#x00A0;interface.c</span><span 
+class="cmtt-10">&#x00A0;game.h</span><br /><span 
+class="cmtt-10">logic.o:</span><span 
+class="cmtt-10">&#x00A0;logic.c</span><span 
+class="cmtt-10">&#x00A0;game.h</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;$(CC)</span><span 
+class="cmtt-10">&#x00A0;$(CFLAGS)</span><span 
+class="cmtt-10">&#x00A0;-c</span><span 
+class="cmtt-10">&#x00A0;logic.c</span><span 
+class="cmtt-10">&#x00A0;game.h</span><br /><span 
+class="cmtt-10">clean:</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;rm</span><span 
+class="cmtt-10">&#x00A0;-f</span><span 
+class="cmtt-10">&#x00A0;*~</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;rm</span><span 
+class="cmtt-10">&#x00A0;-f</span><span 
+class="cmtt-10">&#x00A0;*#</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;rm</span><span 
+class="cmtt-10">&#x00A0;-f</span><span 
+class="cmtt-10">&#x00A0;./prs</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;rm</span><span 
+class="cmtt-10">&#x00A0;-f</span><span 
+class="cmtt-10">&#x00A0;*.o</span><br /><br /></div></div>
+<!--l. 168--><p class="noindent" >For example:
+<!--l. 170--><p class="noindent" >main.o: main.c game.h<br 
+class="newline" />
+<!--l. 172--><p class="noindent" >tells the make utility that main.o is dependent on main.c and game.h. So if either file is changed
+(time stamps are different from the previous versions) then the compiler will create a new
+main.o
+<!--l. 174--><p class="noindent" >Try runing the Makefile and following the command sequence below. Because the Makefile now defines the
+dependencies the make utility is efficient and compiles only those files that have changed taking into
+account their dependencies.
+<div 
+class="colorbox" id="colorbox3"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">[atc@Macintosh-25</span><span 
+class="cmtt-10">&#x00A0;prs]$</span><span 
+class="cmtt-10">&#x00A0;make</span><span 
+class="cmtt-10">&#x00A0;clean</span><br /><span 
+class="cmtt-10">rm</span><span 
+class="cmtt-10">&#x00A0;-f</span><span 
+class="cmtt-10">&#x00A0;*~</span><br /><span 
+class="cmtt-10">rm</span><span 
+class="cmtt-10">&#x00A0;-f</span><span 
+class="cmtt-10">&#x00A0;*#</span><br /><span 
+class="cmtt-10">rm</span><span 
+class="cmtt-10">&#x00A0;-f</span><span 
+class="cmtt-10">&#x00A0;./prs</span><br /><span 
+class="cmtt-10">rm</span><span 
+class="cmtt-10">&#x00A0;-f</span><span 
+class="cmtt-10">&#x00A0;*.o</span><br /><br /><span 
+class="cmtt-10">[atc@Macintosh-25</span><span 
+class="cmtt-10">&#x00A0;prs]$</span><span 
+class="cmtt-10">&#x00A0;make</span><br /><span 
+class="cmtt-10">gcc</span><span 
+class="cmtt-10">&#x00A0;-Wall</span><span 
+class="cmtt-10">&#x00A0;-pedantic</span><span 
+class="cmtt-10">&#x00A0;-std=c99</span><span 
+class="cmtt-10">&#x00A0;-c</span><span 
+class="cmtt-10">&#x00A0;main.c</span><span 
+class="cmtt-10">&#x00A0;game.h</span><br /><span 
+class="cmtt-10">gcc</span><span 
+class="cmtt-10">&#x00A0;-Wall</span><span 
+class="cmtt-10">&#x00A0;-pedantic</span><span 
+class="cmtt-10">&#x00A0;-std=c99</span><span 
+class="cmtt-10">&#x00A0;-c</span><span 
+class="cmtt-10">&#x00A0;interface.c</span><span 
+class="cmtt-10">&#x00A0;game.h</span><br /><span 
+class="cmtt-10">gcc</span><span 
+class="cmtt-10">&#x00A0;-Wall</span><span 
+class="cmtt-10">&#x00A0;-pedantic</span><span 
+class="cmtt-10">&#x00A0;-std=c99</span><span 
+class="cmtt-10">&#x00A0;-c</span><span 
+class="cmtt-10">&#x00A0;logic.c</span><span 
+class="cmtt-10">&#x00A0;game.h</span><br /><span 
+class="cmtt-10">gcc</span><span 
+class="cmtt-10">&#x00A0;-Wall</span><span 
+class="cmtt-10">&#x00A0;-pedantic</span><span 
+class="cmtt-10">&#x00A0;-std=c99</span><span 
+class="cmtt-10">&#x00A0;-o</span><span 
+class="cmtt-10">&#x00A0;prs</span><span 
+class="cmtt-10">&#x00A0;main.o</span><span 
+class="cmtt-10">&#x00A0;interface.o</span><span 
+class="cmtt-10">&#x00A0;logic.o</span><br /><br /><span 
+class="cmtt-10">[atc@Macintosh-25</span><span 
+class="cmtt-10">&#x00A0;prs]$</span><span 
+class="cmtt-10">&#x00A0;touch</span><span 
+class="cmtt-10">&#x00A0;interface.c</span><br /><br /><span 
+class="cmtt-10">[atc@Macintosh-25</span><span 
+class="cmtt-10">&#x00A0;prs]$</span><span 
+class="cmtt-10">&#x00A0;make</span><br /><span 
+class="cmtt-10">gcc</span><span 
+class="cmtt-10">&#x00A0;-Wall</span><span 
+class="cmtt-10">&#x00A0;-pedantic</span><span 
+class="cmtt-10">&#x00A0;-std=c99</span><span 
+class="cmtt-10">&#x00A0;-c</span><span 
+class="cmtt-10">&#x00A0;interface.c</span><span 
+class="cmtt-10">&#x00A0;game.h</span><br /><span 
+class="cmtt-10">gcc</span><span 
+class="cmtt-10">&#x00A0;-Wall</span><span 
+class="cmtt-10">&#x00A0;-pedantic</span><span 
+class="cmtt-10">&#x00A0;-std=c99</span><span 
+class="cmtt-10">&#x00A0;-o</span><span 
+class="cmtt-10">&#x00A0;prs</span><span 
+class="cmtt-10">&#x00A0;main.o</span><span 
+class="cmtt-10">&#x00A0;interface.o</span><span 
+class="cmtt-10">&#x00A0;logic.o</span><br /><br /><span 
+class="cmtt-10">[atc@Macintosh-25</span><span 
+class="cmtt-10">&#x00A0;prs]$</span><span 
+class="cmtt-10">&#x00A0;touch</span><span 
+class="cmtt-10">&#x00A0;game.h</span><br /><br /><span 
+class="cmtt-10">[atc@Macintosh-25</span><span 
+class="cmtt-10">&#x00A0;prs]$</span><span 
+class="cmtt-10">&#x00A0;make</span><br /><span 
+class="cmtt-10">gcc</span><span 
+class="cmtt-10">&#x00A0;-Wall</span><span 
+class="cmtt-10">&#x00A0;-pedantic</span><span 
+class="cmtt-10">&#x00A0;-std=c99</span><span 
+class="cmtt-10">&#x00A0;-c</span><span 
+class="cmtt-10">&#x00A0;main.c</span><span 
+class="cmtt-10">&#x00A0;game.h</span><br /><span 
+class="cmtt-10">gcc</span><span 
+class="cmtt-10">&#x00A0;-Wall</span><span 
+class="cmtt-10">&#x00A0;-pedantic</span><span 
+class="cmtt-10">&#x00A0;-std=c99</span><span 
+class="cmtt-10">&#x00A0;-c</span><span 
+class="cmtt-10">&#x00A0;interface.c</span><span 
+class="cmtt-10">&#x00A0;game.h</span><br /><span 
+class="cmtt-10">gcc</span><span 
+class="cmtt-10">&#x00A0;-Wall</span><span 
+class="cmtt-10">&#x00A0;-pedantic</span><span 
+class="cmtt-10">&#x00A0;-std=c99</span><span 
+class="cmtt-10">&#x00A0;-c</span><span 
+class="cmtt-10">&#x00A0;logic.c</span><span 
+class="cmtt-10">&#x00A0;game.h</span><br /><span 
+class="cmtt-10">gcc</span><span 
+class="cmtt-10">&#x00A0;-Wall</span><span 
+class="cmtt-10">&#x00A0;-pedantic</span><span 
+class="cmtt-10">&#x00A0;-std=c99</span><span 
+class="cmtt-10">&#x00A0;-o</span><span 
+class="cmtt-10">&#x00A0;prs</span><span 
+class="cmtt-10">&#x00A0;main.o</span><span 
+class="cmtt-10">&#x00A0;interface.o</span><span 
+class="cmtt-10">&#x00A0;logic.o</span><br /><br /></div></div>
+<!--l. 211--><p class="noindent" >The final example of the Makefile writes the rules in a more generic manner.
+<!--l. 213--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/Makefile2" >Makefile</a>
+<div 
+class="colorbox" id="colorbox4"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">[atc@Macintosh-25</span><span 
+class="cmtt-10">&#x00A0;prs]</span><span 
+class="cmtt-10">&#x00A0;more</span><span 
+class="cmtt-10">&#x00A0;Makefile</span><br /><span 
+class="cmtt-10">CC</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;gcc</span><br /><span 
+class="cmtt-10">OBJS</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;main.o</span><span 
+class="cmtt-10">&#x00A0;interface.o</span><span 
+class="cmtt-10">&#x00A0;logic.o</span><br /><span 
+class="cmtt-10">CFLAGS</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;-Wall</span><span 
+class="cmtt-10">&#x00A0;-pedantic</span><span 
+class="cmtt-10">&#x00A0;-std=c99</span><br /><span 
+class="cmtt-10">EXEC</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;prs</span><br /><span 
+class="cmtt-10">$(EXEC):</span><span 
+class="cmtt-10">&#x00A0;$(OBJS)</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;$(CC)</span><span 
+class="cmtt-10">&#x00A0;$(CFLAGS)</span><span 
+class="cmtt-10">&#x00A0;-o</span><span 
+class="cmtt-10">&#x00A0;$(EXEC)</span><span 
+class="cmtt-10">&#x00A0;$(OBJS)</span><br /><span 
+class="cmtt-10">$(OBJS):</span><span 
+class="cmtt-10">&#x00A0;%.o:</span><span 
+class="cmtt-10">&#x00A0;%.c</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;$(CC)</span><span 
+class="cmtt-10">&#x00A0;$(CFLAGS)</span><span 
+class="cmtt-10">&#x00A0;-c</span><span 
+class="cmtt-10">&#x00A0;$&#x003C;</span><span 
+class="cmtt-10">&#x00A0;game.h</span><br /><span 
+class="cmtt-10">clean:</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;rm</span><span 
+class="cmtt-10">&#x00A0;-f</span><span 
+class="cmtt-10">&#x00A0;*~</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;rm</span><span 
+class="cmtt-10">&#x00A0;-f</span><span 
+class="cmtt-10">&#x00A0;*#</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;rm</span><span 
+class="cmtt-10">&#x00A0;-f</span><span 
+class="cmtt-10">&#x00A0;./prs</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;rm</span><span 
+class="cmtt-10">&#x00A0;-f</span><span 
+class="cmtt-10">&#x00A0;*.o</span><br /><br /></div></div>
+<!--l. 240--><p class="noindent" >The <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">$&#x003C;</span></span></span> represents an internal macro and stand for the &#8221;implicit&#8221; source.
+                                                                                  
+                                                                                  
+ 
+</body></html> 
+
+                                                                                  
+
+

@@ -126,10 +126,9 @@ int main(int argc, char** argv) {
 
   /* while there are urls to crawl do */
   WebPage* tmp;
-  char* url;  /* Probably bad practice */
   while((tmp = listRemovePage(toVisit))) {
     /* get next url from list */
-    if (validDepth(tmp->depth, user_depth) && !HashTableLookUpURL(URLSVisited, tmp->url, &url)) {
+    if (validDepth(tmp->depth, user_depth) && !HashTableLookUpURL(URLSVisited, tmp->url)) {
       /* get webpage for url */
       if (GetWebPage(tmp)) { /* write page file */
         writePage(tmp, target, file_counter);
@@ -225,7 +224,6 @@ int writePage(WebPage *page, char *dir, int file_counter) {
 int crawlPage(WebPage *page) {
   int pos;
   char* buf;
-  char* url;
 
   pos = 0;
   buf = NULL;
@@ -233,7 +231,7 @@ int crawlPage(WebPage *page) {
   while ((pos = GetNextURL(page->html, pos, page->url, &buf)) > 0) {
     if (NormalizeURL(buf)) {
       if (isValidURL(buf)) {
-        if (!HashTableLookUpURL(URLSVisited, buf, &url)) {
+        if (!HashTableLookUpURL(URLSVisited, buf)) {
           if (STATUS_LOG == 1)
             printf("\nFound url: %s", buf);
 
