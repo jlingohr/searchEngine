@@ -42,27 +42,7 @@ typedef struct HashTable {
 
 // ---------------- Prototypes/Macros
 
-/* URL Hashtable wrappers */
 int HashString(const element_t strv, int mod);
-int HashTableAddURL(HashTable* ht, char* url);
-int HashTableLookUpURL(HashTable* ht, char* url);
-void cleanHashURL(HashTable* ht);
-
-
-
-
-/* Wordnode Hashtable wrappers */
-int HashTableAddWord(HashTable* ht, char* word, int docID);
-int HashTableLookUpWord(HashTable* ht, char* word);
-int HashTableUpdateWord(HashTable* ht, char* word, int docID);
-int cmpWNode(element_t wordv, element_t wNodev);
-int HashWNode(const element_t wNodev, int mod);
-WordNode* initWNode(char* word, int docID);
-void HashTablePrintWords(HashTable* ht);
-int HashTableLoadWords(HashTable* ht, char** buf);
-void cleanHashWord(HashTable* ht);
-
-void HashTableAddWNode(HashTable* ht, WordNode* wNode);
 
 /* Hashtable macros */
 HashTable* initHashTable();

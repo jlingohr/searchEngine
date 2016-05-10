@@ -20,7 +20,9 @@
 #include <assert.h>
 
 // ---------------- Local includes  e.g., "file.h"
-#include "../../util/hashtable.h"                       // hashtable functionality
+//#include "../../util/hashtable.h"                       // hashtable functionality
+#include "index.h"
+#include "listD.h"
 #include "../../util/common.h"                          // common functionality
 #include "../../util/util.h"
 #include "../../util/web.h"                             // curl and html functionality
@@ -34,7 +36,7 @@ int getDocID(char* filename, char* dir);
 int updateIndex(char* word, int docID, HashTable* index);
 //int saveIndexToFile(char* file, HashTable* index);
 void* saveIndexToFile(void* argsv);
-void cleanIndex(HashTable* Index);
+void cleanUp(HashTable* Index);
 HashTable* readFile(char* filename);
 void handleLine(HashTable* index, char* line);
 
@@ -136,7 +138,7 @@ int main(int argc, char** argv) {
 
      
   //6. CleanDynamicList (wordindex)
-  cleanIndex(Index);
+  cleanUp(Index);
 
   /* For testing (argc == 5) */
   if (argc == 5) {
@@ -158,7 +160,7 @@ int main(int argc, char** argv) {
     printf("Test complete\n");
 
     /*9. cleanDynamicList(wordindex) */
-    cleanIndex(Index);
+    cleanUp(Index);
   }
   //free(Index);
 
@@ -305,13 +307,13 @@ int getDocID(char* filename, char* dir) {
 */
 int updateIndex(char* word, int docID, HashTable* index) {
 
-  if (HashTableLookUpWord(index, word)) { /* Word is in table */
+  if (IndexLookUp(index, word)) { /* Word is in table */
     /* Update docID for word */
-    return HashTableUpdateWord(index, word, docID);
+    return IndexUpdate(index, word, docID);
   }
   else {
     /* Word not in, so insert word */
-    return HashTableAddWord(index, word, docID);
+    return IndexAddWord(index, word, docID);
   }
   return 1;
 }
@@ -338,7 +340,7 @@ void* saveIndexToFile(void* argsv)
   index = args->ht;
 
   buf = malloc(BUF_SIZE);
-  size = HashTableLoadWords(index, &buf);
+  size = IndexLoadWords(index, &buf);
 
   fp = fopen(file, "w+");
   if (fp) {
@@ -357,8 +359,8 @@ void* saveIndexToFile(void* argsv)
 * cleanIndex - Cleans up memory
 * @index: table to clean
 */
-void cleanIndex(HashTable* index) {
-  cleanHashWord(index);
+void cleanUp(HashTable* index) {
+  cleanIndex(index);
 }
 
 /*
@@ -419,7 +421,7 @@ void handleLine(HashTable* index, char* line) {
       /* First token is the word */
       strcpy(word, pch);
       //printf("word: %s, ", word);
-      if (HashTableLookUpWord(index, word))
+      if (IndexLookUp(index, word))
         return;
     }
     else if (num_tokens == 2) {
@@ -457,7 +459,7 @@ void handleLine(HashTable* index, char* line) {
   wNode = malloc(sizeof(WordNode));
   strcpy(wNode->word, word);
   wNode->page = dNodeList;
-  HashTableAddWNode(index, wNode);
+  IndexAddWNode(index, wNode);
 
   
 }

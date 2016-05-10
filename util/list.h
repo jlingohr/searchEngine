@@ -20,9 +20,16 @@
 
 // ---------------- Structures/Types
 
+typedef struct ListNode {
+    element_t* data;                           // the data for a node
+    struct ListNode *next;                   // pointer to next node
+} ListNode;
 
-/* Document list nodes */
-
+typedef struct List {
+    ListNode *head;                          // "beginning" of the list
+    ListNode *tail;                          // "end" of the list
+    int len;
+} List;
 
 
 // ---------------- Public Variables
@@ -32,22 +39,10 @@
 // ---------------- Prototypes/Macros
 
 
-/* WebPage list wrappers */
-WebPage* listRemovePage(List* list);
-void listAddPage(List* list, WebPage* page);
-void inc_ref(WebPage* page);
-void dec_ref(WebPage* page);
-
-/* DocumentNode wrappers */
-void listAddDoc(List* list, DocumentNode* dNode);
-DocumentNode* listGetLastDNode(List* list);
-void listDeleteDNode(List* list);
-void deleteDNode(element_t dNode);
-
 
 /* Generic List macros */
-void listAdd(List* list, element_t elem);
 List* initList();
+void listAdd(List* list, element_t elem);
 ListNode* listRemove(List* list);
 element_t listGetLast(List* list);
 void listDelete(void (*f)(element_t),List* list);

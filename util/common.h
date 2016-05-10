@@ -35,6 +35,7 @@
 /* For working with generics */
 typedef void* element_t;
 
+/* Structure of a webpage */
 typedef struct WebPage {
     char *url;                               // url of the page
     char *html;                              // html code of the page
@@ -42,20 +43,6 @@ typedef struct WebPage {
     int depth;                               // depth of crawl
     int ref_count;
 } WebPage;
-
-/* Bad practice? Should be in list module... */
-
-typedef struct ListNode {
-    element_t* data;                           // the data for a node
-    struct ListNode *next;                   // pointer to next node
-} ListNode;
-
-typedef struct List {
-    ListNode *head;                          // "beginning" of the list
-    ListNode *tail;                          // "end" of the list
-    int len;
-} List;
-
 
 /*
 * Associated location for each word containing
@@ -65,7 +52,6 @@ typedef struct List {
 typedef struct DocumentNode {
   int document_id;              /* Document identifer */
   int page_word_frequency;      /* Number of occurrences of the word */
-  //struct DocumentNode* next;
 } DocumentNode;
 
 /*
@@ -75,7 +61,7 @@ typedef struct DocumentNode {
 
 typedef struct WordNode {
   char word[WORD_LENGTH];       /* The word */
-  List* page;           /* Pointer to first element of the page list */
+  struct List* page;           /* Pointer to first element of the page list */
 } WordNode;
 
 
