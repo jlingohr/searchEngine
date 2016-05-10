@@ -1,0 +1,24 @@
+Search Engine
+
+--------
+CRAWLER
+
+  Usage: ./crawler [URL] [Directory] [Depth]
+
+  Note: Crawler limited to crawling domain specified by URL_PREFIX for security purposes
+
+
+---------
+INDEXER
+
+  Usage: ./index [Crawl Directory] [indexed.dat]
+
+  Assumptions: Indexer assumes that webpages crawled will be placed in in [Crawl Directory]
+  by the crawler
+
+--------
+Query
+
+  Usage: ./query [indexed.dat] [Crawl Dir]
+
+  Assumptions: Query assumes that [indexed.dat] is a valid file and [Crawl Dir] is a valid directory

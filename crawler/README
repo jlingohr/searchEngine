@@ -7,11 +7,7 @@ Command Input
 
 ./crawler [SEED URL] [TARGET DIRECTORY WHERE TO PUT THE DATA] [MAX CRAWLING DEPTH]
 
-Example command input
-
-crawler http://old-www.cs.dartmouth.edu/~cs50/tse/ ./data/ 2
-
-[SEED URL] http://old-www.cs.dartmouth.edu/~cs50/tse/
+[SEED URL]
 Requirement: The URL must be valid.
 Usage: The crawler needs to inform the user if URL is not found
 
@@ -66,7 +62,6 @@ We continue ths process as long as there are URL's on the URLList.
     page - pointer to the current page (the string that holds the current webpage)
 
     URLList - holds a list of URLs from the page by name only
-    (e.g., http://www-old.cs.dartmouth.edu/~cs50/tse)
 
     WebPage structure holds the URL name, a pointer to the HTML source, the length 
     of the HTML source, and the depth of the webpage.

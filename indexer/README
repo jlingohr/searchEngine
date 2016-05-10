@@ -1,6 +1,5 @@
 Specification
 -------------
-Each word (w) in a document (d) forms a posting (w,d) that is added to a list
 
 Requirements
 ---------

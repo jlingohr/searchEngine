@@ -1,0 +1,37 @@
+Includes a query processor and ranking module
+
+REQUIREMENTS
+-----------
+
+- should load previously generated index form the file systems
+- should receive user queries from input
+- should convert capital letters of query to lowercase
+- for each query, check the index and retrive the results matching the query
+- should rank the list of results, returning the document with the highest number of matches to the query string, and so on
+- should displauy the results in rank order to user
+
+Query Processor
+----------
+Treats AND and OR as logical operators. Spaces are assumed to be an AND
+
+Ranking Module
+------------
+Uses word frequency in an HTML page to rank results.
+
+Temporary scheme: Assume search terms dog & cat, ranking module must handle:
+  1 - dog AND CAT (dog cat)
+      score = MIN(Count(dog), Count(cat)) file to estimate how well file matches
+  2 - dog OR cat
+      score = Count(dog) + Count(cat)
+
+
+=================
+
+
+Usage: ./query [indexed] [dir]
+
+Input: indexed is the filename of the Indexer's output after indexing results from the Crawler.
+       dir is the path to HTML outputs from a crawl session
+
+Output: Prints ranked list of urls that best match search terms
+
