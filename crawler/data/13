@@ -1677,3 +1677,1682 @@ class="cmtt-10">&#x00A0;=vp;</span><br /><br /></div></div>
                                                                                   
 
 
+http://www.cs.dartmouth.edu/~campbell/cs50/pointers.html
+Depth: 2
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title></title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="pointers.tex"> 
+<meta name="date" content="2014-01-30 11:15:00"> 
+<link rel="stylesheet" type="text/css" href="pointers.css"> 
+</head><body 
+>
+<h1 class="likepartHead"><a 
+ id="x1-1000"></a>CS 50 Software Design and Implementation</h1>
+<h1 class="likepartHead"><a 
+ id="x1-2000"></a>Lecture 8</h1>
+<h1 class="likepartHead"><a 
+ id="x1-3000"></a>Pesky Pointers</h1>
+<!--l. 21--><p class="noindent" >In this lecture, we carry on our introduction to the C language.
+<h3 class="likesectionHead"><a 
+ id="x1-4000"></a>Goals</h3>
+<!--l. 25--><p class="noindent" >We plan to learn the following from today&#8217;s lecture:
+     <ul class="itemize1">
+     <li class="itemize">Pointers
+     </li>
+     <li class="itemize">Living dangerously with pointers: the bus error, seg fault
+     </li>
+     <li class="itemize">Casting and void *p</li></ul>
+<!--l. 33--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-5000"></a>Pointers</h3>
+<!--l. 35--><p class="noindent" >The C programming language has a very powerful feature (and if used incorrectly a very dangerous
+feature), which allows a program at run-time to access its own memory. This ability is well supported in
+the language through the use of pointers. There is much written about the power and expressiveness of C&#8217;s
+pointers, and much (more recently) written about Java&#8217;s lack of pointers. More precisely, Java
+does have pointers, termed references, but the references to Java&#8217;s objects are so consistently
+and carefully constrained at both compile and run-time, that very little can go wrong. Not
+C.
+<!--l. 42--><p class="noindent" >C has both &#8220;standard&#8221; variables and structures, and pointers to these variables and structures (Java only
+has references to objects, and it is only possible to manipulate the computers memory used to hold the
+objects, by using references). C&#8217;s drawback is that while the pointers allow us to easily refer to
+                                                                                  
+                                                                                  
+scalar variables and aggregate structures, C has very little support to prevent us accessing
+anything else (accidently) at run-time. All speed advantages provided by the availability of
+pointers, can be trivially consumed by the time taken to debug a program incorrectly using
+pointers.
+<!--l. 49--><p class="noindent" ><span 
+class="cmbx-10">Pointers allow us to refer to the address of a variable rather than its value</span>. If this were all that
+were possible, we may be able to get away without using pointers at all. Unfortunately, parameters to
+functions may only be passed by value, and so a rudimentary understanding of C&#8217;s pointers is needed to
+use &#8220;pass-by-reference&#8221; parameter passing in C.
+<!--l. 54--><p class="noindent" >Consider the following example trying to interchange the value of two integer variables:
+<div 
+class="colorbox" id="colorbox1"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;#include</span><span 
+class="cmtt-10">&#x00A0;&#x003C;stdio.h&#x003E;</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;void</span><span 
+class="cmtt-10">&#x00A0;swap(int</span><span 
+class="cmtt-10">&#x00A0;i,</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;j)</span><span 
+class="cmtt-10">&#x00A0;{</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;temp;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;temp</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;i;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;i</span><span 
+class="cmtt-10">&#x00A0;=j;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;j</span><span 
+class="cmtt-10">&#x00A0;=temp;</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;}</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;main(int</span><span 
+class="cmtt-10">&#x00A0;argc,</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;*argv[])</span><span 
+class="cmtt-10">&#x00A0;{</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;a=3,</span><span 
+class="cmtt-10">&#x00A0;b=5;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;printf("before</span><span 
+class="cmtt-10">&#x00A0;a=</span><span 
+class="cmtt-10">&#x00A0;%d,</span><span 
+class="cmtt-10">&#x00A0;b=</span><span 
+class="cmtt-10">&#x00A0;%d\n",a,b);</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;swap(a,b);</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;printf("after</span><span 
+class="cmtt-10">&#x00A0;a=</span><span 
+class="cmtt-10">&#x00A0;%d,</span><span 
+class="cmtt-10">&#x00A0;b=</span><span 
+class="cmtt-10">&#x00A0;%d\n",a,b);</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;return(0);</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;}</span><br /><br /></div></div>
+<!--l. 86--><p class="noindent" ><span 
+class="cmbx-10">C code</span>:<a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/swap.c" > swap.c </a>
+<!--l. 88--><p class="noindent" >before a=3, b=5
+<!--l. 90--><p class="noindent" >after a=3, b=5
+<!--l. 92--><p class="noindent" >Not what we expected. What went wrong?
+<!--l. 94--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-6000"></a>Pass by reference using pointers</h3>
+<!--l. 96--><p class="noindent" >We need to pass a &#8220;reference&#8221; to the two integers to be interchanged, so that the function swap() is
+actually dealing with the original variables, rather than new copies of their values (passed on the run-time
+stack).
+<div 
+class="colorbox" id="colorbox2"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;#include</span><span 
+class="cmtt-10">&#x00A0;&#x003C;stdio.h&#x003E;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;void</span><span 
+class="cmtt-10">&#x00A0;swap(int</span><span 
+class="cmtt-10">&#x00A0;*ip,</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;*jp)</span><span 
+class="cmtt-10">&#x00A0;{</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;temp;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;temp</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;*ip;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;*ip</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;*jp;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;*jp</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;temp;</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;}</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;main(int</span><span 
+class="cmtt-10">&#x00A0;argc,</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;*argv[])</span><span 
+class="cmtt-10">&#x00A0;{</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;a=3,</span><span 
+class="cmtt-10">&#x00A0;b=5;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;printf("before</span><span 
+class="cmtt-10">&#x00A0;a=</span><span 
+class="cmtt-10">&#x00A0;%d,</span><span 
+class="cmtt-10">&#x00A0;b=</span><span 
+class="cmtt-10">&#x00A0;%d\n",a,b);</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;swap(&amp;a,</span><span 
+class="cmtt-10">&#x00A0;&amp;b);</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;printf("after</span><span 
+class="cmtt-10">&#x00A0;a=</span><span 
+class="cmtt-10">&#x00A0;%d,</span><span 
+class="cmtt-10">&#x00A0;b=</span><span 
+class="cmtt-10">&#x00A0;%d\n",a,b);</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;return(0);</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;}</span><br /><br /></div></div>
+<!--l. 129--><p class="noindent" ><span 
+class="cmbx-10">C code</span>:<a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/okswap.c" > okswap.c </a>
+<!--l. 131--><p class="noindent" >before a=3, b=5
+<!--l. 133--><p class="noindent" >after a=5, b=3
+<!--l. 135--><p class="noindent" >Now it works.
+<!--l. 137--><p class="noindent" >Here we have introduce a bit more syntax (and, typically, it uses punctuation characters).
+<!--l. 139--><p class="noindent" >The address operator, <span 
+class="cmbx-10">&amp;</span>, is used to determine the run-time memory address of a variable. Here we require
+the memory address of the variables i and j before passing these addresses to the swap() function. Notice,
+that we are still using pass-by-value parameter passing, but that we are passing addresses on the run-time
+stack.
+<!--l. 144--><p class="noindent" >The two asterisks <span 
+class="cmbx-10">* </span>in swap()&#8217;s formal definition (e.g., *ip) indicate that the variables ip and jp are
+pointers, or pointer variables, rather than just &#8220;simple&#8221; variables. It is typical in C programs to append
+&#8220;p&#8221; or &#8220;ptr&#8221; to a variables name to indicate that its a pointer.
+                                                                                  
+                                                                                  
+<!--l. 148--><p class="noindent" >The asterisks are always placed in front of ip and jp in function swap() indicate that we wish to
+dereference these variables. Instead of using the contents of these variables (which are &#8220;meaningless&#8221;
+memory addresses) we wish to use the values pointed to by these variables. Notice, that we may
+dereference variables on &#8220;both sides&#8221; of an assignment expression.
+<!--l. 154--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-7000"></a>Pointers to arrays and character strings</h3>
+<!--l. 156--><p class="noindent" >One often confusing point in C is the synonymous use of arrays, character strings, and pointers.
+The name of an array in C, is actually the memory address of the arrays first element. Thus
+the following two assignment statements are the same, and the first is the most commonly
+used:
+<div 
+class="colorbox" id="colorbox3"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;buffer[BUFSIZ],</span><span 
+class="cmtt-10">&#x00A0;*ptr;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;ptr</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;buffer;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;ptr</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;&amp;buffer[0];</span><br /><br /></div>                     </div>
+<!--l. 173--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">-&#x003E;</span></span></span> explain char *ptr<br 
+class="newline" />declare ptr as pointer to char<br 
+class="newline" />
+<!--l. 176--><p class="noindent" >If we also remember that C&#8217;s character strings are simply a contiguous series of characters
+which, by convention, are terminated by a NULL character, then we can consider strings to be
+arrays to, and strings may be accessed through pointers (you may wish to consider a strings
+first character as being stored at the memory address of the array of characters. We can thus
+write:
+<div 
+class="colorbox" id="colorbox4"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;n;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;*hex_values</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;"0123456789abcdef";</span><br /><br /></div>                                   </div>
+<!--l. 193--><p class="noindent" >We will often see the use of character pointers (used to strings), and character arrays (with assumed
+terminating NULL characters), used interchangeably:
+<div 
+class="colorbox" id="colorbox5"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;my_strlen(char</span><span 
+class="cmtt-10">&#x00A0;*str)</span><span 
+class="cmtt-10">&#x00A0;{</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;len</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;0;</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;while(</span><span 
+class="cmtt-10">&#x00A0;str[len]</span><span 
+class="cmtt-10">&#x00A0;/*</span><span 
+class="cmtt-10">&#x00A0;!=</span><span 
+class="cmtt-10">&#x00A0;&#8217;\0&#8217;</span><span 
+class="cmtt-10">&#x00A0;*/</span><span 
+class="cmtt-10">&#x00A0;)</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;++len;</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;return(len);</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;}</span><br /><br /></div></div>
+<!--l. 218--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-8000"></a>Pointers can be like driving too fast: dangerous</h3>
+<!--l. 220--><p class="noindent" >In the code snippet we look at the contents of two ints a and b (int a, b;) definitions and a pointer p (int
+*p;). We move various values around and look at <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">&amp;p</span></span></span>, p, and *p.
+<!--l. 223--><p class="noindent" >We set the contents of the pointer p = 1. Not a good idea. Run the code with and without the line p = 1.
+What happens and why? The tittle of the code is self explanatory!
+<!--l. 226--><p class="noindent" ><span 
+class="cmbx-10">C code</span>:<a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/buserr.c" > buserr.c </a>
+                                                                                  
+                                                                                  
+<!--l. 228--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-9000"></a>Declaration versus Redirection: the difference uses of the asterisk * operator</h3>
+<!--l. 230--><p class="noindent" >Many people get a little confused about the * operator when used in C. The asterisk get used in two ways
+in C code and you should remember this so as not to get confused. We have used the * to either declare a
+pointer to a type for example  <span 
+class="cmti-10">int *ptr </span>or to deference a pointer where * is used as the indirection
+operator * to access the data by means of pointer ptr, for example <span 
+class="cmti-10">c = *ptr </span>where previous c is declared
+e.g., char c; Here the indirection operator indicated the contents of what the pointer is pointing to is
+written into the c variable.
+<!--l. 232--><p class="noindent" >Let&#8217;s look at the code below and discuss some of the examples to clear this point up. Also we will look at
+the similarities and differences between arrays and pointers.
+<!--l. 234--><p class="noindent" ><span 
+class="cmbx-10">C code</span>:<a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/pointer-examples.c" > pointer-examples.c </a>
+<div 
+class="colorbox" id="colorbox6"><div class="BVerbatimInput"><br /><br /><span 
+class="cmtt-10">&#x00A0;#include&#x003C;stdio.h&#x003E;</span><br /><br /><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;main(int</span><span 
+class="cmtt-10">&#x00A0;argc,</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;*argv[])</span><span 
+class="cmtt-10">&#x00A0;{</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;a[]={1,2,3,4,5,6,7};</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;i;</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;*p</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;a;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;equivalent</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;p</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;a;</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;lots</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;ways</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;print</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;address</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;array.</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;array</span><span 
+class="cmtt-10">&#x00A0;names</span><span 
+class="cmtt-10">&#x00A0;such</span><span 
+class="cmtt-10">&#x00A0;as</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;or</span><span 
+class="cmtt-10">&#x00A0;variables</span><span 
+class="cmtt-10">&#x00A0;such</span><span 
+class="cmtt-10">&#x00A0;as</span><span 
+class="cmtt-10">&#x00A0;i</span><span 
+class="cmtt-10">&#x00A0;have</span><span 
+class="cmtt-10">&#x00A0;addresses</span><span 
+class="cmtt-10">&#x00A0;in</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;memory</span><span 
+class="cmtt-10">&#x00A0;&amp;a</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;&amp;i,</span><span 
+class="cmtt-10">&#x00A0;respectively.</span><span 
+class="cmtt-10">&#x00A0;These</span><span 
+class="cmtt-10">&#x00A0;are</span><span 
+class="cmtt-10">&#x00A0;called</span><span 
+class="cmtt-10">&#x00A0;address</span><span 
+class="cmtt-10">&#x00A0;constants.</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;They</span><span 
+class="cmtt-10">&#x00A0;can&#8217;t</span><span 
+class="cmtt-10">&#x00A0;be</span><span 
+class="cmtt-10">&#x00A0;changed.</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;Note,</span><span 
+class="cmtt-10">&#x00A0;with</span><span 
+class="cmtt-10">&#x00A0;pointer</span><span 
+class="cmtt-10">&#x00A0;or</span><span 
+class="cmtt-10">&#x00A0;array</span><span 
+class="cmtt-10">&#x00A0;arithmetic</span><span 
+class="cmtt-10">&#x00A0;that</span><span 
+class="cmtt-10">&#x00A0;what</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;added</span><span 
+class="cmtt-10">&#x00A0;e.g.,</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;interger</span><span 
+class="cmtt-10">&#x00A0;1</span><span 
+class="cmtt-10">&#x00A0;in</span><span 
+class="cmtt-10">&#x00A0;terms</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;address</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;dependant</span><span 
+class="cmtt-10">&#x00A0;on</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;type.</span><span 
+class="cmtt-10">&#x00A0;array</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;is</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;an</span><span 
+class="cmtt-10">&#x00A0;array</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;integers</span><span 
+class="cmtt-10">&#x00A0;so</span><span 
+class="cmtt-10">&#x00A0;adding</span><span 
+class="cmtt-10">&#x00A0;1</span><span 
+class="cmtt-10">&#x00A0;would</span><span 
+class="cmtt-10">&#x00A0;add</span><span 
+class="cmtt-10">&#x00A0;04</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;address.</span><span 
+class="cmtt-10">&#x00A0;If</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;it</span><span 
+class="cmtt-10">&#x00A0;was</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;array</span><span 
+class="cmtt-10">&#x00A0;then</span><span 
+class="cmtt-10">&#x00A0;only</span><span 
+class="cmtt-10">&#x00A0;1</span><span 
+class="cmtt-10">&#x00A0;would</span><span 
+class="cmtt-10">&#x00A0;be</span><span 
+class="cmtt-10">&#x00A0;added</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;address</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;computation</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;printf("addresses:</span><span 
+class="cmtt-10">&#x00A0;&amp;a</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;%p</span><span 
+class="cmtt-10">&#x00A0;a+1</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;%p</span><span 
+class="cmtt-10">&#x00A0;p+1</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;%p\n",</span><span 
+class="cmtt-10">&#x00A0;(void</span><span 
+class="cmtt-10">&#x00A0;*)&amp;a,</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;(void</span><span 
+class="cmtt-10">&#x00A0;*)(a+1),</span><span 
+class="cmtt-10">&#x00A0;(void</span><span 
+class="cmtt-10">&#x00A0;*)(p+1));</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;because</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;an</span><span 
+class="cmtt-10">&#x00A0;array</span><span 
+class="cmtt-10">&#x00A0;name</span><span 
+class="cmtt-10">&#x00A0;you</span><span 
+class="cmtt-10">&#x00A0;can</span><span 
+class="cmtt-10">&#x00A0;just</span><span 
+class="cmtt-10">&#x00A0;use</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;instead</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;&amp;a</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;print</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;address</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;printf("addresses:</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;%p</span><span 
+class="cmtt-10">&#x00A0;a+1</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;%p</span><span 
+class="cmtt-10">&#x00A0;p+1</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;%p\n",</span><span 
+class="cmtt-10">&#x00A0;(void</span><span 
+class="cmtt-10">&#x00A0;*)&amp;a,</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;(void</span><span 
+class="cmtt-10">&#x00A0;*)(a+1),</span><span 
+class="cmtt-10">&#x00A0;(void</span><span 
+class="cmtt-10">&#x00A0;*)(p+1));</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;Now</span><span 
+class="cmtt-10">&#x00A0;lets</span><span 
+class="cmtt-10">&#x00A0;see</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;various</span><span 
+class="cmtt-10">&#x00A0;ways</span><span 
+class="cmtt-10">&#x00A0;we</span><span 
+class="cmtt-10">&#x00A0;can</span><span 
+class="cmtt-10">&#x00A0;look</span><span 
+class="cmtt-10">&#x00A0;at</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;content</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;variables</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;using</span><span 
+class="cmtt-10">&#x00A0;array</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;pointer</span><span 
+class="cmtt-10">&#x00A0;arithmetic.</span><span 
+class="cmtt-10">&#x00A0;Note,</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;indirection</span><span 
+class="cmtt-10">&#x00A0;operator</span><span 
+class="cmtt-10">&#x00A0;*</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;used</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;access</span><span 
+class="cmtt-10">&#x00A0;data,</span><span 
+class="cmtt-10">&#x00A0;i.e.,</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;contents</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;what</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;pointer</span><span 
+class="cmtt-10">&#x00A0;is</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;pointing</span><span 
+class="cmtt-10">&#x00A0;to.</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;printf("addresses:</span><span 
+class="cmtt-10">&#x00A0;a[1]</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;%d</span><span 
+class="cmtt-10">&#x00A0;*(a+1)</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;%d</span><span 
+class="cmtt-10">&#x00A0;*(p+1)</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;%d</span><span 
+class="cmtt-10">&#x00A0;p[1]</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;%d\n",</span><span 
+class="cmtt-10">&#x00A0;a[1],</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;*(a+1),</span><span 
+class="cmtt-10">&#x00A0;*(p+1),</span><span 
+class="cmtt-10">&#x00A0;p[1]);</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;we</span><span 
+class="cmtt-10">&#x00A0;can</span><span 
+class="cmtt-10">&#x00A0;use</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;variable</span><span 
+class="cmtt-10">&#x00A0;such</span><span 
+class="cmtt-10">&#x00A0;as</span><span 
+class="cmtt-10">&#x00A0;i</span><span 
+class="cmtt-10">&#x00A0;with</span><span 
+class="cmtt-10">&#x00A0;arrays</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;course</span><span 
+class="cmtt-10">&#x00A0;but</span><span 
+class="cmtt-10">&#x00A0;also</span><span 
+class="cmtt-10">&#x00A0;for</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;pointer</span><span 
+class="cmtt-10">&#x00A0;arthimetic</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;i=2;</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;printf("addresses:</span><span 
+class="cmtt-10">&#x00A0;a[i]</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;%d</span><span 
+class="cmtt-10">&#x00A0;*(a+i)</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;%d</span><span 
+class="cmtt-10">&#x00A0;*(p+i)</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;%d</span><span 
+class="cmtt-10">&#x00A0;p[i]</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;%d\n",</span><span 
+class="cmtt-10">&#x00A0;a[i],</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;*(a+i),</span><span 
+class="cmtt-10">&#x00A0;*(p+i),</span><span 
+class="cmtt-10">&#x00A0;p[i]);</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;Here</span><span 
+class="cmtt-10">&#x00A0;we</span><span 
+class="cmtt-10">&#x00A0;make</span><span 
+class="cmtt-10">&#x00A0;p</span><span 
+class="cmtt-10">&#x00A0;point</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;0.</span><span 
+class="cmtt-10">&#x00A0;NULL</span><span 
+class="cmtt-10">&#x00A0;pointers</span><span 
+class="cmtt-10">&#x00A0;have</span><span 
+class="cmtt-10">&#x00A0;significance</span><span 
+class="cmtt-10">&#x00A0;in</span><span 
+class="cmtt-10">&#x00A0;C.</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;Because</span><span 
+class="cmtt-10">&#x00A0;all</span><span 
+class="cmtt-10">&#x00A0;objets</span><span 
+class="cmtt-10">&#x00A0;have</span><span 
+class="cmtt-10">&#x00A0;non</span><span 
+class="cmtt-10">&#x00A0;zero</span><span 
+class="cmtt-10">&#x00A0;addresses</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;NULL</span><span 
+class="cmtt-10">&#x00A0;pointer</span><span 
+class="cmtt-10">&#x00A0;always</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;represents</span><span 
+class="cmtt-10">&#x00A0;an</span><span 
+class="cmtt-10">&#x00A0;invalid</span><span 
+class="cmtt-10">&#x00A0;address.</span><span 
+class="cmtt-10">&#x00A0;Functions</span><span 
+class="cmtt-10">&#x00A0;can</span><span 
+class="cmtt-10">&#x00A0;return</span><span 
+class="cmtt-10">&#x00A0;pointers</span><span 
+class="cmtt-10">&#x00A0;and</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;indicate</span><span 
+class="cmtt-10">&#x00A0;failure</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;returning</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;NULL</span><span 
+class="cmtt-10">&#x00A0;pointer.</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;p=NULL;</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;Some</span><span 
+class="cmtt-10">&#x00A0;times</span><span 
+class="cmtt-10">&#x00A0;people</span><span 
+class="cmtt-10">&#x00A0;get</span><span 
+class="cmtt-10">&#x00A0;confused</span><span 
+class="cmtt-10">&#x00A0;with</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;*</span><span 
+class="cmtt-10">&#x00A0;operator.</span><span 
+class="cmtt-10">&#x00A0;It</span><span 
+class="cmtt-10">&#x00A0;has</span><span 
+class="cmtt-10">&#x00A0;two</span><span 
+class="cmtt-10">&#x00A0;meanings:</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;When</span><span 
+class="cmtt-10">&#x00A0;*</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;used</span><span 
+class="cmtt-10">&#x00A0;when</span><span 
+class="cmtt-10">&#x00A0;declaring</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;pointer</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;*ptr</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;means</span><span 
+class="cmtt-10">&#x00A0;&#8216;&#8216;pointer</span><span 
+class="cmtt-10">&#x00A0;to&#8217;&#8217;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;character,</span><span 
+class="cmtt-10">&#x00A0;e.g.,</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;*ptr</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;"andrew";</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;c;</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;but</span><span 
+class="cmtt-10">&#x00A0;when</span><span 
+class="cmtt-10">&#x00A0;not</span><span 
+class="cmtt-10">&#x00A0;used</span><span 
+class="cmtt-10">&#x00A0;in</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;declaration</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;pointer</span><span 
+class="cmtt-10">&#x00A0;(e.g.,</span><span 
+class="cmtt-10">&#x00A0;*ptr).</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;The</span><span 
+class="cmtt-10">&#x00A0;indirection</span><span 
+class="cmtt-10">&#x00A0;operator</span><span 
+class="cmtt-10">&#x00A0;*</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;used</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;access</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;data</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;means</span><span 
+class="cmtt-10">&#x00A0;of</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;pointer</span><span 
+class="cmtt-10">&#x00A0;ptr.</span><span 
+class="cmtt-10">&#x00A0;Therefore,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;c</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;*ptr</span><span 
+class="cmtt-10">&#x00A0;but</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;object</span><span 
+class="cmtt-10">&#x00A0;(a)</span><span 
+class="cmtt-10">&#x00A0;into</span><span 
+class="cmtt-10">&#x00A0;variable</span><span 
+class="cmtt-10">&#x00A0;c</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;c=*ptr;</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;printf("ptr</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;%p,</span><span 
+class="cmtt-10">&#x00A0;*ptr</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;%c,</span><span 
+class="cmtt-10">&#x00A0;c</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;%c\n",</span><span 
+class="cmtt-10">&#x00A0;(void</span><span 
+class="cmtt-10">&#x00A0;*)ptr,</span><span 
+class="cmtt-10">&#x00A0;*ptr,</span><span 
+class="cmtt-10">&#x00A0;c);</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;return</span><span 
+class="cmtt-10">&#x00A0;0;</span><br /><br /><span 
+class="cmtt-10">}</span><br /><br /></div></div>
+<!--l. 321--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-10000"></a>Pointer Arithmetic</h3>
+<!--l. 323--><p class="noindent" >Another confusing facility in C is the use of pointer arithmetic with which we may advance a
+pointer to point to successive memory locations at run-time. It would make little sense to be
+able to &#8220;point anywhere&#8221;into memory, and so C automatically adjusts pointers (forwards
+and backwards) by values that are multiples of the size of the base types (or user-defined
+structures) to which the pointer points. We specify pointer arithmetic in the same way we
+specify numeric arithmetic, using +, <span class="obeylines-h"><span class="verb"></span></span>, and pre- and post- increment and decrement operators
+(multiplication and division make little sense). We may thus traverse an array with pointer
+arithmetic:
+<div 
+class="colorbox" id="colorbox7"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;my_strlen(char</span><span 
+class="cmtt-10">&#x00A0;*str)</span><span 
+class="cmtt-10">&#x00A0;{</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;len</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;0;</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;while(</span><span 
+class="cmtt-10">&#x00A0;*str</span><span 
+class="cmtt-10">&#x00A0;/*</span><span 
+class="cmtt-10">&#x00A0;!=</span><span 
+class="cmtt-10">&#x00A0;&#8217;\0&#8217;</span><span 
+class="cmtt-10">&#x00A0;*/</span><span 
+class="cmtt-10">&#x00A0;)</span><span 
+class="cmtt-10">&#x00A0;{</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;++len;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;++str;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;}</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;return(len);</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;}</span><br /><br /></div></div>
+<!--l. 353--><p class="noindent" >Notice that we are simply &#8220;moving the pointer along&#8221;, we are not modifying what it pointers to, simply
+accessing adjacent memory locations until we reach one containing the NULL character. This example is a
+little simple, because the character pointer will only be advanced one memory location (one
+byte) at a time, as a character is one byte long. Alternatively, consider the five equivalent
+examples:
+<div 
+class="colorbox" id="colorbox8"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;sum_array(int</span><span 
+class="cmtt-10">&#x00A0;*values,</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;n)</span><span 
+class="cmtt-10">&#x00A0;{</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;i,</span><span 
+class="cmtt-10">&#x00A0;*ip;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;sum</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;0;</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;for(sum=0,</span><span 
+class="cmtt-10">&#x00A0;i=0</span><span 
+class="cmtt-10">&#x00A0;;</span><span 
+class="cmtt-10">&#x00A0;i&#x003C;n</span><span 
+class="cmtt-10">&#x00A0;;</span><span 
+class="cmtt-10">&#x00A0;i++)</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;sum</span><span 
+class="cmtt-10">&#x00A0;+=</span><span 
+class="cmtt-10">&#x00A0;values[i];</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;for(sum=0,</span><span 
+class="cmtt-10">&#x00A0;i=0</span><span 
+class="cmtt-10">&#x00A0;;</span><span 
+class="cmtt-10">&#x00A0;i&#x003C;n</span><span 
+class="cmtt-10">&#x00A0;;</span><span 
+class="cmtt-10">&#x00A0;i++)</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;sum</span><span 
+class="cmtt-10">&#x00A0;+=</span><span 
+class="cmtt-10">&#x00A0;*(values+i);</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;for(sum=0,</span><span 
+class="cmtt-10">&#x00A0;ip=values;</span><span 
+class="cmtt-10">&#x00A0;ip&#x003C;&amp;values[n]</span><span 
+class="cmtt-10">&#x00A0;;</span><span 
+class="cmtt-10">&#x00A0;ip++)</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;sum</span><span 
+class="cmtt-10">&#x00A0;+=</span><span 
+class="cmtt-10">&#x00A0;*ip;</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;for(sum=0,</span><span 
+class="cmtt-10">&#x00A0;i=0</span><span 
+class="cmtt-10">&#x00A0;;</span><span 
+class="cmtt-10">&#x00A0;i&#x003C;n</span><span 
+class="cmtt-10">&#x00A0;;</span><span 
+class="cmtt-10">&#x00A0;i++)</span><span 
+class="cmtt-10">&#x00A0;{</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;sum</span><span 
+class="cmtt-10">&#x00A0;+=</span><span 
+class="cmtt-10">&#x00A0;*values;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;++values;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;}</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;for(sum=0,</span><span 
+class="cmtt-10">&#x00A0;i=0</span><span 
+class="cmtt-10">&#x00A0;;</span><span 
+class="cmtt-10">&#x00A0;i&#x003C;n</span><span 
+class="cmtt-10">&#x00A0;;</span><span 
+class="cmtt-10">&#x00A0;i++)</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;sum</span><span 
+class="cmtt-10">&#x00A0;+=</span><span 
+class="cmtt-10">&#x00A0;*values++;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;}</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;return(sum);</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;}</span><br /><br /></div></div>
+<!--l. 395--><p class="noindent" >Unfortunately, we frequently see an excessive use of pointer arithmetic in C with programmers trying to
+be too smart to speed up their programs. For example my_strcpy() below. Does the function copy the
+NULL character to?
+<!--l. 398--><p class="noindent" ><span 
+class="cmbx-10">C code</span>:<a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/strcpy.c" > strcpy.c </a>
+<!--l. 400--><p class="noindent" >The contents of strcpy.c looks like this:
+<div 
+class="colorbox" id="colorbox9"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">/*</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;File:</span><span 
+class="cmtt-10">&#x00A0;strcpy.c</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;Description:</span><span 
+class="cmtt-10">&#x00A0;Copies</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;source</span><span 
+class="cmtt-10">&#x00A0;string</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;destination.</span><span 
+class="cmtt-10">&#x00A0;Keeps</span><span 
+class="cmtt-10">&#x00A0;copying</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;until</span><span 
+class="cmtt-10">&#x00A0;it</span><span 
+class="cmtt-10">&#x00A0;finds</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;NULL</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;in</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;source</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;string</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;Input:</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;pointers</span><span 
+class="cmtt-10">&#x00A0;for</span><span 
+class="cmtt-10">&#x00A0;source</span><span 
+class="cmtt-10">&#x00A0;(s2)</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;destination</span><span 
+class="cmtt-10">&#x00A0;(s1)</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;Output:</span><span 
+class="cmtt-10">&#x00A0;returns</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;pointer</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;destinatio</span><span 
+class="cmtt-10">&#x00A0;(s1)</span><br /><span 
+class="cmtt-10">*/</span><br /><br /><span 
+class="cmtt-10">#include&#x003C;stdio.h&#x003E;</span><br /><span 
+class="cmtt-10">#include&#x003C;stdlib.h&#x003E;</span><br /><br /><span 
+class="cmtt-10">char</span><span 
+class="cmtt-10">&#x00A0;*my_strcpy(char</span><span 
+class="cmtt-10">&#x00A0;*</span><span 
+class="cmtt-10">&#x00A0;,</span><span 
+class="cmtt-10">&#x00A0;const</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;*</span><span 
+class="cmtt-10">&#x00A0;);</span><br /><br /><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;main()</span><br /><span 
+class="cmtt-10">{</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;src[]</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;"cs23!";</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;dst[]="Hello</span><span 
+class="cmtt-10">&#x00A0;hello";</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;*curdst;</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;int</span><span 
+class="cmtt-10">&#x00A0;len=0;</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;printf("src</span><span 
+class="cmtt-10">&#x00A0;address</span><span 
+class="cmtt-10">&#x00A0;%p</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;first</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;%c</span><span 
+class="cmtt-10">&#x00A0;\n",</span><span 
+class="cmtt-10">&#x00A0;(void</span><span 
+class="cmtt-10">&#x00A0;*)&amp;src,</span><span 
+class="cmtt-10">&#x00A0;src[0]);</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;printf("dst</span><span 
+class="cmtt-10">&#x00A0;address</span><span 
+class="cmtt-10">&#x00A0;%p</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;first</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;%c</span><span 
+class="cmtt-10">&#x00A0;\n",</span><span 
+class="cmtt-10">&#x00A0;(void</span><span 
+class="cmtt-10">&#x00A0;*)&amp;dst,</span><span 
+class="cmtt-10">&#x00A0;dst[0]);</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;compute</span><span 
+class="cmtt-10">&#x00A0;where</span><span 
+class="cmtt-10">&#x00A0;NULL</span><span 
+class="cmtt-10">&#x00A0;character</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;&#8217;\0&#8217;</span><span 
+class="cmtt-10">&#x00A0;ASCII</span><span 
+class="cmtt-10">&#x00A0;0</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;while(src[len++]);</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;print</span><span 
+class="cmtt-10">&#x00A0;out</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;arrays</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;various</span><span 
+class="cmtt-10">&#x00A0;addresses.</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;printf("src</span><span 
+class="cmtt-10">&#x00A0;array</span><span 
+class="cmtt-10">&#x00A0;%s</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;last</span><span 
+class="cmtt-10">&#x00A0;element</span><span 
+class="cmtt-10">&#x00A0;%d\n",</span><span 
+class="cmtt-10">&#x00A0;src,</span><span 
+class="cmtt-10">&#x00A0;atoi(&amp;src[len]));</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;printf("dst</span><span 
+class="cmtt-10">&#x00A0;array</span><span 
+class="cmtt-10">&#x00A0;%s</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;last</span><span 
+class="cmtt-10">&#x00A0;element</span><span 
+class="cmtt-10">&#x00A0;%c\n",</span><span 
+class="cmtt-10">&#x00A0;dst,</span><span 
+class="cmtt-10">&#x00A0;dst[len]);</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;do</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;copy</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;curdst=</span><span 
+class="cmtt-10">&#x00A0;my_strcpy(dst,</span><span 
+class="cmtt-10">&#x00A0;src);</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;check</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;see</span><span 
+class="cmtt-10">&#x00A0;if</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;NULL</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;copied</span><span 
+class="cmtt-10">&#x00A0;too.</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;printf("dst</span><span 
+class="cmtt-10">&#x00A0;array</span><span 
+class="cmtt-10">&#x00A0;%s</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;last</span><span 
+class="cmtt-10">&#x00A0;element</span><span 
+class="cmtt-10">&#x00A0;%d\n",</span><span 
+class="cmtt-10">&#x00A0;dst,</span><span 
+class="cmtt-10">&#x00A0;atoi(&amp;dst[len]));</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;return</span><span 
+class="cmtt-10">&#x00A0;0;</span><br /><br /><span 
+class="cmtt-10">}</span><br /><br /><span 
+class="cmtt-10">char</span><span 
+class="cmtt-10">&#x00A0;*my_strcpy(char</span><span 
+class="cmtt-10">&#x00A0;*s1,</span><span 
+class="cmtt-10">&#x00A0;const</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;*s2)</span><span 
+class="cmtt-10">&#x00A0;{</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;register</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;*d</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;s1;</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;//</span><span 
+class="cmtt-10">&#x00A0;print</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;pointer</span><span 
+class="cmtt-10">&#x00A0;variables</span><span 
+class="cmtt-10">&#x00A0;address</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;their</span><span 
+class="cmtt-10">&#x00A0;contents,</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;first</span><span 
+class="cmtt-10">&#x00A0;char</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;printf("s2</span><span 
+class="cmtt-10">&#x00A0;address</span><span 
+class="cmtt-10">&#x00A0;%p,</span><span 
+class="cmtt-10">&#x00A0;its</span><span 
+class="cmtt-10">&#x00A0;contents</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;pointer</span><span 
+class="cmtt-10">&#x00A0;%p</span><span 
+class="cmtt-10">&#x00A0;to</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;first</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;%c</span><span 
+class="cmtt-10">&#x00A0;\n",</span><span 
+class="cmtt-10">&#x00A0;(void</span><span 
+class="cmtt-10">&#x00A0;*)&amp;s2,</span><span 
+class="cmtt-10">&#x00A0;(void</span><span 
+class="cmtt-10">&#x00A0;*)s2,</span><span 
+class="cmtt-10">&#x00A0;*s2);</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;printf("s1</span><span 
+class="cmtt-10">&#x00A0;address</span><span 
+class="cmtt-10">&#x00A0;%p,</span><span 
+class="cmtt-10">&#x00A0;its</span><span 
+class="cmtt-10">&#x00A0;contents</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;pointer</span><span 
+class="cmtt-10">&#x00A0;%p</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;first</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;%c</span><span 
+class="cmtt-10">&#x00A0;\n",</span><span 
+class="cmtt-10">&#x00A0;(void</span><span 
+class="cmtt-10">&#x00A0;*)&amp;s1,</span><span 
+class="cmtt-10">&#x00A0;(void</span><span 
+class="cmtt-10">&#x00A0;*)s1,</span><span 
+class="cmtt-10">&#x00A0;*s1);</span><br /><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;while</span><span 
+class="cmtt-10">&#x00A0;((*d++</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;*s2++));</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;return(s1);</span><br /><br /><span 
+class="cmtt-10">}</span><br /><br /></div></div>
+                                                                                  
+                                                                                  
+<!--l. 475--><p class="noindent" >If you compile and run pointers then you get the following. Look closely at the pointer values and the
+address of the people array of structs and the various sizes of data types including a pointer and the size of
+the person struct.
+<div 
+class="colorbox" id="colorbox10"><div class="BVerbatimInput"><br /><br /><span 
+class="cmtt-10">./strcpy</span><br /><span 
+class="cmtt-10">src</span><span 
+class="cmtt-10">&#x00A0;address</span><span 
+class="cmtt-10">&#x00A0;0x7fff5fbff650</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;first</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;c</span><br /><span 
+class="cmtt-10">dst</span><span 
+class="cmtt-10">&#x00A0;address</span><span 
+class="cmtt-10">&#x00A0;0x7fff5fbff660</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;first</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;H</span><br /><span 
+class="cmtt-10">src</span><span 
+class="cmtt-10">&#x00A0;array</span><span 
+class="cmtt-10">&#x00A0;cs23!</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;last</span><span 
+class="cmtt-10">&#x00A0;element</span><span 
+class="cmtt-10">&#x00A0;0</span><br /><span 
+class="cmtt-10">dst</span><span 
+class="cmtt-10">&#x00A0;array</span><span 
+class="cmtt-10">&#x00A0;Hello</span><span 
+class="cmtt-10">&#x00A0;hello</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;last</span><span 
+class="cmtt-10">&#x00A0;element</span><span 
+class="cmtt-10">&#x00A0;h</span><br /><span 
+class="cmtt-10">s2</span><span 
+class="cmtt-10">&#x00A0;address</span><span 
+class="cmtt-10">&#x00A0;0x7fff5fbff620,</span><span 
+class="cmtt-10">&#x00A0;its</span><span 
+class="cmtt-10">&#x00A0;contents</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;pointer</span><span 
+class="cmtt-10">&#x00A0;0x7fff5fbff650</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;first</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;c</span><br /><span 
+class="cmtt-10">s1</span><span 
+class="cmtt-10">&#x00A0;address</span><span 
+class="cmtt-10">&#x00A0;0x7fff5fbff628,</span><span 
+class="cmtt-10">&#x00A0;its</span><span 
+class="cmtt-10">&#x00A0;contents</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;pointer</span><span 
+class="cmtt-10">&#x00A0;0x7fff5fbff660</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;first</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;H</span><br /><span 
+class="cmtt-10">dst</span><span 
+class="cmtt-10">&#x00A0;array</span><span 
+class="cmtt-10">&#x00A0;cs23!</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;last</span><span 
+class="cmtt-10">&#x00A0;element</span><span 
+class="cmtt-10">&#x00A0;0</span><br /><br /></div></div>
+<!--l. 496--><p class="noindent" >With code such as this, in which we are trying to copy all characters from src to dest until we reach the
+NULL character, we always have in the back of our minds the concern as to whether the
+NULL character is in fact copied from the end of src to dest, and thus legally terminates
+dest.
+<!--l. 500--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-11000"></a>There is a bug in the code.</h3>
+<!--l. 502--><p class="noindent" ><span 
+class="cmbx-10">NOTE</span>, there is a bug in <span 
+class="cmbx-10">C code</span>:<a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/strcpy.c" > strcpy.c </a>You will need to get use to debugging code. Study the ouput
+and the arrays. The output is wrong. Can you find the error? It is related to pointers. Think about it first
+by studying the code. Reading each line and executing the program in your head with a pen and paper.
+Here your head is the computer (instruction execution) and the pen/paper, memory. Can you find
+it?
+<!--l. 504--><p class="noindent" >Once you have spent a little time studying the original code then take a look at the fixed
+code:
+<!--l. 506--><p class="noindent" ><span 
+class="cmbx-10">C code</span>:<a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/fixed-strcpy.c" > fixed-strcpy.c </a>
+<!--l. 508--><p class="noindent" >Now compile the new code and look at the output. Compare the output of <a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/fixed-strcpy.c" > fixed-strcpy.c </a>and <a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/strcpy.c" > strcpy.c
+</a>
+<!--l. 510--><p class="noindent" >&#8220;Desk checking code&#8221; is a very valuable and efficient way to find bugs. I think it is a little smarter to do
+that just hacking on the computer and using printf. When desk checking code for errors you are the
+computer and printf is you looking at the values of variables that you updated on paper as you execute
+each line of the code in your head. Also, many bugs like this one are so called &#8220;boundary bugs&#8221;. We will
+talk about debugging soon in class. You need a suite of technques. I rate desk checking way up
+there; conversely, blind hacking to fix debugs - way down there. Be smart as a coder, use your
+head.
+<!--l. 512--><p class="noindent" >The correct out out is below. Note, now the code prints the correct last element of the src array (&#8217;/0&#8217;
+which is 0) and the character at the same index in the dst array (a white space):
+<div 
+class="colorbox" id="colorbox11"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">./strcpy</span><br /><span 
+class="cmtt-10">src</span><span 
+class="cmtt-10">&#x00A0;address</span><span 
+class="cmtt-10">&#x00A0;0x7fff5fbff650</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;first</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;c</span><br /><span 
+class="cmtt-10">dst</span><span 
+class="cmtt-10">&#x00A0;address</span><span 
+class="cmtt-10">&#x00A0;0x7fff5fbff660</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;first</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;H</span><br /><span 
+class="cmtt-10">src</span><span 
+class="cmtt-10">&#x00A0;array</span><span 
+class="cmtt-10">&#x00A0;cs23!</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;last</span><span 
+class="cmtt-10">&#x00A0;element</span><span 
+class="cmtt-10">&#x00A0;0</span><br /><span 
+class="cmtt-10">dst</span><span 
+class="cmtt-10">&#x00A0;array</span><span 
+class="cmtt-10">&#x00A0;Hello</span><span 
+class="cmtt-10">&#x00A0;hello</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;last</span><span 
+class="cmtt-10">&#x00A0;element</span><br /><span 
+class="cmtt-10">s2</span><span 
+class="cmtt-10">&#x00A0;address</span><span 
+class="cmtt-10">&#x00A0;0x7fff5fbff620,</span><span 
+class="cmtt-10">&#x00A0;its</span><span 
+class="cmtt-10">&#x00A0;contents</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;pointer</span><span 
+class="cmtt-10">&#x00A0;0x7fff5fbff650</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;first</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;c</span><br /><span 
+class="cmtt-10">s1</span><span 
+class="cmtt-10">&#x00A0;address</span><span 
+class="cmtt-10">&#x00A0;0x7fff5fbff628,</span><span 
+class="cmtt-10">&#x00A0;its</span><span 
+class="cmtt-10">&#x00A0;contents</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;pointer</span><span 
+class="cmtt-10">&#x00A0;0x7fff5fbff660</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;first</span><span 
+class="cmtt-10">&#x00A0;char</span><span 
+class="cmtt-10">&#x00A0;H</span><br /><span 
+class="cmtt-10">dst</span><span 
+class="cmtt-10">&#x00A0;array</span><span 
+class="cmtt-10">&#x00A0;cs23!</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;last</span><span 
+class="cmtt-10">&#x00A0;element</span><span 
+class="cmtt-10">&#x00A0;0</span><br /><br /></div></div>
+<!--l. 532--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-12000"></a>Casting</h3>
+<div 
+class="colorbox" id="colorbox12"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;a,</span><span 
+class="cmtt-10">&#x00A0;*ip;</span><br /><br /><span 
+class="cmtt-10">char</span><span 
+class="cmtt-10">&#x00A0;*cp;</span><br /><br /><span 
+class="cmtt-10">long</span><span 
+class="cmtt-10">&#x00A0;l,</span><span 
+class="cmtt-10">&#x00A0;*lp;</span><br /><br /><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;Will</span><span 
+class="cmtt-10">&#x00A0;not</span><span 
+class="cmtt-10">&#x00A0;work,</span><span 
+class="cmtt-10">&#x00A0;why?</span><br /><br /><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;cp;</span><br /><br /><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;But</span><span 
+class="cmtt-10">&#x00A0;this</span><span 
+class="cmtt-10">&#x00A0;will</span><span 
+class="cmtt-10">&#x00A0;-</span><span 
+class="cmtt-10">&#x00A0;casting;</span><span 
+class="cmtt-10">&#x00A0;but</span><span 
+class="cmtt-10">&#x00A0;probably</span><span 
+class="cmtt-10">&#x00A0;not</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;great</span><span 
+class="cmtt-10">&#x00A0;idea</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;case</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;pointer</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;int.</span><br /><br /><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;(int)cp;</span><br /><br /><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;Will</span><span 
+class="cmtt-10">&#x00A0;not</span><span 
+class="cmtt-10">&#x00A0;work</span><br /><br /><span 
+class="cmtt-10">ip</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;lp;</span><br /><br /><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;But</span><span 
+class="cmtt-10">&#x00A0;this</span><span 
+class="cmtt-10">&#x00A0;will</span><span 
+class="cmtt-10">&#x00A0;-</span><span 
+class="cmtt-10">&#x00A0;casting</span><br /><br /><span 
+class="cmtt-10">ip</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;(int</span><span 
+class="cmtt-10">&#x00A0;*)lp;</span><br /><br /></div></div>
+                                                                                  
+                                                                                  
+<!--l. 567--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-13000"></a>void *</h3>
+<!--l. 569--><p class="noindent" >Special case that comes in handy. For example, malloc returns a pointer to void that can be equated to
+any data type, int *, char *, struct *, etc.
+<!--l. 571--><p class="noindent" >void * is a generic pointer that can be assigned to any type. Very cool!
+<!--l. 573--><p class="noindent" >Some examples below:
+<!--l. 575--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-14000"></a>Casting</h3>
+<div 
+class="colorbox" id="colorbox13"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">void</span><span 
+class="cmtt-10">&#x00A0;*vp;</span><br /><br /><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;Will</span><span 
+class="cmtt-10">&#x00A0;not</span><span 
+class="cmtt-10">&#x00A0;work</span><br /><br /><span 
+class="cmtt-10">cp</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;ip;</span><br /><br /><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;Need,</span><span 
+class="cmtt-10">&#x00A0;casting</span><br /><br /><span 
+class="cmtt-10">cp</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;(char</span><span 
+class="cmtt-10">&#x00A0;*)ip;</span><br /><br /><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;But,</span><span 
+class="cmtt-10">&#x00A0;this</span><span 
+class="cmtt-10">&#x00A0;works</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;treat</span><br /><br /><span 
+class="cmtt-10">cp</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;vp;</span><br /><br /><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;this</span><br /><br /><span 
+class="cmtt-10">ip</span><span 
+class="cmtt-10">&#x00A0;=vp;</span><br /><br /></div></div>
+ 
+</body></html> 
+
+                                                                                  
+
+

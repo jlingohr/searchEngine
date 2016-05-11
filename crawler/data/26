@@ -523,3 +523,528 @@ the terminal.
                                                                                   
 
 
+http://www.cs.dartmouth.edu/~campbell/cs50/lab7.html
+Depth: 2
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title></title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="lab7.tex"> 
+<meta name="date" content="2012-05-16 13:03:00"> 
+<link rel="stylesheet" type="text/css" href="lab7.css"> 
+</head><body 
+>
+<h1 class="likepartHead"><a 
+ id="x1-1000"></a>CS 50 Software Design and Implementation</h1>
+<h1 class="likepartHead"><a 
+ id="x1-2000"></a>Lab7</h1>
+<h1 class="likepartHead"><a 
+ id="x1-3000"></a>Socket Programming</h1>
+<!--l. 19--><p class="noindent" >This is the last lab! Almost there...
+<!--l. 21--><p class="noindent" >In this lab, we will learn the important skill of distributed programming using socket programming in C
+and the socket API. A socket is similar to the pipe abstraction between two processes on the same
+machine but in this lab we will create a reliable byte-stream &#8220;pipe&#8221; that uses TCP between client and
+server processes running on different machines over the Internet. Socket programming is very cool and the
+basis of the vast majority of Internet programming.
+<!--l. 24--><p class="noindent" >In this lab, you will write a client and a server. You&#8217;ll start with writing a client that will communicate
+with a server that we put up on the web. Then you will write the server.
+<!--l. 26--><p class="noindent" >We will use TCP socket programming as part of the robotics project. In this lab, we give you a lot of the
+code so it&#8217;s not too taxing. However, don&#8217;t blindly use it to simply complete the assignment -
+understand the code. You will need to nail socket programming for the project, as mentioned
+above.
+<!--l. 28--><p class="noindent" >OK, let&#8217;s get going.
+<!--l. 30--><p class="noindent" >____________________________________________________________________________
+<!--l. 32--><p class="noindent" >The assignment includes two parts. First, implement a TCP client that interacts with an existing server -
+that we have written and that is &#8220;always on&#8221;. After that write the TCP server side using an IP address
+and port of your choosing and run your client and server. The server should act in the exact same way as
+our server.
+<!--l. 36--><p class="noindent" >First the client part:
+<!--l. 38--><p class="noindent" >The background to this programming idea is that a client can interacts with a sensor and gets real-time
+sensor readings, such as, temperature, humity, and light. Here the &#8220;sensor&#8221; is the server software. We will
+use real sensors in the robotics project.
+<!--l. 41--><p class="noindent" >Implement a client that retrieves temperature, humidity and light data from a remote server. The server
+runs on green.cs.dartmouth.edu and you will need the IP address; you can get that by typing &#8220;host&#8221; at the
+terminal
+<!--l. 44--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">$host</span><span 
+class="cmtt-10">&#x00A0;green.cs.dartmouth.edu</span><span 
+class="cmtt-10">&#x00A0;</span></span></span><br 
+class="newline" /><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">green.cs.dartmouth.edu</span><span 
+class="cmtt-10">&#x00A0;has</span><span 
+class="cmtt-10">&#x00A0;address</span><span 
+class="cmtt-10">&#x00A0;129.170.213.212</span></span></span> <br 
+class="newline" />
+                                                                                  
+                                                                                  
+<!--l. 47--><p class="noindent" >A client can access the server at IP address 129.170.213.212 on port 5567. The server is up and running
+now.
+<!--l. 49--><p class="noindent" >The client should connect to the server, stay connected, and retrieve a number of readings
+similar to the screen dump show below. The client can request readings from the server as
+many times as you want, however, the reading values returned by server will only be modified
+every second. For example. the client requests temperature and then waits for the server to
+respond with the temperature, then it requests humidity and again waits for the server response,
+finally, the client requests light and gets the current light reading. The server will not change
+the value of the sensor data (i.e., temp, hum, light) until a second has passed. In essense,
+the server emulates a real live sensor where the sensor data changes over time. The client
+can request sensor data in any order (e.g., hum, temp, light) &#8211; the example above is just an
+example &#8211; and the server will respond accordingly. The client should connect to the server and
+request a new set of sensor data (i.e., temp, light, hum) every second <span 
+class="cmti-10">TIP: your client needs to</span>
+<span 
+class="cmti-10">sleep for one second before it issues a new request. Once the client has cycled through all the</span>
+<span 
+class="cmti-10">data (e.g., the server starts to repeat itself after 20 seconds) it should disconnect/close the</span>
+<span 
+class="cmti-10">connection</span>.
+<!--l. 51--><p class="noindent" >The server (i.e., the child process forked to handle the connection) will also close when the client issues a
+close. Therefore, the server is capable of handling concurrent clients. You should design for that went
+you code up the server; this is similar in design to the echoConServer.c found in the lecture
+notes.
+<!--l. 53--><p class="noindent" >Note, that the &#8220;listening server&#8221; should always remain active. You can use similar printf statements for
+your client output as shown below. Here is a high level description of the server functionality. The server
+should compute the time when the client sets up a connection (just after the accept) and when it gets a
+request. It should compute the difference in the time readings and normalizes that to index
+the current temp., hum., light data (read into memory from the data files). Note, that the
+data in the files is limited (not 100s of readings) so you might wrap around while running the
+client/server. The idea here is that when the client connects to the server the server resets
+some representation of the client&#8217;s clock to zero (e.g., the clock starts from zero) and waits
+for requests from the client. When it gets a request some time later (e.g., 0.5 sec later) it
+computes the new client clock time (e.g., current time - clock time &#8211; 0.5 - 0) and indexes the data
+based on that time. In this example, the time difference is less than a second so the server
+will send the current data (e.g., the current temp if temperature is requested); if however,
+the time difference was greater than one second but less than two seconds it would get the
+next reading from the data (tip: the server needs to read the computers wall clock (i.e., clock
+time, as mentioned above) when the client first connects, e.g., using the time() function. The
+server needs to read the time again and compute the difference when a request is received. It
+uses the difference between the current time and clock time (which will not be zero as in
+the example above) to determine how to index the data copied in from the three files into
+arrays).
+<!--l. 55--><p class="noindent" >The data can be retrieved when the client sends the following strings <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">"TEMPERATURE"</span></span></span>, <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">"HUMIDITY"</span></span></span> or
+<span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">"LIGHT"</span></span></span> to the server. Once one of the three strings is received at the server (e.g., temperature), the server
+will immediately return a 2-byte string representing the integer value of the sensor reading. You should
+display readings to the screen. For example:
+<div 
+class="colorbox" id="colorbox1"><div class="BVerbatimInput"><span 
+class="cmtt-10">Connected</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;server!</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;60</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;0</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;1</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;59</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;50</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;2</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;58</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;20</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;3</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;57</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;30</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;4</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;56</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;40</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;5</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;55</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;20</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;6</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;54</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;80</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;7</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;53</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;70</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;8</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;52</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;70</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;9</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;51</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;50</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;10</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;50</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;44</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;9</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;51</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;45</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;8</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;52</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;34</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;7</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;53</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;34</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;6</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;54</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;34</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;5</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;55</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;23</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;4</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;56</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;21</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;3</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;57</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;23</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;2</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;58</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;78</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;1</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;59</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;67</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;1</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;59</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;67</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;1</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;59</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;67</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;1</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;59</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;67</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;1</span><br /><span 
+class="cmtt-10">Data</span><span 
+class="cmtt-10">&#x00A0;returned</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server:</span><br /><span 
+class="cmtt-10">TEMPERATURE</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;59</span><span 
+class="cmtt-10">&#x00A0;HUMIDITY</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;67</span><span 
+class="cmtt-10">&#x00A0;LIGHT</span><span 
+class="cmtt-10">&#x00A0;=</span><span 
+class="cmtt-10">&#x00A0;1</span><br /><span 
+class="cmtt-10">Closing</span><span 
+class="cmtt-10">&#x00A0;connection</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;server...finished!</span><br /><br /></div></div>
+                                                                                  
+                                                                                  
+<!--l. 117--><p class="noindent" >Once you have written a working client and it works with the existing server, discussed above, then you
+need to write a replacement server that does exactly the same. The idea is that you first write the client
+that works with an existing server. Then you write the server and run your client and server
+together.
+<!--l. 119--><p class="noindent" >Next, implement the concurrent server part of the program. The actual data can be retrieved from a set of
+files:
+<!--l. 121--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/temperature.dat" > temperature.dat </a>
+<!--l. 123--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/light.dat" > light.dat </a>
+<!--l. 125--><p class="noindent" ><a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/humidity.dat" > humidity.dat </a>
+<!--l. 127--><p class="noindent" >Each file contains the last 20 readings of the temperature, humidity and light sensors (one read per second
+for each category). The 20 readings are formatted as a list, one reading per line. The files are the
+following:
+<!--l. 129--><p class="noindent" >The server is simulating a sensor such as the mote sensors you see around Sudikoff - that provides readings
+of temperature, light and humidity. In this case, you will copy these files into the same directory as your
+server and the server will open each file, <span 
+class="cmti-10">read in all sensor values, and serve every request from the</span>
+<span 
+class="cmti-10">client. If a client requests temperature, the server will return a certain temperature sample</span>
+<span 
+class="cmti-10">from temperature.dat according to the time of the connection. Starting from the first value of</span>
+<span 
+class="cmti-10">temperature.dat when a connection is established, every second the server should return the next</span>
+<span 
+class="cmti-10">value in temperature.dat upon request. If EOF is reached, the server should wraps around</span>
+<span 
+class="cmti-10">and start from the beginning of the file again. </span>For this assignment you will have to work out
+the details of how the commands and responses interaction between the client and server,
+respectively.
+<!--l. 131--><p class="noindent" >The server is responsible for reading in the data, accepting client connections and sending out the right
+data according to the commands sent by clients.
+<!--l. 133--><p class="noindent" ><span 
+class="cmbx-10">Submit using SVN</span>:
+<!--l. 135--><p class="noindent" >Submit the assignment using Subversion Versions System (SVN). Use SVN to sign in your source
+tree.
+<!--l. 137--><p class="noindent" >Change to your labs directory <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">cd</span><span 
+class="cmtt-10">&#x00A0;~/cs50/labs</span></span></span> This directory contains your lab7 directory where your
+solutions are found.
+<!--l. 139--><p class="noindent" >Please make sure that the labs directory contains a simple text file, named README, describing anything
+&#8220;unusual&#8221; about how your solutions should be located, executed, and considered; and a Makefile to build
+the source.
+<!--l. 141--><p class="noindent" ><span 
+class="cmbx-10">Coding style</span>: Excellent code required.
+<!--l. 143--><p class="noindent" >The final software should be include of the following components:
+     <ul class="itemize1">
+     <li class="itemize">TCP client (first part);
+     </li>
+     <li class="itemize">A file of the retrieved data by the client program (the print out to the screen shown above);
+     and
+                                                                                  
+                                                                                  
+     </li>
+     <li class="itemize">TCP server (second part)</li></ul>
+<!--l. 150--><p class="noindent" >Again, you should also provide a Makefile to build your program (one for the client and one for the
+server) and a concise README file describing briefly your design choices and how to run the
+program.
+<!--l. 152--><p class="noindent" >Good luck!
+<!--l. 154--><p class="noindent" ><span 
+class="cmbx-10">Tip</span>: Make sure you always logout when you are done and see the prompt to login again before you leave
+the terminal.
+ 
+</body></html> 
+
+                                                                                  
+
+

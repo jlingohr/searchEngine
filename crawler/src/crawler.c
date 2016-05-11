@@ -30,12 +30,13 @@
 
 // ---------------- Local includes  e.g., "file.h"
 #include "utils.h"                           // utility stuffs
-#include "../../util/hashtable.h"                       // hashtable functionality
+//#include "../../util/hashtable.h"                       // hashtable functionality
 #include "../../util/common.h"                          // common functionality
 #include "../../util/util.h"
 #include "../../util/web.h"                             // curl and html functionality
-#include "../../util/list.h"                            // webpage list functionality
-
+//#include "../../util/list.h"                            // webpage list functionality
+#include "hashtableURL.h"
+#include "listwpage.h"
 
 
 

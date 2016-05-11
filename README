@@ -17,7 +17,7 @@ INDEXER
   by the crawler
 
 --------
-Query
+Query (Incomplete)
 
   Usage: ./query [indexed.dat] [Crawl Dir]
 

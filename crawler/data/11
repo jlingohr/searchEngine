@@ -958,3 +958,963 @@ class="content">General search engine architecture [Arvind, 2001].</span></div><
                                                                                   
 
 
+http://www.cs.dartmouth.edu/~campbell/cs50/searchingtheweb.html
+Depth: 2
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title></title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="searchingtheweb.tex"> 
+<meta name="date" content="2012-04-16 00:11:00"> 
+<link rel="stylesheet" type="text/css" href="searchingtheweb.css"> 
+</head><body 
+>
+<h1 class="likepartHead"><a 
+ id="x1-1000"></a>CS 50 Software Design and Implementation</h1>
+<h1 class="likepartHead"><a 
+ id="x1-2000"></a>Lecture 10</h1>
+<h1 class="likepartHead"><a 
+ id="x1-3000"></a>Searching the Web</h1>
+<!--l. 21--><p class="noindent" >In the next series of lectures we will design, implement and test a simple yet powerful command-line
+search engine called <span 
+class="cmbx-10">TinySearch </span>because it can be writtem in <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">&#x003C;</span></span></span> 1500 lines of C (that is about 500 lines
+for each Lab). We will discuss the top level design of TinySearch and its decomposition into three major
+components; that is the crawler, indexer, and query engine modules. We will discuss the major data
+structures and algorithms needed to design the TinySearch.
+<!--l. 24--><p class="noindent" >In this lecture, we will discuss some of the foundational issues associated with searching the web. We
+will also dicuss the overall architectural design of a more comprehensive search engine than
+TinySearch.
+<!--l. 26--><p class="noindent" ><span 
+class="cmbx-10">Back before Google existed</span>: Search engines (e.g., Google) represent our window into the
+web and a multiple billion dollar industry. Once you have finished the Lab4 (crawler), Lab5
+(indexer), and Lab6 (query engine) you can take on Larry Page and Sergey Brin co-founders
+of the goliath Google. They are ready to take down and you could be David or Denise as
+it were. Checkout how Larry and Sergey boostrapped Google - <a 
+href="http://www.google.com/corporate/history.html" >back before Google existed.
+</a>
+<!--l. 28--><p class="noindent" >There is one excellent technical paper from Stanford that we will ready as we move through the
+assignment:
+<!--l. 30--><p class="noindent" ><span 
+class="cmbx-10">Important reference</span>: <a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/searchingtheweb.pdf" >&#8220;Searching the Web&#8221;</a>, Arvind Arasu, Junghoo Cho, Hector Garcia-Molina,
+Andreas Paepcke, Sriram Raghavan (Stanford University). ACM Transactions on Internet Technology
+(TOIT), Volume 1 , Issue 1 (August 2001).
+<!--l. 32--><p class="noindent" ><span 
+class="cmbx-10">Read this paper this week</span>: This paper gives insights into search engine design. You can skip the plots
+and more research type material but do your best to get through the text on the main components and
+design issues of the search engine.
+<!--l. 34--><p class="noindent" >We will also follow some of the design, implementation and testing methodology as discussed
+<!--l. 36--><p class="noindent" ><span 
+class="cmbx-10">Other reference</span>: <a 
+href="http://www.amazon.com/Practice-Programming-Addison-Wesley-Professional-Computing/dp/020161586X/ref=pd_bbs_sr_2?ie=UTF8&s=books&qid=1199226460&sr=1-2" >&#8220;The Practice of Programming&#8221; </a>(Addison-Wesley Professional Computing Series) by
+Brian W. Kernighan, Rob Pike.
+<h3 class="likesectionHead"><a 
+ id="x1-4000"></a>Goals</h3>
+                                                                                  
+                                                                                  
+<!--l. 40--><p class="noindent" >We plan to learn the following from today&#8217;s lecture:
+     <ul class="itemize1">
+     <li class="itemize">How does search engine like Google search the web?
+     </li>
+     <li class="itemize">Things we need to know about: URLs, webpages, HTML, HTTP, and keywords
+     </li>
+     <li class="itemize">&#8220;Talking&#8221; to the departmental webserver using client server.
+     </li>
+     <li class="itemize">A general search engine architecture</li></ul>
+<!--l. 49--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-5000"></a>Searching the Web</h3>
+<!--l. 51--><p class="noindent" >How do you get information from the Web? I&#8217;m interested in fly-fishing and Vermont. I type the
+<span 
+class="cmbx-10">keywords </span><span 
+class="cmti-10">fly-fishing Vermont</span>. Searching the web is something we do every day with easy but it&#8217;s
+technically challenging mostly because of the scale of information (i.e., webpages) on the web. So how do I
+get information about fly-fishing in Vermont. I query a search engine (or Google) which is an information
+retrieval systems and it sends me back URLs to sites that have keywords fly-fishing and Vermont
+embedded in them - and the URL are ranked.
+<!--l. 53--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                  
+                                                                                  
+<a 
+ id="x1-50011"></a>
+                                                                                  
+                                                                                  
+<!--l. 54--><p class="noindent" ><img 
+src="searchingtheweb0x.png" alt="PIC" class="graphics" width="578.15999pt" height="295.20578pt" ><!--tex4ht:graphics  
+name="searchingtheweb0x.png" src="flyfishing.eps"  
+-->
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1: </span><span  
+class="content">Keywords fly fishing Vermont - web searched in 0.19 seconds! 119,000 matches found</span></div><!--tex4ht:label?: x1-50011 -->
+                                                                                  
+                                                                                  
+<!--l. 57--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 59--><p class="noindent" >Google responds to my query in 0.19 seconds with 119,000 matches found (interestingly when I did the
+same search two days ago I got the following response: 0.15 seconds! 117,000 - what could have changed,
+thoughts?). It gives me a set of ranked pages. Such a simple interactions raised a number of questions.
+First, the web is huge so how does Google search an estimated 15 to 30 billion web pages in 150 msecs.
+Surely, Google can&#8217;t do that in such a short period. The answer is that it doesn&#8217;t. But it collects a snap
+shot of some percentage of the estimated set of webpages cached those on at server farms and it computes
+and indexes those <span 
+class="cmbx-10">webpages </span>against the <span 
+class="cmbx-10">keywords </span>it finds in those pages such as fishing, fly,
+Vermont.
+<!--l. 61--><p class="noindent" >How does Google rank the pages it gives in response to a query? It uses a page rank scheme (which has
+probably evolved since its initial publication). Because webpages are updated continuously when does
+Google take the next snap shot of the web? That depends on multiple things. Maybe the webpages for the
+New York Times are &#8220;crawled&#8221; more frequently that cs50 webpages? Yes, of course they are.
+They are more popular and that policy feeds into when and how often Google will crawl a
+website. But how much storage does it take Google to crawl the web. It is estimated that
+Google&#8217;s search crawler uses <a 
+href="http://googlesystem.blogspot.com/2006/09/how-much-data-does-google-store.html" >850 TB of information (1 TB = 1024 GB)</a>of information (1 TB =
+1024 GB). These figures are from 2009 and probably very out of date already, as the web
+expands.
+<h3 class="likesectionHead"><a 
+ id="x1-6000"></a>URLs, HTML, and keywords</h3>
+<!--l. 65--><p class="noindent" ><span 
+class="cmbx-10">HTML</span>. From the description of the problem above we note a few things. First, search engines need to
+collect pages from the web (this is called crawling the web) and store them on servers. Webpages are
+typically written using the <span 
+class="cmbx-10">HyperText Markup Language (HTML)</span>. For a quick tutorial on HTML
+check out this <a 
+href="http://www.w3schools.com/html/html_intro.asp" >Introduction to HTML</a>
+<!--l. 67--><p class="noindent" >The basics are that HTML file is a text file containing markup tags that tell your web browser how to
+display the page. An HTML file must have an htm or html file extension. HTML pages can be
+created by tools or simply from the command line editor. Note, you will not need to write
+any HTML for this project but you will need to understand a little about what a HTML
+webpage looks like. We are interested in extracting URL from HTML webpages and words. So it
+you now go to you web browser while looking at this page and view course (I use Safari so it
+depends on your browser where the &#8220;view source&#8221; pop down is - take a look around you will find
+it).
+<!--l. 69--><p class="noindent" ><span 
+class="cmbx-10">Here is a snippet of the HTML </span>of this page; that is, <br 
+class="newline" />
+<!--l. 71--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">http://www.cs.dartmouth.edu/~campbell/cs50/tinysearch.html</span></span></span><br 
+class="newline" />
+<!--l. 73--><p class="noindent" >Try and look at the HTML source in one tab (window) and the rendered webpage in another.<br 
+class="newline" />
+<!--l. 75--><p class="noindent" >You start to pick up the similarities.<br 
+class="newline" />
+<div 
+class="colorbox" id="colorbox1"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">&#x003C;!DOCTYPE</span><span 
+class="cmtt-10">&#x00A0;html</span><span 
+class="cmtt-10">&#x00A0;PUBLIC</span><span 
+class="cmtt-10">&#x00A0;"-//W3C//DTD</span><span 
+class="cmtt-10">&#x00A0;HTML</span><span 
+class="cmtt-10">&#x00A0;4.01</span><span 
+class="cmtt-10">&#x00A0;Transitional//EN"</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;"http://www.w3.org/TR/html4/loose.dtd"&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;html</span><span 
+class="cmtt-10">&#x00A0;&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;head&#x003E;&#x003C;title&#x003E;&#x003C;/title&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;meta</span><span 
+class="cmtt-10">&#x00A0;http-equiv="Content-Type"</span><span 
+class="cmtt-10">&#x00A0;content="text/html;</span><span 
+class="cmtt-10">&#x00A0;charset=iso-8859-1"&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;meta</span><span 
+class="cmtt-10">&#x00A0;name="generator"</span><span 
+class="cmtt-10">&#x00A0;content="TeX4ht</span><span 
+class="cmtt-10">&#x00A0;(http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;meta</span><span 
+class="cmtt-10">&#x00A0;name="originator"</span><span 
+class="cmtt-10">&#x00A0;content="TeX4ht</span><span 
+class="cmtt-10">&#x00A0;(http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;!--</span><span 
+class="cmtt-10">&#x00A0;html</span><span 
+class="cmtt-10">&#x00A0;--&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;meta</span><span 
+class="cmtt-10">&#x00A0;name="src"</span><span 
+class="cmtt-10">&#x00A0;content="tinysearch.tex"&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;meta</span><span 
+class="cmtt-10">&#x00A0;name="date"</span><span 
+class="cmtt-10">&#x00A0;content="2008-01-27</span><span 
+class="cmtt-10">&#x00A0;21:18:00"&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;link</span><span 
+class="cmtt-10">&#x00A0;rel="stylesheet"</span><span 
+class="cmtt-10">&#x00A0;type="text/css"</span><span 
+class="cmtt-10">&#x00A0;href="tinysearch.css"&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;/head&#x003E;&#x003C;body</span><br /><span 
+class="cmtt-10">&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;h1</span><span 
+class="cmtt-10">&#x00A0;class="likepartHead"&#x003E;&#x003C;a</span><br /><span 
+class="cmtt-10">&#x00A0;id="x1-1000"&#x003E;&#x003C;/a&#x003E;CS</span><span 
+class="cmtt-10">&#x00A0;23</span><span 
+class="cmtt-10">&#x00A0;Software</span><span 
+class="cmtt-10">&#x00A0;Design</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;Implementation&#x003C;/h1&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;h1</span><span 
+class="cmtt-10">&#x00A0;class="likepartHead"&#x003E;&#x003C;a</span><br /><span 
+class="cmtt-10">&#x00A0;id="x1-2000"&#x003E;&#x003C;/a&#x003E;Lecture</span><span 
+class="cmtt-10">&#x00A0;10&#x003C;/h1&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;h1</span><span 
+class="cmtt-10">&#x00A0;class="likepartHead"&#x003E;&#x003C;a</span><br /><span 
+class="cmtt-10">&#x00A0;id="x1-3000"&#x003E;&#x003C;/a&#x003E;Design</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;Implementation</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;TinySearch</span><span 
+class="cmtt-10">&#x00A0;(Tiny</span><span 
+class="cmtt-10">&#x00A0;Search</span><span 
+class="cmtt-10">&#x00A0;Engine)&#x003C;/h1&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;!--l.</span><span 
+class="cmtt-10">&#x00A0;21--&#x003E;&#x003C;p</span><span 
+class="cmtt-10">&#x00A0;class="noindent"</span><span 
+class="cmtt-10">&#x00A0;&#x003E;In</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;next</span><span 
+class="cmtt-10">&#x00A0;series</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;lectures</span><span 
+class="cmtt-10">&#x00A0;we</span><span 
+class="cmtt-10">&#x00A0;will</span><br /><span 
+class="cmtt-10">design,</span><span 
+class="cmtt-10">&#x00A0;implement</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;test</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;simple</span><span 
+class="cmtt-10">&#x00A0;yet</span><span 
+class="cmtt-10">&#x00A0;powerful</span><span 
+class="cmtt-10">&#x00A0;command-line</span><br /><span 
+class="cmtt-10">search</span><span 
+class="cmtt-10">&#x00A0;engine</span><span 
+class="cmtt-10">&#x00A0;called</span><span 
+class="cmtt-10">&#x00A0;&#x003C;span</span><br /><span 
+class="cmtt-10">class="cmbx-10"&#x003E;TinySearch</span><span 
+class="cmtt-10">&#x00A0;&#x003C;/span&#x003E;because</span><span 
+class="cmtt-10">&#x00A0;it</span><span 
+class="cmtt-10">&#x00A0;can</span><span 
+class="cmtt-10">&#x00A0;be</span><span 
+class="cmtt-10">&#x00A0;writtem</span><span 
+class="cmtt-10">&#x00A0;in</span><span 
+class="cmtt-10">&#x00A0;&#x003C;span</span><br /><span 
+class="cmtt-10">class="obeylines-h"&#x003E;&#x003C;span</span><span 
+class="cmtt-10">&#x00A0;class="verb"&#x003E;&#x003C;span</span><br /><span 
+class="cmtt-10">class="cmtt-10"&#x003E;&amp;#x003C;&#x003C;/span&#x003E;&#x003C;/span&#x003E;&#x003C;/span&#x003E;</span><span 
+class="cmtt-10">&#x00A0;2000</span><span 
+class="cmtt-10">&#x00A0;lines</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;C.</span><span 
+class="cmtt-10">&#x00A0;We</span><span 
+class="cmtt-10">&#x00A0;will</span><span 
+class="cmtt-10">&#x00A0;discuss</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;top</span><br /><span 
+class="cmtt-10">leve</span><span 
+class="cmtt-10">&#x00A0;design</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;TinySearch</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;its</span><span 
+class="cmtt-10">&#x00A0;decomposition</span><span 
+class="cmtt-10">&#x00A0;into</span><span 
+class="cmtt-10">&#x00A0;three</span><span 
+class="cmtt-10">&#x00A0;major</span><span 
+class="cmtt-10">&#x00A0;components;</span><br /><span 
+class="cmtt-10">that</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;crawler,</span><span 
+class="cmtt-10">&#x00A0;indexer,</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;query</span><span 
+class="cmtt-10">&#x00A0;engine</span><span 
+class="cmtt-10">&#x00A0;modules.</span><span 
+class="cmtt-10">&#x00A0;We</span><span 
+class="cmtt-10">&#x00A0;will</span><span 
+class="cmtt-10">&#x00A0;discuss</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;major</span><span 
+class="cmtt-10">&#x00A0;data</span><br /><span 
+class="cmtt-10">structures</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;algorithms</span><span 
+class="cmtt-10">&#x00A0;needed</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;design</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;TinySearch.</span><span 
+class="cmtt-10">&#x00A0;In</span><span 
+class="cmtt-10">&#x00A0;this</span><span 
+class="cmtt-10">&#x00A0;lecture,</span><span 
+class="cmtt-10">&#x00A0;we</span><span 
+class="cmtt-10">&#x00A0;will</span><br /><span 
+class="cmtt-10">discuss</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;overal</span><span 
+class="cmtt-10">&#x00A0;architectural</span><span 
+class="cmtt-10">&#x00A0;design</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;then</span><span 
+class="cmtt-10">&#x00A0;focus</span><span 
+class="cmtt-10">&#x00A0;on</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;design</span><span 
+class="cmtt-10">&#x00A0;of</span><br /><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;crawler.</span><br /><br /><span 
+class="cmtt-10">====</span><br /><span 
+class="cmtt-10">SNIP</span><br /><span 
+class="cmtt-10">====</span><br /><br /><span 
+class="cmtt-10">We</span><span 
+class="cmtt-10">&#x00A0;will</span><span 
+class="cmtt-10">&#x00A0;also</span><span 
+class="cmtt-10">&#x00A0;follow</span><span 
+class="cmtt-10">&#x00A0;some</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;design,</span><span 
+class="cmtt-10">&#x00A0;implementation</span><br /><span 
+class="cmtt-10">and</span><span 
+class="cmtt-10">&#x00A0;testing</span><span 
+class="cmtt-10">&#x00A0;methodology</span><span 
+class="cmtt-10">&#x00A0;as</span><span 
+class="cmtt-10">&#x00A0;discussed</span><span 
+class="cmtt-10">&#x00A0;&#x003C;!--l.</span><span 
+class="cmtt-10">&#x00A0;36--&#x003E;&#x003C;p</span><span 
+class="cmtt-10">&#x00A0;class="noindent"</span><span 
+class="cmtt-10">&#x00A0;&#x003E;&#x003C;span</span><br /><span 
+class="cmtt-10">class="cmbx-10"&#x003E;Other</span><span 
+class="cmtt-10">&#x00A0;reference&#x003C;/span&#x003E;:</span><span 
+class="cmtt-10">&#x00A0;&#x003C;a</span><br /><span 
+class="cmtt-10">href="http://www.amazon.com/Practice-Programming-Addison-Wesley-Professional-</span><br /><span 
+class="cmtt-10">Computing/dp/020161586X/ref=pd_bbs_sr_2?ie=UTF8&amp;s=books&amp;qid=1199226460&amp;sr=1-2"</span><span 
+class="cmtt-10">&#x00A0;&#x003E;&amp;#8220;</span><br /><span 
+class="cmtt-10">The</span><span 
+class="cmtt-10">&#x00A0;Practice</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;Programming&amp;#8221;</span><span 
+class="cmtt-10">&#x00A0;&#x003C;/a&#x003E;(Addison-Wesley</span><span 
+class="cmtt-10">&#x00A0;Professional</span><span 
+class="cmtt-10">&#x00A0;Computing</span><span 
+class="cmtt-10">&#x00A0;Series)</span><span 
+class="cmtt-10">&#x00A0;by</span><br /><span 
+class="cmtt-10">Brian</span><span 
+class="cmtt-10">&#x00A0;W.</span><span 
+class="cmtt-10">&#x00A0;Kernighan,</span><span 
+class="cmtt-10">&#x00A0;Rob</span><span 
+class="cmtt-10">&#x00A0;Pike.</span><br /><span 
+class="cmtt-10">&#x003C;h3</span><span 
+class="cmtt-10">&#x00A0;class="likesectionHead"&#x003E;&#x003C;a</span><br /><span 
+class="cmtt-10">&#x00A0;id="x1-5000"&#x003E;&#x003C;/a&#x003E;Problem</span><span 
+class="cmtt-10">&#x00A0;Definition&#x003C;/h3&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;!--l.</span><span 
+class="cmtt-10">&#x00A0;53--&#x003E;&#x003C;p</span><span 
+class="cmtt-10">&#x00A0;class="noindent"</span><span 
+class="cmtt-10">&#x00A0;&#x003E;How</span><span 
+class="cmtt-10">&#x00A0;do</span><span 
+class="cmtt-10">&#x00A0;you</span><span 
+class="cmtt-10">&#x00A0;get</span><span 
+class="cmtt-10">&#x00A0;information</span><span 
+class="cmtt-10">&#x00A0;from</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;Web?</span><span 
+class="cmtt-10">&#x00A0;I&amp;#8217;m</span><br /><span 
+class="cmtt-10">interested</span><span 
+class="cmtt-10">&#x00A0;in</span><span 
+class="cmtt-10">&#x00A0;fly-fishing</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;Vermont.</span><span 
+class="cmtt-10">&#x00A0;I</span><span 
+class="cmtt-10">&#x00A0;type</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;keywords</span><br /><span 
+class="cmtt-10">&#x003C;span</span><br /><span 
+class="cmtt-10">class="cmti-10"&#x003E;fly-fishing</span><span 
+class="cmtt-10">&#x00A0;Vermont&#x003C;/span&#x003E;.</span><span 
+class="cmtt-10">&#x00A0;Searching</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;web</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;something</span><span 
+class="cmtt-10">&#x00A0;we</span><br /><span 
+class="cmtt-10">do</span><span 
+class="cmtt-10">&#x00A0;every</span><span 
+class="cmtt-10">&#x00A0;day</span><span 
+class="cmtt-10">&#x00A0;with</span><span 
+class="cmtt-10">&#x00A0;easy</span><span 
+class="cmtt-10">&#x00A0;but</span><span 
+class="cmtt-10">&#x00A0;it&amp;#8217;s</span><span 
+class="cmtt-10">&#x00A0;technically</span><span 
+class="cmtt-10">&#x00A0;challenging</span><span 
+class="cmtt-10">&#x00A0;mostly</span><span 
+class="cmtt-10">&#x00A0;because</span><span 
+class="cmtt-10">&#x00A0;of</span><br /><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;scale</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;information</span><span 
+class="cmtt-10">&#x00A0;(i.e.,</span><span 
+class="cmtt-10">&#x00A0;webpages)</span><span 
+class="cmtt-10">&#x00A0;on</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;web.</span><span 
+class="cmtt-10">&#x00A0;So</span><span 
+class="cmtt-10">&#x00A0;how</span><span 
+class="cmtt-10">&#x00A0;do</span><span 
+class="cmtt-10">&#x00A0;I</span><span 
+class="cmtt-10">&#x00A0;get</span><br /><span 
+class="cmtt-10">information</span><span 
+class="cmtt-10">&#x00A0;about</span><span 
+class="cmtt-10">&#x00A0;fly-fishing</span><span 
+class="cmtt-10">&#x00A0;in</span><span 
+class="cmtt-10">&#x00A0;Vermont.</span><span 
+class="cmtt-10">&#x00A0;I</span><span 
+class="cmtt-10">&#x00A0;query</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;search</span><span 
+class="cmtt-10">&#x00A0;engine</span><span 
+class="cmtt-10">&#x00A0;(or</span><span 
+class="cmtt-10">&#x00A0;Google)</span><br /><span 
+class="cmtt-10">which</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;an</span><span 
+class="cmtt-10">&#x00A0;information</span><span 
+class="cmtt-10">&#x00A0;retrieval</span><span 
+class="cmtt-10">&#x00A0;systems</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;it</span><span 
+class="cmtt-10">&#x00A0;sends</span><span 
+class="cmtt-10">&#x00A0;me</span><span 
+class="cmtt-10">&#x00A0;back</span><span 
+class="cmtt-10">&#x00A0;URLs</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;sites</span><br /><span 
+class="cmtt-10">that</span><span 
+class="cmtt-10">&#x00A0;have</span><span 
+class="cmtt-10">&#x00A0;keywords</span><span 
+class="cmtt-10">&#x00A0;fly-fishing</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;Vermont</span><span 
+class="cmtt-10">&#x00A0;embedded</span><span 
+class="cmtt-10">&#x00A0;in</span><span 
+class="cmtt-10">&#x00A0;them</span><span 
+class="cmtt-10">&#x00A0;-</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;URL</span><span 
+class="cmtt-10">&#x00A0;are</span><span 
+class="cmtt-10">&#x00A0;ranked.</span><br /><span 
+class="cmtt-10">&#x003C;!--l.</span><span 
+class="cmtt-10">&#x00A0;55--&#x003E;&#x003C;p</span><span 
+class="cmtt-10">&#x00A0;class="noindent"</span><span 
+class="cmtt-10">&#x00A0;&#x003E;&#x003C;hr</span><span 
+class="cmtt-10">&#x00A0;class="figure"&#x003E;&#x003C;div</span><span 
+class="cmtt-10">&#x00A0;class="figure"</span><br /><span 
+class="cmtt-10">&#x003E;&#x003C;table</span><span 
+class="cmtt-10">&#x00A0;class="figure"&#x003E;&#x003C;tr</span><span 
+class="cmtt-10">&#x00A0;class="figure"&#x003E;&#x003C;td</span><span 
+class="cmtt-10">&#x00A0;class="figure"</span><br /><br /><span 
+class="cmtt-10">====</span><br /><span 
+class="cmtt-10">SNIP</span><br /><span 
+class="cmtt-10">====</span><br /><br /></div></div>
+<!--l. 146--><p class="noindent" ><span 
+class="cmbx-10">Tags, URLs and keywords</span>. HTML uses tags to mark-up HTML elements. There are a number of
+different tags in use in HTML some more common that others. In the HTML snippet above there are a
+number of <span 
+class="cmti-10">tags</span>; for example,
+<!--l. 148--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">&#x003C;html</span><span 
+class="cmtt-10">&#x00A0;&#x003E;,</span><span 
+class="cmtt-10">&#x00A0;&#x003C;head&#x003E;,</span><span 
+class="cmtt-10">&#x00A0;&#x003C;title&#x003E;&#x003C;/title&#x003E;,</span><span 
+class="cmtt-10">&#x00A0;&#x003C;/head&#x003E;&#x003C;body,</span><span 
+class="cmtt-10">&#x00A0;&#x003C;h1</span><span 
+class="cmtt-10">&#x00A0;class="likepartHead"}</span></span></span><br 
+class="newline" />
+<!--l. 150--><p class="noindent" >The tutorial goes into tags in details.
+<!--l. 152--><p class="noindent" >We are interested collecting URLs from HTML files because we need to go and collect those pages. The
+<span 
+class="cmti-10">URL tag </span>important to us; that is,
+<!--l. 154--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">&#x003C;a</span><span 
+class="cmtt-10">&#x00A0;href="http://www.google.com/corporate/history.html"</span><span 
+class="cmtt-10">&#x00A0;&#x003E;</span></span></span>
+<!--l. 156--><p class="noindent" >The <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">&#x003C;a&#x003E;</span></span></span> tag defines an anchor. An anchor is used to create a link to another document by using the
+href or to create a bookmark inside a document using the name or id attribute. We will only
+consider href URLs. Tags usually come in pairs like <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">&#x003C;a&#x003E;</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;&#x003C;/a&#x003E;</span></span></span> The first tag in a pair is
+the start tag and the second tag is the end tag and the text the tags represents the element
+content.
+<!--l. 158--><p class="noindent" >When looking at a HTML file we are interested in the keywords only. So we want to parse the HTML file
+for words; for example, <span 
+class="cmti-10">keywords </span>such as,
+<!--l. 160--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">fly</span><span 
+class="cmtt-10">&#x00A0;fishing</span><span 
+class="cmtt-10">&#x00A0;Vermont</span></span></span>.
+<!--l. 162--><p class="noindent" >Can you find these keywords in the snippet above (they are near the end). Notice that keywords
+are not embedded in tags. In fact, for TinySearch, we define keywords as being outside of
+tags.
+<!--l. 164--><p class="noindent" >So when TinySearch downloads a webpage of HTML source in needs to parse the page and remove URLs
+(because it needs to go crawl them too) and KEYWORDS that users might be interested in running
+queries against (such as fly fishing Vermont).
+<!--l. 166--><p class="noindent" >Don&#8217;t worry that you don&#8217;t know all the HTML syntax. We plan to provide you with a parser C
+function. Feel free not to use our parser and write your own if you like (and if you have time). If
+you are interested more information of the curremnt specification check out the <a 
+href="http://www.w3.org/TR/REC-html40/about.html" >HTML 4
+specification</a>
+<!--l. 168--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-7000"></a>Talking to a webserver using HyperText Transfer Protocol (HTTP)</h3>
+<!--l. 170--><p class="noindent" ><span 
+class="cmbx-10">HTTP</span>.<a 
+href="http://www.w3.org/Protocols/" >HyperText Transfer Protocol (HTTP)</a>is used between your client browser and the
+server to transfer plain text HTML files. The URL defines what webpage is transfered, e.g,
+http://www.google.com/corporate/history.html HTTP itself is a very simple request/response
+protocol that get its reliable transport support from TCP (the famous Transmission Control
+                                                                                  
+                                                                                  
+Protocol).
+<!--l. 172--><p class="noindent" >Want to talk to a real-life webserver? They have to be publicly open for business so we can talk plain text
+HTTP to them. And, if we are nice and get all the syntax right they will provide us with whatever we
+ask for. The basic protocol is that the client sends a request called a <span 
+class="cmti-10">GET </span>and the server
+responds with a response. Webservers &#8220;listen&#8221; for requests on the well-know port 80. We will talk
+more about IP address and ports when we cover socket programming later in the course. But
+suffice to say that the Computer Science webserver is listening for requests (e.g., http GET
+commands) at IP address 129.170.213.101 (use host www.cs.dartmouth.edu) port 80. So let&#8217;s start a
+conversation with the server. We have to first connect to the server and open up a reliable
+stream to host www.cs.dartmouth.edu at port 80 . We will use telnet to do this. After that
+we will form a GET message and let the server know our hostname. Then see what it will
+do.
+<div 
+class="colorbox" id="colorbox2"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">[atc@dhcp-210-161</span><span 
+class="cmtt-10">&#x00A0;l10]</span><span 
+class="cmtt-10">&#x00A0;telnet</span><span 
+class="cmtt-10">&#x00A0;www.cs.dartmouth.edu</span><span 
+class="cmtt-10">&#x00A0;80</span><br /><span 
+class="cmtt-10">Trying</span><span 
+class="cmtt-10">&#x00A0;129.170.213.101...</span><br /><span 
+class="cmtt-10">Connected</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;katahdin.cs.dartmouth.edu.</span><br /><span 
+class="cmtt-10">Escape</span><span 
+class="cmtt-10">&#x00A0;character</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;&#8217;^]&#8217;.</span><br /><span 
+class="cmtt-10">GET</span><span 
+class="cmtt-10">&#x00A0;/~campbell/index.html</span><span 
+class="cmtt-10">&#x00A0;HTTP/1.1</span><br /><span 
+class="cmtt-10">host:</span><span 
+class="cmtt-10">&#x00A0;moose.cs.dartmouth.edu</span><br /><br /><br /></div></div>
+<!--l. 191--><p class="noindent" >Make sure you hit carriage return twice after typing in host: moose.cs.dartmouth.edu <br 
+class="newline" />newline
+<!--l. 193--><p class="noindent" >The nice webserver responds with the webpage http://www.cs.dartmouth.edu/&#x00A0;campbell/index.html<br 
+class="newline" />newline
+<div 
+class="colorbox" id="colorbox3"><div class="BVerbatimInput"><br /><span 
+class="cmtt-10">&#x003C;!DOCTYPE</span><span 
+class="cmtt-10">&#x00A0;HTML</span><span 
+class="cmtt-10">&#x00A0;PUBLIC</span><span 
+class="cmtt-10">&#x00A0;"-//W3C//DTD</span><span 
+class="cmtt-10">&#x00A0;HTML</span><span 
+class="cmtt-10">&#x00A0;4.01</span><span 
+class="cmtt-10">&#x00A0;Transitional//EN"&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;html&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;head&#x003E;</span><br /><br /><span 
+class="cmtt-10">====</span><br /><span 
+class="cmtt-10">SNIP</span><br /><span 
+class="cmtt-10">====</span><br /><br /><span 
+class="cmtt-10">&#x003C;font</span><span 
+class="cmtt-10">&#x00A0;face="Arial"&#x003E;Andrew</span><span 
+class="cmtt-10">&#x00A0;T.</span><span 
+class="cmtt-10">&#x00A0;Campbell</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;an</span><span 
+class="cmtt-10">&#x00A0;Associate</span><br /><span 
+class="cmtt-10">Professor</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;&#x003C;a</span><span 
+class="cmtt-10">&#x00A0;href="http://www.cs.dartmouth.edu/"&#x003E;Computer</span><span 
+class="cmtt-10">&#x00A0;Science&#x003C;/a&#x003E;&amp;nbsp;at</span><br /><span 
+class="cmtt-10">Dartmouth</span><span 
+class="cmtt-10">&#x00A0;College</span><span 
+class="cmtt-10">&#x00A0;where</span><span 
+class="cmtt-10">&#x00A0;he</span><span 
+class="cmtt-10">&#x00A0;leads</span><br /><span 
+class="cmtt-10">the&amp;nbsp;&#x003C;a</span><span 
+class="cmtt-10">&#x00A0;href="http://sensorlab.cs.dartmouth.edu"&#x003E;Sensor</span><span 
+class="cmtt-10">&#x00A0;Networks</span><span 
+class="cmtt-10">&#x00A0;Group</span><span 
+class="cmtt-10">&#x00A0;&#x003C;/a&#x003E;and</span><span 
+class="cmtt-10">&#x00A0;is</span><br /><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">&#x00A0;member</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;&#x003C;a</span><span 
+class="cmtt-10">&#x00A0;href="http://www.ists.dartmouth.edu/"&#x003E;Institute</span><br /><span 
+class="cmtt-10">for</span><span 
+class="cmtt-10">&#x00A0;Security</span><span 
+class="cmtt-10">&#x00A0;Technology</span><span 
+class="cmtt-10">&#x00A0;Studies</span><span 
+class="cmtt-10">&#x00A0;(ISTS)&#x003C;/a&#x003E;.</span><span 
+class="cmtt-10">&#x00A0;Prior</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;joining</span><span 
+class="cmtt-10">&#x00A0;Dartmouth</span><span 
+class="cmtt-10">&#x00A0;in</span><span 
+class="cmtt-10">&#x00A0;2005</span><span 
+class="cmtt-10">&#x00A0;Andrew</span><span 
+class="cmtt-10">&#x00A0;was</span><br /><span 
+class="cmtt-10">an</span><span 
+class="cmtt-10">&#x00A0;Associate</span><span 
+class="cmtt-10">&#x00A0;Professor</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;Electrical</span><span 
+class="cmtt-10">&#x00A0;Engineering</span><span 
+class="cmtt-10">&#x00A0;at</span><span 
+class="cmtt-10">&#x00A0;Columbia</span><span 
+class="cmtt-10">&#x00A0;University</span><br /><span 
+class="cmtt-10">(1996-2005)</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;member</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;COMET</span><span 
+class="cmtt-10">&#x00A0;Group.</span><span 
+class="cmtt-10">&#x00A0;His</span><br /><span 
+class="cmtt-10">current</span><span 
+class="cmtt-10">&#x00A0;research&amp;nbsp;focusses</span><span 
+class="cmtt-10">&#x00A0;on</span><span 
+class="cmtt-10">&#x00A0;people-centric</span><span 
+class="cmtt-10">&#x00A0;sensing</span><span 
+class="cmtt-10">&#x00A0;&#x003C;/font&#x003E;&#x003C;span</span><span 
+class="cmtt-10">&#x00A0;style="font-family:</span><br /><span 
+class="cmtt-10">Arial;"&#x003E;where</span><span 
+class="cmtt-10">&#x00A0;he</span><span 
+class="cmtt-10">&#x00A0;leads</span><span 
+class="cmtt-10">&#x00A0;the&amp;nbsp;&#x003C;/span&#x003E;&#x003C;font</span><span 
+class="cmtt-10">&#x00A0;face="Arial"&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;a</span><span 
+class="cmtt-10">&#x00A0;href="http://metrosense.cs.dartmouth.edu/"&#x003E;MetroSense&#x003C;/a&#x003E;&#x003C;/font&#x003E;</span><span 
+class="cmtt-10">&#x00A0;project.</span><br /><span 
+class="cmtt-10">&#x003C;/span&#x003E;&#x003C;span</span><span 
+class="cmtt-10">&#x00A0;style="font-family:</span><span 
+class="cmtt-10">&#x00A0;Arial;"&#x003E;&#x003C;br&#x003E;</span><br /><br /><span 
+class="cmtt-10">====</span><br /><span 
+class="cmtt-10">SNIP</span><br /><span 
+class="cmtt-10">====</span><br /><br /><span 
+class="cmtt-10">&#x003C;h3&#x003E;&#x003C;font</span><span 
+class="cmtt-10">&#x00A0;face="Arial"&#x003E;&#x003C;b&#x003E;Current</span><span 
+class="cmtt-10">&#x00A0;Research</span><span 
+class="cmtt-10">&#x00A0;Projects&#x003C;/b&#x003E;&#x003C;/font&#x003E;&#x003C;/h3&#x003E;</span><br /><br /><br /><span 
+class="cmtt-10">&#x003C;font</span><span 
+class="cmtt-10">&#x00A0;face="Arial"&#x003E;&#x003C;a</span><span 
+class="cmtt-10">&#x00A0;href="http://metrosense.cs.dartmouth.edu"&#x003E;MetroSense</span><span 
+class="cmtt-10">&#x00A0;&#x003C;/a&#x003E;</span><br /><span 
+class="cmtt-10">on</span><span 
+class="cmtt-10">&#x00A0;people-centric</span><span 
+class="cmtt-10">&#x00A0;sensing</span><span 
+class="cmtt-10">&#x00A0;funded</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;ISTS,</span><span 
+class="cmtt-10">&#x00A0;Intel</span><span 
+class="cmtt-10">&#x00A0;Corp,</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;Nokia</span><span 
+class="cmtt-10">&#x00A0;&#x003C;br&#x003E;</span><br /><br /><span 
+class="cmtt-10">====</span><br /><span 
+class="cmtt-10">SNIP</span><br /><span 
+class="cmtt-10">====</span><br /><br /><span 
+class="cmtt-10">&#x003C;/body&#x003E;</span><br /><span 
+class="cmtt-10">&#x003C;/html&#x003E;</span><br /><span 
+class="cmtt-10">Connection</span><span 
+class="cmtt-10">&#x00A0;closed</span><span 
+class="cmtt-10">&#x00A0;by</span><span 
+class="cmtt-10">&#x00A0;foreign</span><span 
+class="cmtt-10">&#x00A0;host.</span><br /><br /></div></div>
+<!--l. 244--><p class="noindent" >From the snippet of HTML above you can clearly parse other URL embedded in the webpage
+http://www.cs.dartmouth.edu/&#x00A0;campbell/index.html The following URLs are embedded:
+<!--l. 247--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">href="http://www.cs.dartmouth.edu/"</span></span></span> <br 
+class="newline" /><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">href="http://sensorlab.cs.dartmouth.edu"</span></span></span> <br 
+class="newline" /><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">href="http://www.ists.dartmouth.edu"</span></span></span> <br 
+class="newline" /><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">href="http://metrosense.cs.dartmouth.edu/"</span></span></span> <br 
+class="newline" /><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10">href="http://metrosense.cs.dartmouth.edu/"</span></span></span> <br 
+class="newline" />
+<!--l. 253--><p class="noindent" >So this little snippet of HTML tells us that <span 
+class="cmbx-10">duplicate links exist</span>. If wanted to imagine that the snippet
+represented the complete HTML for the webpage then we could parse that there are 5 embedded URLs in
+http://www.cs.dartmouth.edu/&#x00A0;campbell/index.html and that one of them is a duplicate. <span 
+class="cmbx-10">TinySearch</span>
+<span 
+class="cmbx-10">will have to be able to detect and ignore duplicates</span>. More on this when we discuss the design
+of the crawler. We will use <span 
+class="cmbx-10">hash function and hash table </span>to make sure we only crawler
+unique webpages and we will not have to implement a sort function to do this. This is really
+cool.
+<!--l. 255--><p class="noindent" >When we design the crawler it will rely on <span 
+class="cmbx-10">wget </span>to relieve webpages. We have already written a bash shell
+script that uses wget in Lab2. We will call wget using the &#8220;system()&#8221; sys call that we used in Lab3. Recall
+that you pas wget a URL.
+<!--l. 257--><p class="noindent" >Try using wget to download my hompage and store it in a file 1.html (like the crawler does) and then
+count the number of URLs on my homepage. There are quite a lot of embedded URLs in my
+homepage.
+<div 
+class="colorbox" id="colorbox4"><div class="BVerbatimInput"><br /><br /><span 
+class="cmtt-10">NAME</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;wget</span><span 
+class="cmtt-10">&#x00A0;-</span><span 
+class="cmtt-10">&#x00A0;GNU</span><span 
+class="cmtt-10">&#x00A0;Wget</span><span 
+class="cmtt-10">&#x00A0;Manual</span><br /><br /><span 
+class="cmtt-10">SYNOPSIS</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;wget</span><span 
+class="cmtt-10">&#x00A0;[option]...</span><span 
+class="cmtt-10">&#x00A0;[URL]...</span><br /><br /><span 
+class="cmtt-10">DESCRIPTION</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;GNU</span><span 
+class="cmtt-10">&#x00A0;Wget</span><span 
+class="cmtt-10">&#x00A0;is</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;free</span><span 
+class="cmtt-10">&#x00A0;utility</span><span 
+class="cmtt-10">&#x00A0;for</span><span 
+class="cmtt-10">&#x00A0;non-interactive</span><span 
+class="cmtt-10">&#x00A0;download</span><span 
+class="cmtt-10">&#x00A0;of</span><span 
+class="cmtt-10">&#x00A0;files</span><span 
+class="cmtt-10">&#x00A0;from</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;the</span><span 
+class="cmtt-10">&#x00A0;Web.</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;It</span><span 
+class="cmtt-10">&#x00A0;supports</span><span 
+class="cmtt-10">&#x00A0;HTTP,</span><span 
+class="cmtt-10">&#x00A0;HTTPS,</span><span 
+class="cmtt-10">&#x00A0;and</span><span 
+class="cmtt-10">&#x00A0;FTP</span><span 
+class="cmtt-10">&#x00A0;protocols,</span><span 
+class="cmtt-10">&#x00A0;as</span><span 
+class="cmtt-10">&#x00A0;well</span><span 
+class="cmtt-10">&#x00A0;as</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;retrieval</span><span 
+class="cmtt-10">&#x00A0;through</span><span 
+class="cmtt-10">&#x00A0;HTTP</span><span 
+class="cmtt-10">&#x00A0;proxies.</span><br /><br /><span 
+class="cmtt-10">Try</span><span 
+class="cmtt-10">&#x00A0;getting</span><span 
+class="cmtt-10">&#x00A0;a</span><span 
+class="cmtt-10">&#x00A0;file</span><span 
+class="cmtt-10">&#x00A0;using</span><span 
+class="cmtt-10">&#x00A0;wget</span><span 
+class="cmtt-10">&#x00A0;like</span><span 
+class="cmtt-10">&#x00A0;you</span><span 
+class="cmtt-10">&#x00A0;did</span><span 
+class="cmtt-10">&#x00A0;in</span><span 
+class="cmtt-10">&#x00A0;Lab3.</span><span 
+class="cmtt-10">&#x00A0;For</span><span 
+class="cmtt-10">&#x00A0;example,</span><span 
+class="cmtt-10">&#x00A0;get</span><span 
+class="cmtt-10">&#x00A0;my</span><span 
+class="cmtt-10">&#x00A0;hompage:</span><br /><br /><span 
+class="cmtt-10">$</span><span 
+class="cmtt-10">&#x00A0;wget</span><span 
+class="cmtt-10">&#x00A0;-O</span><span 
+class="cmtt-10">&#x00A0;1.html</span><span 
+class="cmtt-10">&#x00A0;www.cs.dartmouth.edu/~campbell</span><br /><span 
+class="cmtt-10">--13:27:19--</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;http://www.cs.dartmouth.edu/%7Ecampbell</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;=&#x003E;</span><span 
+class="cmtt-10">&#x00A0;&#8216;1.html&#8217;</span><br /><span 
+class="cmtt-10">Resolving</span><span 
+class="cmtt-10">&#x00A0;www.cs.dartmouth.edu...</span><span 
+class="cmtt-10">&#x00A0;done.</span><br /><span 
+class="cmtt-10">Connecting</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;www.cs.dartmouth.edu[129.170.213.101]:80...</span><span 
+class="cmtt-10">&#x00A0;connected.</span><br /><span 
+class="cmtt-10">HTTP</span><span 
+class="cmtt-10">&#x00A0;request</span><span 
+class="cmtt-10">&#x00A0;sent,</span><span 
+class="cmtt-10">&#x00A0;awaiting</span><span 
+class="cmtt-10">&#x00A0;response...</span><span 
+class="cmtt-10">&#x00A0;301</span><span 
+class="cmtt-10">&#x00A0;Moved</span><span 
+class="cmtt-10">&#x00A0;Permanently</span><br /><span 
+class="cmtt-10">Location:</span><span 
+class="cmtt-10">&#x00A0;http://www.cs.dartmouth.edu/~campbell/</span><span 
+class="cmtt-10">&#x00A0;[following]</span><br /><span 
+class="cmtt-10">--13:27:19--</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;http://www.cs.dartmouth.edu/%7Ecampbell/</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;=&#x003E;</span><span 
+class="cmtt-10">&#x00A0;&#8216;1.html&#8217;</span><br /><span 
+class="cmtt-10">Connecting</span><span 
+class="cmtt-10">&#x00A0;to</span><span 
+class="cmtt-10">&#x00A0;www.cs.dartmouth.edu[129.170.213.101]:80...</span><span 
+class="cmtt-10">&#x00A0;connected.</span><br /><span 
+class="cmtt-10">HTTP</span><span 
+class="cmtt-10">&#x00A0;request</span><span 
+class="cmtt-10">&#x00A0;sent,</span><span 
+class="cmtt-10">&#x00A0;awaiting</span><span 
+class="cmtt-10">&#x00A0;response...</span><span 
+class="cmtt-10">&#x00A0;200</span><span 
+class="cmtt-10">&#x00A0;OK</span><br /><span 
+class="cmtt-10">Length:</span><span 
+class="cmtt-10">&#x00A0;36,035</span><span 
+class="cmtt-10">&#x00A0;[text/html]</span><br /><br /><span 
+class="cmtt-10">100%[=====================================================================================================================================================================&#x003E;]</span><span 
+class="cmtt-10">&#x00A0;36,035</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;488.76K/s</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;ETA</span><span 
+class="cmtt-10">&#x00A0;00:00</span><br /><br /><span 
+class="cmtt-10">13:27:19</span><span 
+class="cmtt-10">&#x00A0;(488.76</span><span 
+class="cmtt-10">&#x00A0;KB/s)</span><span 
+class="cmtt-10">&#x00A0;-</span><span 
+class="cmtt-10">&#x00A0;&#8216;1.html&#8217;</span><span 
+class="cmtt-10">&#x00A0;saved</span><span 
+class="cmtt-10">&#x00A0;[36035/36035]</span><br /><br /><span 
+class="cmtt-10">$</span><span 
+class="cmtt-10">&#x00A0;ls</span><span 
+class="cmtt-10">&#x00A0;-l</span><span 
+class="cmtt-10">&#x00A0;1.html</span><br /><span 
+class="cmtt-10">-rw-r--r--</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;1</span><span 
+class="cmtt-10">&#x00A0;atc</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;admin</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;36035</span><span 
+class="cmtt-10">&#x00A0;Jan</span><span 
+class="cmtt-10">&#x00A0;10</span><span 
+class="cmtt-10">&#x00A0;23:06</span><span 
+class="cmtt-10">&#x00A0;1.html</span><br /><span 
+class="cmtt-10">$</span><span 
+class="cmtt-10">&#x00A0;grep</span><span 
+class="cmtt-10">&#x00A0;&#x003C;</span><span 
+class="cmtt-10">&#x00A0;1.html</span><span 
+class="cmtt-10">&#x00A0;-i</span><span 
+class="cmtt-10">&#x00A0;href</span><span 
+class="cmtt-10">&#x00A0;|</span><span 
+class="cmtt-10">&#x00A0;wc</span><span 
+class="cmtt-10">&#x00A0;-l</span><br /><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;91</span><br /></div></div>
+                                                                                  
+                                                                                  
+<!--l. 303--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-8000"></a>General search engine architecture [Arvind, 2001]</h3>
+<!--l. 305--><p class="noindent" >Search engines such as Google are complex, sophisticated, distributed systems. Below we reproduce the
+general search engine architecture discussed in <a 
+href="http://www.cs.dartmouth.edu/~campbell/cs50/searchingtheweb.pdf" >&#8220;Searching the Web&#8221;</a>, Arvind Arasu, Junghoo Cho, Hector
+Garcia-Molina, Andreas Paepcke, Sriram Raghavan (Stanford University). ACM Transactions on Internet
+Technology (TOIT), Volume 1, Issue 1 (August 2001).
+<!--l. 307--><p class="noindent" >The main components include, parallel crawlers/ and crawler control (when and where to crawl), page
+repository, indexer, analysis, collection of data structures (index tables, structure, utility), and query
+engine and ranking module. Such a general architecture would take a significant amount of time to code.
+In this course, we implement stripped down versions of the main components - we call this TinySearch -
+shown in Figure 2.
+<!--l. 309--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                  
+                                                                                  
+<a 
+ id="x1-80012"></a>
+                                                                                  
+                                                                                  
+
+<!--l. 310--><p class="noindent" ><img 
+src="searchenginemodel.jpg" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2: </span><span  
+class="content">General search engine architecture [Arvind, 2001].</span></div><!--tex4ht:label?: x1-80012 -->
+                                                                                  
+                                                                                  
+<!--l. 313--><p class="noindent" ></div><hr class="endfigure">
+ 
+</body></html> 
+
+                                                                                  
+
+

@@ -74,6 +74,8 @@ int main(int argc, char** argv) {
     /* Normalize query */
     num_words = NormalizeQuery(cmdline, &query);
 
+    /* TODO - how to get queried words? Use union-find?
+    */
     WordNode wNodes[num_words]; /* Static list of WordNodes for each word searched */
     for (int i = 0; i < num_words; i++) {
       wNodes[i] = HashTableGet(index, query[i]);
