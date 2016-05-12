@@ -160,12 +160,13 @@ void eval(char* cmdline) {
 */
 Set* handleQuery(HashTable* ht, char** query, char** ops, int n){
   /* TODO */
-  Set* s;
+  Set* s, tmp;
 
   for (int i = 0; i < n; i++) {
     /* For each query term, make a set from
     the list of DNodes from the hashed value */
     WordNode* wNode = IndexGet(ht, query[i]);
+    tmp
   }
 }
 
