@@ -14,6 +14,7 @@ WordNode* initWNode(char* word, int docID);
 void IndexPrintWords(HashTable* ht);
 int IndexLoadWords(HashTable* ht, char** buf);
 void cleanIndex(HashTable* ht);
+WordNode* IndexGet(HashTable* ht, char* word);
 
 void IndexAddWNode(HashTable* ht, WordNode* wNode);
 

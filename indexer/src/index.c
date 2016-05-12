@@ -78,6 +78,24 @@ int IndexLookUp(HashTable* ht, char* word) {
   return HashTableLookUp(ht, word, HashString, cmpWNode);
 }
 
+/* 
+* IndexGet - Return pointer to WordNode corresponding to
+* word.
+* @ht: Hashtable to retrieve from
+* @word: Word we want to retrive
+*
+* Returns a pointer to a WordNode if found
+* Returns NULL if word not contained 
+*/
+WordNode* IndexGet(HashTable* ht, char* word) {
+  /* TODO - check casting is correct */
+  WordNode* tmp;
+
+  tmp = (WordNode*)HashTableGet(ht, word, HashString, cmpWNode);
+  if (tmp == NULL)
+    return NULL;
+  return tmp;
+}
 
 /*
 * IndexUpdate - Updates word frequency count on relevant doc
@@ -212,3 +230,4 @@ void cleanIndex(HashTable* ht) {
   }
   free(ht);
 }
+
