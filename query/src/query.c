@@ -30,8 +30,8 @@ static char prompt[] = "Query:> ";
 
 int checkCommandLine(char* filename, char* path);
 void eval(char* cmdline);
-int handleQuery(char* query, char** urls);
-int NormalizeQuery(char* query, char** str);
+Set* handleQuery(HashTable* ht, char** query, char** ops int n);
+int NormalizeQuery(char* query, char** str, char** ops);
 
 int main(int argc, char** argv) {
   /* TODO */
@@ -72,25 +72,35 @@ int main(int argc, char** argv) {
     index = readFile(filename);
 
     /* Normalize query */
-    num_words = NormalizeQuery(cmdline, &query);
+    char* ops;
+    num_words = NormalizeQuery(cmdline, &query, &ops);
 
     /* TODO - how to get queried words? Use union-find?
     */
-    WordNode wNodes[num_words]; /* Static list of WordNodes for each word searched */
-    for (int i = 0; i < num_words; i++) {
-      wNodes[i] = HashTableGet(index, query[i]);
-    }
+    //WordNode wNodes[num_words]; /* Static list of WordNodes for each word searched */
+    //WordNode* wNodes[num_words];
+    //Set* sets[num_words];
+    //for (int i = 0; i < num_words; i++) {
+      //wNodes[i] = IndexGet(index, query[i]);
+     // sets[i] = 
+    //}
 
+    Set* matches;
+    matches = HandleQuery(index, qury, ops, num_words);
 
     /* Parse user query */
     //num_words = HandleQuery(cmdline, &query);
 
 
     /* Pass input to ranking module to rank pages */
+    //char* results;
+    rank(wNodes, &results);
 
     /* Print pages in ranked order */
+    display(results);
 
     /* Clean up */
+    free(results);
     cleanIndex(index);
 
   }
@@ -141,31 +151,35 @@ void eval(char* cmdline) {
 }
 
 /*
-* handleQuery - parse search query and returns the number
-* of urls satisfying request
-* @cmdline: string to parse
-* @urls: C-style string to store URLS if match
+* handleQuery - iteratively create sets to match query
+* @ht: Hashtable to find words
+* @query: list of query terms
+* @n: Number of query search terms (not including logical ops)
 *
-* Returns the number of URLs satisying the requst
+* Returns a set containing all entries that match the seatch query
 */
-int handleQuery(char* query, char** urls) {
+Set* handleQuery(HashTable* ht, char** query, char** ops, int n){
   /* TODO */
-  char* tmp;
+  Set* s;
 
-  /* Normalize search query string */
-  NormalizeQuery(query, &tmp);
+  for (int i = 0; i < n; i++) {
+    /* For each query term, make a set from
+    the list of DNodes from the hashed value */
+    WordNode* wNode = IndexGet(ht, query[i]);
+  }
 }
 
 /*
 * NormalizeQuery - Normslizes a search query by treating SPACE
 * as an AND if missing and returns the number of words in
-* the search query
+* the search query. Also converts to all lowercase
 * @query; string to parse
 * @str: C-style string to hold new buffer
+* @ops: C-style string to store logicl operations parsed
 *
 * Returns number of words in query
 */
-int NormalizeQuery(char* query, char** str) {
+int NormalizeQuery(char* query, char** str, char** ops) {
   /* TODO */
   return -1
 

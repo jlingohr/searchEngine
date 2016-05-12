@@ -18,7 +18,9 @@ Ranking Module
 ------------
 Uses word frequency in an HTML page to rank results.
 
-Temporary scheme: Assume search terms dog & cat, ranking module must handle:
+Temporary scheme 1: Return ranked pages for all terms in search query
+
+Temporary scheme 2: Assume search terms dog & cat, ranking module must handle:
   1 - dog AND CAT (dog cat)
       score = MIN(Count(dog), Count(cat)) file to estimate how well file matches
   2 - dog OR cat
