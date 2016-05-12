@@ -132,3 +132,29 @@ int HashTableLookUp(HashTable* ht, element_t key, int (*f)(element_t, int), int 
   return 0;
 }
 
+/*
+* HashTableGet - Retrives key from hashtable
+* @ht: Hashtable to search in
+* @key: Key of element we want to retrive
+* @f: hashing function
+* g: Comparator function
+*
+* Returns void* pointer to element if in table
+* Returns NULL if not in table
+*/
+element_t HashTableGet(HashTable* ht, element_t key, int (*f)(element_t, int),
+ int (*g)(element_t, element_t))
+{
+  int p;
+  HashTableNode* tmp;
+
+  p = f(key, ht->size);
+  tmp = ht->table[p];
+  while (tmp) {
+    if (g(key, tmp->data) == 0) {
+      return tmp->data;
+    }
+    tmp = tmp->next;
+  }
+  return NULL;
+}
