@@ -46,6 +46,7 @@ void listAdd(List* list, element_t elem);
 ListNode* listRemove(List* list);
 element_t listGetLast(List* list);
 void listDelete(void (*f)(element_t),List* list);
+int listIsEmpty(List* list);
 
 void listForEach(void (*f)(element_t), List* list);
 void listFoldString(void (*f) (element_t*, element_t), char** v, List* a);

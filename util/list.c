@@ -79,6 +79,15 @@ void listDelete(void (*f)(element_t), List* list) {
   }
 }
 
+/*
+* listIsEmpty - Returns 1 if list is empty. 0 otherwise
+*/
+int listIsEmpty(List* list) {
+  if (list->head)
+    return 0;
+  return 1;
+}
+
 /* 
 * listFoldl - Fold list using function f placing result in out
 * @f: function to fold on

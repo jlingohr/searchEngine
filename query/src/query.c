@@ -1,6 +1,7 @@
 /*
 * Default use:
 * ./query  [index file] [data file directory]
+* i.e.      ./bin/query ../indexer/data/index.dat ../crawler/data/
 * 
 * Input:
 
@@ -10,36 +11,22 @@
 *
 * To Test: 
 */
-#include <stdio.h>                           // printf
-#include <sys/stat.h>                        // isdir
-#include <sys/types.h>
-#include <unistd.h>
-#include <curl/curl.h>                       // curl functionality
-#include <string.h>                          // strncmpr
-#include <pthread.h>
-#include <assert.h>
-
-// ---------------- Local includes  e.g., "file.h"
-#include "../../util/hashtable.h"                       // hashtable functionality
-#include "../../util/common.h"                          // common functionality
-#include "../../util/util.h"
-#include "../../util/web.h"                             // curl and html functionality
+#include "query.h"
 
 static char prompt[] = "Query:> ";
 
 
 int checkCommandLine(char* filename, char* path);
 void eval(char* cmdline);
-Set* handleQuery(HashTable* ht, char** query, char** ops int n);
-int NormalizeQuery(char* query, char** str, char** ops);
+void ToLower(char* word);
 
 int main(int argc, char** argv) {
   /* TODO */
-  char c;
   char cmdline[MAXLINE];
   char* filename, *html_path;
   int emit_prompt;
   HashTable* index;
+  Query* query;
 
   emit_prompt = 1;
 
@@ -51,8 +38,6 @@ int main(int argc, char** argv) {
   if (!checkCommandLine(argv[1], argv[2]))
     exit(1);
 
-  char** query;
-  int num_words;
   /* What about logical operators? */
   while (1) { 
     if (emit_prompt) {
@@ -60,33 +45,24 @@ int main(int argc, char** argv) {
       fflush(stdout);
     }
     if ((fgets(cmdline, MAXLINE, stdin) == NULL) && ferror(stdin))
-      app_error("fgets error");
+      fprintf(stderr, "fgets error");
     if (feof(stdin)) {
       fflush(stdout);
       exit(0);
     }
+
     filename = argv[1];
     html_path = argv[2];
+    index = initHashTable();
 
     /* Build of index from recent file*/
-    index = readFile(filename);
+    IndexLoadWords(index, &filename);
 
-    /* Normalize query */
-    char* ops;
-    num_words = NormalizeQuery(cmdline, &query, &ops);
 
-    /* TODO - how to get queried words? Use union-find?
-    */
-    //WordNode wNodes[num_words]; /* Static list of WordNodes for each word searched */
-    //WordNode* wNodes[num_words];
-    //Set* sets[num_words];
-    //for (int i = 0; i < num_words; i++) {
-      //wNodes[i] = IndexGet(index, query[i]);
-     // sets[i] = 
-    //}
-
-    Set* matches;
-    matches = HandleQuery(index, qury, ops, num_words);
+    /* Build up query */
+    query = initQuery(cmdline);
+    /* Handle the query */
+    HandleQuery(index, query);
 
     /* Parse user query */
     //num_words = HandleQuery(cmdline, &query);
@@ -94,14 +70,14 @@ int main(int argc, char** argv) {
 
     /* Pass input to ranking module to rank pages */
     //char* results;
-    rank(wNodes, &results);
+    //rank(wNodes, &results);
 
     /* Print pages in ranked order */
-    display(results);
+    //display(results);
 
     /* Clean up */
-    free(results);
-    cleanIndex(index);
+    //free(results);
+    //cleanIndex(index);
 
   }
   return 0;
@@ -128,47 +104,68 @@ int checkCommandLine(char* filename, char* path) {
 }
 
 /*
-* eval - Parses and handles user query
-* @cmdline: query to process
+* initQuery - Initializes a search query by parsing the
+* search string into a list of search terms and
+* a list of search operations
+* @str: search string to parse
 *
+* Returns a pointer to a Query struct
 */
-void eval(char* cmdline) {
-  /* TODO */
-  char* urls;
-  int num_urls;
+ Query* initQuery(char* str) {
+  /* Allocate Query struct */
+  Query* query = malloc(sizeof(Query));
+  query->terms = initList();
+  query->ops = initList();
 
-  /* Parse command line */
-  num_urls = handleQuery(cmdline, &urls);
-  Sort(&urls, num_urls);
+  /* Normalize search string */
+  query->num_terms = parseQuery(str, query->terms, query->ops);
 
-  /* Print results */
-  for (int i = 0; i < num_urls; i++) {
-    printf("%s\n", urls[i]);
-  }
-  printf("\n");
+  return query;
+ }
 
-  
-}
+
 
 /*
-* handleQuery - iteratively create sets to match query
-* @ht: Hashtable to find words
-* @query: list of query terms
-* @n: Number of query search terms (not including logical ops)
+* parseQuery - Works through str and appends word to
+* words and appends logical operators to ops
 *
-* Returns a set containing all entries that match the seatch query
+* ASSUMPTIONS: For now assume user specifies all logical operations
+* and everything else valid
 */
-Set* handleQuery(HashTable* ht, char** query, char** ops, int n){
-  /* TODO */
-  Set* s, tmp;
+void parseQuery(char* str, List* terms, List* ops) {
+  /* TODO - validate string for error conditions */
+  char* word;
+  char* pch;
+  int tokens, terms;
 
-  for (int i = 0; i < n; i++) {
-    /* For each query term, make a set from
-    the list of DNodes from the hashed value */
-    WordNode* wNode = IndexGet(ht, query[i]);
-    tmp
+  tokens = 0;
+  terms = 0;
+
+  pch = strtok(str, " ");
+  while (pch != NULL) {
+    word = malloc(BUF_SIZE);
+    strcpy(word, pch);
+
+    if (strcmp(word, "AND") == 0 || strcmp(word, "OR") == 0) { 
+      /* Append to ops list */
+      listAdd(ops, word);
+    }
+    else {
+      /* Not logical operator! */
+      ToLower(word);
+      listAdd(terms, word);
+      terms++
+    }
+
+    tokens++;
+    pch = strtok(NULL, " ");
   }
+  return terms
 }
+
+
+
+
 
 /*
 * NormalizeQuery - Normslizes a search query by treating SPACE
@@ -180,8 +177,41 @@ Set* handleQuery(HashTable* ht, char** query, char** ops, int n){
 *
 * Returns number of words in query
 */
-int NormalizeQuery(char* query, char** str, char** ops) {
+int NormalizeQuery(char* query) {
   /* TODO */
-  return -1
+  return -1;
+
+}
+
+
+/* 
+* ToLower - turns a string into all lower case
+* @word: Word to change
+*/
+void ToLower(char* word) {
+  /* TODO - Check this is corect */
+  char* cur = word;
+
+  while (*cur) {
+    tolower(*cur);
+    cur++;
+  }
+}
+
+/*
+* HandleQuery - gets pages matching the query,
+* ranks them, and prints them
+*/
+void HandleQuery(HashTable* ht, Query* query) {
+  /* TODO */
+  List *tmp_a, *tmp_b  /* List of pointers to lists containing documents */
+  List* docs;                           /* Primary list of documents */
+  ListNode* cur;
+  WordNode* wNode
+
+  /* Go through query->terms and query->ops and iteratively
+  make sets */
+  
+
 
 }
