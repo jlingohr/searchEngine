@@ -204,14 +204,89 @@ void ToLower(char* word) {
 */
 void HandleQuery(HashTable* ht, Query* query) {
   /* TODO */
-  List *tmp_a, *tmp_b  /* List of pointers to lists containing documents */
+  List *tmp_a, *tmp_b, *tmp_c  /* List of pointers to lists containing documents */
   List* docs;                           /* Primary list of documents */
-  ListNode* cur;
+  ListNode* cur, ListNode* op;
   WordNode* wNode
+
 
   /* Go through query->terms and query->ops and iteratively
   make sets */
+  while ((op = listRemove(query->ops))) {
+    tmp_a = listRemove(query->terms);
+    tmp_b = listRemove(query->terms);
+
+    if (strcmp((char*)op->data, "AND") == 0) {
+      // Intersect a and b
+      tmp_c = intersect(tmp_a, tmp_b);
+      listAdd(query->terms, tmp_c);
+    }
+    else if (strcmp((char*)op->data, "OR") == 0) {
+      // Union a and b
+      tmp_c = union(tmp_a, tmp_b);
+      listAdd(query->terms, tmp_c);
+    }
+    else if (op == NULL) {
+      /* No more opes */
+      docs = tmp_a;
+    }
+
+    /* Need to free old lists */
+  }
+
+  /* Sort the list and return */
+
+
+}
+
+/*
+* intersect - intersect two lists
+* Returns pointer to a new list
+*/
+List* intersect(List* A, List* B) {
+  /* TODO - NOTE: HUGE mem leaks! */
+  List* acc;
+  ListNode *cur, *tmp;
+
+
+  if (A == NULL || B == NULL) /* empty sets */
+    return NULL
+
+  /* Initialize new list */
+  acc = initList();
+
+  /* Set current pointer to smaller list */
+  if (A->len <= B->len) {
+    while((cur = listRemove(A))) {
+      if ((tmp = listGet(B, cur->data))) { /* shared item */
+        DocumentNode* dNode = (DocumentNode*)cur->data;
+        /* Update document node */
+        update(dNode, (DocumentNode*)tmp->data);
+        /* Add updated node to accumulated list */
+        listAdd(acc, dNode);
+      }
+    }
+  }
+  else {
+    while((cur = listRemove(A))) {
+      if ((tmp = listGet(B, cur->data))) { /* shared item */
+        DocumentNode* dNode = (DocumentNode*)cur->data;
+        /* Update document node */
+        update(dNode, (DocumentNode*)tmp->data);
+        /* Add updated node to accumulated list */
+        listAdd(acc, dNode);
+      }
+    }
+  } 
+  /* Returns list */
+  return acc;
+}
+
+/*
+* union - union to lists
+* Returns pointer to a new list 
+*/
+List* union(List* A, List* B) {
+  /* TODO - WATCH MEM LEAKS */
   
-
-
 }

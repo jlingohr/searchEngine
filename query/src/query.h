@@ -29,5 +29,7 @@ int NormalizeQuery(char* query);
 Query* initQuery(char* str);
 int parseQuery(char* str, List* terms, List* ops);
 void HandleQuery(HashTable* ht, Query* query);
+List* intersect(List* A, List* B);
+List* union(List* A, List* B);
 
 #endif
