@@ -203,3 +203,10 @@ List* Merge(List* A, List* B, int (*f)(element_t, element_t)) {
   }
   return list;
 }
+
+/*
+* nodeCompare - Compares node with elem
+*/
+int nodeCompare(element_t* av, element_t bv, int (*f)(element_t, element_t)) {
+  return f(*av, bv);
+}

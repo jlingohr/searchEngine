@@ -147,7 +147,7 @@ int parseQuery(char* str, List* terms, List* ops) {
     word = malloc(BUF_SIZE);
     strcpy(word, pch);
 
-    if (strcmp(word, "AND") == 0 || strcmp(word, "OR") == 0) { 
+    if (strcmp(word, "AND") == 0) { 
       /* Append to ops list */
       listAdd(ops, word);
     }
@@ -210,7 +210,7 @@ void HandleQuery(HashTable* ht, Query* query) {
   /* TODO - Improve this! Too many casts */
   List *tmp_c; /* List of pointers to lists containing documents */
   List* docs;                           /* Primary list of documents */
-  ListNode *op, * tmp_a, *tmp_b;
+  ListNode *opNode, * tmp_a, *tmp_b;
   int filled;
 
   List* sets[query->num_sets];
@@ -220,19 +220,21 @@ void HandleQuery(HashTable* ht, Query* query) {
   make sets */
   filled = 0;
   while (filled < query->num_sets) {
-    op = (ListNode*)listRemove(query->ops)->data;
+    opNode = listRemove(query->ops);
+    //opNode = getNextOp(query->ops);
     tmp_a = (ListNode*)listRemove(query->terms)->data;
     tmp_b = (ListNode*)listRemove(query->terms)->data;
 
-    if (op == NULL)
+    if (opNode == NULL)
       break;
 
-    if (strcmp((char*)op->data, "AND") == 0) {
+    char* op = (char*)opNode->data;
+    if (strcmp(op, "AND") == 0) {
       // Intersect a and b
       tmp_c = intersect((List*)tmp_a->data, (List*)tmp_b->data);
       listAdd(query->terms, tmp_c);
     }
-    else if (strcmp((char*)op->data, "OR") == 0) {
+    else if (strcmp(op, "OR") == 0) {
       // Dont union, just store in another variable
       sets[filled] = (List*)tmp_a->data;
       listAdd(query->ops, tmp_b);
@@ -255,6 +257,14 @@ void HandleQuery(HashTable* ht, Query* query) {
   listForEach(printDNode, docs);
 
 
+}
+
+/*
+* getNextOp - Wrapper to get next operation string
+*/
+ListNode* getNextOp(List* list) {
+  //ListNode* tmp = listRemove(list);
+  return NULL;
 }
 
 /*
@@ -334,6 +344,15 @@ int cmpDNode_ID(const element_t av, const element_t bv) {
   DocumentNode* b = (DocumentNode*)bv;
 
   return (a->document_id == b->document_id);
+}
+
+/*
+* Node_strcmp - Helper to compare a node with a string
+*/
+int Node_strcmp(element_t av, element_t bv) {
+  char* a = (char*)av;
+  char* b = (char*)bv;
+  return strcmp(a, b);
 }
 
 void printDNode(const element_t av) {

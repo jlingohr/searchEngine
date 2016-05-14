@@ -30,12 +30,15 @@ Query* initQuery(char* str);
 int parseQuery(char* str, List* terms, List* ops);
 void HandleQuery(HashTable* ht, Query* query);
 List* intersect(List* A, List* B);
+ListNode* getNextOp(List* list);
 
 void Sort(List* list, int len);
 
 void update(DocumentNode* a, DocumentNode* b);
 int cmpDNode_freq(const element_t av, const element_t bv);
 int cmpDNode_ID(const element_t av, const element_t bv);
+int Node_strcmp(element_t av, element_t bv);
+
 
 void printDNode(element_t av);
 #endif
