@@ -48,9 +48,14 @@ element_t listGetLast(List* list);
 void listDelete(void (*f)(element_t),List* list);
 int listIsEmpty(List* list);
 
+ListNode* listGet(List* list, element_t elem, int (*f)(element_t, element_t));
+
 void listForEach(void (*f)(element_t), List* list);
 void listFoldString(void (*f) (element_t*, element_t), char** v, List* a);
 
+
+void MergeSort(List* list, int len, int (*f)(element_t, element_t));
+List* Merge(List* A, List* B, int (*f)(element_t, element_t));
 
 
 #endif // LIST_H

@@ -22,7 +22,7 @@
 typedef struct Query {
   List* terms;          /* The search terms */
   List* ops;            /* Logical operations like AND or OR */
-  int num_terms;
+  int num_sets;         /* Number of OR occurences */
 } Query;
 
 int NormalizeQuery(char* query);
@@ -30,6 +30,12 @@ Query* initQuery(char* str);
 int parseQuery(char* str, List* terms, List* ops);
 void HandleQuery(HashTable* ht, Query* query);
 List* intersect(List* A, List* B);
-List* union(List* A, List* B);
 
+void Sort(List* list, int len);
+
+void update(DocumentNode* a, DocumentNode* b);
+int cmpDNode_freq(const element_t av, const element_t bv);
+int cmpDNode_ID(const element_t av, const element_t bv);
+
+void printDNode(element_t av);
 #endif

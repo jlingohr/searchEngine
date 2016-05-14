@@ -61,6 +61,7 @@ int main(int argc, char** argv) {
 
     /* Build up query */
     query = initQuery(cmdline);
+    printf("Query initialized...\n");
     /* Handle the query */
     HandleQuery(index, query);
 
@@ -118,7 +119,7 @@ int checkCommandLine(char* filename, char* path) {
   query->ops = initList();
 
   /* Normalize search string */
-  query->num_terms = parseQuery(str, query->terms, query->ops);
+  query->num_sets = parseQuery(str, query->terms, query->ops);
 
   return query;
  }
@@ -132,14 +133,14 @@ int checkCommandLine(char* filename, char* path) {
 * ASSUMPTIONS: For now assume user specifies all logical operations
 * and everything else valid
 */
-void parseQuery(char* str, List* terms, List* ops) {
+int parseQuery(char* str, List* terms, List* ops) {
   /* TODO - validate string for error conditions */
   char* word;
   char* pch;
-  int tokens, terms;
+  int tokens, sets;
 
   tokens = 0;
-  terms = 0;
+  sets = 1;
 
   pch = strtok(str, " ");
   while (pch != NULL) {
@@ -150,17 +151,20 @@ void parseQuery(char* str, List* terms, List* ops) {
       /* Append to ops list */
       listAdd(ops, word);
     }
+    else if (strcmp(word, "OR") == 0) {
+      listAdd(ops, word);
+      sets++;
+    }
     else {
       /* Not logical operator! */
       ToLower(word);
       listAdd(terms, word);
-      terms++
     }
 
     tokens++;
     pch = strtok(NULL, " ");
   }
-  return terms
+  return sets;
 }
 
 
@@ -203,38 +207,52 @@ void ToLower(char* word) {
 * ranks them, and prints them
 */
 void HandleQuery(HashTable* ht, Query* query) {
-  /* TODO */
-  List *tmp_a, *tmp_b, *tmp_c  /* List of pointers to lists containing documents */
+  /* TODO - Improve this! Too many casts */
+  List *tmp_c; /* List of pointers to lists containing documents */
   List* docs;                           /* Primary list of documents */
-  ListNode* cur, ListNode* op;
-  WordNode* wNode
+  ListNode *op, * tmp_a, *tmp_b;
+  int filled;
+
+  List* sets[query->num_sets];
 
 
   /* Go through query->terms and query->ops and iteratively
   make sets */
-  while ((op = listRemove(query->ops))) {
-    tmp_a = listRemove(query->terms);
-    tmp_b = listRemove(query->terms);
+  filled = 0;
+  while (filled < query->num_sets) {
+    op = (ListNode*)listRemove(query->ops)->data;
+    tmp_a = (ListNode*)listRemove(query->terms)->data;
+    tmp_b = (ListNode*)listRemove(query->terms)->data;
+
+    if (op == NULL)
+      break;
 
     if (strcmp((char*)op->data, "AND") == 0) {
       // Intersect a and b
-      tmp_c = intersect(tmp_a, tmp_b);
+      tmp_c = intersect((List*)tmp_a->data, (List*)tmp_b->data);
       listAdd(query->terms, tmp_c);
     }
     else if (strcmp((char*)op->data, "OR") == 0) {
-      // Union a and b
-      tmp_c = union(tmp_a, tmp_b);
-      listAdd(query->terms, tmp_c);
-    }
-    else if (op == NULL) {
-      /* No more opes */
-      docs = tmp_a;
+      // Dont union, just store in another variable
+      sets[filled] = (List*)tmp_a->data;
+      listAdd(query->ops, tmp_b);
+      filled++;
     }
 
     /* Need to free old lists */
   }
+  printf("Merging lists...\n");
 
   /* Sort the list and return */
+  for (int i = 0; i < query->num_sets; i++) {
+    MergeSort(sets[i], sets[i]->len, cmpDNode_freq);
+  }
+  /* Merge all documents */
+  for (int i = 0; i < query->num_sets; i++) {
+    docs = Merge(docs, sets[i], cmpDNode_freq);
+  }
+
+  listForEach(printDNode, docs);
 
 
 }
@@ -250,16 +268,17 @@ List* intersect(List* A, List* B) {
 
 
   if (A == NULL || B == NULL) /* empty sets */
-    return NULL
+    return NULL;
 
   /* Initialize new list */
   acc = initList();
 
   /* Set current pointer to smaller list */
-  if (A->len <= B->len) {
+  if (A->len <= B->len) { /* Have to check if NULL returned */
     while((cur = listRemove(A))) {
-      if ((tmp = listGet(B, cur->data))) { /* shared item */
-        DocumentNode* dNode = (DocumentNode*)cur->data;
+      DocumentNode* dNode = (DocumentNode*)cur->data;
+      if ((tmp = listGet(B, (element_t)dNode, cmpDNode_ID))) { /* shared item */
+        //DocumentNode* dNode = (DocumentNode*)cur->data;
         /* Update document node */
         update(dNode, (DocumentNode*)tmp->data);
         /* Add updated node to accumulated list */
@@ -269,8 +288,9 @@ List* intersect(List* A, List* B) {
   }
   else {
     while((cur = listRemove(A))) {
-      if ((tmp = listGet(B, cur->data))) { /* shared item */
-        DocumentNode* dNode = (DocumentNode*)cur->data;
+      DocumentNode* dNode = (DocumentNode*)cur->data;
+      if ((tmp = listGet(B, (element_t)dNode, cmpDNode_ID))) { /* shared item */
+        //DocumentNode* dNode = (DocumentNode*)cur->data;
         /* Update document node */
         update(dNode, (DocumentNode*)tmp->data);
         /* Add updated node to accumulated list */
@@ -282,11 +302,42 @@ List* intersect(List* A, List* B) {
   return acc;
 }
 
+
 /*
-* union - union to lists
-* Returns pointer to a new list 
+* update - Update DocumentNode a with word freq of
+* DocumentNode b. 
+* NOTE: For now taking the min (from intersection)
 */
-List* union(List* A, List* B) {
-  /* TODO - WATCH MEM LEAKS */
-  
+void update(DocumentNode* a, DocumentNode* b) {
+  if (a->page_word_frequency > b->page_word_frequency)
+    a->page_word_frequency = b->page_word_frequency;
+}
+
+/*
+* cmpDNode_freq - Helper function to compare DocumentNode types based
+* on the number of word frequencies
+*
+*/
+int cmpDNode_freq(const element_t av, const element_t bv) {
+  DocumentNode* a = (DocumentNode*)av;
+  DocumentNode* b = (DocumentNode*)bv;
+
+  return (a->page_word_frequency - b->page_word_frequency);
+}
+
+/*
+* cmpDNode_ID - Helper function to compare DocumentNode types
+* based on document ID
+*/
+int cmpDNode_ID(const element_t av, const element_t bv) {
+  DocumentNode* a = (DocumentNode*)av;
+  DocumentNode* b = (DocumentNode*)bv;
+
+  return (a->document_id == b->document_id);
+}
+
+void printDNode(const element_t av) {
+  DocumentNode* a = (DocumentNode*)av;
+  printf("%d, %d\n", a->document_id, a->page_word_frequency);
+
 }

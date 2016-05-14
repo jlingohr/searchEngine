@@ -89,6 +89,21 @@ int listIsEmpty(List* list) {
 }
 
 /* 
+* listGet - Returns a pointer to elem if in list
+* Otherwise returns NULL
+*/
+ListNode* listGet(List* list, element_t elem, int (*f)(element_t, element_t)) {
+  ListNode* cur = list->head;
+
+  while (cur) {
+    if (f(elem, cur->data))
+      return cur;
+    cur = cur->next;
+  }
+  return NULL;
+}
+
+/* 
 * listFoldl - Fold list using function f placing result in out
 * @f: function to fold on
 * @out: pointer to output variable
@@ -111,4 +126,80 @@ void listFoldString(void (*f) (element_t*, element_t), char** v, List* a) {
   free(dNode_buf);
 
 
+}
+
+/*
+* listForEach - Iteratively move through list and call procedure
+* f on each listNode
+*/
+void listForEach(void (*f)(element_t), List* list) {
+  ListNode* cur = list->head;
+
+  while (cur) {
+    f(cur);
+    cur = cur->next;
+  }
+}
+
+
+/*
+* MergeSort - Sort a linked-list using merge sort
+*/
+void MergeSort(List* list, int len, int (*f)(element_t, element_t)) {
+  if (len <= 1)
+    return;
+
+  List* left = initList();
+  List* right = initList();
+  int mid = len / 2;
+
+  ListNode* cur = list->head;
+
+  for (int i = 0; i < len; i++) {
+    if (mid > 0)
+      listAdd(left, cur);
+    else
+      listAdd(right, cur);
+    mid--;
+  }
+  MergeSort(left, left->len, f);
+  MergeSort(right, right->len, f);
+
+  /* MEMORY LEAKS and DANGLING POINTERS */
+  Merge(left, right, f);
+}
+
+/*
+* Merge - Merges A and B returning a new list
+*/
+List* Merge(List* A, List* B, int (*f)(element_t, element_t)) {
+  /* TODO - Watch dangling pointers and mem leaks! */
+  List* list = initList();
+  ListNode* tmp;
+
+  if (A == NULL)
+    return B;
+  if (B == NULL)
+    return A;
+
+  while (A->len > 0 || B->len > 0) {
+    if (A->len > 0 && B->len > 0) {
+      if (f(A, B) <= 0) {
+        tmp = listRemove(A);
+      }
+      else {
+        tmp = listRemove(B);
+      }
+      listAdd(list, tmp);
+    }
+    else if (A->len > 0) {
+      tmp = listRemove(A);
+      listAdd(list, tmp);
+    }
+    else if (B->len > 0) {
+      tmp = listRemove(B);
+      listAdd(list, tmp);
+    }
+  }
+  return list;
 }
