@@ -53,10 +53,11 @@ int main(int argc, char** argv) {
 
     filename = argv[1];
     html_path = argv[2];
-    index = initHashTable();
-
     /* Build of index from recent file*/
-    IndexLoadWords(index, &filename);
+    index = readFile(filename);
+
+    
+
 
 
     /* Build up query */
@@ -146,6 +147,7 @@ int parseQuery(char* str, List* terms, List* ops) {
   while (pch != NULL) {
     word = malloc(BUF_SIZE);
     strcpy(word, pch);
+    strcat(word, "\0");
 
     if (strcmp(word, "AND") == 0) { 
       /* Append to ops list */
@@ -208,40 +210,31 @@ void ToLower(char* word) {
 */
 void HandleQuery(HashTable* ht, Query* query) {
   /* TODO - Improve this! Too many casts */
-  List *tmp_c; /* List of pointers to lists containing documents */
+  //List *tmp_c; /* List of pointers to lists containing documents */
   List* docs;                           /* Primary list of documents */
-  ListNode *opNode, * tmp_a, *tmp_b;
-  int filled;
+  ListNode *opNode;
+  int filled, num_sets;
 
+  filled = 0;
+  num_sets = query->num_sets;
   List* sets[query->num_sets];
 
+  List* temp_a = getNextQuery(ht, query->terms);
+  sets[filled] = temp_a;
+  filled++;
 
-  /* Go through query->terms and query->ops and iteratively
-  make sets */
-  filled = 0;
-  while (filled < query->num_sets) {
+  while (filled < num_sets) {
     opNode = listRemove(query->ops);
-    //opNode = getNextOp(query->ops);
-    tmp_a = (ListNode*)listRemove(query->terms)->data;
-    tmp_b = (ListNode*)listRemove(query->terms)->data;
-
-    if (opNode == NULL)
-      break;
-
     char* op = (char*)opNode->data;
-    if (strcmp(op, "AND") == 0) {
-      // Intersect a and b
-      tmp_c = intersect((List*)tmp_a->data, (List*)tmp_b->data);
-      listAdd(query->terms, tmp_c);
-    }
-    else if (strcmp(op, "OR") == 0) {
-      // Dont union, just store in another variable
-      sets[filled] = (List*)tmp_a->data;
-      listAdd(query->ops, tmp_b);
-      filled++;
-    }
 
-    /* Need to free old lists */
+    if (strcmp(op, "AND") == 0) {
+      temp_a = getNextQuery(ht, query->terms);
+      sets[filled] = intersect(sets[filled], temp_a);
+    }
+    else if(strcmp(op, "OR") == 0) {
+      filled++;
+      sets[filled] = getNextQuery(ht, query->terms);
+    }
   }
   printf("Merging lists...\n");
 
@@ -257,6 +250,22 @@ void HandleQuery(HashTable* ht, Query* query) {
   listForEach(printDNode, docs);
 
 
+}
+
+/*
+* getNextQuery - Returns a list of DocumentNode for
+* the word at the head of words
+* @ht: Hashtable to look in
+* @words: list of words nodes to get query from
+*/
+List* getNextQuery(HashTable* ht, List* words) {
+  /* TODO - Make sure this is clean */
+  ListNode* tmpNode = listRemove(words);
+  char* word = (char*)tmpNode->data;
+
+  WordNode* wNode = IndexGet(ht, word);
+  List* acc = wNode->page;
+  return acc;
 }
 
 /*
