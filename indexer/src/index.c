@@ -209,6 +209,107 @@ int IndexLoadWords(HashTable* ht, char** buf) {
 
 
 /*
+* readFile - Read an inverted index in from file and
+* construct a new index, i.e. the original.
+* @filename: Name of file to construct from
+*
+* Returns pointer to a hashtable/index
+*/
+HashTable* readFile(char* filename) {
+  /* TODO */
+  HashTable* index;
+  FILE* fp;
+  char *buf;
+  int size;
+
+  /* Initialize new HashTable */
+  index = initHashTable();
+  size = BUF_SIZE;
+  buf = (char*)malloc(size);
+
+  fp = fopen(filename, "r");
+  ssize_t read;
+  size_t len = 0;
+  char* line = NULL;
+  /* Read each line and parse */
+  while ((read = getline(&line, &len, fp)) != -1) {
+    handleLine(index, line);
+  }
+  if (line)
+    free(line);
+
+  fclose(fp);
+  return index;
+}
+
+/*
+* handleLine - Parse line and insert in hashtable
+* @index: table in which to insert
+* @line: Line to parse
+*/
+void handleLine(HashTable* index, char* line) {
+  /* TODO - Buggy doc_id from conversion */
+  char word[BUF_SIZE];
+  char *pch;
+  int num_tokens, num_docs, doc_id, freq;
+  List* dNodeList;
+  DocumentNode* dNode;
+  WordNode* wNode;
+
+  /* Initialize list */
+  num_tokens = 1;
+  dNodeList = initList();
+
+  pch = strtok(line, " ");
+  while (pch != NULL) {
+    if (num_tokens == 1) {
+      /* First token is the word */
+      strcpy(word, pch);
+      //printf("word: %s, ", word);
+      if (IndexLookUp(index, word))
+        return;
+    }
+    else if (num_tokens == 2) {
+      /* Second token is number of DocumentNodes */
+      num_docs = atoi(pch);
+      //printf("no_docs: %d, ", num_docs);
+    }
+    else {
+      if (num_tokens % 2 == 1) {
+        /* Odd numbered are document ids */
+        /* This is buggy */
+        doc_id = atoi(pch);
+        //printf("doc_id: %d, ", doc_id);
+      }
+      else if (num_tokens % 2 == 0) {
+        /* Even numbered are number of occurences in doc
+        forms a pair (a,b) we add as a DocumentNode */
+        freq = atoi(pch);
+
+        /* Build DocumentNode */
+        dNode = malloc(sizeof(DocumentNode));
+        dNode->document_id = doc_id;
+        dNode->page_word_frequency = freq;
+
+        /* Construct list of DocumentNodes */
+        listAddDoc(dNodeList, dNode);
+        //printf("freq: %d\n", freq);
+
+      }
+    }
+    num_tokens++;
+    pch = strtok(NULL, " ");
+  }
+  /* construct WordNode and add to index */
+  wNode = malloc(sizeof(WordNode));
+  strcpy(wNode->word, word);
+  wNode->page = dNodeList;
+  IndexAddWNode(index, wNode);
+
+  
+}
+
+/*
 * cleanIndex - Cleans up memory for hashtable
 * of WordNodes
 * @ht: table to clean

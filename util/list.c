@@ -71,6 +71,7 @@ element_t listGetLast(List* list) {
 * listDelete - Delete the list
 */
 void listDelete(void (*f)(element_t), List* list) {
+  /* TODO - Fix this */
   ListNode* cur;
 
   while ((cur = listRemove(list))) {
@@ -136,7 +137,7 @@ void listForEach(void (*f)(element_t), List* list) {
   ListNode* cur = list->head;
 
   while (cur) {
-    f(cur);
+    f(cur->data);
     cur = cur->next;
   }
 }
@@ -156,48 +157,59 @@ void MergeSort(List* list, int len, int (*f)(element_t, element_t)) {
   ListNode* cur = list->head;
 
   for (int i = 0; i < len; i++) {
-    if (mid > 0)
-      listAdd(left, cur);
+    if (mid > 0) {
+      listAdd(left, cur->data);
+      mid--;
+    }
     else
-      listAdd(right, cur);
-    mid--;
+      listAdd(right, cur->data);
   }
   MergeSort(left, left->len, f);
   MergeSort(right, right->len, f);
 
-  /* MEMORY LEAKS and DANGLING POINTERS */
-  Merge(left, right, f);
+  /* MEMORY LEAKS and DANGLING POINTERS
+   Delete left and right */
+  list = Merge(left, right, f);
 }
 
 /*
 * Merge - Merges A and B returning a new list
 */
 List* Merge(List* A, List* B, int (*f)(element_t, element_t)) {
-  /* TODO - Watch dangling pointers and mem leaks! */
+  /* TODO - Watch dangling pointers and mem leaks! 
+      Also, add iterator and 
+      want to refactor so call listAdd on tmp, not tmp->data*/
   List* list = initList();
-  ListNode* tmp;
+  element_t tmp;
+  ListNode *cur_a, *cur_b;
 
   if (A == NULL)
     return B;
   if (B == NULL)
     return A;
 
-  while (A->len > 0 || B->len > 0) {
-    if (A->len > 0 && B->len > 0) {
-      if (f(A, B) <= 0) {
-        tmp = listRemove(A);
+  cur_a = A->head;
+  cur_b = B->head;
+  while (cur_a || cur_b) {
+    if (cur_a && cur_b) {
+      if (f(cur_a->data, cur_b->data) >= 0) {
+        tmp = cur_a->data;
+        cur_a = cur_a->next;
       }
       else {
-        tmp = listRemove(B);
+        tmp = cur_b->data;
+        cur_b = cur_b->next;
       }
       listAdd(list, tmp);
     }
-    else if (A->len > 0) {
-      tmp = listRemove(A);
+    else if (cur_a) {
+      tmp = cur_a->data;
+      cur_a = cur_a->next;
       listAdd(list, tmp);
     }
-    else if (B->len > 0) {
-      tmp = listRemove(B);
+    else if (cur_b) {
+      tmp = cur_b->data;
+      cur_b = cur_b->next;
       listAdd(list, tmp);
     }
   }

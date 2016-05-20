@@ -15,6 +15,10 @@ void IndexPrintWords(HashTable* ht);
 int IndexLoadWords(HashTable* ht, char** buf);
 void cleanIndex(HashTable* ht);
 WordNode* IndexGet(HashTable* ht, char* word);
+HashTable* readFile(char* filename);
+void handleLine(HashTable* index, char* line);
+
+
 
 void IndexAddWNode(HashTable* ht, WordNode* wNode);
 
