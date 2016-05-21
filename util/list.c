@@ -15,6 +15,7 @@
 */
 void list_new(List* list, int elementSize, freeFunction freeFn) {
   assert(elementSize > 0);
+  assert(freeFn != NULL);
   list->length = 0;
   list->elementSize = elementSize;
   list->head = list->tail = NULL;

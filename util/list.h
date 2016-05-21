@@ -20,11 +20,10 @@
 
 // ---------------- Structures/Types
 
-typedef void (*freeFunction)(element_t);
 typedef bool (*listIterator)(element_t);
 
 typedef struct ListNode {
-    element_t* data;                           // the data for a node
+    element_t data;                           // the data for a node
     struct ListNode *next;                   // pointer to next node
 } ListNode;
 
