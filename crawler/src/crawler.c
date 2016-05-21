@@ -59,9 +59,11 @@ int saveCrawl();
 void cleanup(HashTable* ht);
 int validDepth(int depth, int user_depth);
 
+void free_webpage(element_t elem);
+
 // Global:
 HashTable* URLSVisited;
-List* toVisit;
+List toVisit;
 
 
 int main(int argc, char** argv) {
@@ -89,7 +91,8 @@ int main(int argc, char** argv) {
   strcpy(target, argv[2]);
   user_depth = atoi(argv[3]);
 
-  toVisit= initList();
+  //toVisit= initList();
+  new_list(&toVisit, sizeof(WebPage), free_webpage);
   URLSVisited = initHashTable();
   file_counter = 1;
 
@@ -126,27 +129,43 @@ int main(int argc, char** argv) {
   sleep(INTERVAL_PER_FETCH);
 
   /* while there are urls to crawl do */
-  WebPage* tmp;
-  while((tmp = listRemovePage(toVisit))) {
+  //WebPage* tmp;
+  //while((tmp = listRemovePage(toVisit))) {
     /* get next url from list */
-    if (validDepth(tmp->depth, user_depth) && !HashTableLookUpURL(URLSVisited, tmp->url)) {
+    //if (validDepth(tmp->depth, user_depth) && !HashTableLookUpURL(URLSVisited, tmp->url)) {
       /* get webpage for url */
-      if (GetWebPage(tmp)) { /* write page file */
-        writePage(tmp, target, file_counter);
-        file_counter++;
+      //if (GetWebPage(tmp)) { /* write page file */
+        //writePage(tmp, target, file_counter);
+        //file_counter++;
         /* extract urls from webpage and add to URLList */
-        crawlPage(tmp);
-        free(tmp->html);
+        //crawlPage(tmp);
+        //free(tmp->html);
+      //}
+    //}
+  WebPage temp_page;
+  int result;
+  while ((result = list_dequeue(&toVisit, &temp_page))) {
+    // Get next URL form the list */
+    if (validDepth(temp_page.depth, user_depth) && HashTableLookUpURL(URLSVisited, temp_page.url)) {
+      // Get WebPage for URL
+      if (GetWebPage(&temp_page)) {// write page file
+        writePage(&temp_page, target, file_counter);
+        file_counter++;
+        // extract URLs from webpage and add to URLList
+        crawlPage(&temp_page);
+        free(tmp.html);
       }
     }
-
     /* free resources */
-    dec_ref(tmp); 
+    //dec_ref(tmp); 
 
     /* sleep for a bit to avoid annoying the target domain */
     sleep(INTERVAL_PER_FETCH);
-    
   }
+
+    
+    
+
 
   /* Cleanup curl */
   curl_global_cleanup();
@@ -236,12 +255,20 @@ int crawlPage(WebPage *page) {
           if (STATUS_LOG == 1)
             printf("\nFound url: %s", buf);
 
-          WebPage* tmp = malloc(sizeof(WebPage));
-          tmp->url = malloc(strlen(buf)+1);
-          strcpy(tmp->url, buf);
-          tmp->depth = page->depth + 1;
+          //WebPage* tmp = malloc(sizeof(WebPage));
+          //tmp->url = malloc(strlen(buf)+1);
+          //strcpy(tmp->url, buf);
+          //tmp->depth = page->depth + 1;
 
-          listAddPage(toVisit, tmp);
+          // Fragmentation possible?
+          WebPage tmp;
+          tmp.url = malloc(strlen(buf)+1);
+          strcpy(tmp.url, buf);
+          tmp.depth = page->depth;
+
+          //listAddPage(toVisit, tmp);
+          list_append(&toVisit, &tmp);
+          free(tmp.url);
         }
       }
     }
