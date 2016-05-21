@@ -84,7 +84,22 @@ void hashtable_insert(HashTable* ht, element_t key, element_t data)
 * @key- key to hash
 * Returns 1 if item found, otherwise returns 0
 */
-int hashtable_find(HashTable* ht, element_t key);
+int hashtable_find(HashTable* ht, element_t key)
+{
+  uint32_t p = ht->hash(key);
+  if (ht->table[p] == NULL) {
+    return 0;
+  } else {
+    HashTableNode* cur = ht->table[p];
+    while (cur) {
+      if (ht->compare(key, cur->data)) {
+        return 1;
+      }
+      cur = cur->next;
+    }
+    return 0;
+  }
+}
 
 /*
 * hashtable_get - Retrieves an item in the hashtable
@@ -93,4 +108,21 @@ int hashtable_find(HashTable* ht, element_t key);
 * @elem - retrieved item wil be stored in here
 * Returns 1 if item successfully retrieved, else 0
 */
-int hashtable_get(HashTable* ht, element_t key, element_t elem);
+int hashtable_get(HashTable* ht, element_t key, element_t elem)
+{
+  uint32_t p = ht->hash(key);
+  if (ht->table[p] == NULL) {
+    return 0;
+  } else {
+    HashTableNode* cur = ht->table[p];
+    while (cur) {
+      if (ht->compare(key, cur->data)) {
+        // Passing a pointer - Sure you want to do this?
+        elem = cur->data;
+        return 1;
+      }
+      cur = cur->next;
+    }
+    return 0;
+  }
+}
