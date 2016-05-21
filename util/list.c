@@ -7,218 +7,120 @@
 *************************/
 
 /*
-* initList - Initializes singly-linked list
+* list_new - Creates an empty list
+* with initial size of 0
+* @list: List to initialize
+* @elementSize - Size of data stored in the list
+* @freeFn - function to free list later
 */
-List* initList() {
-  List* list = malloc(sizeof(List));
-  list->head = NULL;
-  list->tail = NULL;
-  list->len = 0;
-  return list;
+void list_new(List* list, int elementSize, freeFunction freeFn) {
+  assert(elementSize > 0);
+  list->length = 0;
+  list->elementSize = elementSize;
+  list->head = list->tail = NULL;
+  list->freeFn = freeFn;
 }
 
 /*
-* listAdd - Add webpage to end of list
+* list_destroy - Destroys the List list
+* and frees mmory
 */
-void listAdd(List* list, element_t elem) {
-  ListNode* tmp;
-
-  tmp = malloc(sizeof(ListNode));
-  tmp->data = elem;
-  //elem->ref_count = 2;
-
-  if (list->head == NULL) { /* List is empty */
-    list->head = list->tail = tmp;
-    tmp->next = NULL;
-  }
-  else { /* Append to end of list */
-    list->tail->next = tmp;
-    list->tail = tmp;
-    tmp->next = NULL;
-  }
-  list->len++;
-}
-
-/*
-* listRemove - Remove node from front of list
-* Return pointer data of tail node
-*/
-ListNode* listRemove(List* list) {
-  //element_t elem;
-  ListNode* tmp;
-
-  if (list->head == NULL)
-    return NULL;
-
-  tmp = list->head;
-  list->head = tmp->next;
-  list->len--;
-  return tmp;
-}
-
-/*
-* listGetLast - Get tail node of a list
-* @list: list operating on
-*
-* Returns pointer to last node
-*/
-element_t listGetLast(List* list) {
-  return list->tail->data;
-}
-
-
-/*
-* listDelete - Delete the list
-*/
-void listDelete(void (*f)(element_t), List* list) {
-  /* TODO - Fix this */
+void list_destroy(List* list) {
   ListNode* cur;
+  while (list->head != NULL) {
+    cur = list->head;
+    list->head = cur->next;
 
-  while ((cur = listRemove(list))) {
-    f(cur->data);
+    if (list->freeFn) {
+      list->freeFn(cur->data);
+    }
+
+    free(cur->data);
     free(cur);
   }
 }
 
 /*
-* listIsEmpty - Returns 1 if list is empty. 0 otherwise
+* list_prepend - adds an element elem to the start
+* of the List list
 */
-int listIsEmpty(List* list) {
-  if (list->head)
-    return 0;
-  return 1;
-}
+void list_prepend(List* list, element_t elem) {
+  ListNode* node = malloc(sizeof(ListNode));
+  node->data = malloc(list->elementSize);
+  memcpy(node->data, elem, list->elementSize);
 
-/* 
-* listGet - Returns a pointer to elem if in list
-* Otherwise returns NULL
-*/
-ListNode* listGet(List* list, element_t elem, int (*f)(element_t, element_t)) {
-  ListNode* cur = list->head;
+  node->next = list->head;
+  list->head = node;
 
-  while (cur) {
-    if (f(elem, cur->data))
-      return cur;
-    cur = cur->next;
+  if (!list->tail) {
+    list->tail = list->head;
   }
-  return NULL;
-}
 
-/* 
-* listFoldl - Fold list using function f placing result in out
-* @f: function to fold on
-* @out: pointer to output variable
-* @list: List folding on
-*/
-void listFoldString(void (*f) (element_t*, element_t), char** v, List* a) {
-  /* TODO - REDO sloppy */
-  char* tmp = malloc(MAXLINE);
-  char* dNode_buf = malloc(MAXLINE);
-  ListNode* cur = a->head;
-  while (cur) {
-    DocumentNode* dNode = (DocumentNode*)cur->data;
-    sprintf(dNode_buf, "%d %d ", dNode->document_id, dNode->page_word_frequency);
-    cur = cur->next;
-    strcat(tmp, dNode_buf);
-  }
-  f((element_t*)v, (element_t)tmp);
-  //strcat(*v, "\n");
-  free(tmp);
-  free(dNode_buf);
-
-
+  list->length++;
 }
 
 /*
-* listForEach - Iteratively move through list and call procedure
-* f on each listNode
+* list_append - Adds the element elem to the end
+* of the List list
 */
-void listForEach(void (*f)(element_t), List* list) {
-  ListNode* cur = list->head;
+void list_append(List* list, element_t elem) {
+  ListNode* node = malloc(sizeof(ListNode));
+  node->data = malloc(list->elementSize);
+  node->next = NULL;
 
-  while (cur) {
-    f(cur->data);
-    cur = cur->next;
+  memcpy(node->data, elem, list->elementSize);
+
+  if (list->length == 0) {
+    list->head = list->tail = node;
+  } else {
+    list->tail->next = node;
+    list->tail = node;
   }
+
+  list->length++;
 }
 
 
 /*
-* MergeSort - Sort a linked-list using merge sort
+* list_for_each - Iterates through the List list
 */
-void MergeSort(List* list, int len, int (*f)(element_t, element_t)) {
-  if (len <= 1)
-    return;
+void list_for_each(List* list, listIterator iterator) {
+  assert(iterator != NULL);
 
-  List* left = initList();
-  List* right = initList();
-  int mid = len / 2;
-
-  ListNode* cur = list->head;
-
-  for (int i = 0; i < len; i++) {
-    if (mid > 0) {
-      listAdd(left, cur->data);
-      mid--;
-    }
-    else
-      listAdd(right, cur->data);
+  ListNode* node = list->head;
+  bool result = TRUE;
+  while (node != NULL && result) {
+    result = iterator(node->data);
+    node = node->next;
   }
-  MergeSort(left, left->len, f);
-  MergeSort(right, right->len, f);
-
-  /* MEMORY LEAKS and DANGLING POINTERS
-   Delete left and right */
-  list = Merge(left, right, f);
 }
 
 /*
-* Merge - Merges A and B returning a new list
+* list_head - Stores data in lists head in elem
 */
-List* Merge(List* A, List* B, int (*f)(element_t, element_t)) {
-  /* TODO - Watch dangling pointers and mem leaks! 
-      Also, add iterator and 
-      want to refactor so call listAdd on tmp, not tmp->data*/
-  List* list = initList();
-  element_t tmp;
-  ListNode *cur_a, *cur_b;
+void list_head(List* list, element_t elem) {
+  /* TODO - what about removal? */
+  assert(list->head != NULL);
 
-  if (A == NULL)
-    return B;
-  if (B == NULL)
-    return A;
+  ListNode* node = list->head;
+  memcpy(elem, node->data, list->elementSize);
 
-  cur_a = A->head;
-  cur_b = B->head;
-  while (cur_a || cur_b) {
-    if (cur_a && cur_b) {
-      if (f(cur_a->data, cur_b->data) >= 0) {
-        tmp = cur_a->data;
-        cur_a = cur_a->next;
-      }
-      else {
-        tmp = cur_b->data;
-        cur_b = cur_b->next;
-      }
-      listAdd(list, tmp);
-    }
-    else if (cur_a) {
-      tmp = cur_a->data;
-      cur_a = cur_a->next;
-      listAdd(list, tmp);
-    }
-    else if (cur_b) {
-      tmp = cur_b->data;
-      cur_b = cur_b->next;
-      listAdd(list, tmp);
-    }
-  }
-  return list;
 }
 
 /*
-* nodeCompare - Compares node with elem
+* list_tail - Returns a pointer to the tail of
+* the List list
 */
-int nodeCompare(element_t* av, element_t bv, int (*f)(element_t, element_t)) {
-  return f(*av, bv);
+void list_tail(List* list, element_t elem) {
+  assert(list->tail != NULL);
+  ListNode* node = list->tail;
+  memcpy(elem, node->data, list->elementSize);
 }
+
+/*
+* list_size - Returns the size of the List list
+*/
+int list_size(List* list) {
+  return list->length;
+}
+

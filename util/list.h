@@ -20,15 +20,20 @@
 
 // ---------------- Structures/Types
 
+typedef void (*freeFunction)(element_t);
+typedef bool (*listIterator)(element_t);
+
 typedef struct ListNode {
     element_t* data;                           // the data for a node
     struct ListNode *next;                   // pointer to next node
 } ListNode;
 
 typedef struct List {
-    ListNode *head;                          // "beginning" of the list
-    ListNode *tail;                          // "end" of the list
-    int len;
+  ListNode *head;                          // "beginning" of the list
+  ListNode *tail;                          // "end" of the list
+  int length;
+  int elementSize;
+  freeFunction freeFn;
 } List;
 
 
@@ -41,6 +46,7 @@ typedef struct List {
 
 
 /* Generic List macros */
+/*
 List* initList();
 void listAdd(List* list, element_t elem);
 ListNode* listRemove(List* list);
@@ -57,6 +63,17 @@ int nodeCompare(element_t*, element_t elem, int (*f)(element_t, element_t));
 
 void MergeSort(List* list, int len, int (*f)(element_t, element_t));
 List* Merge(List* A, List* B, int (*f)(element_t, element_t));
+*/
+void list_new(List* list, int elementSize, freeFunction freeFn);
+void list_destroy(List* list);
+
+void list_prepend(List* list, element_t elem);
+void list_append(List* list, element_t elem);
+int list_size(List* list);
+
+void list_for_each(List* list, listIterator iter);
+void list_head(List* list, element_t elem);
+void list_tail(List* list, element_t elem);
 
 
 #endif // LIST_H

@@ -6,65 +6,47 @@
 #include "../list.h"
 #include "../common.h"
 
-#define SIZE 2
+#define SIZE 5
 
-/*
-* cmpInt - ListNodes whose elements are integers */
-int cmpInt(element_t av, element_t bv) {
-  intptr_t a = (intptr_t)av;
-  intptr_t b = (intptr_t)bv;
-
-  return (a <= b);
+bool iter_int(element_t av) {
+  printf("Found value: %d\n", *(int*)av);
+  return TRUE;
 }
 
-void printInt(element_t av) {
-  intptr_t a = (intptr_t)av;
-  printf("%ld ", a);
-}
+void test_listAdd() {
+  List A;
+  List B;
 
-void test_listAdd(List* A) {
-  printf("Testing listAdd...\n");
-  listForEach(printInt, A);
+  list_new(&A, sizeof(int), NULL);
+  list_new(&B, sizeof(int), NULL);
+
+  for (int i = SIZE; i > 0; i--) {
+    int even = 2*i;
+    int odd = 2*i + 1;
+    list_append(&A, &even);
+    list_prepend(&B, &odd);
+  }
+
+  list_for_each(&A, iter_int);
   printf("\n");
-}
-
-void test_Merge(List* A, List* B, List** C) {
-  printf("Testing Merge...\n");
-  *C = Merge(A, B, cmpInt);
-  listForEach(printInt, *C);
+  list_for_each(&B, iter_int);
   printf("\n");
-  //listDelete(free, tmp);
 
+  list_destroy(&A);
+  list_destroy(&B);
+  printf("Successfully freed both lists...\n");
 }
 
-void test_MergeSort(List* C) {
-  printf("Testing MergSort...\n");
-  MergeSort(C, C->len, cmpInt);
-  listForEach(printInt, C);
-  printf("\n");
-}
 
 int main(void) {
 
-  /* create lists */
-  List* A = initList();
-  List* B = initList();
-  List* C = NULL;
-
-  for (int i = SIZE; i > 0; i--) {
-    intptr_t even = 2*i;
-    intptr_t odd = 2*i + 1;
-    listAdd(A, (element_t)even);
-    listAdd(B, (element_t)odd);
-  }
-
   /* Test listAdd */
-  test_listAdd(A);
+  test_listAdd();
 
   /* Test Merge */
-  test_Merge(A, B, &C);
+  //test_Merge(A, B, &C);
 
   /* Test MergeSort */
-  test_MergeSort(C);
+  //test_MergeSort(C);
   
 }

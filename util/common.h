@@ -14,6 +14,7 @@
 #include <stddef.h>                          // size_t
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 // ---------------- Constants
 #define INTERVAL_PER_FETCH 1                 // seconds between fetches
@@ -32,8 +33,11 @@
 
 // ---------------- Structures/Types
 
+typedef enum {FALSE, TRUE} bool;
+
 /* For working with generics */
 typedef void* element_t;
+
 
 /* Structure of a webpage */
 typedef struct WebPage {
