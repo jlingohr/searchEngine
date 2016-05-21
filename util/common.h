@@ -68,6 +68,7 @@ typedef struct WordNode {
   struct List* page;           /* Pointer to first element of the page list */
 } WordNode;
 
+typedef void (*freeFunction)(element_t);
 
 
 
