@@ -118,6 +118,28 @@ void list_tail(List* list, element_t elem) {
 }
 
 /*
+* list_dequeue - Copies head data into elem and remves
+* from the list, setting the new head.
+* Returns 1 if successfully dequeued
+* Else returns 0
+*/
+int list_dequeue(List* list, element_t elem) {
+  if (list->head == NULL) {
+    return 0;
+  } else {
+    ListNode* node = list->head;
+    memcpy(elem, node->data, list->elementSize);
+    list->head = node->next;
+    list->length--;
+
+    free(node->data);
+    free(node);
+
+    return 1;
+  }
+}
+
+/*
 * list_size - Returns the size of the List list
 */
 int list_size(List* list) {

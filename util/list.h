@@ -75,5 +75,7 @@ void list_for_each(List* list, listIterator iter);
 void list_head(List* list, element_t elem);
 void list_tail(List* list, element_t elem);
 
+int list_dequeue(List* list, element_t elem);
+
 
 #endif // LIST_H
