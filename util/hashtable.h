@@ -17,15 +17,16 @@
 #include "list.h"
 
 // ---------------- Constants
-#define MAX_HASH_SLOT 9973                // number of "buckets" 10000 
+#define MAX_HASH_SLOT 5                // number of "buckets" 10000 
 
 // ---------------- Structures/Types
 
 typedef int (*hashtable_compare)(element_t av, element_t bv);
-typedef uint32_t (hashtable_hash)(element_t key);
+typedef uint32_t (*hashtable_hash)(element_t key);
 
 typedef struct HashTableNode {
     element_t data;                               // object hashed
+    uint32_t hash;                            // hashed value to make comparison easy
     struct HashTableNode *next;              // pointer to next node
 } HashTableNode;
 
@@ -33,7 +34,7 @@ typedef struct HashTable {
     HashTableNode *table[MAX_HASH_SLOT];     // actual hashtable
     uint32_t elementSize;
     hashtable_compare compare;
-    hashtable_hash hash;
+    hashtable_hash hashFn;
     freeFunction freeFn;
 } HashTable;
 
@@ -68,7 +69,7 @@ void hashtable_new(HashTable* ht, int elementSize, hashtable_compare cmp,
 void hashtable_destroy(HashTable* ht);
 
 void hashtable_insert(HashTable* ht, element_t key, element_t data);
-int hashtable_find(HashTable* ht, element_t key);
+//int hashtable_find(HashTable* ht, element_t key);
 
 int hashtable_get(HashTable* ht, element_t key, element_t elem);
 
