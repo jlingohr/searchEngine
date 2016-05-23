@@ -60,6 +60,9 @@ void cleanup(HashTable* ht);
 int validDepth(int depth, int user_depth);
 
 void free_webpage(element_t elem);
+int cmp_URL(element_t av, element_t bv);
+uint32_t hash_URL(element_t keyv);
+void hash_free(element_t data);
 
 // Global:
 HashTable* URLSVisited;
@@ -92,8 +95,9 @@ int main(int argc, char** argv) {
   user_depth = atoi(argv[3]);
 
   //toVisit= initList();
-  new_list(&toVisit, sizeof(WebPage), free_webpage);
-  URLSVisited = initHashTable();
+  list_new(&toVisit, sizeof(WebPage), free_webpage);
+  //URLSVisited = initHashTable();
+  hashtable_new(URLSVisited, MAX_URL_LENGTH, cmp_URL, hash_URL, hash_free);
   file_counter = 1;
 
   /* Bootstrap given URL for initial seed */
@@ -146,14 +150,14 @@ int main(int argc, char** argv) {
   int result;
   while ((result = list_dequeue(&toVisit, &temp_page))) {
     // Get next URL form the list */
-    if (validDepth(temp_page.depth, user_depth) && HashTableLookUpURL(URLSVisited, temp_page.url)) {
+    if (validDepth(temp_page.depth, user_depth) && hashtable_lookup(URLSVisited, temp_page.url)) {
       // Get WebPage for URL
       if (GetWebPage(&temp_page)) {// write page file
         writePage(&temp_page, target, file_counter);
         file_counter++;
         // extract URLs from webpage and add to URLList
         crawlPage(&temp_page);
-        free(tmp.html);
+        free(temp_page.html);
       }
     }
     /* free resources */
@@ -251,7 +255,7 @@ int crawlPage(WebPage *page) {
   while ((pos = GetNextURL(page->html, pos, page->url, &buf)) > 0) {
     if (NormalizeURL(buf)) {
       if (isValidURL(buf)) {
-        if (!HashTableLookUpURL(URLSVisited, buf)) {
+        if (!hashtable_lookup(URLSVisited, buf)) {
           if (STATUS_LOG == 1)
             printf("\nFound url: %s", buf);
 
@@ -273,7 +277,8 @@ int crawlPage(WebPage *page) {
       }
     }
   }
-  HashTableAddURL(URLSVisited, page->url);
+  //HashTableAddURL(URLSVisited, page->url);
+  hashtable_insert(URLSVisited, page->url, page->url);
   free(buf);
   return 1;
 }
@@ -290,6 +295,65 @@ int validDepth(int depth, int user_depth) {
 * cleanup - free resources
 */
 void cleanup(HashTable* ht) {
-  cleanHashURL(ht);
-  free(ht);
+  //cleanHashURL(ht);
+  //free(ht);
+  hashtable_destroy(ht);
+}
+
+/*
+* cmp_URL - compares urls
+*/
+int cmp_URL(element_t av, element_t bv)
+{
+  char* a = av;
+  char* b = bv;
+  while (*a != 0 && *b != 00 && *a == *b) {
+    a++;
+    b++;
+  }
+  return *a < *b? -1 : *a == *b? 0 : 1;
+}
+
+/*
+* hash_URL - Function to hash the url
+*/
+uint32_t hash_URL(element_t keyv)
+{
+  char* key = (char*)keyv;
+  size_t len = strlen(key);
+
+  uint32_t hash = 0;
+  uint32_t i = 0;
+
+  for (hash = i = 0; i < len; ++i) {
+    hash += key[i];
+    hash += (hash << 10);
+    hash ^= (hash >> 6);
+  }
+
+  hash += (hash << 3);
+  hash ^= (hash >> 11);
+  hash += (hash << 15);
+
+  return hash;
+}
+
+/*
+* Function to free urls in hashtable
+*/
+void hash_free(element_t datav)
+{
+  char* data = datav;
+  free(data);
+}
+
+/*
+* Function to free webpages
+*/
+void free_webpage(element_t elem)
+{
+  WebPage* page = elem;
+  free(page->url);
+  free(page->html);
+  free(page);
 }
