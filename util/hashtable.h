@@ -71,7 +71,7 @@ void hashtable_destroy(HashTable* ht);
 void hashtable_insert(HashTable* ht, element_t key, element_t data);
 //int hashtable_find(HashTable* ht, element_t key);
 
-int hashtable_get(HashTable* ht, element_t key, element_t elem);
+int hashtable_get(HashTable* ht, element_t key, element_t* elem);
 
 
 
