@@ -43,7 +43,11 @@ struct t_block {
   HashTable* ht;
 };
 
+WordNode* initWNode(char* word, int docID);
 
+void wNode_cmp(element_t av, element_t bv);
+uint32_t wNode_hash(element_t keyv);
+void wNode_free(element_t data);
 
 int main(int argc, char** argv) {
   HashTable* Index;
@@ -63,7 +67,9 @@ int main(int argc, char** argv) {
 
   /*2. Initialize data structures
        allocate Inverted_index, zero it, and set links to NULL. */
-  Index = initHashTable();
+  //Index = initHashTable();
+  Index = malloc(sizeof(HashTable));
+  hashtable_new(Index, sizeof(WordNode), wNode_cmp, wNode_hash, wNode_free);
 
   target_directory = argv[1];
   target_file = argv[2];
@@ -311,7 +317,9 @@ int updateIndex(char* word, int docID, HashTable* index) {
   }
   else {
     /* Word not in, so insert word */
-    return IndexAddWord(index, word, docID);
+    //return IndexAddWord(index, word, docID);
+    WordNode* wNode = initWNode(word, docID);
+    hashtable_add(index, wNode, word);
   }
   return 1;
 }
