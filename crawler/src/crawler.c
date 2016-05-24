@@ -15,7 +15,7 @@
   and the depth on the second line. The HTML will for the webpage 
   will start on the third line.
 
-  To run: ./crawler http://www.cs.dartmouth.edu/~campbell/cs50/ ./data/ 2
+  To run: ./bin/crawler http://www.cs.dartmouth.edu/~campbell/cs50/ ./data/ 2
 
 
 */
@@ -97,6 +97,8 @@ int main(int argc, char** argv) {
   //toVisit= initList();
   list_new(&toVisit, sizeof(WebPage), free_webpage);
   //URLSVisited = initHashTable();
+  URLSVisited = malloc(sizeof(HashTable));
+
   hashtable_new(URLSVisited, MAX_URL_LENGTH, cmp_URL, hash_URL, hash_free);
   file_counter = 1;
 
@@ -130,6 +132,7 @@ int main(int argc, char** argv) {
   /* Extract urls from seed and add to URLLIST
   and Hashtable */
   crawlPage(&seed_page);
+  hashtable_insert(URLSVisited, (element_t*)seed_page.url, (element_t*)seed_page.url);
   sleep(INTERVAL_PER_FETCH);
 
   /* while there are urls to crawl do */
@@ -146,22 +149,29 @@ int main(int argc, char** argv) {
         //free(tmp->html);
       //}
     //}
-  WebPage temp_page;
+  WebPage* temp_page;
   int result;
-  while ((result = list_dequeue(&toVisit, &temp_page))) {
+  while (list_size(&toVisit)) {
     // Get next URL form the list */
-    if (validDepth(temp_page.depth, user_depth) && hashtable_lookup(URLSVisited, temp_page.url)) {
+    temp_page = malloc(sizeof(WebPage));
+    result = list_dequeue(&toVisit, temp_page);
+    if (validDepth(temp_page->depth, user_depth) && !hashtable_lookup(URLSVisited, temp_page->url)) {
       // Get WebPage for URL
-      if (GetWebPage(&temp_page)) {// write page file
-        writePage(&temp_page, target, file_counter);
+      if (GetWebPage(temp_page)) {// write page file
+        writePage(temp_page, target, file_counter);
         file_counter++;
         // extract URLs from webpage and add to URLList
-        crawlPage(&temp_page);
-        free(temp_page.html);
+        crawlPage(temp_page);
+        // Put url into hashtable
+        hashtable_insert(URLSVisited, temp_page->url, temp_page->url);
+
+        free(temp_page->url);
+        free(temp_page->html); // Free more like URL
       }
     }
     /* free resources */
     //dec_ref(tmp); 
+    free(temp_page);
 
     /* sleep for a bit to avoid annoying the target domain */
     sleep(INTERVAL_PER_FETCH);
@@ -278,7 +288,7 @@ int crawlPage(WebPage *page) {
     }
   }
   //HashTableAddURL(URLSVisited, page->url);
-  hashtable_insert(URLSVisited, page->url, page->url);
+  //hashtable_insert(URLSVisited, page->url, page->url);
   free(buf);
   return 1;
 }
@@ -305,13 +315,14 @@ void cleanup(HashTable* ht) {
 */
 int cmp_URL(element_t av, element_t bv)
 {
+  // Change this since only need to return 0 or 1
   char* a = av;
   char* b = bv;
-  while (*a != 0 && *b != 00 && *a == *b) {
+  while (*a != 0 && *b != 0 && *a == *b) {
     a++;
     b++;
   }
-  return *a < *b? -1 : *a == *b? 0 : 1;
+  return !(*a < *b? -1 : *a == *b? 0 : 1);
 }
 
 /*
@@ -319,7 +330,7 @@ int cmp_URL(element_t av, element_t bv)
 */
 uint32_t hash_URL(element_t keyv)
 {
-  char* key = (char*)keyv;
+  char* key = keyv;
   size_t len = strlen(key);
 
   uint32_t hash = 0;
