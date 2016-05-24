@@ -136,19 +136,6 @@ int main(int argc, char** argv) {
   sleep(INTERVAL_PER_FETCH);
 
   /* while there are urls to crawl do */
-  //WebPage* tmp;
-  //while((tmp = listRemovePage(toVisit))) {
-    /* get next url from list */
-    //if (validDepth(tmp->depth, user_depth) && !HashTableLookUpURL(URLSVisited, tmp->url)) {
-      /* get webpage for url */
-      //if (GetWebPage(tmp)) { /* write page file */
-        //writePage(tmp, target, file_counter);
-        //file_counter++;
-        /* extract urls from webpage and add to URLList */
-        //crawlPage(tmp);
-        //free(tmp->html);
-      //}
-    //}
   WebPage* temp_page;
   int result;
   while (list_size(&toVisit)) {
@@ -170,7 +157,6 @@ int main(int argc, char** argv) {
       }
     }
     /* free resources */
-    //dec_ref(tmp); 
     free(temp_page);
 
     /* sleep for a bit to avoid annoying the target domain */
@@ -268,12 +254,6 @@ int crawlPage(WebPage *page) {
         if (!hashtable_lookup(URLSVisited, buf)) {
           if (STATUS_LOG == 1)
             printf("\nFound url: %s", buf);
-
-          //WebPage* tmp = malloc(sizeof(WebPage));
-          //tmp->url = malloc(strlen(buf)+1);
-          //strcpy(tmp->url, buf);
-          //tmp->depth = page->depth + 1;
-
           // Fragmentation possible?
           WebPage tmp;
           tmp.url = malloc(strlen(buf)+1);
@@ -287,8 +267,6 @@ int crawlPage(WebPage *page) {
       }
     }
   }
-  //HashTableAddURL(URLSVisited, page->url);
-  //hashtable_insert(URLSVisited, page->url, page->url);
   free(buf);
   return 1;
 }
