@@ -59,6 +59,7 @@ int saveCrawl();
 void cleanup(HashTable* ht);
 int validDepth(int depth, int user_depth);
 
+int cmp_webpage(element_t av, element_t bv);
 void free_webpage(element_t elem);
 int cmp_URL(element_t av, element_t bv);
 uint32_t hash_URL(element_t keyv);
@@ -95,7 +96,7 @@ int main(int argc, char** argv) {
   user_depth = atoi(argv[3]);
 
   //toVisit= initList();
-  list_new(&toVisit, sizeof(WebPage), free_webpage);
+  list_new(&toVisit, sizeof(WebPage), cmp_webpage, free_webpage);
   //URLSVisited = initHashTable();
   URLSVisited = malloc(sizeof(HashTable));
 
@@ -334,6 +335,17 @@ void hash_free(element_t datav)
 {
   char* data = datav;
   free(data);
+}
+
+/*
+* cmp_webpage - Function to compare if two webpages are the same
+* Webpages are the same if they have the same url
+*/
+int cmp_webpage(element_t av, element_t bv)
+{
+  WebPage* a = av;
+  WebPage* b = bv;
+  return strcmp(a, b) == 0;
 }
 
 /*

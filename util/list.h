@@ -21,6 +21,8 @@
 // ---------------- Structures/Types
 
 typedef bool (*listIterator)(element_t);
+typedef int (*list_compare)(element_t av, element_t bv);
+
 
 typedef struct ListNode {
     element_t data;                           // the data for a node
@@ -32,6 +34,7 @@ typedef struct List {
   ListNode *tail;                          // "end" of the list
   int length;
   int elementSize;
+  list_compare cmpFn;
   freeFunction freeFn;
 } List;
 
@@ -63,7 +66,7 @@ int nodeCompare(element_t*, element_t elem, int (*f)(element_t, element_t));
 void MergeSort(List* list, int len, int (*f)(element_t, element_t));
 List* Merge(List* A, List* B, int (*f)(element_t, element_t));
 */
-void list_new(List* list, int elementSize, freeFunction freeFn);
+void list_new(List* list, int elementSize, list_compare cmp, freeFunction freeFn);
 void list_destroy(List* list);
 
 void list_prepend(List* list, element_t elem);
@@ -75,6 +78,8 @@ void list_head(List* list, element_t elem);
 void list_tail(List* list, element_t elem);
 
 int list_dequeue(List* list, element_t elem);
+
+int list_find(List* list, element_t elem)
 
 
 #endif // LIST_H

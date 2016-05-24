@@ -11,14 +11,16 @@
 * with initial size of 0
 * @list: List to initialize
 * @elementSize - Size of data stored in the list
+* @cmp: Function used to compare elements for search
 * @freeFn - function to free list later
 */
-void list_new(List* list, int elementSize, freeFunction freeFn) {
+void list_new(List* list, int elementSize, list_compare cmp, freeFunction freeFn) {
   assert(elementSize > 0);
   assert(freeFn != NULL);
   list->length = 0;
   list->elementSize = elementSize;
   list->head = list->tail = NULL;
+  list->cmpFn = cmp;
   list->freeFn = freeFn;
 }
 
