@@ -37,6 +37,15 @@ void test_stringHash()
   }
   printf("\n");
 
+  // Test looking up names
+  for (int i = 0; i < numNames; i++) {
+    if (hashtable_lookup(&A, (element_t*)names[i])) {
+      printf("Found name: %s\n", names[i]);
+    } else {
+      printf("Error: Did not find %s\n", names[i]);
+    }
+  }
+
   name = NULL;
   // Test getting hashed values
   for (int i = 0; i < numNames; i++) {

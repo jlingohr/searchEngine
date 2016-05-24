@@ -149,7 +149,7 @@ static inline int hashtable_find(HashTable* ht, HashTableNode* node, element_t k
       cur = cur->next;
     }  
   }
-  node = NULL;
+  node = NULL;  // This should be ELEM i think
   return 0;
 }
 
@@ -261,5 +261,20 @@ int hashtable_get(HashTable* ht, element_t key, element_t* elem)
   } else {
     //node = NULL;
     return hashtable_find(ht, ht->table[p], key, hash, *elem);
+  }
+}
+
+/*
+* hashtable_lookup - Returns 1 if key is in table,
+* otherwise returns 0
+*/
+int hashtable_lookup(HashTable* ht, const element_t key)
+{
+  uint32_t hash = 0;
+  int p = hashtable_find_bucket(ht, key, &hash);
+  if (ht->table[p] == NULL) {
+    return 0;
+  } else {
+    return hashtable_find(ht, ht->table[p], key, hash, NULL);
   }
 }

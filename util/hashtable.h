@@ -17,7 +17,7 @@
 #include "list.h"
 
 // ---------------- Constants
-#define MAX_HASH_SLOT 5                // number of "buckets" 10000 
+#define MAX_HASH_SLOT 9973                // number of "buckets" 10000 
 
 // ---------------- Structures/Types
 
@@ -69,10 +69,9 @@ void hashtable_new(HashTable* ht, int elementSize, hashtable_compare cmp,
 void hashtable_destroy(HashTable* ht);
 
 void hashtable_insert(HashTable* ht, element_t key, element_t data);
-//int hashtable_find(HashTable* ht, element_t key);
 
 int hashtable_get(HashTable* ht, element_t key, element_t* elem);
-
+int hashtable_lookup(HashTable* ht, const element_t key);
 
 
 #endif // HASHTABLE_H
