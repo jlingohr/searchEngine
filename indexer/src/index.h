@@ -2,24 +2,12 @@
 #define _INDEX_H
 
 #include "../../util/hashtable.h"
-#include "listD.h"
+#include "../../util/common.h"
+#include "../../util/list.h"
 
 /* Wordnode Hashtable wrappers */
-int IndexAddWord(HashTable* ht, char* word, int docID);
-int IndexLookUp(HashTable* ht, char* word);
-int IndexUpdate(HashTable* ht, char* word, int docID);
-int cmpWNode(element_t wordv, element_t wNodev);
-int HashWNode(const element_t wNodev, int mod);
+int updateIndex(char* word, int docID, HashTable* index);
 WordNode* initWNode(char* word, int docID);
-void IndexPrintWords(HashTable* ht);
-int IndexLoadWords(HashTable* ht, char** buf);
-void cleanIndex(HashTable* ht);
-WordNode* IndexGet(HashTable* ht, char* word);
-HashTable* readFile(char* filename);
-void handleLine(HashTable* index, char* line);
-
-
-
-void IndexAddWNode(HashTable* ht, WordNode* wNode);
-
+void dNode_free(element_t elem);
+int dNode_cmp(element_t av, element_t bv);
 #endif

@@ -22,7 +22,6 @@
 // ---------------- Local includes  e.g., "file.h"
 //#include "../../util/hashtable.h"                       // hashtable functionality
 #include "index.h"
-#include "listD.h"
 #include "../../util/common.h"                          // common functionality
 #include "../../util/util.h"
 #include "../../util/web.h"                             // curl and html functionality
@@ -33,7 +32,6 @@
 int checkCommandLine(int argc, char** argv);
 char* loadDoc(char* filename);
 int getDocID(char* filename, char* dir);
-int updateIndex(char* word, int docID, HashTable* index);
 //int saveIndexToFile(char* file, HashTable* index);
 void* saveIndexToFile(void* argsv);
 void cleanUp(HashTable* Index);
@@ -43,9 +41,8 @@ struct t_block {
   HashTable* ht;
 };
 
-WordNode* initWNode(char* word, int docID);
 
-void wNode_cmp(element_t av, element_t bv);
+int wNode_cmp(element_t av, element_t bv);
 uint32_t wNode_hash(element_t keyv);
 void wNode_free(element_t data);
 
@@ -294,35 +291,7 @@ int getDocID(char* filename, char* dir) {
   return atoi(id);
 }
 
-/* updateIndex - Updates the structure containing the index by
-* inserting a new WordNode if not already in the index
-* and updating the DocumentNode if word is already
-* in the index.
 
-* If word is not in the index, procedure allocates
-* a new WordNode and adds to the hashtable
-*
-* @word: string containing the word
-* @docID: identifier of the document
-* @index: InvertedIndex hashtable
-*
-* Returns 1 if successful
-* Returns 0 otherwise
-*/
-int updateIndex(char* word, int docID, HashTable* index) {
-
-  if (IndexLookUp(index, word)) { /* Word is in table */
-    /* Update docID for word */
-    return IndexUpdate(index, word, docID);
-  }
-  else {
-    /* Word not in, so insert word */
-    //return IndexAddWord(index, word, docID);
-    WordNode* wNode = initWNode(word, docID);
-    hashtable_add(index, wNode, word);
-  }
-  return 1;
-}
 
 /*
 * saveIndexToFile - Saves the inverted index to a file in .dat format
@@ -369,6 +338,55 @@ void cleanUp(HashTable* index) {
   cleanIndex(index);
 }
 
+/*
+* wNode_cmp - Helper function to compare WordNodes
+* in a hashtable of WordNodes
+* @elemv: Assume to be the word to match against
+* @wNodev: Assume to be the WordNode to match
+*/
+void wNode_cmp(element_t elemv, element_t wNodev)
+{
+  char* word = elemv;
+  WordNode* wNode = wNodev;
+  return strcmp(word, wNode->word) == 0;
 
+}
 
+/*
+* wNode_hash - Hashing function to hash WordNodes
+*/
+uint32_t wNode_hash(element_t keyv)
+{
+  WordNode* wNode = keyv;
+
+  // works with *(char**) only///
+  char* key = wNode->word;
+  //printf("Hashing %s\n", key);
+  size_t len = strlen(key);
+
+  uint32_t hash = 0;
+  uint32_t i = 0;
+
+  for (hash = i = 0; i < len; ++i) {
+    hash += key[i];
+    hash += (hash << 10);
+    hash ^= (hash >> 6);
+  }
+
+  hash += (hash << 3);
+  hash ^= (hash >> 11);
+  hash += (hash << 15);
+
+  return hash;
+}
+
+/*
+* wNode_free - Helper to free WordNodes
+*/
+void wNode_free(element_t data)
+{
+  WordNode* wNode = data;
+  list_destroy(wNode->page);
+  free(wNode);
+}
 
