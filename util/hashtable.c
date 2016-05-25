@@ -279,27 +279,4 @@ int hashtable_lookup(HashTable* ht, const element_t key)
   }
 }
 
-/*
-* hashtable_update - Updates an object in the hashtable
-* @ht: hashtable to retrieve object
-* @key: key to hash corresponding to object
-* @data: data to update
-*/
-int hashtable_update(HashTable* ht, element_t key, element_t data)
-{
-  // TODO - finish
-  // Get WordNode for word
-  uint32_t hash = 0;
-  int p = hashtable_find_bucket(ht, key, &hash);
-  HashTableNode* node = ht->table[p];
-  while (!ht->compare(word, node->data)) {  // We know word must be in table
-    node = node->next;
-  }
-  if (!node) {
-    fprintf(stderr, "hashtable_update error\n");
-    return 0;
-  }
 
-  // Update data for key in node
-  
-}

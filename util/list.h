@@ -34,7 +34,7 @@ typedef struct List {
   ListNode *tail;                          // "end" of the list
   int length;
   int elementSize;
-  list_compare cmpFn;
+  list_compare compare;
   freeFunction freeFn;
 } List;
 
