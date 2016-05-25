@@ -36,6 +36,7 @@ int getDocID(char* filename, char* dir);
 void* saveIndexToFile(void* argsv);
 void cleanUp(HashTable* Index);
 void readFile(HashTable* ht, char* filename);
+void handleLine(HashTable* index, char* line);
 
 struct t_block {
   char* file;
@@ -166,7 +167,7 @@ int main(int argc, char** argv) {
     /*7. Reload index from file and rewrite to new file
       wordindex = readFile(argv[3]) */
     //Index = readFile(test_old);
-    hhashtable_new(Index, sizeof(WordNode), wNode_cmp, wNode_hash, wNode_free);
+    hashtable_new(Index, sizeof(WordNode), wNode_cmp, wNode_hash, wNode_free);
     readFile(Index, test_old);
 
     /*8. saveFile (argv[4]. wordindex) */
@@ -363,7 +364,7 @@ void cleanUp(HashTable* index) {
 * @elemv: Assume to be the word to match against
 * @wNodev: Assume to be the WordNode to match
 */
-void wNode_cmp(element_t elemv, element_t wNodev)
+int wNode_cmp(element_t elemv, element_t wNodev)
 {
   char* word = elemv;
   WordNode* wNode = wNodev;
@@ -418,8 +419,8 @@ void wNode_free(element_t data)
 void readFile(HashTable* index, char* filename)
 {
   FILE* fp;
-  char* buf;
-  int size;
+  //char* buf;
+  //int size;
 
   fp = fopen(filename, "r");
   ssize_t read;
@@ -453,6 +454,7 @@ void handleLine(HashTable* index, char* line) {
   // Initialize list 
   num_tokens = 1;
   //dNodeList = initList();
+  dNodeList = malloc(sizeof(List));
   list_new(dNodeList, sizeof(DocumentNode), dNode_cmp, dNode_free);
 
   pch = strtok(line, " ");

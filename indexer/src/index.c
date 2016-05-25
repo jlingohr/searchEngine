@@ -49,10 +49,10 @@ int updateIndex(char* word, int docID, HashTable* index) {
   }
   return 1;*/
   WordNode* wNode = NULL;
-  if (hashtable_lookup(index, word, wNode)) {
+  if (hashtable_lookup(index, word)) {
     // word is in hashtable, so find DocumentNode
     DocumentNode* dNode = malloc(sizeof(DocumentNode));
-    if (list_get(wNode->page, docID, dNode)) {
+    if (list_get(wNode->page, &docID, dNode)) {
       // Update page count
       dNode->page_word_frequency++;
       // remove, update
@@ -68,6 +68,7 @@ int updateIndex(char* word, int docID, HashTable* index) {
     wNode = initWNode(word, docID);
     hashtable_insert(index, word, wNode);
   }
+  return 1;
 }
 
 /*
@@ -76,7 +77,7 @@ int updateIndex(char* word, int docID, HashTable* index) {
 void dNode_free(element_t elem)
 {
   DocumentNode* dNode = elem;
-  free(elem);
+  free(dNode);
 }
 
 /*
@@ -86,7 +87,7 @@ void dNode_free(element_t elem)
 int dNode_cmp(element_t av, element_t bv)
 {
   DocumentNode* a = av;
-  intptr_t b = bv;
+  intptr_t b = (intptr_t)bv;
   return a->document_id == b;
 }
 
@@ -121,18 +122,23 @@ WordNode* initWNode(char* word, int docID) {
 * dNode_concat - Helper to concatenate the data in a list
 * of DocumentNode
 */
-void dNode_concat(element_t* av, element_t bv) {
-  char** a = (char**)av;
+void dNode_concat(char* str, List* list) {
+  /*char** rp = (char**)rpv;
   DocumentNode* dNode = (DocumentNode*)bv;
 
   char dNode_buf[MAXLINE];
-  sprintf(&dNode_buf, "%d %d ", dNode->document_id, dNode->page_word_frequency);
+  sprintf(dNode_buf, "%d %d ", dNode->document_id, dNode->page_word_frequency);
 
 
-  int alen = strlen(*a);
+  int alen = strlen(*rp);
   int blen = strlen(dNode_buf);
-  *a = realloc(*a, alen + blen + 1);
-  strcat(*a, &dNode_buf);
+  *rp = realloc(*rp, alen + blen + 1);
+  strcat(*rp, dNode_buf);*/
+  char* v = malloc(1);
+  v[0] = 0;
+  list_foldl(concat, (element_t*)&v, list);
+  strcat()
+
 }
 
 /*
@@ -145,35 +151,8 @@ void dNode_concat(element_t* av, element_t bv) {
 * Returns size of buffer
 * TODO - Hoe to make private?
 */
-int IndexLoadWords(HashTable* ht, char** buf) {
-  /*
-  // TODO - REDO, too sloppy and risks fragmentations 
-  HashTableNode* node;
-  WordNode* wNode;
-  char* word, *word_buf;
-
-  for (int i = 0; i < ht->size; i++) {  // Loop through hashtable 
-    node = ht->table[i];
-    while (node) { // Loop through WordNode 
-      wNode = (WordNode*)node->data;
-      word = wNode->word;
-      //printf("Obtaining data on %s\n", word);
-      word_buf = malloc(MAXLINE);
-
-      sprintf(word_buf, "%s %d ", word, wNode->page->len);
-      listFoldString(concat, &word_buf, wNode->page);
-
-      if (strlen(*buf) + strlen(word_buf) - 1 <= sizeof(*buf))
-        buf = realloc(buf, 2*sizeof(buf));
-      strcat(*buf, word_buf);
-      strcat(*buf, "\n");
-      free(word_buf);
-
-      node = node->next;      
-    }
-  }
-  return strlen(*buf);*/
-
+int IndexLoadWords(HashTable* ht, char** buf) 
+{
   WordNode* wNode;
   char *word, *word_buf;
   for (int i = 0; i < MAX_HASH_SLOT; i++) { // Go through each hashtable bucket
@@ -184,7 +163,8 @@ int IndexLoadWords(HashTable* ht, char** buf) {
       word_buf = malloc(MAXLINE);
 
       sprintf(word_buf, "%s %d ", word, wNode->page->length);
-      list_foldl(dNode_concat, &word_buf, wNode->page);
+      //list_foldl(dNode_concat, (element_t*)&word_buf, wNode->page);
+      dNode_concat(&word_buf, wNode->page);
 
       if (strlen(*buf) + strlen(word_buf) - 1 <= sizeof(*buf)) {
         buf = realloc(buf, 2*sizeof(buf));
