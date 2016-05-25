@@ -10,4 +10,7 @@ int updateIndex(char* word, int docID, HashTable* index);
 WordNode* initWNode(char* word, int docID);
 void dNode_free(element_t elem);
 int dNode_cmp(element_t av, element_t bv);
+int IndexLoadWords(HashTable* ht, char** buf);
+void dNode_concat(element_t* av, element_t bv);
+
 #endif

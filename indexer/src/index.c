@@ -116,3 +116,86 @@ WordNode* initWNode(char* word, int docID) {
   return wNode;
 }
 
+
+/*
+* dNode_concat - Helper to concatenate the data in a list
+* of DocumentNode
+*/
+void dNode_concat(element_t* av, element_t bv) {
+  char** a = (char**)av;
+  DocumentNode* dNode = (DocumentNode*)bv;
+
+  char dNode_buf[MAXLINE];
+  sprintf(&dNode_buf, "%d %d ", dNode->document_id, dNode->page_word_frequency);
+
+
+  int alen = strlen(*a);
+  int blen = strlen(dNode_buf);
+  *a = realloc(*a, alen + blen + 1);
+  strcat(*a, &dNode_buf);
+}
+
+/*
+* IndexLoadWords - load hashtable values into string buffer. Each word
+* is loaded followed by (1) number indicating how many documents the word is in;
+* (2) (a,b) pairs where the document a has b occurences of the word
+* @ht: Hashtable to load from
+* @buf: pointer to C-style string to loads values
+*
+* Returns size of buffer
+* TODO - Hoe to make private?
+*/
+int IndexLoadWords(HashTable* ht, char** buf) {
+  /*
+  // TODO - REDO, too sloppy and risks fragmentations 
+  HashTableNode* node;
+  WordNode* wNode;
+  char* word, *word_buf;
+
+  for (int i = 0; i < ht->size; i++) {  // Loop through hashtable 
+    node = ht->table[i];
+    while (node) { // Loop through WordNode 
+      wNode = (WordNode*)node->data;
+      word = wNode->word;
+      //printf("Obtaining data on %s\n", word);
+      word_buf = malloc(MAXLINE);
+
+      sprintf(word_buf, "%s %d ", word, wNode->page->len);
+      listFoldString(concat, &word_buf, wNode->page);
+
+      if (strlen(*buf) + strlen(word_buf) - 1 <= sizeof(*buf))
+        buf = realloc(buf, 2*sizeof(buf));
+      strcat(*buf, word_buf);
+      strcat(*buf, "\n");
+      free(word_buf);
+
+      node = node->next;      
+    }
+  }
+  return strlen(*buf);*/
+
+  WordNode* wNode;
+  char *word, *word_buf;
+  for (int i = 0; i < MAX_HASH_SLOT; i++) { // Go through each hashtable bucket
+    HashTableNode* node = ht->table[i];
+    while (node) {  // Go through each word node
+      wNode = node->data;
+      word = wNode->word;
+      word_buf = malloc(MAXLINE);
+
+      sprintf(word_buf, "%s %d ", word, wNode->page->length);
+      list_foldl(dNode_concat, &word_buf, wNode->page);
+
+      if (strlen(*buf) + strlen(word_buf) - 1 <= sizeof(*buf)) {
+        buf = realloc(buf, 2*sizeof(buf));
+      }
+      strcat(*buf, word_buf);
+      strcat(*buf, "\n");
+      free(word_buf);
+
+      node = node->next;
+    }
+  }
+  return strlen(*buf);
+  
+}
