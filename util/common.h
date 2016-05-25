@@ -22,14 +22,14 @@
 #define MAX_DEPTH 4                          // don't want to go too far do
 #define MAX_URL_LENGTH 1000
 #define MAXLINE 1000     
-#define STATUS_LOG 1            // switch to one for output    
+#define STATUS_LOG 0            // switch to one for output    
 #define WORD_LENGTH 1000
 #define MAX_NUMBER_OF_SLOTS 10000  
 #define BUF_SIZE 8192
  
 
 // limit crawling to only this domain
-#define URL_PREFIX "http://www.cs.dartmouth.edu/~campbell/cs50/"
+#define URL_PREFIX "http://www.cs.dartmouth.edu/campbell/cs50/"
 
 // ---------------- Structures/Types
 

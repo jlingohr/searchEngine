@@ -143,9 +143,59 @@ int list_dequeue(List* list, element_t elem) {
 }
 
 /*
+* list_get - Retrive object with match key and store in elem,
+* while removing element from list 
+* Returns 1 on success, 0 otherwise
+*/
+int list_get(List* list, element_t key, element_t elem)
+{
+  // TODO - should it remove element?
+  if (list->compare(key, list->head)) {
+    return list_dequeue(list, elem);
+  }
+
+  ListNode* node = list->head;
+  ListNode* tmp = node->next;
+  while (tmp) {
+    if (list->compare(key, tmp->data)) {
+      //elem = malloc(list->elementSize);
+      memcpy(elem, tmp->data, list->elementSize);
+      node->next = tmp->next;
+      free(tmp);
+      return 1;
+    }
+    node = tmp;
+    tmp = tmp->next;
+  }
+  return 0;
+}
+
+
+/*
 * list_size - Returns the size of the List list
 */
 int list_size(List* list) {
   return list->length;
 }
 
+/**
+ * Fold in_list using function f placing result in out_element_p.
+ * For f(out,in):
+ *    out is pointer to the accumulator element (i.e., the value of out_element_p)
+ *        if *out is NULL then f should allocate a new element and set *out to point to it
+ *    in  is an element from in_list
+ */
+void list_foldl(void (*f) (element_t*, element_t, element_t), element_t* out_element_p, List* list)
+{
+  ListNode* node = list->head;
+  bool result = TRUE;
+  while (node != NULL && result) {
+    result = iterator(node->data);
+    node = node->next;
+  }
+
+  ListNode* node = list->head;
+  while (node) {
+    f(out_element_p, *out_element_p, node->data);
+  }
+}
