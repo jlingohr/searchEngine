@@ -15,6 +15,34 @@
 * Wordnode Hashtable wrappers 
 **************************/
 
+
+/*
+* initWNode - Initializes WordNode and assigns initial values
+* @word: Word the node corresponds to
+* @docID: documet id
+*
+*/
+WordNode* initWNode(char* word, int docID) {
+  /* TODO - BUGS here with assigning dNOde to list;
+  Check for memory leaks */
+  
+  WordNode* wNode = malloc(sizeof(WordNode));
+  strcpy(wNode->word, word);
+
+  //wNode->page = initList();
+  wNode->page = malloc(sizeof(List));
+  list_new(wNode->page, sizeof(DocumentNode), dNode_cmp, dNode_free);
+
+
+  DocumentNode* dNode = malloc(sizeof(DocumentNode));
+  dNode->document_id = docID;
+  dNode->page_word_frequency = 1;
+
+  //listAddDoc(wNode->page, dNode);
+  list_append(wNode->page, dNode);
+  return wNode;
+}
+
 /* updateIndex - Updates the structure containing the index by
 * inserting a new WordNode if not already in the index
 * and updating the DocumentNode if word is already
@@ -49,7 +77,7 @@ int updateIndex(char* word, int docID, HashTable* index) {
   }
   return 1;*/
   WordNode* wNode = NULL;
-  if (hashtable_lookup(index, word)) {
+  if (hashtable_get(index, word, wNode)) { //hashtable_lookup(index, word)
     // word is in hashtable, so find DocumentNode
     DocumentNode* dNode = malloc(sizeof(DocumentNode));
     if (list_get(wNode->page, &docID, dNode)) {
@@ -91,31 +119,6 @@ int dNode_cmp(element_t av, element_t bv)
   return a->document_id == b;
 }
 
-/*
-* initWNode - Initializes WordNode and assigns initial values
-* @word: Word the node corresponds to
-* @docID: documet id
-*
-*/
-WordNode* initWNode(char* word, int docID) {
-  /* TODO - BUGS here with assigning dNOde to list;
-  Check for memory leaks */
-  
-  WordNode* wNode = malloc(sizeof(WordNode));
-  strcpy(wNode->word, word);
-
-  //wNode->page = initList();
-  list_new(wNode->page, sizeof(DocumentNode), dNode_cmp, dNode_free);
-
-
-  DocumentNode* dNode = malloc(sizeof(DocumentNode));
-  dNode->document_id = docID;
-  dNode->page_word_frequency = 1;
-
-  //listAddDoc(wNode->page, dNode);
-  list_append(wNode->page, dNode);
-  return wNode;
-}
 
 static void concat(element_t* outv, element_t strv, element_t dNodev)
 {

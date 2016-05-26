@@ -5,12 +5,12 @@
 * For testing ability to reconstruct the inverted index
 * ./indexer  [TARGET_DIRECTORY] [RESULTS FILENAME] [RESULTS FILENAME] [REWRITEN FILENAME]
 *
-* To run: ./bin/index ../crawler/data/ ./data/index.dat
+* To run: ./bin/indexer ../crawler/data/ ./data/index.dat
 *
-* To Test: ./index ../crawler/data/ ./data/index.dat ./data/index.dat ./data/newindex.dat
+* To Test: ./bin/indexer ../crawler/data/ ./data/index.dat ./data/index.dat ./data/newindex.dat
 */
 
-#include <stdio.h>                           // printf
+//#include <stdio.h>                           // printf
 #include <sys/stat.h>                        // isdir
 #include <sys/types.h>
 #include <unistd.h>
@@ -22,7 +22,7 @@
 // ---------------- Local includes  e.g., "file.h"
 //#include "../../util/hashtable.h"                       // hashtable functionality
 #include "index.h"
-#include "../../util/common.h"                          // common functionality
+//#include "../../util/common.h"                          // common functionality
 #include "../../util/util.h"
 #include "../../util/web.h"                             // curl and html functionality
 
