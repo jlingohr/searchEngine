@@ -11,6 +11,6 @@ WordNode* initWNode(char* word, int docID);
 void dNode_free(element_t elem);
 int dNode_cmp(element_t av, element_t bv);
 int IndexLoadWords(HashTable* ht, char** buf);
-void dNode_concat(char* str, List* list);
+void dNode_concat(char** str, List* list);
 
 #endif

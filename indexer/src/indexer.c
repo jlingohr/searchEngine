@@ -5,7 +5,7 @@
 * For testing ability to reconstruct the inverted index
 * ./indexer  [TARGET_DIRECTORY] [RESULTS FILENAME] [RESULTS FILENAME] [REWRITEN FILENAME]
 *
-* To run: ./index ../crawler/data/ ./data/index.dat
+* To run: ./bin/index ../crawler/data/ ./data/index.dat
 *
 * To Test: ./index ../crawler/data/ ./data/index.dat ./data/index.dat ./data/newindex.dat
 */

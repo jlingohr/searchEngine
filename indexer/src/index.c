@@ -117,12 +117,26 @@ WordNode* initWNode(char* word, int docID) {
   return wNode;
 }
 
+static void concat(element_t* outv, element_t strv, element_t dNodev)
+{
+  char** out = (char**)outv;
+  DocumentNode* dNode = dNodev;
+
+  // Copy values into a buffer
+  char temp[BUF_SIZE];
+  sprintf(temp, "%d %d ", dNode->document_id, dNode->page_word_frequency);
+  
+  int out_len = strlen(*out);
+  int temp_len = strlen(temp);
+  *out = realloc(*out, out_len + temp_len + 1);
+  strcat(*out, temp);
+}
 
 /*
 * dNode_concat - Helper to concatenate the data in a list
 * of DocumentNode
 */
-void dNode_concat(char* str, List* list) {
+void dNode_concat(char** str, List* list) {
   /*char** rp = (char**)rpv;
   DocumentNode* dNode = (DocumentNode*)bv;
 
@@ -136,8 +150,9 @@ void dNode_concat(char* str, List* list) {
   strcat(*rp, dNode_buf);*/
   char* v = malloc(1);
   v[0] = 0;
-  list_foldl(concat, (element_t*)&v, list);
-  strcat()
+  list_foldl(concat, (element_t*)&v, list); // iteratively concat DocumentNode values
+  //strcat(str, v);
+  free(v);
 
 }
 
@@ -162,14 +177,14 @@ int IndexLoadWords(HashTable* ht, char** buf)
       word = wNode->word;
       word_buf = malloc(MAXLINE);
 
-      sprintf(word_buf, "%s %d ", word, wNode->page->length);
+      sprintf(word_buf, "%s %d ", word, wNode->page->length); // allocate the word and number of documents
       //list_foldl(dNode_concat, (element_t*)&word_buf, wNode->page);
-      dNode_concat(&word_buf, wNode->page);
+      dNode_concat(&word_buf, wNode->page); // Get string values for each DocumentNode for the current word
 
       if (strlen(*buf) + strlen(word_buf) - 1 <= sizeof(*buf)) {
         buf = realloc(buf, 2*sizeof(buf));
       }
-      strcat(*buf, word_buf);
+      strcat(*buf, word_buf); // Concat to the buffer
       strcat(*buf, "\n");
       free(word_buf);
 
