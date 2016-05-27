@@ -58,25 +58,9 @@ WordNode* initWNode(char* word, int docID) {
 * Returns 1 if successful
 * Returns 0 otherwise
 */
-int updateIndex(char* word, int docID, HashTable* index) {
-
-  /*if (IndexLookUp(index, word)) { // Word is in table 
-    // Update docID for word 
-    //return IndexUpdate(index, word, docID);
-    //hashtable_update(index, word, docID);
-    WordNode* wNode = NULL;
-    if (hashtable_get(index, word, wNode)) {
-
-    }
-  }
-  else {
-    // Word not in, so insert word 
-    //return IndexAddWord(index, word, docID);
-    WordNode* wNode = initWNode(word, docID);
-    hashtable_add(index, word, wNode);
-  }
-  return 1;*/
-  WordNode* wNode = NULL;
+int updateIndex(char* word, int docID, HashTable* index) 
+{
+  WordNode* wNode = initWNode(word, docID);
   if (hashtable_get(index, word, wNode)) { //hashtable_lookup(index, word)
     // word is in hashtable, so find DocumentNode
     DocumentNode* dNode = malloc(sizeof(DocumentNode));
@@ -93,7 +77,7 @@ int updateIndex(char* word, int docID, HashTable* index) {
     dNode_free(dNode);
   } else {
     //wNode_free(wNode);
-    wNode = initWNode(word, docID);
+    //wNode = initWNode(word, docID);
     hashtable_insert(index, word, wNode);
   }
   return 1;
@@ -139,22 +123,12 @@ static void concat(element_t* outv, element_t strv, element_t dNodev)
 * dNode_concat - Helper to concatenate the data in a list
 * of DocumentNode
 */
-void dNode_concat(char** str, List* list) {
-  /*char** rp = (char**)rpv;
-  DocumentNode* dNode = (DocumentNode*)bv;
-
-  char dNode_buf[MAXLINE];
-  sprintf(dNode_buf, "%d %d ", dNode->document_id, dNode->page_word_frequency);
-
-
-  int alen = strlen(*rp);
-  int blen = strlen(dNode_buf);
-  *rp = realloc(*rp, alen + blen + 1);
-  strcat(*rp, dNode_buf);*/
+void dNode_concat(char** str, List* list) 
+{
   char* v = malloc(1);
   v[0] = 0;
   list_foldl(concat, (element_t*)&v, list); // iteratively concat DocumentNode values
-  //strcat(str, v);
+  strcat(*str, v);
   free(v);
 
 }
@@ -170,7 +144,7 @@ void dNode_concat(char** str, List* list) {
 * TODO - Hoe to make private?
 */
 int IndexLoadWords(HashTable* ht, char** buf) 
-{
+{ // TODO - this is bugging out
   WordNode* wNode;
   char *word, *word_buf;
   for (int i = 0; i < MAX_HASH_SLOT; i++) { // Go through each hashtable bucket
@@ -192,6 +166,7 @@ int IndexLoadWords(HashTable* ht, char** buf)
       free(word_buf);
 
       node = node->next;
+      printf("Loaded word: %s\n", word);
     }
   }
   return strlen(*buf);

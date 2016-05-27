@@ -150,8 +150,10 @@ int main(int argc, char** argv) {
   struct t_block args;
   args.file = target_file;
   args.ht = Index;
-  pthread_create(&tid, NULL, saveIndexToFile, &args);
-  pthread_join(tid, NULL);
+  //pthread_create(&tid, NULL, saveIndexToFile, &args);
+  //pthread_join(tid, NULL);
+  char* buf = malloc(BUF_SIZE);
+  IndexLoadWords(Index, &buf);
 
   //saved = saveIndexToFile(target_file, Index);
 
@@ -335,6 +337,7 @@ void* saveIndexToFile(void* argsv)
   index = args->ht;
 
   buf = malloc(BUF_SIZE);
+  //printf("Loading words from index...\n");
   size = IndexLoadWords(index, &buf);
 
   fp = fopen(file, "w+");

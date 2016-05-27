@@ -11,6 +11,9 @@ Requirements
 TODOS:
 ----------
 
+* Update all Index hashtable in indexer.c to work with refactored hashtable
+- dNode_concat and concat
+
 Double check refactoring didnt affect crawler.c
 Tidy up
 Seperate modules/Libraries

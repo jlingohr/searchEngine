@@ -17,6 +17,7 @@
 void list_new(List* list, int elementSize, list_compare cmp, freeFunction freeFn) {
   assert(elementSize > 0);
   assert(freeFn != NULL);
+  assert(cmp != NULL);
   list->length = 0;
   list->elementSize = elementSize;
   list->head = list->tail = NULL;
@@ -190,5 +191,6 @@ void list_foldl(void (*f) (element_t*, element_t, element_t), element_t* out_ele
   ListNode* node = list->head;
   while (node) {
     f(out_element_p, *out_element_p, node->data);
+    node = node->next;
   }
 }

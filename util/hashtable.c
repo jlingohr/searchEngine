@@ -234,7 +234,7 @@ void hashtable_insert(HashTable* ht, element_t key, element_t data)
 * @elem - retrieved item wil be stored in here
 * Returns 1 if item successfully retrieved, else 0
 */
-int hashtable_get(HashTable* ht, element_t key, element_t* elem)
+int hashtable_get(HashTable* ht, element_t key, element_t elem)
 {
   /*uint32_t p = ht->hashFn(key)%MAX_HASH_SLOT;
   if (ht->table[p] == NULL) {
@@ -252,7 +252,7 @@ int hashtable_get(HashTable* ht, element_t key, element_t* elem)
     return 0;
   }*/
   //HashTableNode* node;
-  *elem = malloc(ht->elementSize);
+  //*elem = malloc(ht->elementSize);
   uint32_t hash = 0;
   //node = hashtable_find_bucket(ht, key, &hash);
   int p = hashtable_find_bucket(ht, key, &hash);
@@ -260,7 +260,7 @@ int hashtable_get(HashTable* ht, element_t key, element_t* elem)
     return 0;
   } else {
     //node = NULL;
-    return hashtable_find(ht, ht->table[p], key, hash, *elem);
+    return hashtable_find(ht, ht->table[p], key, hash, elem);
   }
 }
 

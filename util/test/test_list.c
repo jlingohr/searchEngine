@@ -13,12 +13,19 @@ bool iter_int(element_t av) {
   return TRUE;
 }
 
+int cmp_int(element_t av, element_t bv)
+{
+  intptr_t a = (intptr_t)av;
+  intptr_t b = (intptr_t)bv;
+  return a == b;
+}
+
 void test_intList() {
   List A;
   List B;
 
-  list_new(&A, sizeof(int), NULL);
-  list_new(&B, sizeof(int), NULL);
+  list_new(&A, sizeof(int), cmp_int, NULL);
+  list_new(&B, sizeof(int), cmp_int, NULL);
 
   for (int i = SIZE; i > 0; i--) {
     int even = 2*i;
@@ -37,6 +44,14 @@ void test_intList() {
   printf("Successfully freed both lists...\n");
 }
 
+int cmp_page(element_t av, element_t bv)
+{
+  // TODO - Add test for this
+  WebPage* a = av;
+  WebPage* b = bv;
+  return strcmp(a->url, b->url) == 0;
+}
+
 void free_page(element_t av) {
   WebPage* a = (WebPage*)av;
   free(a->url);
@@ -52,7 +67,7 @@ bool iter_page(element_t av) {
 void test_WebPageList() {
   List A;
 
-  list_new(&A, sizeof(WebPage), free_page);
+  list_new(&A, sizeof(WebPage), cmp_page, free_page);
 
   WebPage page;
   for (int i = 1; i < SIZE; i++) {
