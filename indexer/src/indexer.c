@@ -124,7 +124,7 @@ int main(int argc, char** argv) {
   for (int i = 0; i < num_files; i++) {
     if (!isFile(filenames[i])) {
       fprintf(stderr, "%s not a file\n", filenames[i]);
-      continue;
+      return 1;
     }
     doc = loadDoc(filenames[i]);
     doc_id = getDocID(filenames[i], target_directory);
@@ -150,10 +150,10 @@ int main(int argc, char** argv) {
   struct t_block args;
   args.file = target_file;
   args.ht = Index;
-  //pthread_create(&tid, NULL, saveIndexToFile, &args);
-  //pthread_join(tid, NULL);
-  char* buf = malloc(BUF_SIZE);
-  IndexLoadWords(Index, &buf);
+  pthread_create(&tid, NULL, saveIndexToFile, &args);
+  pthread_join(tid, NULL);
+  //char* buf = malloc(BUF_SIZE);
+  //IndexLoadWords(Index, &buf);
 
   //saved = saveIndexToFile(target_file, Index);
 

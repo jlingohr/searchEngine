@@ -155,7 +155,6 @@ int IndexLoadWords(HashTable* ht, char** buf)
       word_buf = malloc(MAXLINE);
 
       sprintf(word_buf, "%s %d ", word, wNode->page->length); // allocate the word and number of documents
-      //list_foldl(dNode_concat, (element_t*)&word_buf, wNode->page);
       dNode_concat(&word_buf, wNode->page); // Get string values for each DocumentNode for the current word
 
       if (strlen(*buf) + strlen(word_buf) - 1 <= sizeof(*buf)) {
