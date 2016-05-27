@@ -142,6 +142,7 @@ int main(int argc, char** argv) {
     // LOG( "done!");
   if (STATUS_LOG == 1) {
     printf("\nLogging complete!\n");
+    printIndex(index);
     //HashTablePrintWords(Index);
   }
 
@@ -325,18 +326,20 @@ int getDocID(char* filename, char* dir) {
 //int saveIndexToFile(char* file, HashTable* index)
 void* saveIndexToFile(void* argsv)
  {
-  /* TODO - Works except printing some html! */
+  // TODO - Problem in IndexLoadWords
   FILE* fp;
-  char* buf, *file;
-  int size;
+  //char* buf, *file;
+  char* file;
+  //int size;
   HashTable* index;
+  HashTableNode* node;
 
   struct t_block* args = (struct t_block*)argsv;
 
   file = args->file;
   index = args->ht;
 
-  buf = malloc(BUF_SIZE);
+  /*buf = malloc(BUF_SIZE);
   //printf("Loading words from index...\n");
   size = IndexLoadWords(index, &buf);
 
@@ -350,6 +353,31 @@ void* saveIndexToFile(void* argsv)
     fprintf(stderr, "Error opening file\n");
     return 0;
   }
+  return 0;*/
+
+  fp = fopen(file, "w+");
+  if (fp) {
+    for (int i = 0; i < MAX_HASH_SLOT; i++) { .. Loop through buckets
+      WordNode* wNode;
+      for (node = index->table[i]; node != NULL; node = node->next) { // Loop through hashtable nodes
+        ListNode* lNode;
+        wNode = node->data;
+        fprintf(fp, "%s %d ", wNode->word, wNode->page->length);
+        // Loop through DocuentNode in wNode
+        lNode = wNode->page->head;
+        while (lNode) { // Loop through DocumentNodes
+          DocumentNode* dNode = lNode->data;
+          fprintf(fp, "%d %d ", dNode->document_id, dNode->page_word_frequency);
+          lNode = lNode->next;
+        }
+        fprintf(fp, "\n");
+      }
+    }
+  } else {
+    fprintf(stderr, "Error - Opening target file\n");
+    exit(1);
+  }
+  fclose(fp);
   return 0;
 }
 

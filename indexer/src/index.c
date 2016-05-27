@@ -130,6 +130,17 @@ void dNode_concat(char** str, List* list)
   list_foldl(concat, (element_t*)&v, list); // iteratively concat DocumentNode values
   strcat(*str, v);
   free(v);
+  /*char buf[BUF_SIZE];
+  ListNode* node = list->head;
+  DocumentNode* dNode;
+  while (node) {
+    dNode = node->data;
+    sprintf(buf, "%d %d ", dNode->document_id, dNode->page_word_frequency);
+    node = node->next;
+    strcat(*str, buf);
+
+  }
+  //strcat(*str, buf);*/
 
 }
 
@@ -152,20 +163,20 @@ int IndexLoadWords(HashTable* ht, char** buf)
     while (node) {  // Go through each word node
       wNode = node->data;
       word = wNode->word;
-      word_buf = malloc(MAXLINE);
+      word_buf = malloc(BUF_SIZE);
 
       sprintf(word_buf, "%s %d ", word, wNode->page->length); // allocate the word and number of documents
       dNode_concat(&word_buf, wNode->page); // Get string values for each DocumentNode for the current word
 
       if (strlen(*buf) + strlen(word_buf) - 1 <= sizeof(*buf)) {
-        buf = realloc(buf, 2*sizeof(buf));
+        buf = realloc(*buf, 2*sizeof(*buf));
       }
       strcat(*buf, word_buf); // Concat to the buffer
       strcat(*buf, "\n");
       free(word_buf);
 
       node = node->next;
-      printf("Loaded word: %s\n", word);
+      //printf("Loaded word: %s\n", word);
     }
   }
   return strlen(*buf);
