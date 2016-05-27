@@ -15,7 +15,7 @@
   and the depth on the second line. The HTML will for the webpage 
   will start on the third line.
 
-  To run: ./bin/crawler http://www.cs.dartmouth.edu/~campbell/cs50/ ./data/ 2
+  To run: ./bin/crawler http://www.cs.dartmouth.edu/~campbell/cs50/ ./data/ 0
 
 
 */
@@ -30,13 +30,13 @@
 
 // ---------------- Local includes  e.g., "file.h"
 #include "utils.h"                           // utility stuffs
-//#include "../../util/hashtable.h"                       // hashtable functionality
+#include "../../util/hashtable.h"                       // hashtable functionality
 #include "../../util/common.h"                          // common functionality
 #include "../../util/util.h"
 #include "../../util/web.h"                             // curl and html functionality
-//#include "../../util/list.h"                            // webpage list functionality
-#include "hashtableURL.h"
-#include "listwpage.h"
+#include "../../util/list.h"                            // webpage list functionality
+//#include "hashtableURL.h"
+//#include "listwpage.h"
 
 
 
@@ -67,7 +67,7 @@ void hash_free(element_t data);
 
 // Global:
 HashTable* URLSVisited;
-List toVisit;
+List* toVisit;
 
 
 int main(int argc, char** argv) {
@@ -96,7 +96,8 @@ int main(int argc, char** argv) {
   user_depth = atoi(argv[3]);
 
   //toVisit= initList();
-  list_new(&toVisit, sizeof(WebPage), cmp_webpage, free_webpage);
+  toVisit = malloc(sizeof(List));
+  list_new(toVisit, sizeof(WebPage), cmp_webpage, free_webpage);
   //URLSVisited = initHashTable();
   URLSVisited = malloc(sizeof(HashTable));
 
@@ -139,11 +140,11 @@ int main(int argc, char** argv) {
   /* while there are urls to crawl do */
   WebPage* temp_page;
   int result;
-  while (list_size(&toVisit)) {
+  while (list_size(toVisit)) {
     // Get next URL form the list */
     temp_page = malloc(sizeof(WebPage));
-    result = list_dequeue(&toVisit, temp_page);
-    if (validDepth(temp_page->depth, user_depth) && !hashtable_lookup(URLSVisited, temp_page->url)) {
+    result = list_dequeue(toVisit, temp_page);
+    if (result && validDepth(temp_page->depth, user_depth) && !hashtable_lookup(URLSVisited, temp_page->url)) {
       // Get WebPage for URL
       if (GetWebPage(temp_page)) {// write page file
         writePage(temp_page, target, file_counter);
@@ -152,21 +153,14 @@ int main(int argc, char** argv) {
         crawlPage(temp_page);
         // Put url into hashtable
         hashtable_insert(URLSVisited, temp_page->url, temp_page->url);
-
-        free(temp_page->url);
-        free(temp_page->html); // Free more like URL
-      }
+        free_webpage(temp_page);
+      } 
     }
-    /* free resources */
-    free(temp_page);
+
 
     /* sleep for a bit to avoid annoying the target domain */
     sleep(INTERVAL_PER_FETCH);
   }
-
-    
-    
-
 
   /* Cleanup curl */
   curl_global_cleanup();
@@ -230,7 +224,7 @@ int writePage(WebPage *page, char *dir, int file_counter) {
     fclose(fd);
     return 1;
   }
-  if (fd == NULL) {
+  else if (fd == NULL) {
     fprintf(stderr, "Error opening file.");
     return 1;
   }
@@ -256,14 +250,15 @@ int crawlPage(WebPage *page) {
           if (STATUS_LOG == 1)
             printf("\nFound url: %s", buf);
           // Fragmentation possible?
-          WebPage tmp;
-          tmp.url = malloc(strlen(buf)+1);
-          strcpy(tmp.url, buf);
-          tmp.depth = page->depth;
+          WebPage* tmp = malloc(sizeof(WebPage));
+          tmp->url = malloc(strlen(buf)+1);
+          strcpy(tmp->url, buf);
+          tmp->depth = page->depth + 1;
 
           //listAddPage(toVisit, tmp);
-          list_append(&toVisit, &tmp);
-          free(tmp.url);
+          list_append(toVisit, tmp);
+          free(tmp->url);
+          free(tmp);
         }
       }
     }
@@ -345,7 +340,7 @@ int cmp_webpage(element_t av, element_t bv)
 {
   WebPage* a = av;
   WebPage* b = bv;
-  return strcmp(a, b) == 0;
+  return strcmp(a->url, b->url) == 0;
 }
 
 /*
