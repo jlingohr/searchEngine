@@ -12,7 +12,7 @@ TODOS:
 ----------
 
 * Update all Index hashtable in indexer.c to work with refactored hashtable
-- dNode_concat and concat causing concurrency issues?
+- Need to fix dNode_cmp
 - indexer cleanup
 
 Double check refactoring didnt affect crawler.c

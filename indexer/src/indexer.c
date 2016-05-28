@@ -142,7 +142,7 @@ int main(int argc, char** argv) {
     // LOG( "done!");
   if (STATUS_LOG == 1) {
     printf("\nLogging complete!\n");
-    printIndex(index);
+    //printIndex(index);
     //HashTablePrintWords(Index);
   }
 
@@ -328,18 +328,18 @@ void* saveIndexToFile(void* argsv)
  {
   // TODO - Problem in IndexLoadWords
   FILE* fp;
-  //char* buf, *file;
-  char* file;
-  //int size;
+  char* buf, *file;
+  //char* file;
+  int size;
   HashTable* index;
-  HashTableNode* node;
+  //HashTableNode* node;
 
   struct t_block* args = (struct t_block*)argsv;
 
   file = args->file;
   index = args->ht;
 
-  /*buf = malloc(BUF_SIZE);
+  buf = malloc(BUF_SIZE);
   //printf("Loading words from index...\n");
   size = IndexLoadWords(index, &buf);
 
@@ -353,9 +353,9 @@ void* saveIndexToFile(void* argsv)
     fprintf(stderr, "Error opening file\n");
     return 0;
   }
-  return 0;*/
+  return 0;
 
-  fp = fopen(file, "w+");
+  /*fp = fopen(file, "w+");
   if (fp) {
     for (int i = 0; i < MAX_HASH_SLOT; i++) { .. Loop through buckets
       WordNode* wNode;
@@ -378,7 +378,7 @@ void* saveIndexToFile(void* argsv)
     exit(1);
   }
   fclose(fp);
-  return 0;
+  return 0;*/
 }
 
 /*

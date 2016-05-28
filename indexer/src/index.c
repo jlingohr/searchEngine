@@ -22,11 +22,11 @@
 * @docID: documet id
 *
 */
-WordNode* initWNode(char* word, int docID) {
+WordNode* initWNode(char* word, int docID, WordNode* wNode) {
   /* TODO - BUGS here with assigning dNOde to list;
   Check for memory leaks */
   
-  WordNode* wNode = malloc(sizeof(WordNode));
+  //WordNode* wNode = malloc(sizeof(WordNode));
   strcpy(wNode->word, word);
 
   //wNode->page = initList();
@@ -60,24 +60,28 @@ WordNode* initWNode(char* word, int docID) {
 */
 int updateIndex(char* word, int docID, HashTable* index) 
 {
-  WordNode* wNode = initWNode(word, docID);
+  //WordNode* wNode = initWNode(word, docID);
+  WordNode* wNode = malloc(sizeof(WordNode));
   if (hashtable_get(index, word, wNode)) { //hashtable_lookup(index, word)
     // word is in hashtable, so find DocumentNode
+    assert(!strcmp(word, wNode->word));
     DocumentNode* dNode = malloc(sizeof(DocumentNode));
-    if (list_get(wNode->page, &docID, dNode)) {
+    dNode->document_id = docID;
+    if (list_get(wNode->page, (element_t)&docID, dNode)) {
       // Update page count
       dNode->page_word_frequency++;
       // remove, update
     } else {
       // Not found, so just add the DocumentNode
-      dNode->document_id = docID;
+      //dNode->document_id = docID;
       dNode->page_word_frequency = 1;
     }
     list_append(wNode->page, dNode);
     dNode_free(dNode);
   } else {
     //wNode_free(wNode);
-    //wNode = initWNode(word, docID);
+    initWNode(word, docID, wNode);
+
     hashtable_insert(index, word, wNode);
   }
   return 1;
@@ -98,9 +102,9 @@ void dNode_free(element_t elem)
 */
 int dNode_cmp(element_t av, element_t bv)
 {
-  DocumentNode* a = av;
-  intptr_t b = (intptr_t)bv;
-  return a->document_id == b;
+  DocumentNode* b = bv;
+  intptr_t a = (intptr_t)av;
+  return b->document_id == a;
 }
 
 
@@ -173,6 +177,7 @@ int IndexLoadWords(HashTable* ht, char** buf)
       }
       strcat(*buf, word_buf); // Concat to the buffer
       strcat(*buf, "\n");
+      printf("%s\n", word_buf);
       free(word_buf);
 
       node = node->next;
