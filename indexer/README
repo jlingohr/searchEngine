@@ -12,8 +12,7 @@ TODOS:
 ----------
 
 * Update all Index hashtable in indexer.c to work with refactored hashtable
-- Need to fix dNode_cmp
-- indexer cleanup
+- Fix any memory leaks
 
 Double check refactoring didnt affect crawler.c
 Tidy up

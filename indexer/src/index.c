@@ -135,17 +135,6 @@ void dNode_concat(char** str, List* list)
   list_foldl(concat, (element_t*)&v, list); // iteratively concat DocumentNode values
   strcat(*str, v);
   free(v);
-  /*char buf[BUF_SIZE];
-  ListNode* node = list->head;
-  DocumentNode* dNode;
-  while (node) {
-    dNode = node->data;
-    sprintf(buf, "%d %d ", dNode->document_id, dNode->page_word_frequency);
-    node = node->next;
-    strcat(*str, buf);
-
-  }
-  //strcat(*str, buf);*/
 
 }
 
