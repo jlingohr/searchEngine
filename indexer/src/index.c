@@ -5,6 +5,7 @@
 
 #include "index.h"
 
+
 /********************
 * Private functions
 ********************/
@@ -67,7 +68,7 @@ int updateIndex(char* word, int docID, HashTable* index)
     assert(!strcmp(word, wNode->word));
     DocumentNode* dNode = malloc(sizeof(DocumentNode));
     dNode->document_id = docID;
-    if (list_get(wNode->page, (element_t)&docID, dNode)) {
+    if (list_get(wNode->page, &docID, dNode)) {
       // Update page count
       dNode->page_word_frequency++;
       // remove, update
@@ -103,8 +104,8 @@ void dNode_free(element_t elem)
 int dNode_cmp(element_t av, element_t bv)
 {
   DocumentNode* b = bv;
-  intptr_t a = (intptr_t)av;
-  return b->document_id == a;
+  int* a = av;
+  return b->document_id == *a;
 }
 
 
@@ -158,8 +159,10 @@ void dNode_concat(char** str, List* list)
 * Returns size of buffer
 * TODO - Hoe to make private?
 */
-int IndexLoadWords(HashTable* ht, char** buf) 
+element_t IndexLoadWords(element_t Indexv) 
 { // TODO - this is bugging out
+  HashTable* ht = Indexv;
+  char* buf = malloc(BUF_SIZE);
   WordNode* wNode;
   char *word, *word_buf;
   for (int i = 0; i < MAX_HASH_SLOT; i++) { // Go through each hashtable bucket
@@ -172,11 +175,11 @@ int IndexLoadWords(HashTable* ht, char** buf)
       sprintf(word_buf, "%s %d ", word, wNode->page->length); // allocate the word and number of documents
       dNode_concat(&word_buf, wNode->page); // Get string values for each DocumentNode for the current word
 
-      if (strlen(*buf) + strlen(word_buf) - 1 <= sizeof(*buf)) {
-        buf = realloc(*buf, 2*sizeof(*buf));
+      if (strlen(buf) + strlen(word_buf) - 1 <= sizeof(buf)) {
+        buf = realloc(buf, 2*sizeof(buf));
       }
-      strcat(*buf, word_buf); // Concat to the buffer
-      strcat(*buf, "\n");
+      strcat(buf, word_buf); // Concat to the buffer
+      strcat(buf, "\n");
       printf("%s\n", word_buf);
       free(word_buf);
 
@@ -184,6 +187,7 @@ int IndexLoadWords(HashTable* ht, char** buf)
       //printf("Loaded word: %s\n", word);
     }
   }
-  return strlen(*buf);
+  //return buf;
+  pthread_exit(&buf);
   
 }

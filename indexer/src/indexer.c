@@ -49,13 +49,6 @@ uint32_t wNode_hash(element_t keyv);
 void wNode_free(element_t data);
 
 
-/****************
-* Private functions
-*****************/
-
-
-
-
 
 /*****
 * Main
@@ -148,13 +141,34 @@ int main(int argc, char** argv) {
 
   /* Asynchronous problem from read/write
     Could use threads to solve */
-  struct t_block args;
-  args.file = target_file;
-  args.ht = Index;
-  pthread_create(&tid, NULL, saveIndexToFile, &args);
-  pthread_join(tid, NULL);
+  //struct t_block args;
+  //args.file = target_file;
+  //args.ht = Index;
+  //pthread_create(&tid, NULL, saveIndexToFile, &args);
+  //pthread_join(tid, NULL);
   //char* buf = malloc(BUF_SIZE);
   //IndexLoadWords(Index, &buf);
+
+  //5. Save index to file
+  FILE* fp;
+  char* buf;
+
+  buf = malloc(BUF_SIZE);
+  //printf("Loading words from index...\n");
+  pthread_create(&tid, NULL, IndexLoadWords, Index);
+  pthread_join(tid, (element_t)buf);
+  //size = IndexLoadWords(index, &buf);
+  fp = fopen(target_file, "w+");
+  if (fp) {
+    Fputs(buf, fp);
+    fclose(fp);
+    return 0;
+  }
+  if (fp == NULL) {
+    fprintf(stderr, "Error opening file\n");
+    return 0;
+  }
+
 
   //saved = saveIndexToFile(target_file, Index);
 
@@ -175,10 +189,10 @@ int main(int argc, char** argv) {
 
     /*8. saveFile (argv[4]. wordindex) */
     //LOG("Test complete\n");
-    args.file = test_new;
-    args.ht = Index;
-    pthread_create(&tid, NULL, saveIndexToFile, &args);
-    pthread_join(tid, NULL);
+    //args.file = test_new;
+    //args.ht = Index;
+    //pthread_create(&tid, NULL, saveIndexToFile, &args);
+    //pthread_join(tid, NULL);
 
     //saveIndexToFile(test_new, Index);
     printf("Test complete\n");
@@ -324,7 +338,7 @@ int getDocID(char* filename, char* dir) {
 * Returns 0 otherwise
 */
 //int saveIndexToFile(char* file, HashTable* index)
-void* saveIndexToFile(void* argsv)
+/*void* saveIndexToFile(void* argsv)
  {
   // TODO - Problem in IndexLoadWords
   FILE* fp;
@@ -354,32 +368,7 @@ void* saveIndexToFile(void* argsv)
     return 0;
   }
   return 0;
-
-  /*fp = fopen(file, "w+");
-  if (fp) {
-    for (int i = 0; i < MAX_HASH_SLOT; i++) { .. Loop through buckets
-      WordNode* wNode;
-      for (node = index->table[i]; node != NULL; node = node->next) { // Loop through hashtable nodes
-        ListNode* lNode;
-        wNode = node->data;
-        fprintf(fp, "%s %d ", wNode->word, wNode->page->length);
-        // Loop through DocuentNode in wNode
-        lNode = wNode->page->head;
-        while (lNode) { // Loop through DocumentNodes
-          DocumentNode* dNode = lNode->data;
-          fprintf(fp, "%d %d ", dNode->document_id, dNode->page_word_frequency);
-          lNode = lNode->next;
-        }
-        fprintf(fp, "\n");
-      }
-    }
-  } else {
-    fprintf(stderr, "Error - Opening target file\n");
-    exit(1);
-  }
-  fclose(fp);
-  return 0;*/
-}
+}*/
 
 /*
 * cleanIndex - Cleans up memory
