@@ -12,7 +12,7 @@ TODOS:
 ----------
 
 * Update all Index hashtable in indexer.c to work with refactored hashtable
-- Not writing to file properly re. IndexLoadWords
+- cleanUP in index not working 
 - Finish the reload (#7)
 - Fix any memory leaks
 

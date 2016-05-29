@@ -25,7 +25,7 @@
 * @docID: documet id
 *
 */
-WordNode* initWNode(char* word, int docID, WordNode* wNode) {
+int initWNode(char* word, int docID, WordNode* wNode) {
   /* TODO - BUGS here with assigning dNOde to list;
   Check for memory leaks */
   
@@ -34,7 +34,7 @@ WordNode* initWNode(char* word, int docID, WordNode* wNode) {
 
   //wNode->page = initList();
   wNode->page = malloc(sizeof(List));
-  list_new(wNode->page, sizeof(DocumentNode), dNode_cmp, dNode_free);
+  list_new(wNode->page, sizeof(DocumentNode), dNode_cmp, NULL);
 
 
   DocumentNode* dNode = malloc(sizeof(DocumentNode));
@@ -43,7 +43,8 @@ WordNode* initWNode(char* word, int docID, WordNode* wNode) {
 
   //listAddDoc(wNode->page, dNode);
   list_append(wNode->page, dNode);
-  return wNode;
+  //return wNode;
+  return 1;
 }
 
 /* updateIndex - Updates the structure containing the index by
@@ -68,19 +69,25 @@ int updateIndex(char* word, int docID, HashTable* index)
   if (hashtable_get(index, word, wNode)) { //hashtable_lookup(index, word)
     // word is in hashtable, so find DocumentNode
     assert(!strcmp(word, wNode->word));
-    DocumentNode* dNode = malloc(sizeof(DocumentNode));
-    dNode->document_id = docID;
-    if (list_get(wNode->page, &docID, dNode)) {
+    //DocumentNode* dNode = malloc(sizeof(DocumentNode));
+    DocumentNode* dNode;
+    //dNode->document_id = docID;
+    if (list_get(wNode->page, &docID, (element_t)&dNode)) {
       // Update page count
+      assert(dNode != NULL);
       dNode->page_word_frequency++;
       // remove, update
     } else {
       // Not found, so just add the DocumentNode
       //dNode->document_id = docID;
+      dNode = malloc(sizeof(DocumentNode));
+      dNode->document_id = docID;
       dNode->page_word_frequency = 1;
+      list_append(wNode->page, dNode);
+      dNode_free(dNode);
     }
-    list_append(wNode->page, dNode);
-    dNode_free(dNode);
+    //list_append(wNode->page, dNode);
+    //dNode_free(dNode);
   } else {
     //wNode_free(wNode);
     initWNode(word, docID, wNode);
@@ -131,8 +138,9 @@ static void wNode_concat(WordNode* wNode, char** str)
   if (strlen(docs) + strlen(*str) - 1 >= sizeof(*str)) {
     *str = realloc(*str, 2*(sizeof(*str)));
   }
-  printf("%s", docs);
+  //printf("%s", docs);
   strcat(*str, docs);
+  free(docs);
 
 }
 
@@ -155,7 +163,6 @@ element_t IndexLoadWords(element_t Indexv)
   for (int i = 0; i < MAX_HASH_SLOT; i++) { // Go through each hashtable bucket
     HashTableNode* node = ht->table[i];
     while (node) {  // Go through each word node
-
       wNode = node->data;
       wNode_concat(wNode, &buf);
 
@@ -163,7 +170,6 @@ element_t IndexLoadWords(element_t Indexv)
       
     }
   }
-
   return buf;
   
 }

@@ -61,6 +61,7 @@ int main(int argc, char** argv) {
   HashTable* Index;
 
   char *target_directory, *target_file, *test_old, *test_new;
+  //char* prev_file;
   char** filenames;
   int num_files;// saved;
   pthread_t tid;
@@ -74,6 +75,7 @@ int main(int argc, char** argv) {
 
   /*2. Initialize data structures
        allocate Inverted_index, zero it, and set links to NULL. */
+  //Index = initHashTable();
   Index = malloc(sizeof(HashTable));
   hashtable_new(Index, sizeof(WordNode), wNode_cmp, wNode_hash, wNode_free);
 
@@ -131,33 +133,38 @@ int main(int argc, char** argv) {
 
   //5. saveFile (argv[2], wordindex );
     // LOG( "done!");
-  if (STATUS_LOG == 1) {
-    printf("\nLogging complete!\n");
-  }
+  
 
   //5. Save index to file
   FILE* fp;
   char* buf = NULL;
+  //printf("Loading words from index...\n");
   pthread_create(&tid, NULL, IndexLoadWords, Index);
   pthread_join(tid, (element_t*)&buf);
+  //size = IndexLoadWords(index, &buf);
   fp = fopen(target_file, "w+");
   if (fp) {
     Fputs(buf, fp);
     fclose(fp);
-    return 0;
   }
   if (fp == NULL) {
     fprintf(stderr, "Error opening file\n");
     return 0;
   }
   free(buf);
+
+  if (STATUS_LOG == 1) {
+    printf("\nLogging complete!\n");
+  }
      
   //6. CleanDynamicList (wordindex)
   cleanUp(Index);
+  printf("Cleanup complete...\n");
 
   /* For testing (argc == 5) */
   if (argc == 5) {
     //LOG(argv[3]);
+    Index = malloc(sizeof(HashTable));
     printf("Rebuilding index...\n");
 
     /*7. Reload index from file and rewrite to new file
@@ -167,11 +174,12 @@ int main(int argc, char** argv) {
 
     /*8. saveFile (argv[4]. wordindex) */
     //LOG("Test complete\n");
-
     FILE* fd;
     buf = NULL;
+    //printf("Loading words from index...\n");
     pthread_create(&tid, NULL, IndexLoadWords, Index);
     pthread_join(tid, (element_t*)&buf);
+    //size = IndexLoadWords(index, &buf);
     fd = fopen(test_new, "w+");
     if (fp) {
       Fputs(buf, fd);
@@ -183,6 +191,7 @@ int main(int argc, char** argv) {
       return 0;
     }
 
+    //saveIndexToFile(test_new, Index);
     printf("Test complete\n");
 
     /*9. cleanDynamicList(wordindex) */
@@ -414,8 +423,9 @@ uint32_t wNode_hash(element_t keyv)
 void wNode_free(element_t data)
 {
   WordNode* wNode = data;
+  //free(wNode->word);
   list_destroy(wNode->page);
-  free(wNode);
+  //free(wNode);
 }
 
 /*
