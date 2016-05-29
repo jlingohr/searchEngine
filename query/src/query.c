@@ -236,10 +236,10 @@ void HandleQuery(HashTable* ht, Query* query) {
 
   List* temp_a = getNextQuery(ht, query->terms);
   sets[filled] = temp_a;
-  filled++;
+  //filled++;
 
   // Store operand, i.e. AND, OR
-  char op[MAXLINE];
+  char op[WORD_LENGTH];
   while(filled < num_sets) {
     list_dequeue(query->ops, &op);
 
@@ -284,8 +284,10 @@ List* getNextQuery(HashTable* ht, List* words) {
   return acc;
   */
   // Dequeue word from words
-  char term[MAXLINE];
-  list_dequeue(words, &term);
+  //char term[WORD_LENGTH];
+  //strcpy(term, "");
+  char* term = malloc(WORD_LENGTH);
+  list_dequeue(words,term);
 
   WordNode* wNode = malloc(sizeof(WordNode));
   hashtable_get(ht, term, wNode);
