@@ -196,27 +196,35 @@ void list_foldl(void (*f) (element_t*, element_t, element_t), element_t* out_ele
 * MergeSort - Sort a linked-list using merge sort
 */
 void MergeSort(List* list, int len, int (*f)(element_t, element_t)) {
-  // TODO
+  // TODO - Update for refactored list
   if (len <= 1)
     return;
 
-  List* left = initList();
-  List* right = initList();
+  List* left = malloc(sizeof(List));
+  List* right = malloc(sizeof(List));
+  list_new(left, list->elementSize, list->compare, list->freeFn);
+  list_new(left, list->elementSize, list->compare, list->freeFn);
+
   int mid = len / 2;
 
   ListNode* cur = list->head;
 
   for (int i = 0; i < len; i++) {
-    if (mid > 0)
-      listAdd(left, cur);
-    else
-      listAdd(right, cur);
+    if (mid > 0) {
+      //listAdd(left, cur);
+      list_append(left, cur);
+    }
+    else {
+      //listAdd(right, cur);
+      list_append(right, cur);
+    }
     mid--;
+    cur = cur->next;
   }
-  MergeSort(left, left->len, f);
-  MergeSort(right, right->len, f);
+  MergeSort(left, left->length, f);
+  MergeSort(right, right->length, f);
 
-  /* MEMORY LEAKS and DANGLING POINTERS */
+  // MEMORY LEAKS and DANGLING POINTERS
   Merge(left, right, f);
 }
 
@@ -225,31 +233,40 @@ void MergeSort(List* list, int len, int (*f)(element_t, element_t)) {
 */
 List* Merge(List* A, List* B, int (*f)(element_t, element_t)) {
   // TODO - Watch dangling pointers and mem leaks! 
-  List* list = initList();
-  ListNode* tmp;
+  //List* list = initList();
+  List* list = malloc(sizeof(List));
+  list_new(list, A->elementSize, A->compare, A->freeFn);
 
   if (A == NULL)
     return B;
   if (B == NULL)
     return A;
 
-  while (A->len > 0 || B->len > 0) {
-    if (A->len > 0 && B->len > 0) {
-      if (f(A, B) <= 0) {
-        tmp = listRemove(A);
+  ListNode tmp;
+  while (A->length > 0 || B->length > 0) {
+    if (A->length > 0 && B->length > 0) {
+      if (f(A->head, B->head) <= 0) {
+        //tmp = listRemove(A);
+        list_head(A, tmp.data);
       }
       else {
-        tmp = listRemove(B);
+        //tmp = listRemove(B);
+        list_head(B, tmp.data);
       }
-      listAdd(list, tmp);
+      //listAdd(list, tmp);
+      list_append(list, tmp.data);
     }
-    else if (A->len > 0) {
-      tmp = listRemove(A);
-      listAdd(list, tmp);
+    else if (A->length > 0) {
+      //tmp = listRemove(A);
+      list_head(A, tmp.data);
+      //listAdd(list, tmp);
+      list_append(list, tmp.data);
     }
-    else if (B->len > 0) {
-      tmp = listRemove(B);
-      listAdd(list, tmp);
+    else if (B->length > 0) {
+      //tmp = listRemove(B);
+      //listAdd(list, tmp);
+      list_head(B, tmp.data);
+      list_append(list, tmp.data);
     }
   }
   return list;

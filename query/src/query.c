@@ -255,13 +255,13 @@ void HandleQuery(HashTable* ht, Query* query) {
   printf("Merging lists...\n");
 
   //Sort the lists
-  /*for (int i = 0; i < query->num_sets; i++) {
-    MergeSort(sets[i], sets[i]->len, cmpDNode_freq);
+  for (int i = 0; i < query->num_sets; i++) {
+    MergeSort(sets[i], sets[i]->length, cmpDNode_freq);
   }
   // Merge all documents 
   for (int i = 0; i < query->num_sets; i++) {
     docs = Merge(docs, sets[i], cmpDNode_freq);
-  }*/
+  }
 
   
 
