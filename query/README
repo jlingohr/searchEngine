@@ -37,3 +37,6 @@ Input: indexed is the filename of the Indexer's output after indexing results fr
 
 Output: Prints ranked list of urls that best match search terms
 
+==================
+TODO
+- Update mergesort and merge
