@@ -16,7 +16,6 @@
 */
 void list_new(List* list, int elementSize, list_compare cmp, freeFunction freeFn) {
   assert(elementSize > 0);
-  assert(freeFn != NULL);
   assert(cmp != NULL);
   list->length = 0;
   list->elementSize = elementSize;
@@ -53,11 +52,12 @@ void list_prepend(List* list, element_t elem) {
   node->data = malloc(list->elementSize);
   memcpy(node->data, elem, list->elementSize);
 
-  node->next = list->head;
-  list->head = node;
-
-  if (!list->tail) {
-    list->tail = list->head;
+  if (list->head == NULL) { // Empty list
+    list->head = list->tail = node;
+    node->next = NULL;
+  } else {
+    node->next = list->head;
+    list->head = node;
   }
 
   list->length++;
@@ -74,7 +74,7 @@ void list_append(List* list, element_t elem) {
 
   memcpy(node->data, elem, list->elementSize);
 
-  if (list->length == 0) {
+  if (list->head == NULL) { // Empty list
     list->head = list->tail = node;
   } else {
     list->tail->next = node;
@@ -131,42 +131,35 @@ int list_dequeue(List* list, element_t elem) {
   if (list->head == NULL) {
     return 0;
   } else {
+    list_head(list, elem);
     ListNode* node = list->head;
-    memcpy(elem, node->data, list->elementSize);
     list->head = node->next;
-    list->length--;
+    
 
     free(node->data);
     free(node);
 
+    list->length--;
     return 1;
   }
 }
 
 /*
-* list_get - Retrive object with match key and store in elem,
-* while removing element from list 
+* list_get - Retrive object with match key and points elem to it,
 * Returns 1 on success, 0 otherwise
 */
-int list_get(List* list, element_t key, element_t elem)
+int list_get(List* list, element_t key, element_t* elem)
 {
   // TODO - should it remove element?
-  if (list->compare(key, list->head)) {
-    return list_dequeue(list, elem);
-  }
-
-  ListNode* node = list->head;
-  ListNode* tmp = node->next;
-  while (tmp) {
-    if (list->compare(key, tmp->data)) {
-      //elem = malloc(list->elementSize);
-      memcpy(elem, tmp->data, list->elementSize);
-      node->next = tmp->next;
-      free(tmp);
+  ListNode* node = NULL;
+  ListNode* cur = list->head;
+  while (cur) {
+    if (list->compare(key, cur->data)) {
+      *elem = cur->data;
       return 1;
     }
-    node = tmp;
-    tmp = tmp->next;
+    node = cur;
+    cur = node->next;
   }
   return 0;
 }

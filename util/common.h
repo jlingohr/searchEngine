@@ -29,7 +29,7 @@
  
 
 // limit crawling to only this domain
-#define URL_PREFIX "http://www.cs.dartmouth.edu/campbell/cs50/"
+#define URL_PREFIX "http://www.cs.dartmouth.edu/~campbell/cs50/"
 
 // ---------------- Structures/Types
 

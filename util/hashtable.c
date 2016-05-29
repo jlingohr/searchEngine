@@ -32,16 +32,23 @@ void hashtable_new(HashTable* ht, int elementSize, hashtable_compare cmp,
 */
 void hashtable_destroy(HashTable* ht) 
 {
-  HashTableNode* cur;
+  HashTableNode *cur, *tmp;
   for (int i = 0; i < MAX_HASH_SLOT; i++) {
-    while ((cur = ht->table[i]) != NULL) {
-      ht->table[i] = cur->next;
-      ht->freeFn(cur->data);
+    cur = ht->table[i];
+    while (cur != NULL) {
+      //ht->table[i] = cur->next;
+      //ht->freeFn(cur->data);
+      tmp = cur;
+      cur = cur->next;
+      ht->freeFn(tmp->data);
+      free(tmp);
+      tmp = NULL;
       //free(cur->data);
-      free(cur);
+      //free(cur);
     }
-    free(ht->table[i]);
+    //free(ht->table[i]);
   }
+  free(ht);
 }
 
 
@@ -90,53 +97,6 @@ static inline int hashtable_find_bucket(HashTable* ht, element_t key,
 static inline int hashtable_find(HashTable* ht, HashTableNode* node, element_t key,
   uint32_t hash, element_t elem)
 {
-  /*uint32_t p = ht->hashFn(key)%MAX_HASH_SLOT;
-  if (ht->table[p] == NULL) {
-    return 0;
-  } else {
-    HashTableNode* cur = ht->table[p];
-    while (cur) {
-      if (ht->compare(key, cur->data)) {
-        return 1;
-      }
-      cur = cur->next;
-    }
-    return 0;
-  }*/
-  /*HashTableNode* node;
-  
-  uint32_t hash = 0;
-  node = hashtable_find_bucket(ht, key, &hash);
-  if (node == NULL) {
-    return 0;
-  } else {
-    while (node) {
-      if (node->hash == hash && ht->compare(key, node->data)) {
-        return 1;
-      }
-      node = node->next;
-    }
-    return 0;
-  }*/
-    /*
-  HashTableNode* cur = node;
-  while (cur->next != NULL) {
-    if (cur->hash == hash && ht->compare(key, cur->data)) {
-      // Found, copy into elem and return
-      if (elem) {
-        memcpy(elem, cur->data, ht->elementSize);
-      }
-      return 1;
-    }
-    cur = cur->next;
-  }
-  if (cur->hash == hash && ht->compare(key, cur->data)) {
-    if (elem) {
-      memcpy(elem, cur->data, ht->elementSize);
-    }
-    return 1;
-  }
-  return 0;*/
   HashTableNode* cur = node;
   while (cur) {
     if (cur->hash == hash && ht->compare(key, cur->data)) {
@@ -161,46 +121,6 @@ static inline int hashtable_find(HashTable* ht, HashTableNode* node, element_t k
 */
 void hashtable_insert(HashTable* ht, element_t key, element_t data)
 {
-  /*HashTableNode* node;
-  uint32_t p = ht->hashFn(key)%MAX_HASH_SLOT;
-  if (ht->table[p] == NULL) {
-    node = hashtable_create_node(ht->elementSize, data);
-    ht->table[p] = node;
-  } else {
-    node = ht->table[p];
-    while (node->next != NULL) {
-      node = node->next;
-    }
-    HashTableNode* tmp = hashtable_create_node(ht->elementSize, data);
-    node->next = tmp;
-  }*/
-  /*HashTableNode* node;
-
-  uint32_t hash = 0;
-  node = hashtable_find_bucket(ht, key, &hash);
-  if (node == NULL) {
-    // No item hashed here, so start chaining
-    node = hashtable_create_node(ht->elementSize, data, hash);
-  } else {
-    // Scan through until end, then insert
-    HashTableNode* cur = node->next;
-    while (cur != NULL) {
-      if (node->hash == hash && ht->compare(node->data, key)) {
-        // Already in hashtable
-        return; // NOT CORRECT - notify user or something
-      }
-      node = cur;
-      cur = cur->next;
-    }
-    // At tail, check once and insert if not equal
-    if (node->hash == hash && ht->compare(node->data, key)) {
-      return; // BETTER WAY
-    } else {
-      cur = hashtable_create_node(ht->elementSize, data, hash);
-      node->next = cur;
-      return;
-    }
-  }*/
   HashTableNode* node;
 
   uint32_t hash = 0;
@@ -236,23 +156,7 @@ void hashtable_insert(HashTable* ht, element_t key, element_t data)
 */
 int hashtable_get(HashTable* ht, element_t key, element_t elem)
 {
-  /*uint32_t p = ht->hashFn(key)%MAX_HASH_SLOT;
-  if (ht->table[p] == NULL) {
-    return 0;
-  } else {
-    HashTableNode* cur = ht->table[p];
-    while (cur) {
-      if (ht->compare(key, cur->data)) {
-        // Passing a pointer - Sure you want to do this?
-        elem = cur->data;
-        return 1;
-      }
-      cur = cur->next;
-    }
-    return 0;
-  }*/
-  //HashTableNode* node;
-  //*elem = malloc(ht->elementSize);
+
   uint32_t hash = 0;
   //node = hashtable_find_bucket(ht, key, &hash);
   int p = hashtable_find_bucket(ht, key, &hash);

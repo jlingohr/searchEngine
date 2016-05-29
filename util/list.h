@@ -79,7 +79,7 @@ void list_tail(List* list, element_t elem);
 
 int list_dequeue(List* list, element_t elem);
 
-int list_get(List* list, element_t key, element_t elem);
+int list_get(List* list, element_t key, element_t* elem);
 void list_foldl(void (*f) (element_t*, element_t, element_t), element_t* out_element_p, List* list);
 
 
