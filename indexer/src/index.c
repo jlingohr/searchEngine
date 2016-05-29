@@ -171,5 +171,146 @@ element_t IndexLoadWords(element_t Indexv)
     }
   }
   return buf;
-  
+}
+
+
+/*
+* readFile - Read an inverted index in from file and
+* construct a new index, i.e. the original.
+* @ht: Hashtable to reconstruct
+* @filename: Name of file to construct from
+*/
+void readFile(HashTable* index, char* filename)
+{
+  FILE* fp;
+
+  fp = fopen(filename, "r");
+  ssize_t read;
+  size_t len = 0;
+  char* line = NULL;
+  // Read each line and parse
+  while ((read = getline(&line, &len, fp)) != -1) {
+    handleLine(index, line);
+  }
+  if (line) {
+    free(line);
+  }
+
+  fclose(fp);
+}
+
+/*
+* handleLine - Parse line and insert in hashtable
+* @index: table in which to insert
+* @line: Line to parse
+*/
+void handleLine(HashTable* index, char* line) {
+  // TODO - Buggy doc_id from conversion 
+  char word[BUF_SIZE];
+  char *pch;
+  int num_tokens, num_docs, doc_id, freq;
+  List* dNodeList;
+  DocumentNode* dNode;
+  WordNode* wNode;
+
+  // Initialize list 
+  num_tokens = 1;
+  //dNodeList = initList();
+  dNodeList = malloc(sizeof(List));
+  list_new(dNodeList, sizeof(DocumentNode), dNode_cmp, dNode_free);
+
+  pch = strtok(line, " ");
+  while (pch != NULL) {
+    if (num_tokens == 1) {
+      // First token is the word
+      strcpy(word, pch);
+
+    }
+    else if (num_tokens == 2) {
+      // Second token is number of DocumentNodes 
+      num_docs = atoi(pch);
+    }
+    else {
+      if (num_tokens % 2 == 1) {
+        // Odd numbered are document ids
+        doc_id = atoi(pch);
+      }
+      else if (num_tokens % 2 == 0) {
+        // Even numbered are number of occurences in doc
+        //forms a pair (a,b) we add as a DocumentNode 
+        freq = atoi(pch);
+
+        /* Build DocumentNode */
+        dNode = malloc(sizeof(DocumentNode));
+        dNode->document_id = doc_id;
+        dNode->page_word_frequency = freq;
+
+        // Construct list of DocumentNodes 
+        list_append(dNodeList, dNode);
+
+        // Free resources
+        dNode_free(dNode);
+
+      }
+    }
+    num_tokens++;
+    pch = strtok(NULL, " ");
+  }
+  // construct WordNode and add to index 
+  wNode = malloc(sizeof(WordNode));
+  strcpy(wNode->word, word);
+  wNode->page = dNodeList;
+  hashtable_insert(index, wNode->word, wNode);
+  free(wNode); 
+}
+
+/*
+* wNode_cmp - Helper function to compare WordNodes
+* in a hashtable of WordNodes
+* @elemv: Assume to be the word to match against
+* @wNodev: Assume to be the WordNode to match
+*/
+int wNode_cmp(element_t elemv, element_t wNodev)
+{
+  char* word = elemv;
+  WordNode* wNode = wNodev;
+  return strcmp(word, wNode->word) == 0;
+
+}
+
+/*
+* wNode_hash - Hashing function to hash WordNodes
+*/
+uint32_t wNode_hash(element_t keyv)
+{
+  WordNode* wNode = keyv;
+
+  // works with *(char**) only///
+  char* key = wNode->word;
+  //printf("Hashing %s\n", key);
+  size_t len = strlen(key);
+
+  uint32_t hash = 0;
+  uint32_t i = 0;
+
+  for (hash = i = 0; i < len; ++i) {
+    hash += key[i];
+    hash += (hash << 10);
+    hash ^= (hash >> 6);
+  }
+
+  hash += (hash << 3);
+  hash ^= (hash >> 11);
+  hash += (hash << 15);
+
+  return hash;
+}
+
+/*
+* wNode_free - Helper to free WordNodes
+*/
+void wNode_free(element_t data)
+{
+  WordNode* wNode = data;
+  list_destroy(wNode->page);
 }
