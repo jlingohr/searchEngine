@@ -12,6 +12,8 @@ TODOS:
 ----------
 
 * Update all Index hashtable in indexer.c to work with refactored hashtable
+- Not writing to file properly re. IndexLoadWords
+- Finish the reload (#7)
 - Fix any memory leaks
 
 Double check refactoring didnt affect crawler.c

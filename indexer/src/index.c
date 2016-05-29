@@ -5,6 +5,8 @@
 
 #include "index.h"
 
+#define eos(s) ((s) + strlen(s))
+
 
 /********************
 * Private functions
@@ -109,32 +111,28 @@ int dNode_cmp(element_t av, element_t bv)
 }
 
 
-static void concat(element_t* outv, element_t strv, element_t dNodev)
-{
-  char** out = (char**)outv;
-  DocumentNode* dNode = dNodev;
 
-  // Copy values into a buffer
-  char temp[BUF_SIZE];
-  sprintf(temp, "%d %d ", dNode->document_id, dNode->page_word_frequency);
-  
-  int out_len = strlen(*out);
-  int temp_len = strlen(temp);
-  *out = realloc(*out, out_len + temp_len + 1);
-  strcat(*out, temp);
-}
-
-/*
-* dNode_concat - Helper to concatenate the data in a list
-* of DocumentNode
-*/
-void dNode_concat(char** str, List* list) 
+static void wNode_concat(WordNode* wNode, char** str)
 {
-  char* v = malloc(1);
-  v[0] = 0;
-  list_foldl(concat, (element_t*)&v, list); // iteratively concat DocumentNode values
-  strcat(*str, v);
-  free(v);
+  //char headers[MAXLINE];
+  char* docs = malloc(BUF_SIZE);
+  sprintf(docs, "%s %d ", wNode->word, wNode->page->length);
+
+  ListNode* node = wNode->page->head;
+  DocumentNode* dNode;
+  //char temp[MAXLINE];
+  while (node) {
+    DocumentNode* dNode = node->data;
+    sprintf(eos(docs), "%d %d ", dNode->document_id, dNode->page_word_frequency);
+    //strcat(docs, temp);
+    node = node->next;
+  }
+  strcat(docs, "\n");
+  if (strlen(docs) + strlen(*str) - 1 >= sizeof(*str)) {
+    *str = realloc(*str, 2*(sizeof(*str)));
+  }
+  printf("%s", docs);
+  strcat(*str, docs);
 
 }
 
@@ -157,26 +155,15 @@ element_t IndexLoadWords(element_t Indexv)
   for (int i = 0; i < MAX_HASH_SLOT; i++) { // Go through each hashtable bucket
     HashTableNode* node = ht->table[i];
     while (node) {  // Go through each word node
+
       wNode = node->data;
-      word = wNode->word;
-      word_buf = malloc(BUF_SIZE);
-
-      sprintf(word_buf, "%s %d ", word, wNode->page->length); // allocate the word and number of documents
-      dNode_concat(&word_buf, wNode->page); // Get string values for each DocumentNode for the current word
-
-      if (strlen(buf) + strlen(word_buf) - 1 <= sizeof(buf)) {
-        buf = realloc(buf, 2*sizeof(buf));
-      }
-      strcat(buf, word_buf); // Concat to the buffer
-      strcat(buf, "\n");
-      printf("%s\n", word_buf);
-      free(word_buf);
+      wNode_concat(wNode, &buf);
 
       node = node->next;
-      //printf("Loaded word: %s\n", word);
+      
     }
   }
-  //return buf;
-  pthread_exit(&buf);
+
+  return buf;
   
 }

@@ -12,6 +12,5 @@ WordNode* initWNode(char* word, int docID, WordNode* wNode);
 void dNode_free(element_t elem);
 int dNode_cmp(element_t av, element_t bv);
 element_t IndexLoadWords(element_t Index);
-void dNode_concat(char** str, List* list);
 
 #endif

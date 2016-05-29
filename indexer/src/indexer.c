@@ -61,7 +61,6 @@ int main(int argc, char** argv) {
   HashTable* Index;
 
   char *target_directory, *target_file, *test_old, *test_new;
-  //char* prev_file;
   char** filenames;
   int num_files;// saved;
   pthread_t tid;
@@ -75,7 +74,6 @@ int main(int argc, char** argv) {
 
   /*2. Initialize data structures
        allocate Inverted_index, zero it, and set links to NULL. */
-  //Index = initHashTable();
   Index = malloc(sizeof(HashTable));
   hashtable_new(Index, sizeof(WordNode), wNode_cmp, wNode_hash, wNode_free);
 
@@ -135,29 +133,13 @@ int main(int argc, char** argv) {
     // LOG( "done!");
   if (STATUS_LOG == 1) {
     printf("\nLogging complete!\n");
-    //printIndex(index);
-    //HashTablePrintWords(Index);
   }
-
-  /* Asynchronous problem from read/write
-    Could use threads to solve */
-  //struct t_block args;
-  //args.file = target_file;
-  //args.ht = Index;
-  //pthread_create(&tid, NULL, saveIndexToFile, &args);
-  //pthread_join(tid, NULL);
-  //char* buf = malloc(BUF_SIZE);
-  //IndexLoadWords(Index, &buf);
 
   //5. Save index to file
   FILE* fp;
-  char* buf;
-
-  buf = malloc(BUF_SIZE);
-  //printf("Loading words from index...\n");
+  char* buf = NULL;
   pthread_create(&tid, NULL, IndexLoadWords, Index);
-  pthread_join(tid, (element_t)buf);
-  //size = IndexLoadWords(index, &buf);
+  pthread_join(tid, (element_t*)&buf);
   fp = fopen(target_file, "w+");
   if (fp) {
     Fputs(buf, fp);
@@ -168,10 +150,7 @@ int main(int argc, char** argv) {
     fprintf(stderr, "Error opening file\n");
     return 0;
   }
-
-
-  //saved = saveIndexToFile(target_file, Index);
-
+  free(buf);
      
   //6. CleanDynamicList (wordindex)
   cleanUp(Index);
@@ -183,18 +162,27 @@ int main(int argc, char** argv) {
 
     /*7. Reload index from file and rewrite to new file
       wordindex = readFile(argv[3]) */
-    //Index = readFile(test_old);
     hashtable_new(Index, sizeof(WordNode), wNode_cmp, wNode_hash, wNode_free);
     readFile(Index, test_old);
 
     /*8. saveFile (argv[4]. wordindex) */
     //LOG("Test complete\n");
-    //args.file = test_new;
-    //args.ht = Index;
-    //pthread_create(&tid, NULL, saveIndexToFile, &args);
-    //pthread_join(tid, NULL);
 
-    //saveIndexToFile(test_new, Index);
+    FILE* fd;
+    buf = NULL;
+    pthread_create(&tid, NULL, IndexLoadWords, Index);
+    pthread_join(tid, (element_t*)&buf);
+    fd = fopen(test_new, "w+");
+    if (fp) {
+      Fputs(buf, fd);
+      fclose(fd);
+      return 0;
+    }
+    if (fd == NULL) {
+      fprintf(stderr, "Error opening file\n");
+      return 0;
+    }
+
     printf("Test complete\n");
 
     /*9. cleanDynamicList(wordindex) */
