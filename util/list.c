@@ -187,3 +187,70 @@ void list_foldl(void (*f) (element_t*, element_t, element_t), element_t* out_ele
     node = node->next;
   }
 }
+
+/*****************
+* List Algorithms
+*****************/
+
+/*
+* MergeSort - Sort a linked-list using merge sort
+*/
+void MergeSort(List* list, int len, int (*f)(element_t, element_t)) {
+  // TODO
+  if (len <= 1)
+    return;
+
+  List* left = initList();
+  List* right = initList();
+  int mid = len / 2;
+
+  ListNode* cur = list->head;
+
+  for (int i = 0; i < len; i++) {
+    if (mid > 0)
+      listAdd(left, cur);
+    else
+      listAdd(right, cur);
+    mid--;
+  }
+  MergeSort(left, left->len, f);
+  MergeSort(right, right->len, f);
+
+  /* MEMORY LEAKS and DANGLING POINTERS */
+  Merge(left, right, f);
+}
+
+/*
+* Merge - Merges A and B returning a new list
+*/
+List* Merge(List* A, List* B, int (*f)(element_t, element_t)) {
+  // TODO - Watch dangling pointers and mem leaks! 
+  List* list = initList();
+  ListNode* tmp;
+
+  if (A == NULL)
+    return B;
+  if (B == NULL)
+    return A;
+
+  while (A->len > 0 || B->len > 0) {
+    if (A->len > 0 && B->len > 0) {
+      if (f(A, B) <= 0) {
+        tmp = listRemove(A);
+      }
+      else {
+        tmp = listRemove(B);
+      }
+      listAdd(list, tmp);
+    }
+    else if (A->len > 0) {
+      tmp = listRemove(A);
+      listAdd(list, tmp);
+    }
+    else if (B->len > 0) {
+      tmp = listRemove(B);
+      listAdd(list, tmp);
+    }
+  }
+  return list;
+}
