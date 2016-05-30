@@ -257,7 +257,7 @@ void handleLine(HashTable* index, char* line) {
     pch = strtok(NULL, " ");
   }
   // construct WordNode and add to index 
-  wNode = malloc(sizeof(WordNode));
+  wNode = calloc(1, sizeof(WordNode));
   strcpy(wNode->word, word);
   wNode->page = dNodeList;
   hashtable_insert(index, wNode->word, wNode);

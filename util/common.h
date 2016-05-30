@@ -23,7 +23,7 @@
 #define MAX_URL_LENGTH 1000
 #define MAXLINE 1000     
 #define STATUS_LOG 1            // switch to one for output    
-#define WORD_LENGTH 1000
+#define WORD_LENGTH 100
 #define MAX_NUMBER_OF_SLOTS 10000  
 #define BUF_SIZE 8192
  

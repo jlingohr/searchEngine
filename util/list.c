@@ -212,11 +212,11 @@ void MergeSort(List* list, int len, int (*f)(element_t, element_t)) {
   for (int i = 0; i < len; i++) {
     if (mid > 0) {
       //listAdd(left, cur);
-      list_append(left, cur);
+      list_append(left, cur->data);
     }
     else {
       //listAdd(right, cur);
-      list_append(right, cur);
+      list_append(right, cur->data);
     }
     mid--;
     cur = cur->next;
