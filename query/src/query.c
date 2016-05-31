@@ -23,7 +23,7 @@ int str_compare(element_t av, element_t bv);
 void free_string(element_t av);
 void normalizeQuery(char* str);
 List* HandleQuery(HashTable* ht, Query* query);
-void handleResults(List* results);
+void handleResults(List* results, char* path);
 
 int main(int argc, char** argv) {
   /* TODO */
@@ -70,11 +70,11 @@ int main(int argc, char** argv) {
 
     /* Build up query */
     query = initQuery(cmdline);
-    printf("Query initialized...\n");
+    //printf("Query initialized...\n");
     /* Handle the query */
     List* results;  // This is a list of DocumentNodes sorted in order
     results = HandleQuery(Index, query);
-    handleResults(results);
+    handleResults(results, html_path);
 
     /* Parse user query */
     //num_words = HandleQuery(cmdline, &query);
@@ -261,7 +261,6 @@ List* HandleQuery(HashTable* ht, Query* query) {
     }
     strcpy(op, "");
   }
-  printf("Merging lists...\n");
 
   //Sort the lists
   for (int i = 0; i < query->num_sets; i++) {
@@ -285,9 +284,40 @@ List* HandleQuery(HashTable* ht, Query* query) {
 * DocumentNode in results and fetching the url to
 * print to the user
 */
-void handleResults(List* results)
+void handleResults(List* results, char* path)
 {
+  // REDO using a list iteration, or something to keep working
+  // with the list seperate
+  //list_for_each(results, dNode_iter);
 
+  DocumentNode* dNode;
+  char url[MAX_URL_LENGTH];
+  char filename[MAXLINE];
+  int path_len = strlen(path);
+  FILE* fd;
+  ssize_t read;
+  size_t len = 0;
+  char* line = NULL;
+
+  strcpy(filename, path);
+
+  ListNode* cur = results->head;
+  while (cur) {
+    dNode = cur->data;
+    sprintf(filename + path_len, "%d", dNode->document_id);
+
+    //open file and retrieve URL
+    fd = fopen(filename, "r");
+    if ((read = getline(&line, &len, fd)) != -1) {
+      if (line) {
+        printf("%s", line);
+        free(line);
+      }
+    }
+    fclose(fd);
+    cur = cur->next;
+
+  }
 }
 
 
