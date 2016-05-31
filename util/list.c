@@ -237,15 +237,15 @@ List* Merge(List* A, List* B, int (*f)(element_t, element_t)) {
   List* list = malloc(sizeof(List));
   list_new(list, A->elementSize, A->compare, A->freeFn);
 
-  if (A == NULL)
+  if (A->head == NULL)
     return B;
-  if (B == NULL)
+  if (B->head == NULL)
     return A;
 
   ListNode tmp;
   while (A->length > 0 || B->length > 0) {
     if (A->length > 0 && B->length > 0) {
-      if (f(A->head, B->head) <= 0) {
+      if (f(A->head->data, B->head->data) <= 0) {
         //tmp = listRemove(A);
         list_head(A, tmp.data);
       }

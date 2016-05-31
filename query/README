@@ -39,5 +39,4 @@ Output: Prints ranked list of urls that best match search terms
 
 ==================
 TODO
-- Problem with getNextQuery, not passing list properly
 - Update mergesort and merge

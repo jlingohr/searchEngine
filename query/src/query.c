@@ -21,6 +21,9 @@ void eval(char* cmdline);
 void ToLower(char* word);
 int str_compare(element_t av, element_t bv);
 void free_string(element_t av);
+void normalizeQuery(char* str);
+List* HandleQuery(HashTable* ht, Query* query);
+void handleResults(List* results);
 
 int main(int argc, char** argv) {
   /* TODO */
@@ -69,7 +72,9 @@ int main(int argc, char** argv) {
     query = initQuery(cmdline);
     printf("Query initialized...\n");
     /* Handle the query */
-    HandleQuery(Index, query);
+    List* results;  // This is a list of DocumentNodes sorted in order
+    results = HandleQuery(Index, query);
+    handleResults(results);
 
     /* Parse user query */
     //num_words = HandleQuery(cmdline, &query);
@@ -131,13 +136,30 @@ int checkCommandLine(char* filename, char* path) {
   list_new(query->ops, sizeof(char*), str_compare, free_string);
 
 
-  /* Normalize search string */
+  // Normalize search string and parse
+  normalizeQuery(str);
   query->num_sets = parseQuery(str, query->terms, query->ops);
 
   return query;
  }
 
+/*
+* normalizeQuery - Normslizes a search query by treating SPACE
+* as an AND if missing and returns the number of words in
+* the search query. Also converts to all lowercase and removes
+* extra characters like '\n'
+* @query; string to parse
+* @str: C-style string to hold new buffer
+* @ops: C-style string to store logicl operations parsed
+*
+* Returns number of words in query
+*/
+void normalizeQuery(char* query) {
+  // TODO 
+  //NormalizeWord(query);
+  query[strlen(query)-1] = '\0';
 
+}
 
 /*
 * parseQuery - Works through str and appends word to
@@ -189,21 +211,7 @@ int parseQuery(char* str, List* terms, List* ops) {
 
 
 
-/*
-* NormalizeQuery - Normslizes a search query by treating SPACE
-* as an AND if missing and returns the number of words in
-* the search query. Also converts to all lowercase
-* @query; string to parse
-* @str: C-style string to hold new buffer
-* @ops: C-style string to store logicl operations parsed
-*
-* Returns number of words in query
-*/
-int NormalizeQuery(char* query) {
-  /* TODO */
-  return -1;
 
-}
 
 
 /* 
@@ -224,7 +232,7 @@ void ToLower(char* word) {
 * HandleQuery - gets pages matching the query,
 * ranks them, and prints them
 */
-void HandleQuery(HashTable* ht, Query* query) {
+List* HandleQuery(HashTable* ht, Query* query) {
   /* TODO - Improve this! Too many casts */
 
   List* docs;
@@ -240,7 +248,7 @@ void HandleQuery(HashTable* ht, Query* query) {
 
   // Store operand, i.e. AND, OR
   char op[WORD_LENGTH];
-  while(filled < num_sets) {
+  while(query->ops->length) {
     list_dequeue(query->ops, &op);
 
     if (strcmp(op, "AND") == 0) {
@@ -251,6 +259,7 @@ void HandleQuery(HashTable* ht, Query* query) {
       filled++;
       sets[filled] = getNextQuery(ht, query->terms);
     }
+    strcpy(op, "");
   }
   printf("Merging lists...\n");
 
@@ -259,13 +268,28 @@ void HandleQuery(HashTable* ht, Query* query) {
     MergeSort(sets[i], sets[i]->length, cmpDNode_freq);
   }
   // Merge all documents 
+  docs = malloc(sizeof(List));
+  list_new(docs, sizeof(DocumentNode), cmpDNode_freq, NULL);
   for (int i = 0; i < query->num_sets; i++) {
     docs = Merge(docs, sets[i], cmpDNode_freq);
   }
 
-  
+  return docs;
+
 
 }
+
+/*
+* printResults - Handle results from query by
+* opening the relevant document corresponding to each
+* DocumentNode in results and fetching the url to
+* print to the user
+*/
+void handleResults(List* results)
+{
+
+}
+
 
 /*
 * getNextQuery - Returns a list of DocumentNode for
@@ -286,7 +310,7 @@ List* getNextQuery(HashTable* ht, List* words) {
   // Dequeue word from words
   //char term[WORD_LENGTH];
   //strcpy(term, "");
-  char* term = malloc(WORD_LENGTH);
+  char* term = calloc(1, WORD_LENGTH);
   list_dequeue(words,term);
 
   WordNode* wNode = malloc(sizeof(WordNode));
