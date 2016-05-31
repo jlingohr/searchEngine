@@ -122,21 +122,21 @@ int dNode_cmp(element_t av, element_t bv)
 static void wNode_concat(WordNode* wNode, char** str)
 {
   //char headers[MAXLINE];
-  char* docs = malloc(BUF_SIZE);
-  sprintf(docs, "%s %d ", wNode->word, wNode->page->length);
+  char* docs = calloc(1,BUF_SIZE);
+  sprintf(docs, "%s %d", wNode->word, wNode->page->length);
 
   ListNode* node = wNode->page->head;
   DocumentNode* dNode;
   //char temp[MAXLINE];
   while (node) {
     DocumentNode* dNode = node->data;
-    sprintf(eos(docs), "%d %d ", dNode->document_id, dNode->page_word_frequency);
+    sprintf(eos(docs), " %d %d", dNode->document_id, dNode->page_word_frequency);
     //strcat(docs, temp);
     node = node->next;
   }
   strcat(docs, "\n");
-  if (strlen(docs) + strlen(*str) - 1 >= sizeof(*str)) {
-    *str = realloc(*str, 2*(sizeof(*str)));
+  if (strlen(docs) + strlen(*str) - 1 >= strlen(*str)) {
+    *str = realloc(*str, 2*(strlen(*str)));
   }
   //printf("%s", docs);
   strcat(*str, docs);
@@ -157,12 +157,16 @@ static void wNode_concat(WordNode* wNode, char** str)
 element_t IndexLoadWords(element_t Indexv) 
 { // TODO - this is bugging out
   HashTable* ht = Indexv;
-  char* buf = malloc(BUF_SIZE);
+  char* buf = calloc(1, BUF_SIZE);
   WordNode* wNode;
   char *word, *word_buf;
   for (int i = 0; i < MAX_HASH_SLOT; i++) { // Go through each hashtable bucket
     HashTableNode* node = ht->table[i];
     while (node) {  // Go through each word node
+      if (node == NULL) {
+        fprintf(stderr, "ERROR - IndexLoadWords");
+        exit(1);
+      }
       wNode = node->data;
       wNode_concat(wNode, &buf);
 
@@ -208,6 +212,7 @@ void handleLine(HashTable* index, char* line) {
   // TODO - Buggy doc_id from conversion 
   char word[BUF_SIZE];
   char *pch;
+  char* saveptr;
   int num_tokens, num_docs, doc_id, freq;
   List* dNodeList;
   DocumentNode* dNode;
@@ -219,7 +224,7 @@ void handleLine(HashTable* index, char* line) {
   dNodeList = malloc(sizeof(List));
   list_new(dNodeList, sizeof(DocumentNode), dNode_cmp, dNode_free);
 
-  pch = strtok(line, " ");
+  pch = strtok_r(line, " ", &saveptr);
   while (pch != NULL) {
     if (num_tokens == 1) {
       // First token is the word
@@ -254,7 +259,7 @@ void handleLine(HashTable* index, char* line) {
       }
     }
     num_tokens++;
-    pch = strtok(NULL, " ");
+    pch = strtok_r(NULL, " \n", &saveptr);
   }
   // construct WordNode and add to index 
   wNode = calloc(1, sizeof(WordNode));
