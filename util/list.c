@@ -48,8 +48,8 @@ void list_destroy(List* list) {
 * of the List list
 */
 void list_prepend(List* list, element_t elem) {
-  ListNode* node = malloc(sizeof(ListNode));
-  node->data = malloc(list->elementSize);
+  ListNode* node = calloc(1, sizeof(ListNode));
+  node->data = calloc(1, list->elementSize);
   memcpy(node->data, elem, list->elementSize);
 
   if (list->head == NULL) { // Empty list
@@ -68,8 +68,8 @@ void list_prepend(List* list, element_t elem) {
 * of the List list
 */
 void list_append(List* list, element_t elem) {
-  ListNode* node = malloc(sizeof(ListNode));
-  node->data = malloc(list->elementSize);
+  ListNode* node = calloc(1, sizeof(ListNode));
+  node->data = calloc(1, list->elementSize);
   node->next = NULL;
 
   memcpy(node->data, elem, list->elementSize);
@@ -203,7 +203,7 @@ void MergeSort(List* list, int len, int (*f)(element_t, element_t)) {
   List* left = malloc(sizeof(List));
   List* right = malloc(sizeof(List));
   list_new(left, list->elementSize, list->compare, list->freeFn);
-  list_new(left, list->elementSize, list->compare, list->freeFn);
+  list_new(right, list->elementSize, list->compare, list->freeFn);
 
   int mid = len / 2;
 
@@ -225,7 +225,9 @@ void MergeSort(List* list, int len, int (*f)(element_t, element_t)) {
   MergeSort(right, right->length, f);
 
   // MEMORY LEAKS and DANGLING POINTERS
-  Merge(left, right, f);
+  list = Merge(left, right, f);
+  list_destroy(left);
+  list_destroy(right);
 }
 
 /*
@@ -242,32 +244,34 @@ List* Merge(List* A, List* B, int (*f)(element_t, element_t)) {
   if (B->head == NULL)
     return A;
 
-  ListNode tmp;
+  ListNode* tmp;
   while (A->length > 0 || B->length > 0) {
+    tmp = calloc(1, sizeof(ListNode));
     if (A->length > 0 && B->length > 0) {
       if (f(A->head->data, B->head->data) <= 0) {
         //tmp = listRemove(A);
-        list_head(A, tmp.data);
+        list_head(A, tmp->data);
       }
       else {
         //tmp = listRemove(B);
-        list_head(B, tmp.data);
+        list_head(B, tmp->data);
       }
       //listAdd(list, tmp);
-      list_append(list, tmp.data);
+      list_append(list, tmp->data);
     }
     else if (A->length > 0) {
       //tmp = listRemove(A);
-      list_head(A, tmp.data);
+      list_head(A, tmp->data);
       //listAdd(list, tmp);
-      list_append(list, tmp.data);
+      list_append(list, tmp->data);
     }
     else if (B->length > 0) {
       //tmp = listRemove(B);
       //listAdd(list, tmp);
-      list_head(B, tmp.data);
-      list_append(list, tmp.data);
+      list_head(B, tmp->data);
+      list_append(list, tmp->data);
     }
+    free(tmp);
   }
   return list;
 }
