@@ -1,9 +1,9 @@
 TODO
-- EXC_BAD_ACCESS in query.c: 267 (Mergesort) -- Due to Merge when calling list_head(List, tmp.data)
-    Has to do with copying data into a nodes data, which should really be a DocumentNode here... but generic...
+- Check that intersect works
 - Start testing on multuple pages
 - exit nicely
 - memory leaks and dangling pointers
+- Move intersect into list.c and make generic
 
 Includes a query processor and ranking module
 

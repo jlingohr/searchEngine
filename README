@@ -22,3 +22,10 @@ Query (Incomplete)
   Usage: ./query [indexed.dat] [Crawl Dir]
 
   Assumptions: Query assumes that [indexed.dat] is a valid file and [Crawl Dir] is a valid directory
+
+__________
+TODO
+
+- System testing
+- complete unit testing
+- Fix all memory leaks 

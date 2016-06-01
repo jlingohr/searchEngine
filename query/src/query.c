@@ -64,34 +64,16 @@ int main(int argc, char** argv) {
     hashtable_new(Index, sizeof(WordNode), wNode_cmp, wNode_hash, wNode_free);
     readFile(Index, filename);
 
-    
-
-
-
     /* Build up query */
     query = initQuery(cmdline);
-    //printf("Query initialized...\n");
+
     /* Handle the query */
     List* results;  // This is a list of DocumentNodes sorted in order
     results = HandleQuery(Index, query);
     handleResults(results, html_path);
-
-    /* Parse user query */
-    //num_words = HandleQuery(cmdline, &query);
-
-
-    /* Pass input to ranking module to rank pages */
-    //char* results;
-    //rank(wNodes, &results);
-
-    /* Print pages in ranked order */
-    //display(results);
-
-    /* Clean up */
-    //free(results);
-    //cleanIndex(index);
-
   }
+  /* Clean up */
+  hashtable_destroy(Index);
   return 0;
 }
 
