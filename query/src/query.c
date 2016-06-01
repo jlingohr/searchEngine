@@ -311,7 +311,7 @@ void handleResults(List* results, char* path)
     if ((read = getline(&line, &len, fd)) != -1) {
       if (line) {
         printf("%s", line);
-        free(line);
+        //free(line);
       }
     }
     fclose(fd);

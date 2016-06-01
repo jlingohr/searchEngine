@@ -247,30 +247,38 @@ List* Merge(List* A, List* B, int (*f)(element_t, element_t)) {
   ListNode* tmp;
   while (A->length > 0 || B->length > 0) {
     tmp = calloc(1, sizeof(ListNode));
+    tmp->data = calloc(1, A->elementSize);
     if (A->length > 0 && B->length > 0) {
       if (f(A->head->data, B->head->data) <= 0) {
         //tmp = listRemove(A);
-        list_head(A, tmp->data);
+        //list_head(A, tmp->data);
+        list_dequeue(A, tmp->data);
       }
       else {
         //tmp = listRemove(B);
-        list_head(B, tmp->data);
+        //list_head(B, tmp->data);
+        list_dequeue(B, tmp->data);
       }
       //listAdd(list, tmp);
-      list_append(list, tmp->data);
+      //list_append(list, tmp->data);
     }
     else if (A->length > 0) {
       //tmp = listRemove(A);
-      list_head(A, tmp->data);
+      //list_head(A, tmp->data);
       //listAdd(list, tmp);
-      list_append(list, tmp->data);
+      //list_append(list, tmp->data);
+      list_dequeue(A, tmp->data);
     }
     else if (B->length > 0) {
       //tmp = listRemove(B);
       //listAdd(list, tmp);
-      list_head(B, tmp->data);
-      list_append(list, tmp->data);
+      //list_head(B, tmp->data);
+      //list_append(list, tmp->data);
+      list_dequeue(B, tmp->data);
     }
+    //A->freeFn(tmp->data);
+    list_append(list, tmp->data);
+    free(tmp->data);
     free(tmp);
   }
   return list;
