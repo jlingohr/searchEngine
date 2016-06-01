@@ -328,18 +328,7 @@ void handleResults(List* results, char* path)
 * @words: list of words nodes to get query from
 */
 List* getNextQuery(HashTable* ht, List* words) {
-  // TODO - Account for refactoring
-  /*
-  ListNode* tmpNode = listRemove(words);
-  char* word = (char*)tmpNode->data;
-
-  WordNode* wNode = IndexGet(ht, word);
-  List* acc = wNode->page;
-  return acc;
-  */
   // Dequeue word from words
-  //char term[WORD_LENGTH];
-  //strcpy(term, "");
   char* term = calloc(1, WORD_LENGTH);
   list_dequeue(words,term);
 
