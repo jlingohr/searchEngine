@@ -1,9 +1,4 @@
-TODO
-- Check that intersect works
-- Start testing on multuple pages
-- exit nicely
-- memory leaks and dangling pointers
-- Move intersect into list.c and make generic
+
 
 Includes a query processor and ranking module
 

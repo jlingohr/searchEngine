@@ -1,7 +1,4 @@
-TODO
------
-- Stop safely for problems
-- Check if a file already exists and dont append to if it already exists
+
 
 ***Crawler Design Spec***
 -------------------------

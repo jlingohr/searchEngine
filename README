@@ -6,6 +6,15 @@ CRAWLER
   Usage: ./crawler [URL] [Directory] [Depth]
 
   Note: Crawler limited to crawling domain specified by URL_PREFIX for security purposes
+  and crawls to a depth of at most 4
+
+  TODO
+  -----
+  - refactor Hashtable like List
+  - Stop safely for problems
+  - Check if a file already exists and dont append to if it already exists
+  - Valgrind errors gone, but now big memory leaks; have to check free conditions in crawPage and freeWebPage, list_dequeue
+    -- Try making some thing static
 
 
 ---------
@@ -16,16 +25,34 @@ INDEXER
   Assumptions: Indexer assumes that webpages crawled will be placed in in [Crawl Directory]
   by the crawler
 
+  TODOS:
+  ----------
+  - Account for List and hashtable refactoring
+  * Update all Index hashtable in indexer.c to work with refactored hashtable
+  - Fix any memory leaks
+
+  -Double check refactoring didnt affect crawler.c
+  -Tidy up
+  -Seperate modules/Libraries
+
 --------
-Query (Incomplete)
+Query
 
   Usage: ./query [indexed.dat] [Crawl Dir]
 
   Assumptions: Query assumes that [indexed.dat] is a valid file and [Crawl Dir] is a valid directory
 
-__________
-TODO
+  TODO
+  - Account for List and hashtable refactoring
+  - Check that intersect works
+  - Start testing on multuple pages
+  - exit nicely
+  - memory leaks and dangling pointers
+  - Move intersect into list.c and make generic
 
+__________
+TODO (Program)
+- Chaning List and Hashtable again to copy less values on the stack
 - System testing
 - complete unit testing
 - Fix all memory leaks 

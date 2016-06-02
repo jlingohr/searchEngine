@@ -51,8 +51,7 @@ void list_destroy(List* list) {
 */
 void list_prepend(List* list, element_t elem) {
   ListNode* node = calloc(1, sizeof(ListNode));
-  node->data = calloc(1, list->elementSize);
-  memcpy(node->data, elem, list->elementSize);
+  node->data = elem;
 
   if (list->head == NULL) { // Empty list
     list->head = list->tail = node;
@@ -71,10 +70,8 @@ void list_prepend(List* list, element_t elem) {
 */
 void list_append(List* list, element_t elem) {
   ListNode* node = calloc(1, sizeof(ListNode));
-  node->data = calloc(1, list->elementSize);
+  node->data = elem;
   node->next = NULL;
-
-  memcpy(node->data, elem, list->elementSize);
 
   if (list->head == NULL) { // Empty list
     list->head = list->tail = node;
@@ -128,22 +125,20 @@ void list_tail(List* list, element_t elem) {
 * Returns 1 if successfully dequeued
 * Else returns 0
 */
-int list_dequeue(List* list, element_t elem) {
-  if (list->head == NULL) {
-    elem = NULL;
-    return 0;
-  } else {
-    list_head(list, elem);
-    ListNode* node = list->head;
-    list->head = node->next;
-    
-    if (list->freeFn) {
-      list->freeFn(node->data);
-    }
-    free(node);
+element_t list_dequeue(List* list) {
+  element_t result = NULL;
 
+  if (list->head == NULL) {
+    return result;
+  } else {
+    ListNode* tmp = list->head;
+    list->head = tmp->next;
+    result = tmp->data;
+    tmp->next = NULL;
+    tmp->data = NULL;
+    free(tmp);
     list->length--;
-    return 1;
+    return result;
   }
 }
 
@@ -198,7 +193,7 @@ void list_foldl(void (*f) (element_t*, element_t, element_t), element_t* out_ele
 * MergeSort - Sort a linked-list using merge sort
 */
 void MergeSort(List* list, int len, int (*f)(element_t, element_t)) {
-  // TODO - Update for refactored list
+  // TODO - Careful wih dangling pointers
   if (len <= 1)
     return;
 
@@ -208,18 +203,16 @@ void MergeSort(List* list, int len, int (*f)(element_t, element_t)) {
   list_new(right, list->elementSize, list->compare, list->freeFn);
 
   int mid = len / 2;
-
-  ListNode* cur = list->head;
-
-  for (int i = 0; i < len; i++) {
+  ListNode* cur;
+  element_t tmp;
+  while (list->length) {
+    tmp = list_dequeue(list);
     if (mid > 0) {
-      list_append(left, cur->data);
-    }
-    else {
-      list_append(right, cur->data);
+      list_append(left, tmp);
+    } else {
+      list_append(right, tmp);
     }
     mid--;
-    cur = cur->next;
   }
   MergeSort(left, left->length, f);
   MergeSort(right, right->length, f);
@@ -243,27 +236,24 @@ List* Merge(List* A, List* B, int (*f)(element_t, element_t)) {
   if (B->head == NULL)
     return A;
 
-  ListNode* tmp;
+  //ListNode* tmp;
+  element_t tmp;
   while (A->length > 0 || B->length > 0) {
-    tmp = calloc(1, sizeof(ListNode));
-    tmp->data = calloc(1, A->elementSize);
     if (A->length > 0 && B->length > 0) {
       if (f(A->head->data, B->head->data) <= 0) {
-        list_dequeue(A, tmp->data);
+        tmp = list_dequeue(A);
       }
       else {
-        list_dequeue(B, tmp->data);
+        tmp = list_dequeue(B);
       }
     }
     else if (A->length > 0) {
-      list_dequeue(A, tmp->data);
+      tmp = list_dequeue(A);
     }
     else if (B->length > 0) {
-      list_dequeue(B, tmp->data);
+      tmp = list_dequeue(B);
     }
-    list_append(list, tmp->data);
-    free(tmp->data);
-    free(tmp);
+    list_append(list, tmp);
   }
   return list;
 }
