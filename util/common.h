@@ -22,14 +22,14 @@
 #define MAX_DEPTH 4                          // don't want to go too far do
 #define MAX_URL_LENGTH 1000
 #define MAXLINE 1000     
-#define STATUS_LOG 1            // switch to one for output    
+#define STATUS_LOG 0            // switch to one for output    
 #define WORD_LENGTH 100
 #define MAX_NUMBER_OF_SLOTS 10000  
 #define BUF_SIZE 8192
  
 
 // limit crawling to only this domain
-#define URL_PREFIX "http://www.cs.dartmouth.edu/~campbell/cs50/"
+#define URL_PREFIX "http://www.cs.dartmouth.edu/~cs50/"
 
 // ---------------- Structures/Types
 
@@ -41,11 +41,10 @@ typedef void* element_t;
 
 /* Structure of a webpage */
 typedef struct WebPage {
-    char *url;                               // url of the page
+    char url[MAX_URL_LENGTH];                               // url of the page
     char *html;                              // html code of the page
     size_t html_len;                         // length of html code
     int depth;                               // depth of crawl
-    int ref_count;
 } WebPage;
 
 /*

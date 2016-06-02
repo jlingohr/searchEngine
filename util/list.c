@@ -38,9 +38,10 @@ void list_destroy(List* list) {
       list->freeFn(cur->data);
     }
 
-    free(cur->data);
     free(cur);
   }
+  free(list);
+  list = NULL;
 }
 
 /*
@@ -103,7 +104,6 @@ void list_for_each(List* list, listIterator iterator) {
 * list_head - Stores data in lists head in elem
 */
 void list_head(List* list, element_t elem) {
-  /* TODO - what about removal? */
   assert(list->head != NULL);
 
   ListNode* node = list->head;
@@ -129,14 +129,16 @@ void list_tail(List* list, element_t elem) {
 */
 int list_dequeue(List* list, element_t elem) {
   if (list->head == NULL) {
+    elem = NULL;
     return 0;
   } else {
     list_head(list, elem);
     ListNode* node = list->head;
     list->head = node->next;
     
-
-    free(node->data);
+    if (list->freeFn) {
+      list->freeFn(node->data);
+    }
     free(node);
 
     list->length--;
@@ -150,7 +152,6 @@ int list_dequeue(List* list, element_t elem) {
 */
 int list_get(List* list, element_t key, element_t* elem)
 {
-  // TODO - should it remove element?
   ListNode* node = NULL;
   ListNode* cur = list->head;
   while (cur) {
@@ -200,8 +201,8 @@ void MergeSort(List* list, int len, int (*f)(element_t, element_t)) {
   if (len <= 1)
     return;
 
-  List* left = malloc(sizeof(List));
-  List* right = malloc(sizeof(List));
+  List* left = calloc(1, sizeof(List));
+  List* right = calloc(1, sizeof(List));
   list_new(left, list->elementSize, list->compare, list->freeFn);
   list_new(right, list->elementSize, list->compare, list->freeFn);
 
@@ -233,7 +234,7 @@ void MergeSort(List* list, int len, int (*f)(element_t, element_t)) {
 */
 List* Merge(List* A, List* B, int (*f)(element_t, element_t)) {
   // TODO - Watch dangling pointers and mem leaks! 
-  List* list = malloc(sizeof(List));
+  List* list = calloc(1, sizeof(List));
   list_new(list, A->elementSize, A->compare, A->freeFn);
 
   if (A->head == NULL)

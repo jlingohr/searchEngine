@@ -36,19 +36,17 @@ void hashtable_destroy(HashTable* ht)
   for (int i = 0; i < MAX_HASH_SLOT; i++) {
     cur = ht->table[i];
     while (cur != NULL) {
-      //ht->table[i] = cur->next;
-      //ht->freeFn(cur->data);
       tmp = cur;
       cur = cur->next;
-      ht->freeFn(tmp->data);
+      if (ht->freeFn) {
+        ht->freeFn(tmp->data);
+      }
       free(tmp);
       tmp = NULL;
-      //free(cur->data);
-      //free(cur);
     }
-    //free(ht->table[i]);
   }
   free(ht);
+  ht = NULL;
 }
 
 
@@ -61,8 +59,8 @@ void hashtable_destroy(HashTable* ht)
 */
 static inline HashTableNode* hashtable_create_node(HashTable* ht, element_t data, uint32_t hash)
 {
-  HashTableNode* node = malloc(sizeof(HashTableNode));
-  node->data = malloc(ht->elementSize);
+  HashTableNode* node = calloc(1, sizeof(HashTableNode));
+  node->data = calloc(1, ht->elementSize);
   node->hash = hash;
   memcpy(node->data, data, ht->elementSize);
   node->next = NULL;
@@ -91,13 +89,14 @@ static inline int hashtable_find_bucket(HashTable* ht, element_t key,
 /*
 * hashtable_find - Find an element in the hashtable
 * @ht: hashtable to search inside
+* @bucket: First ListNode in ht->table[hash]
 * @key- key to hash
 * Returns 1 if item found, otherwise returns 0
 */
-static inline int hashtable_find(HashTable* ht, HashTableNode* node, element_t key,
+static inline int hashtable_find(HashTable* ht, HashTableNode* bucket, element_t key,
   uint32_t hash, element_t elem)
 {
-  HashTableNode* cur = node;
+  HashTableNode* cur = bucket;
   while (cur) {
     if (cur->hash == hash && ht->compare(key, cur->data)) {
       //node = cur->data;
@@ -109,7 +108,7 @@ static inline int hashtable_find(HashTable* ht, HashTableNode* node, element_t k
       cur = cur->next;
     }  
   }
-  node = NULL;  // This should be ELEM i think
+  //node = NULL;  // This should be ELEM i think
   return 0;
 }
 

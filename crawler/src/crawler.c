@@ -15,7 +15,7 @@
   and the depth on the second line. The HTML will for the webpage 
   will start on the third line.
 
-  To run: ./bin/crawler http://old-www.cs.dartmouth.edu/~cs50/ ./data/ 1
+  To run: ./bin/crawler http://old-www.cs.dartmouth.edu/~cs50/ ./data/ 0
 
 
 */
@@ -102,7 +102,7 @@ int main(int argc, char** argv) {
 
   // Bootstrap given URL for initial seed 
   curl_global_init(CURL_GLOBAL_ALL);  // NOTE: Not thread safe
-  seed_page.url = malloc(sizeof(seed_url));
+  //seed_page.url = malloc(sizeof(seed_url));
   strcpy(seed_page.url, seed_url);
   seed_page.html = NULL;
   seed_page.depth = 0;
@@ -174,7 +174,7 @@ int main(int argc, char** argv) {
 
   // Free seed page 
   free(seed_page.html);
-  free(seed_page.url);
+  //free(seed_page.url);
 
   return 0;
 }
@@ -247,6 +247,7 @@ int writePage(WebPage *page, char *dir, int file_counter) {
 * crawlPage - Crawls WebPage page to extract URLS
 * Extracts urls only if not already in hashtable and would not
 * exceed maximum allowed epth
+* NOTE: Webpages added to toVisit with html uninitialized at this point
 */
 int crawlPage(HashTable* URLSVisited, List* toVisit, WebPage *page) {
   int pos;
@@ -263,12 +264,14 @@ int crawlPage(HashTable* URLSVisited, List* toVisit, WebPage *page) {
           printf("\nFound url: %s", buf);
 
         WebPage* tmp = calloc(1, sizeof(WebPage));
-        tmp->url = calloc(1, strlen(buf)+1);
+        //tmp->url = calloc(1, strlen(buf)+1);
+        strcpy(tmp->url, "");
         strcpy(tmp->url, buf);
+        tmp->html = NULL;
         tmp->depth = page->depth + 1;
 
         list_append(toVisit, tmp);
-        free(tmp->url);
+        //free(tmp->url);
         free(tmp);
       }
     }
@@ -363,7 +366,7 @@ int cmp_webpage(element_t av, element_t bv)
 void free_webpage(element_t elem)
 {
   WebPage* page = elem;
-  free(page->url);
-  free(page->html);
-  free(page);
+  //free(page->url);
+  //free(page->html);
+  //free(page);
 }
