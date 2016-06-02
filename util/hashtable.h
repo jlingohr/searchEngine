@@ -17,7 +17,7 @@
 #include "list.h"
 
 // ---------------- Constants
-#define MAX_HASH_SLOT 100                // number of "buckets" 9973 10000 
+#define MAX_HASH_SLOT 3                // number of "buckets" 9973 10000 
 
 // ---------------- Structures/Types
 
@@ -36,6 +36,7 @@ typedef struct HashTable {
     hashtable_compare compare;
     hashtable_hash hashFn;
     freeFunction freeFn;
+    uint32_t size;
 } HashTable;
 
 

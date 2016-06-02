@@ -15,7 +15,6 @@ void hashtable_new(HashTable* ht, int elementSize, hashtable_compare cmp,
   assert(elementSize > 0);
   assert(cmp != NULL);
   assert(hash != NULL);
-  assert(freeFn != NULL);
 
   for (int i = 0; i < MAX_HASH_SLOT; i++) {
     ht->table[i] = NULL;
@@ -24,6 +23,7 @@ void hashtable_new(HashTable* ht, int elementSize, hashtable_compare cmp,
   ht->compare = cmp;
   ht->hashFn = hash;
   ht->freeFn = freeFn;
+  ht->size = 0;
 }
 
 /*
@@ -40,12 +40,15 @@ void hashtable_destroy(HashTable* ht)
       cur = cur->next;
       if (ht->freeFn) {
         ht->freeFn(tmp->data);
+        tmp->data = NULL;
       }
       free(tmp);
       tmp = NULL;
     }
+    ht->table[i]= NULL;
   }
-  free(ht);
+  free(ht->table);
+  //free(ht);
   ht = NULL;
 }
 
@@ -120,25 +123,21 @@ static inline int hashtable_find(HashTable* ht, HashTableNode* bucket, element_t
 */
 void hashtable_insert(HashTable* ht, element_t key, element_t data)
 {
-  HashTableNode* node;
-
   uint32_t hash = 0;
-  //node = hashtable_find_bucket(ht, key, &hash);
   int p = hashtable_find_bucket(ht, key, &hash);
   if (ht->table[p] == NULL) {
     // No item hashed here, so start chaining
     ht->table[p] = hashtable_create_node(ht, data, hash);
-    //ht->table[p] = node;
   } else {
-    node = NULL;
-    //node = ht->table[p];
+    HashTableNode* node = NULL;
     if (!hashtable_find(ht, ht->table[p], key,  hash, node)) {
       // Not found, so insert
-      HashTableNode* tmp = hashtable_create_node(ht, data, hash);
-      tmp->next = ht->table[p];
-      ht->table[p] = tmp;  // Probably incorrect pointing...
+      node = hashtable_create_node(ht, data, hash);
+      node->next = ht->table[p];
+      ht->table[p] = node;  // Probably incorrect pointing...
     }
   }
+  ht->size++;
 
 }
 

@@ -15,7 +15,7 @@
   and the depth on the second line. The HTML will for the webpage 
   will start on the third line.
 
-  To run: ./bin/crawler http://old-www.cs.dartmouth.edu/~cs50/ ./data/ 0
+  To run: ./bin/crawler http://old-www.cs.dartmouth.edu/~cs50/ ./data/ 1
 
 
 */
@@ -35,8 +35,6 @@
 #include "../../util/util.h"
 #include "../../util/web.h"                             // curl and html functionality
 #include "../../util/list.h"                            // webpage list functionality
-//#include "hashtableURL.h"
-//#include "listwpage.h"
 
 
 
@@ -55,7 +53,6 @@ int isValidURL(char * URL);
 int writePage(WebPage *page, char *dir, int x);
 int crawlPage(HashTable* URLSVisited, List* toVisit, WebPage *page);
 int saveCrawl();
-void cleanup(HashTable* ht);
 int validDepth(int depth, int user_depth);
 
 int cmp_webpage(element_t av, element_t bv);
@@ -94,9 +91,9 @@ int main(int argc, char** argv) {
   strcpy(target, argv[2]);
   user_depth = atoi(argv[3]);
 
-  toVisit = malloc(sizeof(List));
+  toVisit = calloc(1, sizeof(List));
   list_new(toVisit, sizeof(WebPage), cmp_webpage, free_webpage);
-  URLSVisited = malloc(sizeof(HashTable));
+  URLSVisited = calloc(1, sizeof(HashTable));
   hashtable_new(URLSVisited, MAX_URL_LENGTH, cmp_URL, hash_URL, hash_free);
   file_counter = 1;
 
@@ -154,13 +151,11 @@ int main(int argc, char** argv) {
         file_counter++;
         // extract URLs from webpage and add to URLList
         crawlPage(URLSVisited, toVisit, temp_page);
-        //free_webpage(temp_page);
         free(temp_page->html);
 
         // sleep for a bit to avoid annoying the target domain
         sleep(INTERVAL_PER_FETCH);
       } 
-      free(temp_page->url);
       free(temp_page);
     }
   }
@@ -174,7 +169,6 @@ int main(int argc, char** argv) {
 
   // Free seed page 
   free(seed_page.html);
-  //free(seed_page.url);
 
   return 0;
 }
@@ -290,15 +284,6 @@ int crawlPage(HashTable* URLSVisited, List* toVisit, WebPage *page) {
 */
 int validDepth(int depth, int user_depth) {
   return (depth <= user_depth && depth <= MAX_DEPTH);
-}
-
-/*
-* cleanup - free resources
-*/
-void cleanup(HashTable* ht) {
-  //cleanHashURL(ht);
-  //free(ht);
-  hashtable_destroy(ht);
 }
 
 /*

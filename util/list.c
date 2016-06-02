@@ -37,9 +37,10 @@ void list_destroy(List* list) {
     if (list->freeFn) {
       list->freeFn(cur->data);
     }
-
     free(cur);
   }
+  free(list->head);
+  list->head = NULL;
   free(list);
   list = NULL;
 }
