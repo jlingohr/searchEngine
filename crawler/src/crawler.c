@@ -15,7 +15,7 @@
   and the depth on the second line. The HTML will for the webpage 
   will start on the third line.
 
-  To run: ./bin/crawler http://www.cs.dartmouth.edu/~campbell/cs50/ ./data/ 0
+  To run: ./bin/crawler http://old-www.cs.dartmouth.edu/~cs50/ ./data/ 1
 
 
 */
@@ -52,9 +52,8 @@
 // ---------------- Private prototypes
 int checkValidInputs(char* seed, char* target, char* max_depth);
 int isValidURL(char * URL);
-//int isDirec(char * dir);
 int writePage(WebPage *page, char *dir, int x);
-int crawlPage(WebPage *page);
+int crawlPage(HashTable* URLSVisited, List* toVisit, WebPage *page);
 int saveCrawl();
 void cleanup(HashTable* ht);
 int validDepth(int depth, int user_depth);
@@ -65,9 +64,6 @@ int cmp_URL(element_t av, element_t bv);
 uint32_t hash_URL(element_t keyv);
 void hash_free(element_t data);
 
-// Global:
-HashTable* URLSVisited;
-List* toVisit;
 
 
 int main(int argc, char** argv) {
@@ -77,7 +73,10 @@ int main(int argc, char** argv) {
   int valid, file_counter;
   WebPage seed_page;
 
-  /* Check command line arguments */
+  HashTable* URLSVisited; 
+  List* toVisit;
+
+  // Check command line arguments 
   if (argc != 4) {
     fprintf(stderr, "usage: <url> <directory> <max depth>\n");
     exit(1);
@@ -89,23 +88,20 @@ int main(int argc, char** argv) {
   }
   printf("Crawling - %s\n", argv[1]);
 
-  /* Check initLists - Initialize data structures */
+  // Check initLists - Initialize data structures 
   strcpy(seed_url, argv[1]);
   NormalizeURL(seed_url);
   strcpy(target, argv[2]);
   user_depth = atoi(argv[3]);
 
-  //toVisit= initList();
   toVisit = malloc(sizeof(List));
   list_new(toVisit, sizeof(WebPage), cmp_webpage, free_webpage);
-  //URLSVisited = initHashTable();
   URLSVisited = malloc(sizeof(HashTable));
-
   hashtable_new(URLSVisited, MAX_URL_LENGTH, cmp_URL, hash_URL, hash_free);
   file_counter = 1;
 
-  /* Bootstrap given URL for initial seed */
-  curl_global_init(CURL_GLOBAL_ALL);  // NOTE: Not thread safe!
+  // Bootstrap given URL for initial seed 
+  curl_global_init(CURL_GLOBAL_ALL);  // NOTE: Not thread safe
   seed_page.url = malloc(sizeof(seed_url));
   strcpy(seed_page.url, seed_url);
   seed_page.html = NULL;
@@ -115,59 +111,68 @@ int main(int argc, char** argv) {
     printf("\nSeed URL: %s", seed_page.url);
   }
 
-  /* Check getPage for seed page */
+  // Check getPage for seed page 
   if (!GetWebPage(&seed_page)) {
     printf("Coulnd't open seed url: %s\n", seed_page.url);
     free(seed_page.url);
     free(seed_page.html);
+    hashtable_destroy(URLSVisited);
+    list_destroy(toVisit);
     exit(-1);
   }
 
-  /* Write seed page to file */
+  // Write seed page to file 
   if (!writePage(&seed_page, target, file_counter)) {
     printf("Error writing seed page...\n");
+    free(seed_page.url);
+    free(seed_page.html);
+    hashtable_destroy(URLSVisited);
+    list_destroy(toVisit);
     return 1;
   }
   file_counter++;
 
 
-  /* Extract urls from seed and add to URLLIST
-  and Hashtable */
-  crawlPage(&seed_page);
+  // Extract urls from seed and add to URLLIST and Hashtable 
+  crawlPage(URLSVisited, toVisit, &seed_page);
   hashtable_insert(URLSVisited, (element_t*)seed_page.url, (element_t*)seed_page.url);
   sleep(INTERVAL_PER_FETCH);
 
-  /* while there are urls to crawl do */
+  // while there are urls to crawl do 
   WebPage* temp_page;
   int result;
   while (list_size(toVisit)) {
     // Get next URL form the list */
-    temp_page = malloc(sizeof(WebPage));
+    temp_page = calloc(1, sizeof(WebPage));
     result = list_dequeue(toVisit, temp_page);
     if (result && validDepth(temp_page->depth, user_depth) && !hashtable_lookup(URLSVisited, temp_page->url)) {
       // Get WebPage for URL
-      if (GetWebPage(temp_page)) {// write page file
+      
+      if (isValidURL(temp_page->url) && GetWebPage(temp_page)) {// write page file
+        assert(isValidURL(temp_page->url));
         writePage(temp_page, target, file_counter);
         file_counter++;
         // extract URLs from webpage and add to URLList
-        crawlPage(temp_page);
-        // Put url into hashtable
-        hashtable_insert(URLSVisited, temp_page->url, temp_page->url);
-        free_webpage(temp_page);
+        crawlPage(URLSVisited, toVisit, temp_page);
+        //free_webpage(temp_page);
+        free(temp_page->html);
+
+        // sleep for a bit to avoid annoying the target domain
+        sleep(INTERVAL_PER_FETCH);
       } 
+      free(temp_page->url);
+      free(temp_page);
     }
-
-
-    /* sleep for a bit to avoid annoying the target domain */
-    sleep(INTERVAL_PER_FETCH);
   }
 
-  /* Cleanup curl */
+  // Cleanup curl
   curl_global_cleanup();
 
-  /* Free resources */
-  cleanup(URLSVisited);
-  /* Free seed page */
+  // Free resources 
+  hashtable_destroy(URLSVisited);
+  list_destroy(toVisit);
+
+  // Free seed page 
   free(seed_page.html);
   free(seed_page.url);
 
@@ -202,8 +207,15 @@ int checkValidInputs(char* seed, char* target, char* max_depth) {
 * Return 0 if invalid
 */
 int isValidURL(char * URL) {
+  if (URL == NULL) {
+    return 0;
+  }
+  if (!NormalizeURL(URL)) {
+    return 0;
+  }
   if (strncmp(URL, URL_PREFIX, strlen(URL_PREFIX)) != 0)
     return 0;
+
   return 1;
 }
 
@@ -236,7 +248,7 @@ int writePage(WebPage *page, char *dir, int file_counter) {
 * Extracts urls only if not already in hashtable and would not
 * exceed maximum allowed epth
 */
-int crawlPage(WebPage *page) {
+int crawlPage(HashTable* URLSVisited, List* toVisit, WebPage *page) {
   int pos;
   char* buf;
 
@@ -245,25 +257,27 @@ int crawlPage(WebPage *page) {
 
   while ((pos = GetNextURL(page->html, pos, page->url, &buf)) > 0) {
     if (NormalizeURL(buf)) {
-      if (isValidURL(buf)) {
-        if (!hashtable_lookup(URLSVisited, buf)) {
-          if (STATUS_LOG == 1)
-            printf("\nFound url: %s", buf);
-          // Fragmentation possible?
-          WebPage* tmp = malloc(sizeof(WebPage));
-          tmp->url = malloc(strlen(buf)+1);
-          strcpy(tmp->url, buf);
-          tmp->depth = page->depth + 1;
+      if (isValidURL(buf) && !hashtable_lookup(URLSVisited, buf)) {
+        assert(isValidURL(buf));
+        if (STATUS_LOG == 1)
+          printf("\nFound url: %s", buf);
 
-          //listAddPage(toVisit, tmp);
-          list_append(toVisit, tmp);
-          free(tmp->url);
-          free(tmp);
-        }
+        WebPage* tmp = calloc(1, sizeof(WebPage));
+        tmp->url = calloc(1, strlen(buf)+1);
+        strcpy(tmp->url, buf);
+        tmp->depth = page->depth + 1;
+
+        list_append(toVisit, tmp);
+        free(tmp->url);
+        free(tmp);
       }
     }
+    free(buf);
   }
-  free(buf);
+  //free(buf);
+
+  // Update Hashtable after crawling page
+  hashtable_insert(URLSVisited, page->url, page->url);
   return 1;
 }
 
