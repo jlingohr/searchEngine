@@ -181,7 +181,7 @@ int parseQuery(char* str, List* terms, List* ops) {
       //listAdd(terms, word);
       list_append(terms, word);
     }
-    free(word);
+    //free(word);
 
     tokens++;
     pch = strtok(NULL, " ");
@@ -229,9 +229,10 @@ List* HandleQuery(HashTable* ht, Query* query) {
   //filled++;
 
   // Store operand, i.e. AND, OR
-  char op[WORD_LENGTH];
+  //char op[WORD_LENGTH];
+  char* op;
   while(query->ops->length) {
-    list_dequeue(query->ops, &op);
+    op = list_dequeue(query->ops);
 
     if (strcmp(op, "AND") == 0) {
       temp_a = getNextQuery(ht, query->terms);
@@ -241,18 +242,20 @@ List* HandleQuery(HashTable* ht, Query* query) {
       filled++;
       sets[filled] = getNextQuery(ht, query->terms);
     }
-    strcpy(op, "");
+    //strcpy(op, "");
+    free(op);
   }
 
   //Sort the lists
+  List* sorted[num_sets];
   for (int i = 0; i < query->num_sets; i++) {
-    MergeSort(sets[i], sets[i]->length, cmpDNode_freq);
+    sorted[i] = MergeSort(sets[i], sets[i]->length, cmpDNode_freq);
   }
   // Merge all documents 
   docs = malloc(sizeof(List));
   list_new(docs, sizeof(DocumentNode), cmpDNode_freq, NULL);
   for (int i = 0; i < query->num_sets; i++) {
-    docs = Merge(docs, sets[i], cmpDNode_freq);
+    docs = Merge(docs, sorted[i], cmpDNode_freq);
   }
 
   return docs;
@@ -273,7 +276,7 @@ void handleResults(List* results, char* path)
   //list_for_each(results, dNode_iter);
 
   DocumentNode* dNode;
-  char url[MAX_URL_LENGTH];
+  //char url[MAX_URL_LENGTH];
   char filename[MAXLINE];
   int path_len = strlen(path);
   FILE* fd;
@@ -311,11 +314,13 @@ void handleResults(List* results, char* path)
 */
 List* getNextQuery(HashTable* ht, List* words) {
   // Dequeue word from words
-  char* term = calloc(1, WORD_LENGTH);
-  list_dequeue(words,term);
+  //char* term = calloc(1, WORD_LENGTH);
+  char* term;
+  term = list_dequeue(words);
 
   WordNode* wNode = malloc(sizeof(WordNode));
   hashtable_get(ht, term, wNode);
+  free(term);
   return wNode->page;
 
 }
@@ -346,25 +351,27 @@ List* intersect(List* A, List* B) {
   list_new(list, sizeof(DocumentNode), cmpDNode_ID, NULL);
 
   // Set current pointer to smaller list 
-  DocumentNode cur;
-  DocumentNode tmp;
+  DocumentNode* cur;
+  DocumentNode* tmp = NULL;
   if (A->length <= B->length) { //Have to check if NULL returned
     while (A->length) {
-      list_dequeue(A, &cur);
-      if (list_get(B, (element_t)&cur.document_id, (element_t)&tmp)) {
+      cur = list_dequeue(A);
+      if (list_get(B, &cur->document_id, (element_t)&tmp)) {
         // Update Document Node
-        update(&cur, &tmp);
+        update(cur, tmp);
+        tmp = NULL;
         // Add updated node to accumulated list
-        list_append(list, &cur);
+        list_append(list, cur);
       }
     }
   }
   else {
     while (B->length) {
-      list_dequeue(B, &cur);
-      if (list_get(A, (element_t)&cur.document_id, (element_t)&tmp)) {
-        update(&cur, &tmp);
-        list_append(list, &cur);
+      cur = list_dequeue(B);
+      if (list_get(A, &cur->document_id, (element_t)&tmp)) {
+        update(cur, tmp);
+        tmp = NULL;
+        list_append(list, cur);
       }
     }
   }

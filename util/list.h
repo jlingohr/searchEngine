@@ -67,7 +67,7 @@ void list_foldl(void (*f) (element_t*, element_t, element_t), element_t* out_ele
 /**************
 * List Algorithms
 ****************/
-void MergeSort(List* list, int len, int (*f)(element_t, element_t));
+List* MergeSort(List* list, int len, int (*f)(element_t, element_t));
 List* Merge(List* A, List* B, int (*f)(element_t, element_t));
 
 

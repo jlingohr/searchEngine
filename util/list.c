@@ -192,10 +192,10 @@ void list_foldl(void (*f) (element_t*, element_t, element_t), element_t* out_ele
 /*
 * MergeSort - Sort a linked-list using merge sort
 */
-void MergeSort(List* list, int len, int (*f)(element_t, element_t)) {
+List* MergeSort(List* list, int len, int (*f)(element_t, element_t)) {
   // TODO - Careful wih dangling pointers
   if (len <= 1)
-    return;
+    return list;
 
   List* left = calloc(1, sizeof(List));
   List* right = calloc(1, sizeof(List));
@@ -203,7 +203,7 @@ void MergeSort(List* list, int len, int (*f)(element_t, element_t)) {
   list_new(right, list->elementSize, list->compare, list->freeFn);
 
   int mid = len / 2;
-  ListNode* cur;
+  //ListNode* cur;
   element_t tmp;
   while (list->length) {
     tmp = list_dequeue(list);
@@ -218,9 +218,9 @@ void MergeSort(List* list, int len, int (*f)(element_t, element_t)) {
   MergeSort(right, right->length, f);
 
   // MEMORY LEAKS and DANGLING POINTERS
-  list = Merge(left, right, f);
-  list_destroy(left);
-  list_destroy(right);
+  return Merge(left, right, f);
+  //list_destroy(left);
+  //list_destroy(right);
 }
 
 /*
