@@ -10,11 +10,9 @@ CRAWLER
 
   TODO
   -----
-  - refactor Hashtable like List
   - Stop safely for problems
   - Check if a file already exists and dont append to if it already exists
-  - Valgrind errors gone, but now big memory leaks; have to check free conditions in crawPage and freeWebPage, list_dequeue
-    -- Try making some thing static
+  - Valgrind errors gone, but some memory leaks remain; have to check free conditions in crawPage and freeWebPage, list_dequeue
 
 
 ---------

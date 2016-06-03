@@ -68,7 +68,7 @@ int main(int argc, char** argv) {
   char seed_url[MAX_URL_LENGTH], target[MAX_URL_LENGTH];
   static int user_depth;
   int valid, file_counter;
-  WebPage seed_page;
+  WebPage* seed_page;
 
   HashTable* URLSVisited; 
   List* toVisit;
@@ -99,30 +99,30 @@ int main(int argc, char** argv) {
 
   // Bootstrap given URL for initial seed 
   curl_global_init(CURL_GLOBAL_ALL);  // NOTE: Not thread safe
-  //seed_page.url = malloc(sizeof(seed_url));
-  strcpy(seed_page.url, seed_url);
-  seed_page.html = NULL;
-  seed_page.depth = 0;
+  seed_page = calloc(1, sizeof(WebPage));
+  seed_page->html = NULL;
+  strcpy(seed_page->url, seed_url);
+  seed_page->depth = 0;
 
   if (STATUS_LOG == 1) {
-    printf("\nSeed URL: %s", seed_page.url);
+    printf("\nSeed URL: %s", seed_page->url);
   }
 
   // Check getPage for seed page 
-  if (!GetWebPage(&seed_page)) {
-    printf("Coulnd't open seed url: %s\n", seed_page.url);
-    free(seed_page.url);
-    free(seed_page.html);
+  if (!GetWebPage(seed_page)) {
+    printf("Coulnd't open seed url: %s\n", seed_page->url);
+    free(seed_page->html);
+    free(seed_page);
     hashtable_destroy(URLSVisited);
     list_destroy(toVisit);
     exit(-1);
   }
 
   // Write seed page to file 
-  if (!writePage(&seed_page, target, file_counter)) {
+  if (!writePage(seed_page, target, file_counter)) {
     printf("Error writing seed page...\n");
-    free(seed_page.url);
-    free(seed_page.html);
+    free(seed_page->html);
+    free(seed_page);
     hashtable_destroy(URLSVisited);
     list_destroy(toVisit);
     return 1;
@@ -131,24 +131,36 @@ int main(int argc, char** argv) {
 
 
   // Extract urls from seed and add to URLLIST and Hashtable 
-  crawlPage(URLSVisited, toVisit, &seed_page);
-  hashtable_insert(URLSVisited, (element_t*)seed_page.url, (element_t*)seed_page.url);
+  crawlPage(URLSVisited, toVisit, seed_page);
+  char* url = calloc(1, MAX_URL_LENGTH);
+  strcpy(url, seed_page->url);
+  hashtable_insert(URLSVisited, url, url);
   sleep(INTERVAL_PER_FETCH);
 
   // while there are urls to crawl do 
   WebPage* temp_page;
+
   while ((temp_page = list_dequeue(toVisit))) {
-    if (validDepth(temp_page->depth, user_depth) && !hashtable_lookup(URLSVisited, temp_page->url)) {
-      if (isValidURL(temp_page->url) && GetWebPage(temp_page)) {
+    if (validDepth(temp_page->depth, user_depth) && isValidURL(temp_page->url) && 
+      !hashtable_lookup(URLSVisited, temp_page->url)) 
+    {
+      if (GetWebPage(temp_page)) {
         assert(isValidURL(temp_page->url));
         writePage(temp_page, target, file_counter);
         file_counter++;
-        // extract URLs from webpage and add to URLList
+        // Extract URLs from webpage
         crawlPage(URLSVisited, toVisit, temp_page);
 
+        // Insert page URL into hashtable after being crawled
+        url = calloc(1, MAX_URL_LENGTH);
+        strcpy(url, temp_page->url);
+        hashtable_insert(URLSVisited, url, url);
+        free(temp_page->html);
         sleep(INTERVAL_PER_FETCH);
       }
     }
+    strcpy(temp_page->url, "");
+    free(temp_page);
   }
 
   // Cleanup curl
@@ -159,7 +171,8 @@ int main(int argc, char** argv) {
   list_destroy(toVisit);
 
   // Free seed page 
-  free(seed_page.html);
+  free(seed_page->html);
+  free(seed_page);
 
   return 0;
 }
@@ -249,23 +262,16 @@ int crawlPage(HashTable* URLSVisited, List* toVisit, WebPage *page) {
           printf("\nFound url: %s", buf);
 
         WebPage* tmp = calloc(1, sizeof(WebPage));
-        //tmp->url = calloc(1, strlen(buf)+1);
         strcpy(tmp->url, "");
         strcpy(tmp->url, buf);
         tmp->html = NULL;
         tmp->depth = page->depth + 1;
 
         list_append(toVisit, tmp);
-        //free(tmp->url);
-        //free(tmp);
       }
     }
     free(buf);
   }
-  //free(buf);
-
-  // Update Hashtable after crawling page
-  hashtable_insert(URLSVisited, page->url, page->url);
   return 1;
 }
 
@@ -342,7 +348,5 @@ int cmp_webpage(element_t av, element_t bv)
 void free_webpage(element_t elem)
 {
   WebPage* page = elem;
-  //free(page->url);
-  //free(page->html);
-  //free(page);
+  free(page->html);
 }

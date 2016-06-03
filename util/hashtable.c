@@ -63,9 +63,10 @@ void hashtable_destroy(HashTable* ht)
 static inline HashTableNode* hashtable_create_node(HashTable* ht, element_t data, uint32_t hash)
 {
   HashTableNode* node = calloc(1, sizeof(HashTableNode));
-  node->data = calloc(1, ht->elementSize);
+  //node->data = calloc(1, ht->elementSize);
   node->hash = hash;
-  memcpy(node->data, data, ht->elementSize);
+  //memcpy(node->data, data, ht->elementSize);
+  node->data = data;
   node->next = NULL;
   
   return node;
@@ -99,6 +100,7 @@ static inline int hashtable_find_bucket(HashTable* ht, element_t key,
 static inline int hashtable_find(HashTable* ht, HashTableNode* bucket, element_t key,
   uint32_t hash, element_t elem)
 {
+  // TODO - refactor
   HashTableNode* cur = bucket;
   while (cur) {
     if (cur->hash == hash && ht->compare(key, cur->data)) {
@@ -154,7 +156,7 @@ void hashtable_insert(HashTable* ht, element_t key, element_t data)
 */
 int hashtable_get(HashTable* ht, element_t key, element_t elem)
 {
-
+  // TODO - refactor: Keep the copy or redirect a pointer?
   uint32_t hash = 0;
   //node = hashtable_find_bucket(ht, key, &hash);
   int p = hashtable_find_bucket(ht, key, &hash);
