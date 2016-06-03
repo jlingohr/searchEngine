@@ -1,1020 +1,1394 @@
-seok 1 1 2
-us 2 1 2 2 2
-after 2 1 3 2 3
-say 1 1 1
-contains 1 2 1
-overview 1 2 1
-issues 2 2 1 4 1
-joel 1 3 15
-assignments 2 1 14 2 8
-c 3 1 14 2 5 4 7
-contol 1 1 1
-together 2 1 3 2 2
-these 4 1 7 2 4 3 3 4 1
-first 2 1 4 2 3
-leader 2 1 1 2 1
-every 1 1 2
-unclear 1 1 1
-wed 2 2 1 3 1
-reuse 1 2 1
-puttytut 1 2 2
-man 1 4 1
-developed 1 1 1
-harder 1 1 1
-classic 1 1 1
-less 1 1 1
-notes 3 1 1 2 1 4 3
-then 2 1 1 2 5
-t 2 1 5 3 1
-percent 1 1 3
-may 2 1 2 2 7
-isn 1 1 1
-since 3 1 2 2 1 3 1
-breeze 1 2 1
-needed 1 2 1
-year 1 2 1
-words 1 3 1
-include 2 1 1 2 1
-hand 1 1 3
-out 2 1 2 2 3
-submitted 2 1 4 2 1
-holiday 1 1 1
-covering 1 1 1
-circumstance 1 1 1
-sure 1 2 3
-submission 1 2 4
-repsoitory 1 2 1
-anecdotal 1 3 1
-university 1 4 1
-universal 1 4 1
-to 4 1 55 2 23 3 6 4 12
-reading 2 1 1 3 5
-call 1 1 1
-standalone 1 1 2
-turn 1 1 1
-instructor 1 1 4
-lt 1 1 8
-way 3 1 1 2 1 3 1
-problem 1 1 5
-extension 1 1 1
-editors 2 1 1 4 1
-ready 1 2 1
-describing 1 2 1
-spolsky 1 3 9
-system 3 1 4 2 1 4 1
-air 1 1 1
-s 4 1 4 2 3 3 6 4 1
-talk 2 1 3 3 1
-stating 1 1 1
-computing 1 1 1
-segfault 1 2 1
-quick 2 2 1 4 1
-be 4 1 23 2 8 3 3 4 3
-racing 1 1 1
-weeks 1 1 2
-skills 1 1 6
-which 2 1 2 2 3
-an 2 1 2 2 1
-chen 1 1 4
-resubmitted 2 1 1 2 1
-captures 1 1 1
-etc 2 1 1 4 1
-look 1 1 1
-better 1 3 1
-toolkit 1 4 1
-small 1 1 4
-medium 1 1 1
-rtos 1 1 1
-environment 1 1 1
-sudi 1 1 2
-sunday 2 1 2 2 1
-various 1 1 2
-processes 1 1 1
-has 1 1 2
-runs 1 2 1
-relevant 1 2 1
-group 1 1 4
-experience 2 1 3 3 2
-than 1 1 3
-head 1 1 1
-while 1 1 1
-students 4 1 3 2 2 3 1 4 1
-activated 1 1 2
-fill 1 1 1
-weekend 1 1 1
-unpleasant 1 1 1
-password 1 2 4
-seven 1 1 1
-bash 3 1 2 2 1 4 6
-sockets 2 1 1 2 1
-times 1 1 1
-books 2 1 4 4 3
-cool 1 2 1
-promise 1 2 1
-pretty 1 2 1
-guru 1 3 1
-let 1 4 1
-project 3 1 15 2 4 5 2
-answer 1 1 2
-in 4 1 33 2 15 3 5 4 6
-teams 1 1 4
-g 3 1 4 2 1 4 1
-result 1 1 1
-solving 1 1 3
-lecturer 1 1 1
-behalf 1 1 1
-typically 1 2 2
-opinions 1 3 1
-badge 1 3 1
-fire 1 3 1
-ve 1 4 1
-cs 5 1 14 2 12 3 2 4 3 5 4
-on 4 1 29 2 9 3 1 4 6
-course 4 1 16 2 1 3 1 5 1
-tinysearchengine 2 1 2 2 3
-prior 1 1 1
-according 1 1 1
-me 3 1 2 3 1 4 2
-name 2 1 1 2 2
-ansi 1 1 2
-w 2 1 1 2 2
-great 1 1 2
-academic 1 3 1
-minutes 1 3 1
-demonstrated 1 3 1
-morning 1 4 1
-robots 2 1 2 5 1
-any 2 1 5 4 1
-card 1 1 3
-afra 1 5 1
-specifically 1 1 3
-it 4 1 12 2 4 3 2 4 3
-flying 2 1 1 2 1
-tu 1 1 1
-original 2 1 1 2 1
-engineering 1 1 1
-vital 1 1 1
-case 1 1 1
-most 2 1 1 3 1
-send 1 4 1
-by 4 1 9 3 1 4 2 5 1
-min 1 1 2
-stay 1 1 1
-crawler 2 1 1 2 3
-sobell 1 1 1
-term 2 2 1 3 2
-pages 1 3 13
-functional 1 3 2
-answers 1 4 1
-exposed 1 1 2
-source 2 1 8 2 2
-bronson 1 1 1
-cannot 1 1 3
-breaking 1 1 1
-file 1 2 1
-link 2 2 1 4 2
-priority 1 2 1
-world 1 3 1
-abstractions 1 3 2
-science 4 1 1 2 1 3 1 4 1
-thread 1 1 1
-core 1 1 2
-fancy 1 1 1
-domain 1 1 1
-pass 1 1 1
-ever 1 1 1
-challenges 1 1 1
-segfaults 2 1 3 2 2
-unless 1 1 1
-anywhere 1 1 1
-lecture 2 2 2 4 1
-jaded 1 3 1
-this 4 1 13 2 9 3 2 4 2
-command 2 1 1 4 1
-andrew 1 1 1
-strong 1 1 1
-shu 1 2 1
-biculturalism 1 3 1
-advanced 1 4 2
-design 3 1 13 2 5 5 1
-testing 1 1 2
-development 2 1 5 3 1
-commitment 1 1 1
-beta 1 1 1
-concerns 1 1 1
-deliver 1 1 1
-penalties 1 1 2
-edition 2 1 2 4 2
-couple 1 2 1
-located 1 2 1
-projects 1 1 4
-our 2 1 4 3 1
-addition 2 1 2 2 1
-checks 1 1 1
-opinionated 1 3 1
-held 1 1 1
-we 4 1 18 2 8 3 8 4 2
-gained 1 1 1
-ides 1 1 2
-rather 1 1 1
-carson 1 1 2
-fanglin 1 1 3
-exercises 1 1 2
-resubmit 2 1 1 2 1
-assignment 1 1 3
-overall 1 1 1
-making 1 1 1
-language 2 1 1 4 1
-writing 1 1 4
-directory 1 2 6
-example 1 2 2
-full 1 2 2
-quickly 1 2 1
-mac 1 4 1
-your 4 1 18 2 16 3 1 4 1
-for 4 1 26 2 20 3 4 4 5
-bing 1 1 2
-languages 1 1 1
-keep 1 1 2
-bring 1 1 1
-account 2 1 2 2 2
-j 2 1 1 3 1
-gets 1 2 1
-through 1 1 3
-expose 1 1 1
-hyung 1 1 2
-tas 1 1 1
-policy 2 1 6 2 1
-giving 1 1 1
-unsure 1 1 1
-want 1 2 1
-wikipedia 1 4 1
-aquamacs 1 4 1
-nbsp 5 1 183 2 334 3 8 4 11 5 2
-why 2 1 1 4 1
-thing 1 1 2
-require 1 1 2
-fourth 1 1 1
-yours 1 1 2
-throughout 1 3 1
-entry 1 4 1
-can 4 1 6 2 2 3 2 4 1
-just 2 1 2 4 1
-directed 1 1 1
-neil 1 1 1
-share 2 1 2 4 1
-sections 1 2 2
-encourage 1 2 1
-socket 2 1 4 2 1
-knowledge 1 1 2
-am 3 1 2 2 1 4 1
-segfaulted 2 1 1 2 3
-expulsion 1 1 1
-meet 1 2 6
-cynicism 1 3 1
-introduction 1 4 1
-yet 1 4 1
-google 4 1 2 2 1 3 1 4 1
-when 2 1 4 2 3
-green 1 1 1
-gain 2 1 2 2 1
-thursday 1 1 3
-sheet 1 1 3
-requires 1 1 1
-whether 1 3 1
-creating 1 4 1
-similar 1 1 1
-lot 2 1 2 2 1
-x 2 1 1 2 4
-understand 1 1 1
-new 2 1 1 2 1
-root 1 2 1
-correct 1 2 1
-best 2 3 1 4 1
-wanted 1 4 1
-fun 1 1 1
-integration 1 1 1
-goals 1 1 1
-extremely 1 2 1
-briefly 2 2 1 3 1
-i 3 1 9 3 3 4 5
-ship 1 1 1
-matthew 1 1 3
-online 2 1 1 4 2
-arrangements 1 1 1
-subject 1 1 1
-order 2 1 1 2 1
-material 1 1 1
-gotta 1 3 1
-tutorial 1 4 7
-laptop 2 1 1 2 1
-raced 1 1 1
-office 1 1 2
-teaching 1 1 1
-others 2 1 1 3 1
-classes 1 2 3
-vs 1 3 1
-currently 1 4 1
-teamwork 1 1 1
-love 2 1 1 3 2
-product 1 1 1
-matter 1 1 1
-honest 1 3 1
-functions 1 4 1
-with 3 1 8 2 6 3 1
-includes 2 1 1 4 1
-five 1 1 1
-following 2 1 2 2 1
-moral 1 1 1
-now 1 2 2
-hackers 3 1 2 2 1 3 1
-photo 1 1 1
-nanocopters 1 1 6
-time 3 1 3 2 1 3 2
-copters 2 1 1 2 1
-query 2 1 1 2 3
-him 2 1 1 3 1
-coding 2 1 2 2 4
-above 2 1 1 2 2
-hard 1 2 1
-set 1 2 3
-enter 1 2 2
-relate 1 3 1
-certain 1 3 1
-end 1 3 1
-analysis 1 4 1
-pandoc 1 4 1
-motion 2 1 3 3 1
-dumps 1 1 1
-email 1 2 1
-professor 1 2 1
-jerry 1 3 1
-resource 1 4 2
-dynamic 1 4 1
-edu 5 1 9 2 4 3 1 4 1 5 1
-hacker 2 1 3 3 1
-run 2 1 3 2 3
-no 2 1 7 2 3
-blackwood 1 1 2
-professional 1 1 1
-alone 1 1 1
-without 1 2 1
-test 2 2 1 3 1
-network 1 2 1
-off 1 3 1
-number 3 1 1 3 2 4 1
-take 3 1 4 2 2 3 1
-exams 1 1 1
-penalty 2 1 2 2 3
-under 1 1 1
-change 1 2 1
-armed 1 3 1
-apis 1 4 1
-scripst 1 4 1
-function 1 4 1
-lab 3 1 17 2 37 4 3
-tools 2 1 6 4 2
-also 3 1 4 2 3 4 1
-labs 2 1 11 2 7
-would 1 1 5
-honor 1 1 3
-person 1 1 1
-interested 1 1 1
-phase 1 1 2
-including 1 1 1
+effort 1 5 1
+allow 1 6 2
+afraid 1 3 1
+any 3 3 3 5 15 6 2
+reserved 1 5 1
+better 2 5 1 6 1
+structures 1 7 1
+minix 1 3 2
+posting 1 5 1
+discussed 1 5 1
+creating 1 6 1
+fork 1 4 1
+servers 1 6 2
+then 3 1 1 5 4 6 1
+valgrind 2 2 1 6 2
+guessprime 1 4 10
+around 2 5 1 6 1
+power 1 6 1
+above 1 5 3
+hear 1 5 1
+starting 1 5 1
+a 5 1 9 2 2 3 3 5 41 6 32
+bash 3 2 3 6 8 7 1
+stick 1 5 1
+penalties 1 5 2
+text 1 6 8
+didn 1 6 1
+target 1 6 1
+fedora 1 4 1
+idea 1 5 1
+have 2 5 22 6 3
+build 3 1 3 3 1 6 1
+rik 1 3 1
+could 1 5 1
+ssh 1 6 3
+pro 1 6 1
+customizable 1 6 1
+silver 1 3 1
+connect 1 5 1
+doesn 1 5 3
+optional 2 2 1 3 1
+half 1 5 1
+yours 1 5 2
+robinson 1 3 1
+freeman 1 3 1
+extension 1 6 1
+calendar 1 5 1
+deeply 6 1 1 2 1 3 1 5 1 6 1 7 1
+amongst 1 5 1
+keep 1 3 1
+incorporate 1 5 1
+algorithms 1 5 1
+weeks 1 1 1
+pages 2 3 1 6 4
+encourage 1 5 1
+related 1 5 2
+pike 1 6 1
+series 1 5 1
+intended 1 5 1
+wish 1 5 1
+reviewed 1 5 1
+readme 1 4 1
 break 1 3 1
-groups 1 1 1
-left 1 1 2
-back 2 1 1 3 1
-repository 2 1 1 2 1
-made 1 1 2
-taking 1 1 2
-come 3 1 1 2 1 3 2
-incentive 1 1 1
-comparison 1 2 1
-advance 1 2 1
-meets 1 2 1
-javaschools 1 3 1
-leaks 1 1 1
-up 2 1 5 4 1
-section 3 1 3 2 9 3 1
-locked 1 1 3
-getting 1 1 1
-click 1 2 1
-spec 1 3 1
-jensen 1 4 1
-college 2 4 1 5 1
-functionname 1 4 1
-a 4 1 51 2 17 3 7 4 11
-gnu 2 1 2 4 2
-summary 1 1 1
-activity 1 1 1
-emergencies 1 1 1
-very 2 1 3 2 2
-beginning 1 1 1
-stones 1 1 1
-rules 1 1 1
-check 1 2 1
-changes 1 2 1
-safari 1 4 1
-demo 1 1 3
-programs 3 1 2 2 1 4 1
-requiring 1 1 1
-write 2 1 4 2 2
-jonathan 1 1 2
-collaboration 1 1 1
-family 2 1 1 4 1
-twenty 1 1 1
-snippets 1 1 2
-culled 1 1 1
-called 1 2 1
-painless 1 3 2
-zomorodian 1 5 1
-teaches 1 1 1
-so 3 1 5 2 1 3 1
-organized 1 1 2
-debug 2 1 1 2 1
-complex 2 1 3 2 1
-below 2 1 1 2 2
-commands 3 1 3 2 2 4 2
-stressed 1 1 1
-wesley 1 1 1
-sharing 1 1 2
-web 2 1 1 4 2
-anything 2 1 1 2 1
-extensions 1 2 1
-essentially 1 2 1
-letter 1 3 1
-that 3 1 15 2 7 3 2
-about 4 1 6 2 1 3 1 4 1
-necessary 1 1 3
-become 1 1 1
-speak 1 1 1
-friendly 1 1 1
-articles 1 3 3
-attitude 1 3 1
-epway 1 5 1
-one 2 1 6 2 2
-you 4 1 50 2 24 3 5 4 4
-ll 4 1 1 2 1 3 2 4 1
-details 2 1 1 4 1
-brief 1 1 1
-forty 1 1 1
-severe 1 1 1
-ask 1 1 1
-medal 1 2 1
-received 1 2 1
-wayne 1 2 1
-popular 1 4 1
-how 3 1 5 2 6 4 1
-based 2 1 1 3 1
-tell 1 1 2
-eclipse 1 1 1
-line 2 1 1 4 1
-process 1 1 2
-please 3 1 7 2 4 3 1
-specific 1 1 1
-gary 1 1 1
-jointly 1 1 3
-previously 1 1 1
-login 1 2 3
-remote 1 2 2
-windows 1 2 1
-start 1 3 1
-computers 1 4 1
-building 1 1 1
-large 1 1 2
-should 3 1 2 2 2 3 2
-west 1 1 2
-help 3 1 4 2 1 3 1
-warning 2 1 1 2 1
-mindset 1 1 1
-against 1 1 3
-mark 1 1 1
-easy 1 1 2
-sometimes 2 3 2 4 1
-scripting 1 4 1
-document 1 4 1
-lectures 1 1 1
-server 2 1 1 2 1
-tiny 1 1 1
-hours 2 1 12 2 1
-assessed 1 1 1
-id 1 1 2
-preferred 1 1 1
-spirit 1 1 1
-chops 1 2 1
-systems 1 1 4
-use 3 1 4 2 3 4 1
-using 3 1 5 2 3 5 1
-all 2 1 10 2 2
-eight 1 1 1
-exciting 1 1 1
-leaders 2 1 2 2 1
-faq 1 4 1
-control 2 1 3 2 1
-before 2 1 1 2 2
-sudikoff 3 1 7 2 4 4 2
-friday 2 1 4 3 8
-saturday 1 1 2
-correctness 1 1 1
-clarity 1 1 1
-from 3 1 7 2 2 3 2
-fanghao 1 1 1
-other 1 1 6
-kernighan 1 1 1
-lots 1 1 1
-similarly 1 1 1
-milestones 1 2 2
-slow 1 2 1
-extraordinaire 1 3 1
-strategy 1 3 1
-vi 1 4 3
-launch 1 1 1
-gr 1 1 2
-warm 1 1 1
-competition 1 1 1
-funny 1 3 1
-pointers 1 4 2
+some 2 5 7 6 5
+bug 1 2 1
+brooks 1 3 1
+fuzzquery 1 4 1
+responsible 1 5 1
+developers 1 5 1
+comes 1 5 1
+where 1 5 1
+person 2 1 1 5 1
+graders 1 5 2
+promote 1 5 1
+during 1 5 5
+directly 1 5 3
+help 2 5 6 6 1
+scripting 1 6 2
+sockets 1 2 1
+normally 1 5 1
+spinellis 1 3 2
+available 2 5 3 6 3
+feature 1 5 1
+run 2 5 3 6 1
+https 1 6 1
+recommended 1 6 2
+nd 1 6 1
+application 2 1 1 6 3
+readable 1 6 1
+attempts 1 1 1
+opportunity 1 5 2
+updates 1 5 1
+vs 1 6 1
+process 1 1 1
+linus 2 3 1 6 1
+according 1 5 1
+board 1 5 2
+full 1 5 1
+user 1 6 2
+rendering 1 6 1
+classic 1 6 1
+upon 6 1 1 2 1 3 1 5 4 6 1 7 1
+redux 1 2 2
+able 1 5 1
+contribution 1 5 2
+assessment 1 5 1
+linux 3 3 2 5 1 6 11
+hours 1 5 7
+unavoidable 1 5 1
+choice 1 6 1
+fraction 1 5 1
+anyone 1 5 2
+grading 1 5 4
+compile 2 5 3 6 2
+segmentation 1 5 1
+those 6 1 1 2 1 3 1 5 2 6 1 7 1
+meaning 1 5 1
+convince 1 5 1
+diomidis 1 3 2
+work 1 5 10
+per 1 5 1
+will 4 1 2 3 1 5 46 6 4
+whose 1 3 1
+copies 1 6 1
+situation 1 5 1
+matter 1 5 1
+disability 1 5 2
+think 1 5 3
+resubmit 1 5 2
+publicly 1 5 3
+crash 2 1 1 5 4
+outside 1 5 3
+honor 1 5 7
+itself 1 5 1
+its 3 3 1 5 2 6 2
+for 4 3 1 5 35 6 31 7 1
+uploaded 1 5 2
+addison 1 6 2
+ll 3 1 3 5 3 6 3
+friends 1 3 1
+books 1 6 4
+backup 1 4 1
+reserve 2 5 1 6 1
+accommodations 1 5 2
+harmful 1 5 1
+my 1 6 1
+pop 1 6 1
+listing 1 6 1
+connections 1 6 1
+long 1 3 1
+requests 1 5 1
+utility 1 6 1
+devcenter 1 6 1
+won 1 1 1
+fighting 1 3 1
+note 1 5 5
+apply 1 5 1
+circumstance 1 5 1
+end 1 5 1
+password 4 2 1 4 1 5 4 6 1
+art 1 3 1
+progressively 1 5 1
+previous 1 5 1
+rubric 1 5 1
+txt 1 4 9
 prof 1 5 1
-midterm 1 1 1
-kramer 1 1 2
-optional 2 1 1 2 1
-people 1 1 2
-medical 1 1 1
-score 1 1 3
-good 2 1 3 4 3
-they 2 1 1 3 1
-possible 1 2 1
-replace 1 2 1
-ted 1 4 1
-die 1 1 2
-more 3 1 4 2 1 3 3
-reflect 2 1 1 3 1
-final 1 1 5
-everything 1 1 1
-approximately 2 1 1 2 1
-front 1 1 1
-amazed 1 1 1
-millisecond 1 1 1
-starting 1 1 1
-management 2 2 1 4 1
-art 1 3 2
-cvs 2 1 1 4 1
-student 2 1 2 2 2
-learn 2 1 3 2 1
-main 1 1 1
-crash 1 1 1
-member 1 1 1
-appropriate 1 1 1
-version 1 2 1
-advantage 1 2 1
-wisdom 1 3 1
-discussion 2 3 1 4 1
-introductory 1 4 1
-understandable 1 1 1
-laboratory 1 1 3
-given 3 1 1 2 4 3 1
-behind 2 1 1 2 1
-weekday 1 1 1
-things 2 1 1 3 1
-summit 1 4 1
-tutorials 1 4 1
-reinforced 1 1 1
-make 3 1 4 2 4 4 2
-piazza 1 1 1
-p 1 1 2
-revision 1 1 2
-confidence 1 1 1
-multi 1 1 1
-white 1 1 2
-effort 1 1 1
-much 1 3 2
-department 1 4 1
-cover 1 4 1
-sublime 1 4 2
-what 4 1 3 2 1 3 1 4 1
-free 2 1 4 2 1
-threads 1 1 2
-monday 2 1 2 2 14
-richard 1 1 1
-html 3 2 2 3 1 4 1
-pc 1 2 1
+apart 1 5 1
+developed 1 6 1
+learning 3 1 1 5 2 6 1
+mike 2 3 1 6 1
+evals 1 5 1
+lousy 1 5 1
+fool 1 5 1
+popular 1 6 4
+is 6 1 4 2 1 3 3 5 28 6 21 7 1
+efficiently 1 5 1
+amp 3 1 2 5 1 6 3
+communication 1 5 1
+supported 1 5 1
+issues 2 5 1 6 1
+while 1 5 2
+automatically 1 6 1
+kernal 1 6 1
+years 1 6 2
+update 1 5 1
+blitzmail 1 5 1
+once 1 5 2
+cracker 1 1 2
+best 1 5 2
+recommend 1 6 1
+snow 1 5 1
+with 5 1 1 2 2 3 4 5 19 6 6
+tables 1 5 1
+consent 1 5 1
+expressions 1 2 1
+fixes 1 6 1
+violations 1 5 1
+near 1 6 1
+mostly 1 6 1
+md 1 6 1
+edit 1 6 1
+applications 1 6 2
+after 3 1 1 5 5 6 1
+hyperlinks 1 6 1
+precedence 1 2 1
+rooms 1 5 1
+can 2 5 10 6 2
+deadlines 1 5 1
+step 1 5 1
+online 1 6 2
+teaching 1 5 4
+headings 1 6 1
+complement 1 5 1
+north 1 3 1
+running 1 5 1
+their 1 5 3
+open 2 5 2 6 1
+comprehensive 1 6 1
+strong 1 5 1
+site 1 5 5
+files 3 4 2 5 1 6 7
+key 1 5 2
+thomas 1 6 1
+rules 1 5 1
+richard 1 6 3
+just 4 3 1 5 2 6 1 7 1
+occurs 1 5 1
+markoff 1 6 1
+disruptive 1 5 1
+tutorial 1 6 9
+rob 1 6 1
+late 2 5 4 6 1
+gui 1 6 1
+toolkit 1 6 1
+sommerlad 1 3 1
+feel 1 5 2
+these 6 1 1 2 1 3 1 5 7 6 2 7 1
+listiter 1 4 2
+piazza 6 1 1 2 1 3 1 5 26 6 1 7 1
+new 1 6 1
+having 1 1 1
+g 2 5 3 6 3
+requiring 1 5 1
+mission 1 7 1
+by 6 1 3 2 1 3 28 5 16 6 19 7 1
+gitlab 6 1 1 2 2 3 1 5 6 6 3 7 1
+same 2 1 1 5 2
+threads 3 2 1 5 1 6 1
+specialized 1 6 1
+ready 1 5 1
+why 2 5 1 6 1
+pandoc 1 6 1
+render 1 6 1
+other 3 1 3 5 16 6 3
+finally 1 1 1
+held 1 5 1
+at 3 4 1 5 9 6 1
+cracking 1 1 1
+prior 1 5 1
+goodie 1 6 1
+alone 1 5 1
+changes 1 5 1
+early 2 5 2 6 1
+workings 1 1 1
+markup 1 6 1
+bookstores 1 6 2
+faq 1 6 1
+bullet 1 3 1
+whether 1 5 3
+editing 1 6 2
+reilly 1 6 2
+repetitive 1 5 1
+observances 1 5 1
+sarah 1 3 1
+later 1 5 1
+less 2 5 1 6 1
+url 1 6 1
+modified 1 4 1
+robbins 1 6 1
+between 1 5 1
+assessed 1 5 1
+control 2 5 1 6 2
+querier 1 7 1
+retrospective 1 3 1
+april 1 5 2
+request 1 5 3
+wesley 1 6 2
+real 1 3 1
+this 6 1 2 2 1 3 5 5 21 6 8 7 1
+stupid 1 5 1
+section 1 5 2
+words 1 1 1
+sas 1 5 4
+observance 1 5 1
+embedded 1 6 1
+one 1 5 4
+commitments 1 5 1
+alternative 1 6 1
+employ 2 5 1 6 1
+correction 1 5 1
+goto 1 5 1
+deducted 1 5 1
+grades 1 5 2
+needs 1 6 1
+when 2 5 7 6 1
+variance 1 5 1
+job 1 5 1
+notify 1 5 1
+file 1 6 2
+few 2 1 1 5 1
+tells 1 3 1
+giving 1 5 1
+notes 1 5 3
+ritchie 1 6 1
+compiling 1 6 1
+cited 1 5 1
+blum 1 6 1
+prentice 1 6 1
+no 3 3 1 5 4 6 1
+difficulty 1 5 1
+nicer 1 6 1
+general 2 5 1 6 1
+up 2 5 2 6 1
+conflicts 1 5 1
+inclement 1 5 2
+post 1 5 3
+faults 1 5 1
+barnes 1 6 1
+balkcom 6 1 1 2 1 3 1 5 1 6 1 7 1
+vi 1 6 2
+graded 1 5 1
+instructions 1 6 3
+types 1 4 1
+recognizes 1 6 1
+gdb 2 2 1 6 1
+good 2 5 2 6 4
+amazed 1 5 1
+textbook 1 6 1
+gnu 1 6 2
+asked 1 6 1
+provides 2 3 1 6 1
+knowledge 1 5 1
+taken 1 5 1
+response 1 5 1
+limited 2 5 1 6 1
+away 1 5 1
+terpstra 1 6 1
+continue 1 5 1
+else 1 5 1
+found 2 5 2 6 2
+case 2 5 1 6 1
+offers 1 5 1
+solve 1 5 1
+mcilroy 1 3 1
+family 1 6 1
+continued 1 2 1
+paper 1 3 1
+way 1 5 2
+hidden 1 5 1
+universal 1 6 1
+things 2 3 1 6 1
+fact 1 5 3
+others 2 5 2 6 3
+might 1 5 4
+jointly 1 5 3
+apps 1 5 1
+yourself 1 5 1
+qualify 1 5 1
+style 3 3 1 6 1 7 1
+mycurl 1 4 2
+made 1 5 1
+nutshell 1 6 1
+points 1 5 1
+canvas 6 1 1 2 1 3 1 5 11 6 1 7 1
+lec 1 4 1
+workable 1 6 1
+completion 1 5 1
+quick 1 6 5
+farrow 1 3 1
+subsequent 1 5 1
+has 2 5 5 6 2
+side 1 5 1
+signed 1 5 1
+violated 1 5 1
+reimplemented 1 6 1
+links 1 6 2
+david 6 1 1 2 1 3 1 5 1 6 2 7 1
+searching 2 2 1 3 3
+not 3 3 1 5 20 6 4
+specific 1 5 2
+tests 1 2 1
+fred 1 3 1
+search 3 1 1 5 1 6 1
+man 1 6 3
+contact 1 5 2
+page 2 5 1 6 3
+form 2 5 1 6 1
+gitignore 1 6 1
+personal 1 6 1
+people 1 5 2
+part 1 5 3
+assign 1 5 1
+hardcopy 1 6 1
+installing 1 6 2
+also 1 5 5
+second 2 5 1 6 1
+list 1 5 2
+counted 1 5 1
+tu 1 5 1
+username 1 6 1
+written 1 6 1
+connected 1 5 1
+browser 1 5 1
+makefiles 1 2 1
+inflate 1 5 1
+users 2 1 1 6 4
+errors 1 3 1
+planning 1 5 1
+since 1 5 2
+documentation 3 3 1 5 3 6 2
+many 2 2 1 6 7
+ideas 1 5 1
+w 1 6 2
+posts 1 5 1
+locally 1 5 1
+structure 1 3 1
+slick 1 6 1
+solution 2 2 1 5 1
+toomey 1 3 1
+private 1 5 7
+operator 1 4 1
+fall 1 5 2
+baker 1 6 1
+scope 1 4 1
+answering 1 5 1
+students 2 1 1 5 14
+spectrum 1 3 1
+static 1 4 1
+contributions 1 5 1
+change 1 5 1
+next 1 5 1
+write 3 3 1 5 1 6 1
+right 2 3 1 5 3
+need 2 5 7 6 3
+storing 1 5 1
+short 3 3 1 5 2 6 3
+agree 1 5 1
+webcam 1 5 1
+privacy 1 1 1
+bugs 2 2 1 3 1
+give 1 5 2
+if 3 1 1 5 24 6 1
+policy 1 5 1
+json 1 6 1
+steps 1 6 1
+guarantee 1 5 1
+declan 1 6 1
+quiz 1 5 2
+exam 1 5 2
+although 1 6 1
+warren 1 3 1
+brett 1 6 1
+about 4 1 2 2 3 5 9 6 1
+definitive 1 6 1
+allowed 1 5 1
+exist 1 6 1
+colborne 1 3 1
+several 1 5 1
+version 6 1 1 2 1 3 1 5 2 6 4 7 1
+owned 1 6 1
+editor 2 3 1 6 5
+talk 1 5 1
+three 2 2 1 5 2
+upload 1 5 2
+expulsion 1 5 1
+created 1 3 2
+weather 1 5 2
+welcome 1 6 1
+say 1 3 1
+overflow 1 4 1
+dated 1 6 1
+magical 1 3 1
+guessprimea 1 4 1
+stated 1 5 1
+large 2 1 2 6 1
+eric 1 3 1
+distracting 1 5 1
+labs 6 1 1 2 1 3 2 5 4 6 1 7 4
+lists 2 2 1 6 1
+great 2 5 3 6 4
+obvious 1 5 1
+vim 1 6 2
+line 3 3 1 5 1 6 1
+distributed 1 6 1
+kevlin 2 3 1 6 1
+udp 1 4 2
+message 1 5 2
+spirit 1 5 1
+bagiter 1 4 1
+benefit 1 5 1
+window 1 6 2
+particular 1 1 1
+discipline 1 5 1
+me 2 5 8 6 1
+www 7 1 1 2 1 3 1 4 2 5 1 6 1 7 1
+plain 1 6 1
+regardless 1 5 1
+videos 1 6 1
+all 3 3 1 5 8 6 3
+malloc 1 2 1
+internal 1 1 1
+assignment 1 5 9
+bob 2 3 1 5 1
+testing 4 2 2 3 1 4 1 5 1
+operating 1 6 1
+committee 1 5 1
+says 1 5 1
+final 2 2 2 5 4
+tree 1 4 9
+unable 1 5 1
+pm 1 5 2
+does 1 5 3
+kotz 6 1 1 2 1 3 1 5 2 6 1 7 1
+free 2 5 4 6 6
+name 1 4 1
+arguments 1 4 1
+undergraduate 1 5 2
+used 2 5 1 6 1
+important 1 5 1
+reported 1 5 2
+traditional 1 6 1
+chapter 1 3 1
+associated 1 3 3
+we 3 1 1 5 22 6 8
+iterators 1 2 1
+non 2 5 1 6 1
+risk 1 5 1
+adjective 1 5 1
+setting 1 6 1
+dartmouth 7 1 2 2 2 3 2 4 2 5 12 6 4 7 2
+outstanding 6 1 1 2 1 3 1 5 1 6 1 7 1
+beware 1 6 1
+perl 1 6 1
+unit 1 2 1
+coding 4 3 2 5 2 6 1 7 1
+giles 1 3 1
+test 2 1 1 5 1
+click 1 5 1
+require 1 5 1
+merit 1 5 1
+entry 1 6 1
+logistics 6 1 1 2 1 3 1 5 5 6 1 7 1
+within 1 5 3
+checks 1 5 1
+practice 1 6 1
+use 4 1 1 3 3 5 11 6 2
+may 2 5 12 6 4
+something 1 5 1
+complete 1 5 2
+re 3 3 1 5 1 6 2
+makefile 1 4 6
+quite 1 6 1
+read 2 5 4 6 1
+into 1 5 1
+receive 1 5 3
+code 3 3 5 5 32 6 2
+would 1 5 2
+insert 1 5 1
+lisp 1 6 1
+solo 1 5 1
+the 6 1 10 2 7 3 17 5 120 6 34 7 2
+etc 2 5 1 6 1
+always 1 6 1
+sorry 1 5 1
+rejuvenate 1 3 1
+git 3 2 2 5 4 6 7
+contacting 1 5 1
+assistants 1 5 4
+anything 1 5 1
+braithwaite 1 3 1
+jon 1 6 1
+graduate 1 5 2
+brady 1 6 1
+skim 1 3 1
+instructors 1 5 1
+sourcetree 1 6 1
+regrading 1 5 3
+meetings 1 5 3
+giovanni 1 3 1
+algorithm 1 3 1
+majority 1 5 1
+score 1 5 1
+lewis 1 3 1
+finding 1 5 1
+alice 1 5 1
+period 1 5 1
+refer 1 6 1
+latter 1 5 1
+to 6 1 7 2 3 3 4 5 79 6 28 7 1
+raymond 1 3 1
+shifter 1 4 1
+logging 1 3 1
+receiving 1 5 1
+invaluable 1 6 1
+strings 2 2 1 4 1
+index 1 4 2
+proceeds 1 5 1
+come 1 5 1
+i 6 1 1 2 1 3 1 5 16 6 7 7 1
+return 1 5 2
+johannes 1 3 2
+treated 1 5 1
+unpleasant 1 5 1
+emacs 1 6 2
+programs 3 2 1 5 2 6 1
+two 2 2 1 5 2
+article 1 5 1
+xquartz 1 6 3
+andrew 2 3 1 6 1
+exams 1 5 1
+deadline 1 5 1
+look 2 5 1 6 2
+tools 3 1 1 3 4 6 6
+spring 6 1 2 2 2 3 3 5 2 6 2 7 2
+original 2 1 1 5 1
+enrolled 1 5 1
+begin 1 5 1
+previously 1 5 1
+install 1 6 1
+remember 1 6 2
+login 1 3 1
+disabilities 1 5 1
+study 1 5 2
 reliable 1 1 1
-program 3 1 3 2 2 4 1
-contoller 1 1 1
-nacocopter 1 1 1
-wednesday 2 1 1 2 1
-pm 2 1 11 2 9
-being 1 1 1
-progress 1 1 1
-obtain 2 1 1 4 1
-between 2 1 2 2 1
-date 1 2 2
-tool 1 2 1
-executed 1 2 1
-mehling 1 1 1
-part 2 1 7 3 3
-implement 2 1 3 2 1
-figure 1 1 2
-grade 2 1 11 2 3
-submit 2 1 1 2 4
-svn 3 1 1 2 11 4 1
-develop 1 1 2
-well 1 1 1
-clear 1 1 2
-double 1 2 1
-deadline 1 2 1
-sessions 1 2 1
-chapters 1 4 2
-down 1 1 1
-memory 1 1 1
-promote 1 1 2
-three 2 1 1 2 1
-paradigms 1 1 1
-disabilities 1 1 1
-grasp 1 1 1
-scripts 2 1 2 2 1
-work 2 1 7 2 2
-show 1 1 2
-explicit 1 1 1
-exceptions 1 2 2
-trouble 1 2 1
-putty 1 4 1
-is 4 1 24 2 14 3 1 4 2
-team 1 1 7
-embedded 2 1 5 2 1
-learning 1 1 1
-pike 1 1 1
-manner 1 1 1
-solve 1 1 1
-know 2 1 2 4 1
-philosophy 1 3 1
-robot 2 1 1 5 2
-see 2 1 4 2 3
-jun 1 1 2
-gt 1 1 4
-b 1 1 1
-ten 1 1 1
-were 1 1 1
-text 3 1 1 2 1 4 1
-returned 1 2 2
-readme 1 2 2
-refer 1 2 1
-always 1 3 1
-could 1 4 1
-gtk 1 4 1
-had 1 1 1
-public 1 1 1
-passes 2 1 3 2 1
-demanding 1 1 1
-feel 1 1 1
-book 2 1 8 4 2
-recommend 2 1 4 4 1
-seriously 1 1 1
-information 1 2 1
-does 1 4 1
-listed 1 4 1
-hope 1 1 1
-right 1 1 1
-script 1 1 1
-each 3 1 3 2 3 3 1
-tight 1 1 1
-automatically 1 1 1
-happy 1 1 1
-because 1 2 1
-trivial 1 4 1
-winter 2 1 1 5 2
-as 2 1 10 2 4
-two 3 1 3 2 1 4 1
-represents 1 1 1
-only 1 1 1
-responsible 1 1 1
-cheating 1 1 1
-april 1 2 6
-counts 1 2 1
-vim 1 4 2
-series 1 1 2
-have 3 1 8 2 6 3 3
-finish 1 1 1
-desk 1 1 1
-simple 2 1 2 2 1
-life 1 1 1
-complete 1 2 1
-subversion 1 2 1
-perils 1 3 1
-gave 1 3 1
-amazon 1 3 1
-links 1 4 1
-remaining 2 1 1 2 1
-abstraction 1 1 1
-at 4 1 6 2 3 3 4 4 2
-content 1 2 1
-blitz 1 2 2
-random 1 3 1
-tips 1 3 1
-emac 1 4 1
-demos 1 5 1
-photos 1 5 1
-myself 1 1 1
-gcc 1 1 1
-money 1 1 1
-weekdays 1 1 1
-brian 1 1 1
-type 2 1 1 4 2
-started 1 1 1
-experimental 1 4 1
-techniques 1 1 2
-industry 2 1 2 3 1
-asked 3 1 1 2 2 3 1
-practice 1 1 1
-particularly 1 1 1
-too 2 1 1 3 2
-tuesday 1 2 1
-onward 1 2 1
-review 1 1 4
-buy 1 1 2
-suspension 1 1 1
-days 1 2 4
-compiles 1 2 1
-specifications 1 3 2
-useful 1 4 2
-intermediate 1 4 1
-souce 1 4 1
-resources 2 1 1 4 4
-the 5 1 114 2 34 3 14 4 11 5 2
-really 2 1 3 4 1
-scale 1 1 1
-components 1 2 2
-copy 2 2 1 4 1
-ben 1 3 1
-looks 1 4 1
-www 5 1 1 2 2 3 1 4 1 5 1
-software 4 1 12 2 1 3 2 5 1
-class 4 1 6 2 2 3 7 4 1
+following 1 5 1
+lectures 6 1 1 2 4 3 4 5 5 6 1 7 1
+wide 1 5 1
+edition 1 6 5
+domain 1 3 1
+carroll 1 3 1
+address 1 5 3
+assembly 1 6 1
+computers 2 1 1 5 1
+source 3 1 1 5 8 6 1
+solutions 1 5 4
+brian 1 6 1
+equal 1 5 1
+browse 1 6 1
+presented 1 5 1
+designed 6 1 1 2 1 3 1 5 1 6 1 7 1
+very 3 1 1 5 2 6 5
+readings 1 5 2
+out 1 5 1
+still 2 5 1 6 1
+amazing 1 5 1
+distributions 1 6 1
+examples 7 1 1 2 2 3 2 4 3 5 1 6 2 7 1
+caveat 1 5 1
+tanenbaum 1 3 1
+useful 1 6 2
+rfc 1 1 1
+along 1 5 1
+peer 1 5 2
+provided 1 5 1
+unsure 1 5 1
+directory 1 4 1
+from 2 5 11 6 6
+seeing 1 5 1
+option 1 5 1
+across 1 6 1
+taking 1 5 1
+s 3 3 5 5 7 6 10
+immediately 1 5 1
+religious 1 5 3
+media 1 5 1
+past 1 5 1
+copy 1 6 2
+chapters 1 3 1
+themselves 1 5 2
+understandable 1 1 1
+common 2 1 1 6 2
+increment 1 4 1
+an 4 1 2 2 1 5 7 6 4
+n 1 5 1
+compare 1 5 1
+time 2 5 3 6 1
+hold 1 5 1
+office 1 5 5
+make 3 2 2 5 7 6 1
+official 1 5 1
+explicit 1 5 1
+unix 3 1 2 3 4 6 19
+soon 1 5 1
+networks 1 1 1
+engine 2 1 1 6 1
+here 3 2 1 5 4 6 2
+crawler 2 2 3 7 1
+there 2 5 5 6 6
+solving 1 5 1
+fun 1 7 1
+function 1 4 1
+pdf 1 5 1
+appointment 1 5 2
+sudikoff 1 5 6
+rather 1 5 1
+cancel 1 5 1
+information 2 5 1 6 2
+appear 1 6 1
+letterhead 1 5 1
+sys 1 6 1
+extensions 1 5 3
+kernighan 1 6 2
+days 1 2 1
+size 1 4 1
+ieee 1 3 1
+penalty 1 5 1
+they 3 3 1 5 4 6 2
+ta 1 5 3
+been 2 5 1 6 1
+security 1 1 1
+matters 1 3 1
+of 7 1 7 2 3 3 6 4 2 5 41 6 17 7 1
+readline 1 4 2
+members 1 5 1
+announced 1 5 2
+fifth 1 6 1
+subtle 1 6 1
+project 6 1 2 2 3 3 1 5 17 6 1 7 2
+replicate 1 3 1
+video 1 6 3
+mark 2 5 1 6 2
+crashes 1 5 1
+send 1 5 1
+using 3 3 1 5 3 6 6
+example 1 5 1
+join 1 1 1
+guest 1 2 1
+much 1 6 1
+buy 1 6 1
+staff 1 5 1
+confidential 1 5 2
+particularly 1 5 2
+privately 1 5 1
+desk 1 6 1
+are 5 1 1 2 1 3 1 5 18 6 13
+failing 1 5 1
+pocket 1 6 1
+be 4 1 3 3 1 5 42 6 10
+ensure 1 5 3
+helps 1 5 2
+which 4 1 1 3 1 5 2 6 5
+groups 1 5 2
+reference 2 5 2 6 6
+clean 1 3 1
+bright 1 3 1
+machines 1 5 1
+learn 4 1 4 3 2 5 1 6 3
+com 1 6 3
+pragmatic 1 6 1
+broadcast 1 5 1
+macos 2 5 1 6 5
+terms 1 5 1
+due 1 5 3
+below 2 5 4 6 2
+thinking 1 5 1
+hour 1 5 3
+gary 1 6 1
+mistake 2 1 1 5 1
+grottke 1 3 1
+web 4 2 1 3 3 5 2 6 1
+recorded 1 5 1
+log 1 6 1
+told 1 6 1
+course 6 1 3 2 1 3 1 5 14 6 5 7 1
+place 2 5 1 6 1
+necessary 2 5 2 6 1
+delights 1 1 1
+peter 1 3 1
+x 3 4 4 5 2 6 5
+arnold 1 6 1
+prefer 1 6 2
+old 1 1 1
+data 3 3 1 4 1 7 1
+isn 1 5 1
+order 1 6 1
+practical 1 6 1
+hint 1 2 1
+without 1 1 1
+ill 1 5 1
+similar 1 6 1
+possible 1 5 3
+principle 1 5 3
+take 3 1 1 3 1 5 5
+goodliffe 1 3 1
+options 1 5 2
+homework 1 5 7
+observations 1 5 1
+participation 1 5 5
+systems 3 1 2 5 1 6 1
+material 1 5 1
+subject 1 5 1
+too 1 5 1
+center 1 5 1
+sets 1 5 1
+glossary 1 1 1
+day 1 5 3
+parent 1 4 1
+assumed 1 6 1
+really 1 6 2
+plus 1 6 1
+science 2 1 1 5 1
+system 3 1 1 5 3 6 4
+procedure 1 5 1
+excellent 1 6 3
+bold 1 6 1
+preprocessor 1 2 1
+close 1 5 1
+truth 1 3 1
+names 1 4 8
+counts 1 5 1
+args 1 4 1
+freely 1 5 1
+based 6 1 1 2 1 3 1 5 2 6 2 7 1
+stuff 1 5 1
+wikipedia 1 6 1
+am 6 1 1 2 1 3 1 5 2 6 1 7 1
+type 1 5 1
+wrote 1 5 3
+set 1 5 1
+tas 1 5 1
+palmer 6 1 1 2 1 3 1 5 1 6 2 7 1
+dynamic 1 6 1
+introduction 2 2 2 6 3
+extra 1 2 3
+pointers 1 2 2
+only 2 3 2 5 1
+collaborators 1 5 1
+scott 1 6 1
+properly 1 5 2
+applicable 1 5 1
+problem 1 5 3
+overview 1 1 2
+rare 1 5 1
+obtain 1 6 1
+miss 1 5 1
+print 1 6 1
+fitbit 1 5 1
+sufficiently 1 5 1
+began 1 6 1
+submission 1 5 1
+cos 1 5 1
+different 1 5 1
+defined 1 1 2
+amazon 1 6 1
+intimate 1 1 1
+shell 4 2 3 3 2 5 1 6 2
+cheating 1 5 1
+combined 1 4 1
+supplied 1 6 1
+college 6 1 1 2 1 3 1 5 3 6 1 7 1
+exactly 1 5 1
+skip 1 6 1
+tags 1 2 1
+encounters 1 5 1
+do 2 5 7 6 2
+future 1 5 1
+programmer 2 3 1 6 2
+windows 1 6 1
+software 5 1 2 2 1 3 1 5 3 6 2
+program 4 1 1 3 1 5 5 6 1
+sense 1 1 1
+success 1 5 1
+retry 1 3 1
+question 1 5 3
+start 2 5 1 6 1
+references 2 5 1 6 3
+so 1 5 7
+deduction 1 5 1
+extremely 2 5 1 6 1
+accessibility 1 5 2
+macdown 1 6 1
+june 1 5 2
+safe 1 5 1
+incomputable 1 7 1
+point 1 5 1
+interactive 1 6 2
+graphical 1 6 2
+prerequisites 1 5 1
+collis 1 5 1
+language 2 3 2 6 6
+busy 1 5 1
+neil 1 6 1
+classmates 1 5 2
+debugging 4 2 1 3 1 5 1 6 1
+visit 1 5 1
+essence 1 5 1
+walter 1 3 1
+regrade 1 5 3
+topic 1 5 1
+on 3 3 1 5 25 6 14
+want 1 1 1
+considered 1 5 2
+weekly 1 5 1
+like 2 5 1 6 2
+extensible 1 6 2
+it 2 5 26 6 8
+requires 1 6 1
+often 1 5 1
+ignore 1 3 1
+policies 1 5 1
+services 1 5 7
+bring 1 5 1
+extras 2 2 1 3 3
+left 1 5 1
+student 2 3 1 5 4
+textbooks 1 6 1
+interfaces 1 6 1
+coffee 1 5 1
+together 1 5 1
+however 2 5 1 6 1
+employers 1 5 2
+in 6 1 9 2 1 3 1 5 40 6 20 7 2
+that 4 1 2 3 1 5 38 6 6
+google 1 5 3
+again 1 5 1
+regularly 1 5 2
+evil 1 5 2
+bucks 1 6 1
+scripts 1 2 1
+topics 1 5 1
+professors 6 1 1 2 1 3 1 5 1 6 1 7 1
+favorite 2 5 1 6 1
+lab 2 5 10 7 7
+strange 1 3 1
+cal 1 3 1
+determining 1 6 1
+returned 1 5 1
+finish 1 3 1
+four 1 5 1
+contribute 1 5 1
+educators 6 1 1 2 1 3 1 5 1 6 1 7 1
+remain 1 5 1
+usenet 1 6 1
+beginning 1 6 1
+winkel 1 3 1
+k 1 4 29
+let 2 5 2 6 1
+times 1 5 1
+syllabus 1 5 1
+resolved 1 5 2
+meaningless 1 5 1
+follow 3 5 1 6 1 7 1
+was 2 5 2 6 2
+installation 1 6 1
+each 1 5 8
+everyone 2 5 2 6 1
+discussion 2 5 1 6 1
+grader 1 5 3
+document 3 1 1 5 1 6 1
+guessprimefunction 1 4 1
+inside 1 5 2
+lots 1 6 3
+submitting 1 5 2
+show 1 5 3
+carefully 1 5 1
+python 1 6 2
+edu 7 1 1 2 1 3 1 4 2 5 2 6 1 7 1
+modules 1 2 1
+scores 1 4 1
+department 1 6 2
+skimming 1 3 1
+answers 1 5 1
+takes 1 5 1
+longer 1 6 1
+co 1 5 1
+careful 1 5 1
+or 2 5 32 6 5
+includes 1 5 1
+uncle 1 3 1
+tentatively 1 5 2
+satisfactorily 1 5 1
+yes 1 1 1
+van 1 3 1
+please 3 5 14 6 1 7 1
+even 1 5 5
+github 2 5 9 6 5
+submitted 1 5 5
+answer 1 5 2
+both 2 5 2 6 2
+suggesting 1 6 1
+hacker 1 1 3
+self 1 5 1
+week 2 3 10 5 6
+email 1 5 6
+did 1 5 5
+share 2 5 2 6 1
+appropriate 1 5 1
+location 1 5 2
+most 2 5 4 6 2
+lynda 1 6 2
+assure 1 5 1
+asproni 1 3 1
+twin 1 5 1
+empty 1 5 1
 maintainable 1 1 1
-search 1 1 1
-amount 1 1 1
-some 3 1 2 2 2 4 1
-lines 2 1 3 2 3
-tinyserarch 1 1 1
-different 1 1 1
-law 1 3 2
-concepts 1 1 1
-engine 2 1 3 2 3
-graded 2 1 3 2 3
-even 1 1 2
-caters 1 1 1
-march 1 2 1
-z 1 4 1
-pan 1 5 1
-gdb 1 1 1
-note 2 1 5 2 4
-devices 1 1 1
-if 4 1 12 2 5 3 2 4 2
-communication 1 1 1
-sign 1 1 1
-nice 1 1 1
-insightful 1 3 1
-needs 2 3 1 4 1
-he 1 3 1
-working 2 1 2 3 1
-l 2 1 4 4 1
-ahead 1 1 1
-guide 2 1 1 4 1
-unusual 1 2 1
-read 2 2 1 3 5
-garcia 1 5 1
-are 4 1 26 2 13 3 1 4 2
-integrated 1 1 1
-late 2 1 8 2 1
-doing 1 2 1
-either 1 3 1
-graphical 1 4 1
-joseph 1 1 1
-major 1 1 1
-breaks 1 1 1
-event 1 1 1
-undergrad 1 1 1
-turned 1 1 1
-stop 1 1 1
-machines 3 1 1 2 2 4 1
-might 1 1 1
-comments 1 2 1
-emacs 1 4 3
-utility 1 4 1
-code 4 1 24 2 14 3 1 4 1
-syllabus 1 1 1
-job 1 1 1
-easier 1 1 1
-assessment 1 1 1
-access 1 1 7
-doors 1 1 3
-extended 1 1 1
-takes 1 1 1
-gestures 1 1 1
-there 3 1 7 2 5 4 2
-signed 1 1 1
-exterior 1 1 1
-here 3 1 2 3 1 4 2
-coffee 1 1 1
-correctly 1 2 1
-viz 1 2 1
-makefile 1 2 1
-short 2 2 1 4 1
-computer 4 1 4 2 1 3 1 4 1
-debugging 1 1 4
-leap 1 1 3
-around 1 1 1
-need 3 1 4 2 1 4 1
-done 2 1 2 4 1
-habits 1 1 1
-practical 1 1 1
-board 1 1 2
-hesitate 1 1 1
-assigned 1 2 1
-venerable 1 3 1
-cygwin 1 4 1
-subblime 1 4 1
-my 1 4 1
-wei 1 5 1
-linux 3 1 7 2 3 4 4
-challenging 2 1 2 2 3
-important 2 1 1 2 1
-fall 1 2 1
-https 1 2 2
-otherwise 1 2 1
-arrays 1 4 1
-will 4 1 31 2 25 3 4 4 1
-where 2 1 3 2 3
-joint 2 1 6 2 1
-th 2 1 1 4 2
-state 1 1 1
-enormously 1 3 1
-further 1 4 1
-significant 2 1 3 2 2
-e 3 1 4 2 1 4 1
-indexer 2 1 1 2 3
-solution 2 1 1 2 1
-form 1 1 1
-them 3 1 1 2 1 3 2
-discuss 2 1 3 3 1
-essence 1 1 1
-compare 1 1 1
-refactoring 1 2 1
-chapter 1 3 2
-seem 1 4 1
-filters 1 1 1
-into 1 1 4
-copter 1 1 1
-fired 1 1 1
-designed 1 1 1
-solutions 1 1 4
-policies 1 1 1
-hands 1 1 1
-sets 1 1 1
-going 1 2 1
-views 1 3 1
-or 4 1 15 2 1 3 3 4 3
-still 1 1 1
-regarding 1 1 2
-page 1 2 1
-thoughts 1 3 1
-many 1 4 1
-build 1 4 1
-converter 1 4 1
-schedule 2 1 5 2 1
-gprofile 1 1 1
-key 1 1 2
-anyone 1 1 1
-week 3 1 1 2 1 3 7
-another 1 1 1
-hate 1 1 1
-citation 1 1 1
-respository 1 2 1
-dnd 1 2 1
-suggestions 1 2 1
-cycle 1 3 1
-weekly 1 1 1
-shown 1 1 1
-individually 1 1 1
-mentioned 1 2 1
-create 1 2 1
-url 1 2 1
-tbd 1 2 1
-manua 1 4 1
-used 1 4 1
-programming 4 1 31 2 8 3 4 4 8
-shell 3 1 9 2 3 4 1
-but 4 1 9 2 7 3 3 4 2
-simplicity 1 1 1
-library 2 1 1 4 1
-excluding 1 2 1
-newbie 1 3 1
-steve 1 4 1
-http 5 1 1 2 2 3 1 4 1 5 1
-depth 5 1 1 2 1 3 1 4 1 5 1
-and 5 1 78 2 32 3 15 4 7 5 2
-expect 1 1 1
-announcements 1 1 1
-conversant 1 1 1
-midnight 1 2 2
-little 1 3 1
-reference 1 4 1
-posix 1 4 1
-gvim 1 4 1
-determining 1 4 1
-unix 3 1 3 3 3 4 2
-of 4 1 38 2 13 3 13 4 5
-credit 2 1 2 2 1
-their 2 1 1 2 3
-sheets 1 1 1
-been 1 1 1
-addison 1 1 1
-message 1 1 1
-raymond 1 3 3
-go 1 4 1
-list 1 4 2
-day 1 1 1
-client 1 1 1
-kang 1 1 2
-grading 1 1 2
-self 1 1 1
-deducted 1 1 3
-caveat 1 1 2
-later 1 2 1
-item 1 2 1
-tour 1 4 1
-compile 1 4 1
-orc 1 1 1
-over 2 1 2 3 1
-extra 2 1 2 2 1
-plan 1 1 2
-put 2 1 2 2 1
-report 1 1 1
-submissions 1 1 1
-running 2 1 1 4 1
-due 1 2 2
-painful 1 2 1
-those 1 2 1
-gives 1 2 1
-hey 1 3 1
-leaky 1 3 2
-generation 1 4 1
-don 1 1 3
-provide 1 1 3
-questions 4 1 2 2 2 3 1 4 2
-repo 1 2 1
-eric 1 3 4
-craftsmanship 1 3 1
-find 1 4 1
-nutshell 1 4 1
-usenet 1 4 1
-implementation 2 1 6 5 1
-something 1 1 1
-assistants 1 1 1
-however 2 1 2 2 1
-taken 1 1 1
-considered 1 2 1
-username 1 2 3
-campbell 4 1 3 2 3 3 1 4 1
-swipe 1 1 1
-get 4 1 5 2 2 3 1 4 1
-hour 2 1 2 2 1
-ethan 1 1 2
-tse 1 1 1
-open 1 1 2
-do 3 1 7 2 5 3 3
-like 4 1 1 2 1 3 2 4 1
-support 1 1 1
-think 1 1 1
-yourreponame 1 2 2
-tale 1 3 1
-steps 1 3 1
-user 1 4 2
-dartmouth 5 1 14 2 4 3 1 4 2 5 2
-not 4 1 10 2 5 3 1 4 5
-topics 1 1 1
-valgrind 2 1 1 4 1
-posts 1 1 1
-contact 1 1 2
-ta 2 1 5 2 3
-must 1 1 1
-stuff 1 1 1
-hacking 1 1 1
-laptops 1 2 1
-distributed 1 1 1
-tangible 1 1 1
-distribute 1 1 1
-mind 1 1 1
-rob 1 1 1
-interfaces 1 4 1
-real 2 1 1 3 1
-never 2 1 1 3 1
-four 1 1 1
-informing 1 1 1
-won 1 3 1
-reasons 1 3 1
-pdf 1 3 1
-available 1 4 3
-washington 1 4 1
+flavors 1 6 2
+link 1 6 2
+clear 1 6 1
+remove 1 3 1
+description 1 4 1
+originally 2 5 1 6 2
+computer 2 1 3 5 4
+dan 1 3 1
+member 1 5 3
+apache 1 4 1
+cover 1 5 1
+letter 1 5 1
+editors 1 6 3
+c 6 1 2 2 5 3 3 4 39 6 15 7 4
+puzzle 2 2 1 7 1
+what 3 3 1 5 6 6 3
+periods 1 5 2
+bronson 1 6 1
+team 2 1 1 5 14
+instead 2 1 1 5 1
+repositories 1 5 2
+indeed 1 5 1
+variants 1 6 2
+arasu 1 3 2
+sure 1 5 3
+identified 1 6 1
+philosophy 1 3 1
+who 3 1 2 3 1 5 2
+charles 1 6 1
+authorization 1 1 1
+processes 2 2 1 6 1
+reveals 1 5 1
+understanding 2 1 1 5 1
+papers 1 6 1
+nasty 1 5 1
+internet 1 1 1
+scheduled 1 5 4
+outcome 1 5 1
+mastering 1 6 1
+select 3 2 1 4 1 5 1
+websites 1 5 1
+cormen 1 5 1
+memory 1 2 2
+ask 1 5 2
+website 2 5 1 6 3
+cheat 1 5 2
+classes 1 5 1
+m 1 6 1
+chacon 1 6 1
+understand 1 3 1
+problems 1 5 2
+images 1 6 1
+storage 1 5 1
+every 2 5 3 6 1
+ruby 1 6 1
+campus 1 5 2
+announcements 1 5 5
+sessions 1 6 1
+network 1 6 1
+than 2 5 2 6 2
+posted 1 5 1
+e 2 5 4 6 2
+moral 1 5 1
+kernel 1 3 1
+teams 1 5 4
+among 1 5 1
+hands 1 6 1
+analysis 2 3 1 6 1
+courses 1 5 1
+o 1 6 2
+professional 2 3 1 6 1
+guide 1 6 3
+doug 1 3 1
+treea 1 4 1
+hangout 1 5 2
+book 1 6 12
+should 3 1 2 5 11 6 1
+know 3 3 1 5 6 6 2
+account 1 5 2
+server 3 2 1 4 6 5 2
+disturb 1 3 1
+credit 1 5 4
+individual 1 1 1
+table 1 4 1
+must 1 5 7
+feedback 1 5 2
+started 3 2 1 5 1 6 1
+anywhere 1 5 1
+indebted 6 1 1 2 1 3 1 5 1 6 1 7 1
+geeks 1 6 1
+such 1 6 2
+zhou 6 1 1 2 1 3 1 5 1 6 1 7 1
+more 3 2 1 5 3 6 1
+submit 1 5 4
+realize 1 5 1
+input 1 4 1
+netid 1 5 2
+entire 1 5 2
+harbison 1 6 2
+group 1 5 4
+previewing 1 6 1
+ansi 1 6 1
+fourth 1 6 1
+essential 1 5 1
+relevant 1 5 1
+slow 1 6 1
+tell 1 5 1
+covering 1 6 1
+admins 1 6 1
+prevent 1 3 1
+last 1 4 1
+appreciate 1 5 1
+thus 1 6 1
+exercise 1 2 1
+getchar 1 4 1
+emailing 1 5 1
+choose 2 3 1 5 1
+primarily 1 3 1
+nbsp 1 4 76
+questions 1 5 9
+working 1 5 1
+violate 1 5 1
+dishonor 1 5 1
+support 1 5 1
+making 1 6 1
+advantage 1 3 1
+getting 3 2 1 5 1 6 1
+occur 1 5 3
+heard 1 5 1
+how 4 1 1 3 1 5 5 6 2
+listed 1 5 1
+kinds 1 2 1
+cards 1 6 1
+masters 1 6 1
+as 3 1 3 5 15 6 6
+ways 1 5 1
+tool 2 5 1 6 1
+seeking 1 5 1
+command 3 3 1 4 1 6 1
+markdown 1 6 12
+circumstances 1 5 1
+authorized 1 5 1
+small 2 3 1 5 1
+sources 1 5 5
+italics 1 6 1
+evans 1 3 1
+allows 1 5 1
+confuse 1 5 1
+snippets 2 5 2 6 1
+find 1 6 1
+expected 1 5 1
+totaling 1 5 1
+converter 1 6 1
+implement 1 5 1
+programmers 1 5 1
+debug 1 5 1
+hosted 1 5 1
+white 1 5 2
+henney 2 3 1 6 1
+assignments 3 3 2 5 16 7 1
+try 2 5 2 6 1
+variations 1 6 1
+ten 1 6 1
+depth 7 1 1 2 1 3 1 4 1 5 1 6 1 7 1
+gets 1 5 1
+actually 1 1 1
+instruction 1 5 3
+projects 1 5 4
+but 2 5 10 6 5
+encouraged 1 5 3
+correct 1 5 1
+crashing 1 5 1
+enhancing 1 5 1
+additional 2 5 2 6 1
+stevens 1 6 1
+successful 1 5 1
+instructor 1 5 5
+cheatsheet 1 6 1
+commands 3 3 1 5 1 6 3
+called 1 6 2
+brodwall 1 3 2
+discussions 1 5 7
+initiate 1 5 1
+warning 1 5 2
+given 1 5 1
+manner 1 6 1
+whole 1 5 1
+seriously 1 5 2
+ever 1 5 1
+advanced 1 6 1
+t 4 1 1 3 3 5 9 6 1
+sleep 1 3 1
+against 1 5 2
+revision 1 5 1
+syntax 1 6 1
+b 1 2 1
+portals 1 6 1
+highly 1 6 4
+via 2 5 8 6 1
+steele 1 6 2
+including 2 5 6 6 2
+challenging 1 5 1
+explain 1 5 1
+pete 1 3 1
+direct 1 5 1
+phone 1 5 1
+birth 1 3 1
+development 2 1 1 5 1
+wouldn 1 5 1
+doran 1 6 1
+class 1 5 18
+believe 1 5 1
+mac 1 6 1
+functions 1 3 1
+banahan 1 6 1
+buffer 1 4 1
+exercises 1 5 2
+writing 1 5 3
+mount 1 3 1
+indexer 2 2 2 7 1
+local 2 5 1 6 2
+matthew 1 6 1
+credentials 1 5 1
+library 1 6 1
+linker 1 3 1
+verbose 1 3 1
+breaking 1 5 1
+auto 1 4 1
+citation 1 5 1
+design 5 1 2 2 3 3 1 5 1 6 1
+socket 2 2 1 6 1
+error 2 3 1 5 1
+toll 1 5 1
+caught 1 5 2
+word 1 1 1
+speak 1 5 1
+codedrop 1 4 1
+ended 1 5 1
+shouldn 1 5 2
+nor 1 3 1
+before 1 5 4
+culture 1 3 1
+potential 1 5 2
+academic 1 5 7
+foundation 1 3 1
+us 1 5 3
+registered 1 5 1
+under 1 5 1
+sh 1 4 5
+works 1 5 1
+sublime 1 6 2
+comment 1 3 1
+phase 1 5 1
+recent 1 6 1
+stones 1 6 1
+whichever 1 5 1
+implementation 1 2 1
+oldie 1 6 1
+stdio 2 2 1 3 1
+get 1 5 3
+register 1 5 2
+yourselves 1 5 1
+tse 2 5 1 7 3
+getopt 1 4 1
+our 2 5 5 6 1
+conduct 1 5 1
+directories 1 2 1
+concurrent 1 2 1
+well 3 3 1 5 2 6 2
+access 2 1 1 5 5
+cannot 2 3 1 5 5
+don 2 3 3 5 2
+format 1 6 1
+thereof 1 5 1
+professor 2 3 1 5 5
+earlier 1 5 1
+lecture 3 2 34 3 3 5 4
+al 1 3 2
+tinysearchengine 1 3 1
+port 1 4 1
+mwf 1 5 1
+cheaters 1 5 1
+sobell 1 6 1
+assigned 1 5 2
+inquiries 1 5 1
+hall 1 6 1
+schedule 6 1 1 2 1 3 1 5 3 6 1 7 1
+resources 6 1 1 2 1 3 1 5 1 6 7 7 1
+keith 1 3 1
+steve 1 3 1
+trivedi 1 3 1
+varying 1 5 1
+joint 1 5 2
+layout 1 3 1
+difficult 1 5 2
+occasions 1 5 1
+reading 6 1 1 2 1 3 3 5 5 6 1 7 1
+preliminaries 1 7 1
+until 1 6 1
+th 1 6 1
+noble 1 6 1
+and 6 1 6 2 23 3 14 5 76 6 47 7 1
+subtemplate 1 4 3
+accessible 1 5 1
+simply 1 5 1
+programming 4 2 1 3 3 5 2 6 17
+nosort 1 4 2
+quickly 1 5 1
+required 1 6 1
+special 2 2 1 5 1
+comments 2 3 2 6 1
+messages 1 5 1
+details 1 5 1
+number 1 6 2
+them 2 5 3 6 2
+consult 1 5 1
+trip 1 5 1
+product 1 5 1
+chair 1 5 1
+simple 2 5 2 6 4
+your 4 1 1 3 3 5 39 6 4
+client 1 4 5
+evaluation 1 5 1
+repository 2 5 3 6 1
+campbell 6 1 1 2 1 3 1 5 2 6 1 7 1
+tower 1 6 1
+torvalds 2 3 1 6 1
+weight 1 5 1
+gtk 1 6 3
+hunt 1 6 1
+behalf 1 5 1
+either 2 5 2 6 1
+contain 1 6 1
+go 1 5 1
+service 1 5 1
+severe 1 5 1
+sciences 1 5 1
+tutorials 1 6 3
+mean 1 5 1
+located 2 2 1 5 1
+j 2 3 1 6 1
+suspension 1 5 1
+pacemaker 1 5 1
+skills 1 5 1
+misleading 1 5 1
+adjustments 1 5 3
+lower 1 6 1
+grade 1 5 7
+easy 2 5 1 6 3
+fast 1 6 1
+licensed 1 6 1
+first 3 1 1 5 7 6 2
+et 1 3 2
+increasingly 1 6 1
+anders 1 3 1
+accurately 1 5 1
+discuss 1 5 6
+published 1 6 1
+jekyll 1 6 1
+done 1 6 1
+homebrew 1 6 1
+android 1 5 1
+own 3 1 1 5 2 6 1
+life 2 3 1 5 2
+draft 1 5 1
+variables 1 6 1
+notice 1 5 2
+trivial 1 5 1
+manual 1 6 3
+interview 2 3 1 5 1
+nh 1 5 1
+world 1 5 1
+never 1 5 1
+include 1 5 2
+cs 7 1 7 2 6 3 5 4 5 5 14 6 12 7 7
+ios 1 5 1
+because 2 5 2 6 2
+similarly 1 5 1
+http 7 1 1 2 1 3 1 4 3 5 1 6 1 7 1
+h 1 4 2
+mysql 1 6 1
+you 3 1 7 5 78 6 9
+avoid 1 5 1
+sharing 1 5 3
+millisecond 1 5 1
+see 2 5 9 6 1
+included 1 5 2
+term 2 1 1 5 7
+penalized 1 5 1

@@ -1,224 +1,91 @@
-http://www.cs.dartmouth.edu/~campbell/cs50/resources.html
+http://www.cs.dartmouth.edu/~cs50/examples/
 Depth: 1
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
-
-
-
-
-
-
-
-
-
-  
-  
-  
-  
-  
-  
-  
-  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>resources</title></head><body>
-
-
-
-
-
-
-
-<big style="font-family: Helvetica,Arial,sans-serif;"><big><big><big>Computer Science 50<br>
-
-
-
-
-
-
-
-
-
-
-<span style="font-weight: bold;">resources</span></big></big></big></big><big><big style="font-family: Arial;"><big><big><span style="font-weight: bold;">
-</span></big></big></big></big>
-<span style="font-family: Times New Roman,Times,serif;"><span style="font-weight: bold;"><br>
-
-
-<br>
-
-
-</span></span>You and google are your best resource. In this class, you'll need to get quick answers to sometimes trivial programming<br>
-
-
-questions at 2 AM in the morning; questions on APIs, unix commands, bash scripst - go to notes and if not there the web. <br>
-
-
-<br>
-
-
-If you find a good resource send me the link and we can share it. <br>
-
-
-<br>
-
-
-There are a number of good pointers to online resources in the lecture notes.<a href="http://www.ietf.org/"><br>
-
-</a>
-<br>
-<h2>Machines in Lab 001</h2>
-<a href="http://www.cs.dartmouth.edu/%7Ewbc/suditour/001/index.html">Sudikoff Lab 001 tour</a><br>
-<a href="https://wiki.cs.dartmouth.edu/faq/doku.php/users_faq:first">CS Department User's FAQ</a><br>
-<h2>Bash and Shell programming</h2>
-<a href="http://www.panix.com/%7Eelflord/unix/bash-tute.html">Short bash tutorial</a><br>
-<a href="http://www.gnu.org/software/bash/">GNU bash manua</a>l<br>
-<a href="http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html">BASH Programming - Introduction HOW-TO</a><br>
-<a href="http://tldp.org/LDP/abs/html/">Advanced bash scripting guide</a><br>
-<h2><span style="font-family: Times New Roman,Times,serif;">Linux books/links</span></h2>
-
-
-
-
-
-
-
-These books two available online to Dartmouth Students<br>
-
-
-
-
-
-<br>
-
-
-
-
-
-<span style="font-family: Times New Roman,Times,serif;"></span><span style="font-family: Times New Roman,Times,serif;"><a href="http://proquest.safaribooksonline.com:80/0596100795">Linux in a Nutshell, 5th edition (currently not available)</a><br>
-
-
-
-
-
-
-</span>
-<span style="font-family: Times New Roman,Times,serif;"><br>
-
-
-
-
-The book I really wanted to list here Running Linux, 5th edition does
-not seem to be available on Safari Books yet. I've not used this book
-but looks useful. It includes many advanced issues we will not cover
-but it could be a useful reference. Let me know.<br>
-
-
-
-
-<br>
-
-
-
-
-<a href="http://proquest.safaribooksonline.com:80/0596009585">Linux System Programming</a><br>
-
-<a href="http://www.computerhope.com/unix.htm#04">Unix commands on the web</a><br>
-
-
-</span>
-<h2><span style="font-family: Times New Roman,Times,serif;">C</span></h2>
-
-
-<span style="font-family: Times New Roman,Times,serif;">
-
-<a href="http://www.cs.dartmouth.edu/%7Ecampbell/cs50/putty-cygwin-tutorial.pdf">PuTTY/Cygwin Tutorial</a><br>
-
-
-<a href="http://www.cs.dartmouth.edu/%7Echris/cs23/tedjensen/">A Tutorial on Pointers and Arrays in C, by Ted Jensen</a><br>
-
-
-<a href="http://en.wikipedia.org/wiki/C_programming_language">The Wikipedia entry for the C programming language</a><br>
-
-
-<a href="http://groups.google.com/group/comp.lang.c/browse_frm/thread/1ce1b07f3725e0c7?q=%22Why+is+C+good%3F%3F%3F%22&amp;hl=en&amp;pli=1">The USENET discussion Why is C good?</a><br>
-
-
-<br>
-
-
-C Programming Notes, by Steve Summit (Experimental College, University of Washington)<br>
-
-
-&nbsp;&nbsp;&nbsp; <a href="http://www.cs.dartmouth.edu/%7Echris/cs23/summit-intro/">Introductory C Programming, chapters 1-14</a><br>
-
-
-&nbsp;&nbsp;&nbsp; <a href="http://www.cs.dartmouth.edu/%7Echris/cs23/summit-intermediate/">Intermediate C Programming, chapters 15-25</a><br>
-
-
-<br>
-
-
-A list of <a href="http://cplus.kompf.de/posixlist.html">POSIX Library Functions</a><br>
-
-
-<br>
-
-
-To obtain further details about any function listed here, on the
-Sudikoff lab computers type&nbsp;&nbsp;&nbsp;&nbsp; man functionname<br>
-
-
-<br>
-
-
-<a href="http://www.cs.dartmouth.edu/%7Echris/cs23/make-documentation/">GNU make</a><br>
-
-
-<a href="http://www-mrsrl.stanford.edu/%7Ebrian/cvstutorial/">cvs</a><br>
-
-
-</span>
-<h2><span style="font-family: Times New Roman,Times,serif;">Editors</span></h2>
-
-
-<span style="font-family: Times New Roman,Times,serif;">I recommend, emacs or vi, vim and subblime - up to you.<br>
-
-
-I use <a href="http://aquamacs.org/">Aquamacs Emac </a>on my mac<br>
-
-
-I also like <a href="http://www.vim.org/">gvim</a><br>
-
-
-or just type vi or emacs at the command line. <br>
-And for Generation Z: <a href="http://www.sublimetext.com/">Sublime Text</a><a href="http://code.tutsplus.com/articles/perfect-workflow-in-sublime-text-free-course--net-27293"></a><br>
-
-
-<br>
-
-
-Some&nbsp;tutorials:<br>
-
-
-<br>
-
-
-</span><span style="font-family: Times New Roman,Times,serif;"><a href="http://www2.lib.uchicago.edu/keith/tcl-course/emacs-tutorial.html">Emacs Tutorial</a><br>
-
-
-<a href="http://blog.interlinked.org/tutorials/vim_tutorial.html">vim Tutorial</a><br>
-
-
-</span><span style="font-family: Times New Roman,Times,serif;"><a href="http://www.eng.hawaii.edu/Tutor/vi.html">vi tutorial</a> <br>
-</span><span style="font-family: Times New Roman,Times,serif;"><a href="http://code.tutsplus.com/articles/perfect-workflow-in-sublime-text-free-course--net-27293">Sublime tutorial</a></span><span style="font-family: Times New Roman,Times,serif;"><br>
-</span>
-<h2><span style="font-family: Times New Roman,Times,serif;">Tools</span></h2>
-<span style="font-family: Times New Roman,Times,serif;"><a href="http://valgrind.org/">valgrind:</a> a family of tools for dynamic analysis of programs.<br>
-<a href="http://www.tutorialspoint.com/svn/">svn</a> souce code management<br>
-<a href="http://www.gnu.org/software/make/manual/make.html">make</a> is a utility for determining what needs to be done (e.g., compile, link, copy, etc.) to build a program <br>
-</span><span style="font-family: Times New Roman,Times,serif;"><a href="https://developer.gnome.org/gtk-tutorial/stable/">gtk:</a> A popular toolkit for creating graphical user interfaces.<br>
-</span><span style="font-family: Times New Roman,Times,serif;"><a href="http://johnmacfarlane.net/pandoc/">pandoc:</a> A universal document converter.</span><br>
-<br>
-
-
-<big><big style="font-family: Arial;"><big><big><span style="font-weight: bold;"></span></big></big></big></big>
-
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+ <head>
+  <title>Index of /~cs50/examples</title>
+ </head>
+ <body>
+<h1>Index of /~cs50/examples</h1>
+  <table>
+   <tr><th valign="top"><img src="/icons/blank.gif" alt="[ICO]"></th><th><a href="?C=N;O=D">Name</a></th><th><a href="?C=M;O=A">Last modified</a></th><th><a href="?C=S;O=A">Size</a></th><th><a href="?C=D;O=A">Description</a></th></tr>
+   <tr><th colspan="5"><hr></th></tr>
+<tr><td valign="top"><img src="/icons/back.gif" alt="[PARENTDIR]"></td><td><a href="/~cs50/">Parent Directory</a></td><td>&nbsp;</td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="08x-Makefile1.txt">08x-Makefile1.txt</a></td><td align="right">2016-04-12 12:13  </td><td align="right">775 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="08x-Makefile2.txt">08x-Makefile2.txt</a></td><td align="right">2016-04-12 12:14  </td><td align="right">780 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="08x-Makefile3.txt">08x-Makefile3.txt</a></td><td align="right">2016-04-12 12:16  </td><td align="right">112 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="08x-Makefile4.txt">08x-Makefile4.txt</a></td><td align="right">2016-04-12 12:16  </td><td align="right">176 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="Lec1.c">Lec1.c</a></td><td align="right">2016-04-11 18:48  </td><td align="right">395 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="args.sh">args.sh</a></td><td align="right">2016-04-03 20:07  </td><td align="right">358 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="arguments.c">arguments.c</a></td><td align="right">2016-04-12 20:24  </td><td align="right">209 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="auto.c">auto.c</a></td><td align="right">2016-04-06 14:19  </td><td align="right">576 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="backup.sh">backup.sh</a></td><td align="right">2016-04-03 20:07  </td><td align="right">295 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="bagiter.c">bagiter.c</a></td><td align="right">2016-05-04 10:56  </td><td align="right">4.2K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="buffer-overflow.c">buffer-overflow.c</a></td><td align="right">2016-04-11 18:50  </td><td align="right">2.5K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="client-server-http-fork/">client-server-http-fork/</a></td><td align="right">2016-05-31 17:25  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="client-server-http/">client-server-http/</a></td><td align="right">2016-05-31 17:25  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="client-server-udp-select/">client-server-udp-select/</a></td><td align="right">2016-05-31 17:25  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="client-server-udp/">client-server-udp/</a></td><td align="right">2016-05-31 17:25  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="client-server/">client-server/</a></td><td align="right">2016-05-31 17:25  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="codedrop/">codedrop/</a></td><td align="right">2016-05-31 17:25  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="combined.c">combined.c</a></td><td align="right">2016-04-06 14:19  </td><td align="right">331 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="command.c">command.c</a></td><td align="right">2016-04-12 20:25  </td><td align="right">422 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="data-types.c">data-types.c</a></td><td align="right">2016-04-06 14:19  </td><td align="right">1.1K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="files-input.txt">files-input.txt</a></td><td align="right">2016-04-07 11:52  </td><td align="right"> 38 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="files.c">files.c</a></td><td align="right">2016-04-07 11:52  </td><td align="right">2.1K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="function-table/">function-table/</a></td><td align="right">2016-05-31 17:25  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="fuzzquery.c">fuzzquery.c</a></td><td align="right">2016-05-09 11:16  </td><td align="right">6.9K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="getchar.c">getchar.c</a></td><td align="right">2016-04-12 20:24  </td><td align="right">955 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="guessprime.sh">guessprime.sh</a></td><td align="right">2016-04-03 20:04  </td><td align="right">668 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="guessprime1.c">guessprime1.c</a></td><td align="right">2016-04-08 11:53  </td><td align="right">588 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="guessprime2.c">guessprime2.c</a></td><td align="right">2016-04-08 11:53  </td><td align="right">598 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="guessprime3.c">guessprime3.c</a></td><td align="right">2016-04-08 11:53  </td><td align="right">716 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="guessprime4.c">guessprime4.c</a></td><td align="right">2016-04-08 11:53  </td><td align="right">1.2K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="guessprime5.c">guessprime5.c</a></td><td align="right">2016-04-08 11:53  </td><td align="right">1.5K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="guessprime6.c">guessprime6.c</a></td><td align="right">2016-04-08 11:53  </td><td align="right">1.7K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="guessprime7.c">guessprime7.c</a></td><td align="right">2016-04-08 11:53  </td><td align="right">2.2K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="guessprime8.c">guessprime8.c</a></td><td align="right">2016-04-08 11:53  </td><td align="right">2.9K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="guessprime9.c">guessprime9.c</a></td><td align="right">2016-04-11 18:47  </td><td align="right">4.3K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="guessprimeA.c">guessprimeA.c</a></td><td align="right">2016-04-11 18:47  </td><td align="right">4.4K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="guessprimefunction.sh">guessprimefunction.sh</a></td><td align="right">2016-04-03 20:03  </td><td align="right">886 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="increment.c">increment.c</a></td><td align="right">2016-04-06 14:19  </td><td align="right">536 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="listiter1.c">listiter1.c</a></td><td align="right">2016-05-04 10:51  </td><td align="right">2.6K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="listiter2.c">listiter2.c</a></td><td align="right">2016-05-04 10:51  </td><td align="right">3.3K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="mycurl.c">mycurl.c</a></td><td align="right">2016-04-08 22:17  </td><td align="right">1.6K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="mycurl.h">mycurl.h</a></td><td align="right">2016-04-08 22:17  </td><td align="right">873 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="names-Makefile1.txt">names-Makefile1.txt</a></td><td align="right">2016-04-12 12:02  </td><td align="right">267 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="names-Makefile2.txt">names-Makefile2.txt</a></td><td align="right">2016-04-12 12:03  </td><td align="right">334 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="names1.c">names1.c</a></td><td align="right">2016-04-12 22:41  </td><td align="right">816 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="names2.c">names2.c</a></td><td align="right">2016-04-12 22:41  </td><td align="right">1.0K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="names3.c">names3.c</a></td><td align="right">2016-04-12 22:41  </td><td align="right">1.7K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="names4.c">names4.c</a></td><td align="right">2016-04-13 14:22  </td><td align="right">2.4K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="names5.c">names5.c</a></td><td align="right">2016-04-13 14:22  </td><td align="right">2.8K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="names6.c">names6.c</a></td><td align="right">2016-04-13 14:22  </td><td align="right">3.5K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="nosort-getopt.c">nosort-getopt.c</a></td><td align="right">2016-04-08 08:21  </td><td align="right">1.2K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="nosort.c">nosort.c</a></td><td align="right">2016-04-12 20:25  </td><td align="right">1.2K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="operator.c">operator.c</a></td><td align="right">2016-04-06 14:19  </td><td align="right">1.3K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="password/">password/</a></td><td align="right">2016-05-31 17:25  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="readline.c">readline.c</a></td><td align="right">2016-04-12 09:56  </td><td align="right">1.4K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="readline.h">readline.h</a></td><td align="right">2016-04-12 22:57  </td><td align="right">287 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="scope.c">scope.c</a></td><td align="right">2016-04-06 14:19  </td><td align="right">1.7K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="scores/">scores/</a></td><td align="right">2016-05-31 17:25  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="shifter.sh">shifter.sh</a></td><td align="right">2016-04-06 14:19  </td><td align="right">122 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="static.c">static.c</a></td><td align="right">2016-04-06 14:19  </td><td align="right">771 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="strings.c">strings.c</a></td><td align="right">2016-04-11 18:49  </td><td align="right">4.4K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="subtemplate-README.txt">subtemplate-README.txt</a></td><td align="right">2016-04-16 07:34  </td><td align="right">1.7K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="subtemplate-TESTING.txt">subtemplate-TESTING.txt</a></td><td align="right">2016-04-15 22:21  </td><td align="right">5.9K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="subtemplate.c">subtemplate.c</a></td><td align="right">2016-04-16 07:30  </td><td align="right">3.4K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="tree1/">tree1/</a></td><td align="right">2016-05-31 17:25  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="tree2/">tree2/</a></td><td align="right">2016-05-31 17:25  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="tree3/">tree3/</a></td><td align="right">2016-05-31 17:25  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="tree4/">tree4/</a></td><td align="right">2016-05-31 17:25  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="tree5/">tree5/</a></td><td align="right">2016-05-31 17:25  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="tree6/">tree6/</a></td><td align="right">2016-05-31 17:25  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="tree7/">tree7/</a></td><td align="right">2016-05-31 17:25  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="tree8/">tree8/</a></td><td align="right">2016-05-31 17:25  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="tree9/">tree9/</a></td><td align="right">2016-05-31 17:25  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="treeA/">treeA/</a></td><td align="right">2016-05-31 17:25  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+   <tr><th colspan="5"><hr></th></tr>
+</table>
+<address>Apache/2.4.10 (Fedora) Server at www.cs.dartmouth.edu Port 80</address>
 </body></html>

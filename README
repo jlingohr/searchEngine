@@ -27,7 +27,6 @@ INDEXER
 
   TODOS:
   ----------
-  - Account for List and hashtable refactoring
   * Update all Index hashtable in indexer.c to work with refactored hashtable
   - Fix any memory leaks
 
@@ -43,7 +42,7 @@ Query
   Assumptions: Query assumes that [indexed.dat] is a valid file and [Crawl Dir] is a valid directory
 
   TODO
-  - Account for List and hashtable refactoring
+  - Account for and hashtable refactoring
   - Check that intersect works
   - Start testing on multuple pages
   - exit nicely

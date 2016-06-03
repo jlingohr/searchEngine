@@ -913,6 +913,9 @@ int GetNextWord(const char* doc, int pos, char **word)
  */
 void NormalizeWord(char *word)
 {
+    // Put to lowercase
     for(char *ptr = word; *ptr; ++ptr)
         *ptr = tolower(*ptr);
+
+
 }
