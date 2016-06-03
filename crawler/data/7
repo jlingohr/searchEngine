@@ -1,5 +1,5 @@
-http://old-www.cs.dartmouth.edu/~cs50/
-Depth: 0
+http://www.cs.dartmouth.edu/~cs50/Labs/
+Depth: 1
 <!DOCTYPE html>
 <html>
 
@@ -8,12 +8,12 @@ Depth: 0
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>CS50 Overview</title>
+  <title>CS50 Labs</title>
   <meta name="description" content="In Computer Science 50 you will learn how to design & build large,  reliable, maintainable, and understandable software systems.  In the process you will learn to program in C with Unix development tools.
 ">
 
   <link rel="stylesheet" href="/~cs50/css/main.css">
-  <link rel="canonical" href="http://www.cs.dartmouth.edu/~cs50/">
+  <link rel="canonical" href="http://www.cs.dartmouth.edu/~cs50/Labs/">
 </head>
 
 
@@ -43,25 +43,30 @@ Depth: 0
 
     <div class="page-content">
       <div class="wrapper">
-        <h1 id="overview">Overview</h1>
+        <article class="post">
 
-<p>In Computer Science 50 you will learn how to design &amp; build large,  reliable, maintainable, and understandable software systems.  In the process you will learn to program in C with Unix development tools.</p>
+  <header class="post-header">
+    <h1 class="post-title">CS50 Labs</h1>
+  </header>
 
-<p>In other words, you’ll learn to be a hacker! Yes, a hacker, in the original sense of the word as defined by <a href="http://tools.ietf.org/html/rfc1983">RFC1983 The Internet Users’ Glossary</a> as:</p>
+  <div class="post-content">
+    <ul>
+  <li><a href="Lab0-Preliminaries.html">Lab 0 - Preliminaries</a>.</li>
+  <li><a href="Lab1/">Lab 1 - Bash</a>.</li>
+  <li><a href="Lab2.html">Lab 2 - C</a>.</li>
+  <li><a href="../Lectures/09x-puzzle.html">C puzzle!</a> (just for fun)</li>
+  <li><a href="Lab3/">Lab 3 - Data structures in C</a>.</li>
+  <li><a href="Lab4.html">Lab 4 - TSE Crawler</a>.</li>
+  <li><a href="Lab5/">Lab 5 - TSE Indexer</a>.</li>
+  <li><a href="Lab6/">Lab 6 - TSE Querier</a>.</li>
+  <li><a href="Project/">Project - Mission Incomputable!</a></li>
+</ul>
 
-<blockquote>
-  <p><em>A person who delights in having an intimate understanding of the internal workings of a system, computers and computer networks in particular.</em></p>
-</blockquote>
+<p>Please follow the <a href="http://www.cs.dartmouth.edu/~cs50/Resources/CodingStyle.html">CS50 coding style</a> in C assignments.</p>
 
-<p>The other common use of the term hacker is actually a mistake and should instead be “cracker”, which is defined by the same source as:</p>
+  </div>
 
-<blockquote>
-  <p><em>A cracker is an individual who attempts to access computer systems without authorization.</em></p>
-</blockquote>
-
-<p>We won’t be learning about <em>cracking</em> in CS50. If you want to learn about that, then you should take <a href="http://www.cs.dartmouth.edu/~ccpalmer/classes/cs55/Content/Purpose.html">CS55 Security &amp; Privacy</a>.</p>
-
-<p>The first few weeks of this course are a crash course in Unix and C.  After that, you’ll build your very own Search Engine application.  Finally, you’ll join a team of other students to design, build, document, and test a large software project.</p>
+</article>
 
       </div>
     </div>

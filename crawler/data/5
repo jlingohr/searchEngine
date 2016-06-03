@@ -1,107 +1,311 @@
-http://www.cs.dartmouth.edu/%7Epway/cs23/robot/
+http://www.cs.dartmouth.edu/~cs50/Logistics/
 Depth: 1
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
-<head>
 
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <title>CS50 Logistics</title>
+  <meta name="description" content="In Computer Science 50 you will learn how to design & build large,  reliable, maintainable, and understandable software systems.  In the process you will learn to program in C with Unix development tools.
+">
 
-  
-  
-  
-  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
-
-
-
-  
-  
-  
-  <title>CS 23 Winter 08 Dartmouth College ----The ROBOT Project</title>
+  <link rel="stylesheet" href="/~cs50/css/main.css">
+  <link rel="canonical" href="http://www.cs.dartmouth.edu/~cs50/Logistics/">
 </head>
 
 
-<body>
+  <body>
+
+    <header class="site-header">
+
+    <a class="site-title" href="/~cs50/">CS50 Spring 2016</a>
+
+    <nav class="site-nav">
+
+      [<a href="https://canvas.dartmouth.edu/courses/14815">Canvas</a>]
+      [<a href="https://piazza.com/dartmouth/spring2016/cosc05001sp16/home">Piazza</a>]
+      [<a href="https://gitlab.cs.dartmouth.edu">Gitlab</a>]
+      [<a href="/~cs50/Schedule.pdf">Schedule</a>]
+      [<a href="http://www.cs.dartmouth.edu/~cs50/Lectures/">Lectures</a>]
+      [<a href="http://www.cs.dartmouth.edu/~cs50/Reading/">Reading</a>]
+      [<a href="http://www.cs.dartmouth.edu/~cs50/examples/">Examples</a>]
+      [<a href="http://www.cs.dartmouth.edu/~cs50/Logistics/">Logistics</a>]
+      [<a href="http://www.cs.dartmouth.edu/~cs50/Resources/">Resources</a>]
+      [<a href="http://www.cs.dartmouth.edu/~cs50/Labs/">Labs</a>]
+<!--  [<a href="http://www.cs.dartmouth.edu/~cs50/Project/">Project</a>]  -->
+
+   </nav>
+</header>
 
 
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post">
 
-<small><small><span style="font-weight: bold;"></span></small></small>
+  <header class="post-header">
+    <h1 class="post-title">CS50 Logistics</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="contacting-the-cs50-team">Contacting the CS50 team</h1>
+
+<p><strong>Please use Piazza for most questions</strong> (see below). If you need a private communication with the teaching team, you can make a private post in Piazza, contact the relevant person by email, visit us during <a href="https://piazza.com/dartmouth/spring2016/cosc05001sp16/staff">office hours</a>, or make an appointment.</p>
+
+<p>The CS50 team includes Professor Kotz, three graduate teaching assistants, and four undergraduate teaching assistants.</p>
+
+<h3 id="professor">Professor:</h3>
+<ul>
+  <li><a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#068;&#097;&#118;&#105;&#100;&#046;&#070;&#046;&#075;&#111;&#116;&#122;&#064;&#068;&#097;&#114;&#116;&#109;&#111;&#117;&#116;&#104;&#046;&#101;&#100;&#117;">&#068;&#097;&#118;&#105;&#100;&#046;&#070;&#046;&#075;&#111;&#116;&#122;&#064;&#068;&#097;&#114;&#116;&#109;&#111;&#117;&#116;&#104;&#046;&#101;&#100;&#117;</a>, Sudikoff 256</li>
+</ul>
+
+<h3 id="graduate-assistants">Graduate assistants:</h3>
+<ul>
+  <li><a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#067;&#104;&#117;&#097;&#110;&#107;&#097;&#105;&#046;&#065;&#110;&#046;&#071;&#082;&#064;&#100;&#097;&#114;&#116;&#109;&#111;&#117;&#116;&#104;&#046;&#101;&#100;&#117;">&#067;&#104;&#117;&#097;&#110;&#107;&#097;&#105;&#046;&#065;&#110;&#046;&#071;&#082;&#064;&#100;&#097;&#114;&#116;&#109;&#111;&#117;&#116;&#104;&#046;&#101;&#100;&#117;</a>, Sudikoff 207</li>
+  <li><a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#082;&#117;&#105;&#046;&#076;&#105;&#117;&#046;&#071;&#082;&#064;&#100;&#097;&#114;&#116;&#109;&#111;&#117;&#116;&#104;&#046;&#101;&#100;&#117;">&#082;&#117;&#105;&#046;&#076;&#105;&#117;&#046;&#071;&#082;&#064;&#100;&#097;&#114;&#116;&#109;&#111;&#117;&#116;&#104;&#046;&#101;&#100;&#117;</a>, Sudikoff 249</li>
+  <li><a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#084;&#114;&#097;&#118;&#105;&#115;&#046;&#087;&#046;&#080;&#101;&#116;&#101;&#114;&#115;&#046;&#071;&#082;&#064;&#100;&#097;&#114;&#116;&#109;&#111;&#117;&#116;&#104;&#046;&#101;&#100;&#117;">&#084;&#114;&#097;&#118;&#105;&#115;&#046;&#087;&#046;&#080;&#101;&#116;&#101;&#114;&#115;&#046;&#071;&#082;&#064;&#100;&#097;&#114;&#116;&#109;&#111;&#117;&#116;&#104;&#046;&#101;&#100;&#117;</a>, Sudikoff 255</li>
+</ul>
+
+<h3 id="undergraduate-assistants">Undergraduate assistants:</h3>
+<ul>
+  <li><a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#077;&#097;&#114;&#107;&#046;&#069;&#046;&#069;&#114;&#119;&#105;&#110;&#046;&#049;&#055;&#064;&#100;&#097;&#114;&#116;&#109;&#111;&#117;&#116;&#104;&#046;&#101;&#100;&#117;">&#077;&#097;&#114;&#107;&#046;&#069;&#046;&#069;&#114;&#119;&#105;&#110;&#046;&#049;&#055;&#064;&#100;&#097;&#114;&#116;&#109;&#111;&#117;&#116;&#104;&#046;&#101;&#100;&#117;</a></li>
+  <li><a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#067;&#104;&#114;&#105;&#115;&#116;&#111;&#112;&#104;&#101;&#114;&#046;&#074;&#046;&#075;&#121;&#109;&#110;&#046;&#049;&#056;&#064;&#100;&#097;&#114;&#116;&#109;&#111;&#117;&#116;&#104;&#046;&#101;&#100;&#117;">&#067;&#104;&#114;&#105;&#115;&#116;&#111;&#112;&#104;&#101;&#114;&#046;&#074;&#046;&#075;&#121;&#109;&#110;&#046;&#049;&#056;&#064;&#100;&#097;&#114;&#116;&#109;&#111;&#117;&#116;&#104;&#046;&#101;&#100;&#117;</a></li>
+  <li><a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#080;&#101;&#116;&#101;&#114;&#046;&#075;&#046;&#083;&#097;&#105;&#115;&#105;&#046;&#049;&#054;&#064;&#100;&#097;&#114;&#116;&#109;&#111;&#117;&#116;&#104;&#046;&#101;&#100;&#117;">&#080;&#101;&#116;&#101;&#114;&#046;&#075;&#046;&#083;&#097;&#105;&#115;&#105;&#046;&#049;&#054;&#064;&#100;&#097;&#114;&#116;&#109;&#111;&#117;&#116;&#104;&#046;&#101;&#100;&#117;</a></li>
+  <li><a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#065;&#110;&#103;&#101;&#108;&#097;&#046;&#090;&#104;&#117;&#046;&#049;&#055;&#064;&#100;&#097;&#114;&#116;&#109;&#111;&#117;&#116;&#104;&#046;&#101;&#100;&#117;">&#065;&#110;&#103;&#101;&#108;&#097;&#046;&#090;&#104;&#117;&#046;&#049;&#055;&#064;&#100;&#097;&#114;&#116;&#109;&#111;&#117;&#116;&#104;&#046;&#101;&#100;&#117;</a></li>
+</ul>
+
+<h3 id="the-whole-cs50-team-cs50csdartmouthedumailtocs50csdartmouthedu">The whole CS50 team: <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#099;&#115;&#053;&#048;&#064;&#099;&#115;&#046;&#100;&#097;&#114;&#116;&#109;&#111;&#117;&#116;&#104;&#046;&#101;&#100;&#117;">&#099;&#115;&#053;&#048;&#064;&#099;&#115;&#046;&#100;&#097;&#114;&#116;&#109;&#111;&#117;&#116;&#104;&#046;&#101;&#100;&#117;</a></h3>
+
+<h1 id="lectures">Lectures</h1>
+
+<p>MWF 12:30-1:35<br />
+ x-hour: Tu 1:00-1:50<br />
+ Location: <strong>Life Sciences 200</strong>.</p>
+
+<p><em>Some project meetings – tentatively scheduled for May 20 and June 1 – will occur outside of regularly scheduled class hours.</em></p>
+
+<h1 id="access-to-cs-systems">Access to CS systems</h1>
+
+<p>You will need a computer account on the <a href="http://www.cs.dartmouth.edu/~wbc/suditour/011/index.html">CS Linux machines</a> even if you have your own computer. Please complete <a href="Labs/Lab0-Preliminaries.html">Lab Assignment 0</a> to let us know what your account is, or what you would like it to be, along with some other stuff. Please do this <em>on the first day of class!</em></p>
+
+<p>You are free to use the Sudikoff labs (rooms 001, 003, 005) for your work; 003 and 005 have MacOS computers and 001 has empty tables – a great location for study groups or project teams!  Please note that 003 and 005 have some periods when they are reserved for other courses.</p>
+
+<h1 id="lecture-notes">Lecture notes</h1>
+
+<p>Each lecture topic will be supported by <a href="http://www.cs.dartmouth.edu/~cs50/Lectures">lecture notes</a>.  These should be available by class time each day of class and will complement what is presented in class.  We try to include in the class notes most of what we will discuss in class, but there will often be additional material that is included in class. In short: you should not miss class.</p>
+
+<h1 id="inclement-weather">Inclement weather</h1>
+
+<p>On rare occasions, Dartmouth may cancel classes or even close the campus. If this occurs, general notice will be given in three ways:</p>
+
+<ul>
+  <li>Local broadcast media;</li>
+  <li>Campus-wide BlitzMail messages; and</li>
+  <li>A recorded message at a College toll-free Inclement Weather Phone Line: 1-888-566-SNOW (1-888-566-7669).</li>
+</ul>
+
+<h1 id="piazza-canvas-and-gitlab">Piazza, Canvas, and Gitlab</h1>
+
+<p>This term we will be using <strong>Piazza</strong> for class discussion and announcements, <strong>Canvas</strong> for assignments and grades, and <strong>Gitlab</strong> for source-code storage and submission.</p>
+
+<p>NOTE: <strong>the first time you access Piazza must be via <a href="https://canvas.dartmouth.edu/courses/14815">Canvas</a></strong> to ensure that the two are properly connected. After that you can access Piazza directly via a Browser or the iOS and Android apps. See below.</p>
+
+<h3 id="piazza">Piazza</h3>
+
+<p>You are responsible for reading announcements we make in [Piazza](<a href="https://piazza.com/dartmouth/spring2016/cosc05001sp16/home">Piazza</a>). The Piazza system is also a great tool for seeking help, quickly and efficiently, from classmates and the instruction team.  Rather than emailing questions to the teaching staff, I encourage you to post your questions on Piazza. This allows your classmates to benefit from seeing the question and subsequent instructor response. You are also encouraged to contribute answers to other people’s threads, or initiate open-ended discussions (“<em>what did everyone think about that ‘goto considered harmful’ article?</em>”).</p>
+
+<p><em>Warning!</em> If your question reveals part of a solution, do not post it publicly! Mark the question as private and only you and the instructors will be able to see it.</p>
+
+<p><strong>To get set up in Piazza,</strong> you need to connect to <a href="https://canvas.dartmouth.edu/courses/14815">Canvas</a> first.  Once in Canvas, select our course (“Software Design&amp;Implement’n”), and then click on Piazza on the left side. <strong>Please do not register directly at Piazza’s website as that will confuse Canvas ;-)</strong>. If you have registered your full Dartmouth email address with Piazza before, you will be ready to go. If not, Piazza will register you and ask for a password. <em>THIS PASSWORD SHOULD NOT BE THE SAME AS YOUR NetID PASSWORD ! Dartmouth does NOT own the Piazza system so you shouldn’t risk your NetID password there.</em></p>
+
+<p>If you have any problems with Piazza itself, or feedback for the Piazza developers, please email them <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#116;&#101;&#097;&#109;&#064;&#112;&#105;&#097;&#122;&#122;&#097;&#046;&#099;&#111;&#109;">here</a>.</p>
+
+<h3 id="canvas">Canvas</h3>
+<p>All lab assignments will be announced in the <a href="https://canvas.dartmouth.edu/courses/14815/assignments">Assignment section</a> of our <a href="https://canvas.dartmouth.edu/courses/14815">Canvas</a> site. You will submit some lab assignments via that site, and will receive all your feedback and grades via that site.</p>
+
+<p>Access to the Canvas site is limited to those enrolled in the course.</p>
+
+<h3 id="gitlab">Gitlab</h3>
+<p>In the latter half of the course we will use <a href="https://gitlab.cs.dartmouth.edu">Gitlab</a>, a locally hosted <code class="highlighter-rouge">git</code> server, for storing and submitting your source code. This service will be essential for the project. <em>Please do not use Github,</em> because most repositories there are publicly accessible; see the section about Honor Code below.</p>
+
+<h1 id="syllabus">Syllabus</h1>
+
+<p>Please see the <a href="Schedule.pdf">schedule</a> for the complete list of topics that we will cover. 
+The <strong>schedule is subject to change</strong> and I will try to update this pdf when changes occur.
+All class times, and the official <a href="https://canvas.dartmouth.edu/courses/14815/assignments">assignment deadlines</a>, are posted in the Canvas calendar.</p>
+
+<p><em>Some project meetings – tentatively scheduled for May 20 and June 1 – will occur outside of regularly scheduled class hours.</em></p>
+
+<p>We will use most of the <em>x-hour periods</em> for additional lectures, discussions, lab and help time.</p>
+
+<h1 id="reading-assignments">Reading assignments</h1>
+
+<p>You are <em>encouraged</em> to read all the <a href="Reading/">assigned readings</a> listed before class each week, but you are <em>expected</em> to have read these readings before the next week.</p>
+
+<h1 id="prerequisites">Prerequisites</h1>
+
+<p>Successful completion of <strong>Computer Science 10</strong>.</p>
+
+<h1 id="course-announcements">Course Announcements</h1>
+
+<p>The instructor will make announcements via <a href="https://piazza.com/dartmouth/spring2016/cosc05001sp16/home">Piazza</a>. You may choose among several options for receiving announcements and other updates to our Piazza site. See the Piazza page for more information.</p>
+
+<h1 id="help">Help</h1>
+
+<p>The professor and TAs will hold weekly <a href="https://piazza.com/dartmouth/spring2016/cosc05001sp16/staff">office hours</a>; other meetings may be possible by appointment. <strong>The majority of questions and problems can be resolved via posts to Piazza,</strong> including questions about lectures, homework, reading assignments, group discussions, and class logistics.</p>
+
+<p>Other options for help include the Hangout feature of <a href="https://plus.google.com">Google+</a>. Group or private discussions may be held amongst yourselves or with the instruction team in this way. The hangout option does require you to be a member of <a href="https://plus.google.com">Google+</a> and it helps if you have a webcam.</p>
+
+<h1 id="project">Project</h1>
+
+<p>Students will work on projects in small groups assigned by the instructor; details will be announced later in the term. After the project is submitted, each member of a group will submit a confidential assessment of themselves and the others in their group.</p>
+
+<h2 id="grading">Grading</h2>
+
+<p>There are no exams in this class – instead, a series of programming exercises and a final project.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Solo Lab Assignments 1-3</td>
+      <td>27%</td>
+    </tr>
+    <tr>
+      <td>Twin Lab Assignments 4-6</td>
+      <td>27%</td>
+    </tr>
+    <tr>
+      <td>Final project team grade</td>
+      <td>36%</td>
+    </tr>
+    <tr>
+      <td>Team contribution and peer evals</td>
+      <td>5%</td>
+    </tr>
+    <tr>
+      <td>Class participation</td>
+      <td>5%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Lab assignments have varying difficulty but equal weight.
+The final project is a team grade – every team member gets the same grade – but there is an opportunity for peer evaluation to address variance in members’ contribution. 
+Class participation will be assessed based upon discussions during lectures and in answering questions on Piazza. <em>Note: Meaningless contributions to Piazza discussions intended to inflate participation counts will not be counted as participation.</em></p>
+
+<p>Lab assignment regrading requests must be submitted via <a href="cs50@cs.dartmouth.edu">email to the instruction team</a> <em>within one week</em> of the original grade posting.</p>
+
+<p><strong>VERY IMPORTANT NOTICE ABOUT SUBMITTING PROGRAMS THAT CRASH</strong></p>
+
+<p>It is particularly difficult to grade a program that doesn’t compile or has encounters a crash during testing by the graders. If your code does not compile or your program crashes due to segmentation faults or any other issues, we will return it to you via email as soon as possible. You will then have 24 hours to correct it and resubmit, with a 25% point deduction. If you are unable to resubmit your code within 24 hours, late penalties (10% per day) will begin. We cannot guarantee that we’ll return you program immediately - we’ll do the best that we can. You might be busy when you receive it due to other commitments, but we have to stick to the above policy. So the best way to avoid that situation is to ensure that your program doesn’t crash in the first place. Learning how to debug and test your programs is a key part of this course.</p>
+
+<p>Think about it: you wouldn’t appreciate the software in your Fitbit or your Pacemaker crashing when you take a trip out of NH, so your submitted software shouldn’t crash just because we’re running it!</p>
+
+<h1 id="late-assignments">Late assignments</h1>
+
+<p>This is a challenging course, so self-discipline and planning will be key to your success. In short, <em>Start Early</em>!</p>
+
+<p>Late assignments will be penalized on a 10% for each 24 period (or fraction thereof) late. So if it’s due at 11:50PM on 25-April and you submit it at 1:00AM on 26-April, 10% will be deducted from the final score.</p>
+
+<p>To address unavoidable circumstances, all students are allowed two free 48 hour extensions on <em>lab assignments</em> with no penalty. Be careful how you use them since the assignments get progressively more difficult as the term proceeds, and you never know when you might fall ill or have an interview. Be sure you notify the instructor and grader if you need to use one of these extensions. Note that these extensions are <em>not</em> applicable to the term Project assignment.</p>
+
+<h1 id="homework-gradingregrading">Homework grading/regrading</h1>
+
+<p>Your work is normally graded each week by the TA and graders, according to a grading rubric that I discuss with them. If you have any grading questions on a homework or quiz, please follow the procedure below.</p>
+
+<p>If the grader made an obvious mistake (e.g., totaling error), you can see me or the TA after a lecture or during any of our office hours, and we’ll make the correction right away.</p>
+
+<p>If you feel the grader did not grade your answer accurately, then you should send email to both the TA and me to explain which program(s) need regrading and why.  We will make sure that your answer will be reviewed again.  After you hear the outcome on your regrade request, if you still feel the matter is not resolved satisfactorily, then you should see me.</p>
+
+<p>You must submit your homework or quiz regrade request <em>within one week</em> from when the homework/exam was returned, or 5PM May 30, 2016, whichever is earlier.</p>
+
+<p>Please note that any regrade request that comes after the deadline stated above will not be considered, regardless of its merit.</p>
+
+<h1 id="honor-code">Honor code</h1>
+
+<p>Dartmouth’s Honor Code and policies apply to your conduct in this course.</p>
+
+<p>First, you may discuss and help each other (help in debugging, sharing knowledge, giving moral support, getting coffee, etc.) - I promote that as the type of team spirit and joint problem solving skills that is the essence of the course and necessary to do a great project. However, you cannot work jointly on coding up (i.e., writing) your programming assignments. You can talk, discuss solutions, even show snippets of code on the white board (not the computer) to solve a problem but you cannot jointly work on the code development and writing. Submitted code for the labs has to be yours and yours alone.</p>
+
+<p>The project phase is different. You can work jointly with your project team on writing code and documentation. But you cannot take code from anywhere (e.g., the web or any other source). It has to be the joint product of the team. One caveat: no sharing of code between teams. As above, teams can discuss code, show each other snippets on the white board, but not share source code.</p>
+
+<p>In either case, should not read and directly incorporate solutions for assignments found on the Web (including websites for previous terms, inside or outside of Dartmouth).</p>
+
+<p><strong>SPECIFIC GITHUB WARNING</strong></p>
+
+<p>We will also be learning how to share files using the <code class="highlighter-rouge">git</code> source code control system. We will use git with <a href="https://gitlab.cs.dartmouth.edu">Gitlab</a>, a private git server located right here in Sudikoff. You may have also heard of <code class="highlighter-rouge">github</code>, which is an open repository of projects (including source code) from programmers around the world. Some past students of CS50 uploaded their assignment or project solutions to <code class="highlighter-rouge">github</code> for reference by potential employers. While this is may be a good idea for your job search, it is extremely disruptive, distracting, and misleading for students taking the class with you as well as future students.</p>
+
+<ul>
+  <li>Anyone can upload code to <code class="highlighter-rouge">github</code>. That doesn’t mean it’s good code, working code, or even code that will compile and run! In fact, it might even be <strong>evil code that could have something nasty hidden inside it!</strong> If you take freely available code and study it sufficiently to be sure it works properly and isn’t evil, you might as well write it yourself.</li>
+  <li>If you need to upload your work for reference by potential employers, 
+<code class="highlighter-rouge">github</code> offers <strong>free private repositories</strong> to students.</li>
+  <li>Any student found to have uploaded any CS50 assignment solutions, including TSE and the Amazing project, to a publicly available <code class="highlighter-rouge">github</code> repository, or to a private <code class="highlighter-rouge">github</code> repository while sharing its access credentials with other Dartmouth students, will be reported.</li>
+  <li>Anyone caught using the work of prior CS50 students, whether from <code class="highlighter-rouge">github</code> or other sources, will be reported.</li>
+</ul>
+
+<p>The following is repetitive, but it is necessary to be explicit here (this is Prof. Campbell’s version):</p>
+
+<blockquote>
+  <p>You would be amazed at how easy it is to tell when people work together on problem sets, particularly coding exercises. Think about the simple shell commands we run against your source code from labs and projects to compare your lab assignments and projects against every other assignment and project ever submitted since this revision of course started in 2008 - it takes less that a millisecond to run these checks - no effort on our behalf. Similarly, we know how to use google too. You should not under any circumstance look at or use code from students that have previously taken this course. The message is simple - please don’t make life unpleasant for all of us by breaking these rules. The penalties for cheating at Dartmouth are severe, starting with suspension and including expulsion. If you are unsure about anything, please ask.</p>
+</blockquote>
+
+<p>We can assure you that violations of the Honor Code have been, and will continue to be, treated <strong>seriously</strong>.</p>
+
+<p>Indeed, I agree with Professor Cormen, who wrote:</p>
+
+<blockquote>
+  <p>I reserve the right to assign you a failing grade on an entire homework assignment or on an entire exam if I believe that you have violated the Academic Honor Principle, apart from any finding by the COS. I will give you every opportunity to convince me that you did not violate the Academic Honor Principle, but I take the Academic Honor Principle very seriously. You have read Sources and Citation at Dartmouth College. I was co-chair of the committee that wrote this document. In fact, I wrote the first draft. So I know exactly what it says. Cheaters—whether or not they are caught—bring dishonor upon themselves and upon everyone else at Dartmouth. To do that, for just a few lousy points in a course, is [insert your favorite strong adjective meaning “stupid” here]. You cannot fool me into thinking that you did not cheat if, in fact you did. So don’t cheat.</p>
+</blockquote>
+
+<p>Please let me know if you have any questions—better to be safe than sorry!</p>
+
+<h3 id="credit-your-sources">Credit your sources</h3>
+
+<p>Any ideas you get from other teams or any other source should be carefully cited both in the code and in the documentation.</p>
+
+<ul>
+  <li>In your assignments, list all your collaborators (e.g., “I discussed this homework with Alice, Bob, …”) and credit any sources (including code) used.</li>
+  <li>You must also credit specific sources that are provided by the instructor. For example, you must credit code that we give you if it helps you with your work (either by direct use of the code, or by simply enhancing your understanding by reading the code).</li>
+  <li>References for any non-trivial algorithms you employ should be included in the code and documentation to ensure others will know where to learn more about it.</li>
+</ul>
+
+<h1 id="special-accommodations">Special accommodations</h1>
+
+<p>Students with disabilities who may need disability-related academic adjustments and services for this course are encouraged to see me privately as early in the term as possible. Students requiring disability-related academic adjustments and services must consult the Student Accessibility Services office (205 Collis Student Center, 646-9900, Student.Accessibility.Services@Dartmouth.edu). Once SAS has authorized services, students must show the originally signed SAS Services and Consent Form and/or a letter on SAS letterhead to their professor. As a first step, if students have questions about whether they qualify to receive academic adjustments and services, they should contact the SAS office. All inquiries and discussions will remain confidential.</p>
+
+<h1 id="religious-observations">Religious observations</h1>
+
+<p>I realize that some students may wish to take part in religious observances that fall during this academic term. Should you have a religious observance that conflicts with your participation in the course, please come speak with me before the end of the second week of the term to discuss appropriate accommodations.</p>
 
 
+  </div>
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">CS50 Spring 2016 -- Dartmouth College</h2>
+
+    <p> <font size=-1> 
+    	This version of the course is based upon those designed by 
+    	Professors Palmer, Zhou, Campbell, and Balkcom. 
+	I am deeply indebted to these outstanding educators.
+    -- <a href="/~dfk/">David Kotz</a>
+       </font> 
+    </p>
+
+  </div>
+
+</footer>
 
 
+  </body>
 
-
-<h1 style="text-align: center;"><br>
-CS23 Software Design and Implementation (Winter 2008)
-<br>
-
-<br>
-Course Project Demos using the Garcia Robots<big><br>
-</big></h1>
-
-
-
-<br>
-
-
-
-<hr style="width: 100%; height: 2px;">
-<div style="text-align: center;">
-<div style="text-align: left;">
-<div style="text-align: center;"><big><small><img style="width: 640px; height: 427px;" alt="" src="images/img_2973.jpg"><br>
-<br>
-<img style="width: 427px; height: 640px;" alt="" src="images/img_2974.jpg"><br>
-<br>
-<img style="width: 640px; height: 480px;" alt="" src="images/cimg3924.jpg"><br>
-<br>
-<img style="width: 640px; height: 427px;" alt="" src="images/img_2975.jpg"><br>
-<br>
-<img style="width: 640px; height: 427px;" alt="" src="images/img_2976.jpg"><br>
-<br>
-<img style="width: 640px; height: 427px;" alt="" src="images/img_2977.jpg"><br>
-<br>
-<img style="width: 640px; height: 480px;" alt="" src="images/cimg3923.jpg"><br>
-<br>
-<img style="width: 640px; height: 480px;" alt="" src="images/cimg3925.jpg"><br>
-<br>
-<img style="width: 640px; height: 480px;" alt="" src="images/cimg3926.jpg"><br>
-<br>
-<img style="width: 480px; height: 640px;" alt="" src="images/cimg3927.jpg"><br>
-<br>
-<br>
-<br>
-
-
-<br>
-
-
-
-</small></big>
-<hr style="width: 100%; height: 2px;">
-<h2 style="text-align: right;"><small><span style="font-style: italic;">Photos by&nbsp; <a href="http://www.cs.dartmouth.edu/%7Eafra/">Prof Afra Zomorodian</a> &nbsp;and <a href="http://www.cs.dartmouth.edu/%7Epway">Wei Pan</a>.</span></small></h2>
-
-
-
-<big><small><br>
-
-
-
-</small></big></div>
-
-
-
-<big><br>
-
-
-
-</big></div>
-
-
-
-</div>
-
-
-
-<hr style="width: 100%; height: 2px;">
-</body>
 </html>

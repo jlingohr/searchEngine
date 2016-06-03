@@ -59,7 +59,7 @@ void list_for_each(List* list, listIterator iter);
 void list_head(List* list, element_t elem);
 void list_tail(List* list, element_t elem);
 
-int list_dequeue(List* list, element_t elem);
+element_t list_dequeue(List* list);
 
 int list_get(List* list, element_t key, element_t* elem);
 void list_foldl(void (*f) (element_t*, element_t, element_t), element_t* out_element_p, List* list);
@@ -67,7 +67,7 @@ void list_foldl(void (*f) (element_t*, element_t, element_t), element_t* out_ele
 /**************
 * List Algorithms
 ****************/
-void MergeSort(List* list, int len, int (*f)(element_t, element_t));
+List* MergeSort(List* list, int len, int (*f)(element_t, element_t));
 List* Merge(List* A, List* B, int (*f)(element_t, element_t));
 
 

@@ -137,26 +137,17 @@ int main(int argc, char** argv) {
 
   // while there are urls to crawl do 
   WebPage* temp_page;
-  int result;
-  while (list_size(toVisit)) {
-    // Get next URL form the list */
-    temp_page = calloc(1, sizeof(WebPage));
-    result = list_dequeue(toVisit, temp_page);
-    if (result && validDepth(temp_page->depth, user_depth) && !hashtable_lookup(URLSVisited, temp_page->url)) {
-      // Get WebPage for URL
-      
-      if (isValidURL(temp_page->url) && GetWebPage(temp_page)) {// write page file
+  while ((temp_page = list_dequeue(toVisit))) {
+    if (validDepth(temp_page->depth, user_depth) && !hashtable_lookup(URLSVisited, temp_page->url)) {
+      if (isValidURL(temp_page->url) && GetWebPage(temp_page)) {
         assert(isValidURL(temp_page->url));
         writePage(temp_page, target, file_counter);
         file_counter++;
         // extract URLs from webpage and add to URLList
         crawlPage(URLSVisited, toVisit, temp_page);
-        free(temp_page->html);
 
-        // sleep for a bit to avoid annoying the target domain
         sleep(INTERVAL_PER_FETCH);
-      } 
-      free(temp_page);
+      }
     }
   }
 
@@ -266,7 +257,7 @@ int crawlPage(HashTable* URLSVisited, List* toVisit, WebPage *page) {
 
         list_append(toVisit, tmp);
         //free(tmp->url);
-        free(tmp);
+        //free(tmp);
       }
     }
     free(buf);

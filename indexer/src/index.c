@@ -29,21 +29,17 @@ int initWNode(char* word, int docID, WordNode* wNode) {
   /* TODO - BUGS here with assigning dNOde to list;
   Check for memory leaks */
   
-  //WordNode* wNode = malloc(sizeof(WordNode));
   strcpy(wNode->word, word);
 
-  //wNode->page = initList();
-  wNode->page = malloc(sizeof(List));
+  wNode->page = calloc(1, sizeof(List));
   list_new(wNode->page, sizeof(DocumentNode), dNode_cmp, NULL);
 
 
-  DocumentNode* dNode = malloc(sizeof(DocumentNode));
+  DocumentNode* dNode = calloc(1, sizeof(DocumentNode));
   dNode->document_id = docID;
   dNode->page_word_frequency = 1;
 
-  //listAddDoc(wNode->page, dNode);
   list_append(wNode->page, dNode);
-  //return wNode;
   return 1;
 }
 
@@ -65,31 +61,23 @@ int initWNode(char* word, int docID, WordNode* wNode) {
 int updateIndex(char* word, int docID, HashTable* index) 
 {
   //WordNode* wNode = initWNode(word, docID);
-  WordNode* wNode = malloc(sizeof(WordNode));
+  WordNode* wNode = calloc(1, sizeof(WordNode));
   if (hashtable_get(index, word, wNode)) { //hashtable_lookup(index, word)
     // word is in hashtable, so find DocumentNode
     assert(!strcmp(word, wNode->word));
-    //DocumentNode* dNode = malloc(sizeof(DocumentNode));
     DocumentNode* dNode;
-    //dNode->document_id = docID;
     if (list_get(wNode->page, &docID, (element_t)&dNode)) {
       // Update page count
       assert(dNode != NULL);
       dNode->page_word_frequency++;
-      // remove, update
     } else {
       // Not found, so just add the DocumentNode
-      //dNode->document_id = docID;
-      dNode = malloc(sizeof(DocumentNode));
+      dNode = calloc(1, sizeof(DocumentNode));
       dNode->document_id = docID;
       dNode->page_word_frequency = 1;
       list_append(wNode->page, dNode);
-      dNode_free(dNode);
     }
-    //list_append(wNode->page, dNode);
-    //dNode_free(dNode);
   } else {
-    //wNode_free(wNode);
     initWNode(word, docID, wNode);
 
     hashtable_insert(index, word, wNode);
@@ -129,16 +117,14 @@ static void wNode_concat(WordNode* wNode, char** str)
   DocumentNode* dNode;
   //char temp[MAXLINE];
   while (node) {
-    DocumentNode* dNode = node->data;
+    dNode = node->data;
     sprintf(eos(docs), " %d %d", dNode->document_id, dNode->page_word_frequency);
-    //strcat(docs, temp);
     node = node->next;
   }
   strcat(docs, "\n");
   if (strlen(docs) + strlen(*str) - 1 >= strlen(*str)) {
     *str = realloc(*str, 2*(strlen(*str)));
   }
-  //printf("%s", docs);
   strcat(*str, docs);
   free(docs);
 
@@ -159,7 +145,6 @@ element_t IndexLoadWords(element_t Indexv)
   HashTable* ht = Indexv;
   char* buf = calloc(1, BUF_SIZE);
   WordNode* wNode;
-  char *word, *word_buf;
   for (int i = 0; i < MAX_HASH_SLOT; i++) { // Go through each hashtable bucket
     HashTableNode* node = ht->table[i];
     while (node) {  // Go through each word node
@@ -220,8 +205,7 @@ void handleLine(HashTable* index, char* line) {
 
   // Initialize list 
   num_tokens = 1;
-  //dNodeList = initList();
-  dNodeList = malloc(sizeof(List));
+  dNodeList = calloc(1, sizeof(List));
   list_new(dNodeList, sizeof(DocumentNode), dNode_cmp, dNode_free);
 
   pch = strtok_r(line, " ", &saveptr);
@@ -246,15 +230,12 @@ void handleLine(HashTable* index, char* line) {
         freq = atoi(pch);
 
         /* Build DocumentNode */
-        dNode = malloc(sizeof(DocumentNode));
+        dNode = calloc(1, sizeof(DocumentNode));
         dNode->document_id = doc_id;
         dNode->page_word_frequency = freq;
 
         // Construct list of DocumentNodes 
         list_append(dNodeList, dNode);
-
-        // Free resources
-        dNode_free(dNode);
 
       }
     }
@@ -290,9 +271,7 @@ uint32_t wNode_hash(element_t keyv)
 {
   WordNode* wNode = keyv;
 
-  // works with *(char**) only///
   char* key = wNode->word;
-  //printf("Hashing %s\n", key);
   size_t len = strlen(key);
 
   uint32_t hash = 0;
