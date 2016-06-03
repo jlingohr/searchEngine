@@ -86,7 +86,6 @@ static inline int hashtable_find_bucket(HashTable* ht, element_t key,
   int bucket = hash % MAX_HASH_SLOT;
   *hash_out = hash;
 
-  //HashTableNode* node = ht->table[bucket];
   return bucket;
 }
 
@@ -104,7 +103,6 @@ static inline int hashtable_find(HashTable* ht, HashTableNode* bucket, element_t
   HashTableNode* cur = bucket;
   while (cur) {
     if (cur->hash == hash && ht->compare(key, cur->data)) {
-      //node = cur->data;
       if (elem != NULL) {
         memcpy(elem, cur->data, ht->elementSize);
       }
@@ -113,7 +111,6 @@ static inline int hashtable_find(HashTable* ht, HashTableNode* bucket, element_t
       cur = cur->next;
     }  
   }
-  //node = NULL;  // This should be ELEM i think
   return 0;
 }
 
@@ -163,7 +160,6 @@ int hashtable_get(HashTable* ht, element_t key, element_t elem)
   if (ht->table[p] == NULL) {
     return 0;
   } else {
-    //node = NULL;
     return hashtable_find(ht, ht->table[p], key, hash, elem);
   }
 }

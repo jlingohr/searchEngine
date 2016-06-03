@@ -157,6 +157,7 @@ int main(int argc, char** argv) {
         hashtable_insert(URLSVisited, url, url);
         free(temp_page->html);
         sleep(INTERVAL_PER_FETCH);
+        
       }
     }
     strcpy(temp_page->url, "");
