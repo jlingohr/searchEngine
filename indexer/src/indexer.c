@@ -44,9 +44,6 @@ struct t_block {
 
 
 
-
-
-
 /*****
 * Main
 *******/
@@ -73,7 +70,7 @@ int main(int argc, char** argv) {
   /*2. Initialize data structures
        allocate Inverted_index, zero it, and set links to NULL. */
   //Index = initHashTable();
-  Index = malloc(sizeof(HashTable));
+  Index = calloc(1, sizeof(HashTable));
   hashtable_new(Index, sizeof(WordNode), wNode_cmp, wNode_hash, wNode_free);
 
   target_directory = argv[1];
@@ -130,7 +127,6 @@ int main(int argc, char** argv) {
 
   //5. saveFile (argv[2], wordindex );
     // LOG( "done!");
-  
 
   //5. Save index to file
   FILE* fp;
@@ -161,7 +157,7 @@ int main(int argc, char** argv) {
   /* For testing (argc == 5) */
   if (argc == 5) {
     //LOG(argv[3]);
-    Index = malloc(sizeof(HashTable));
+    Index = calloc(1, sizeof(HashTable));
     printf("Rebuilding index...\n");
 
     /*7. Reload index from file and rewrite to new file
@@ -219,7 +215,7 @@ int checkCommandLine(int argc, char** argv) {
   /* Validate directory */
   index = strlen(dir)-1;
   if (dir[index] != '/') {
-    dir = malloc(strlen(argv[1]) + 1); // Dont forget to free
+    dir = calloc(1, strlen(argv[1]) + 1); // Dont forget to free
     strcpy(dir, argv[1]);
     strcat(dir, "/");
   }
@@ -281,7 +277,7 @@ char* loadDoc(char* filename) {
       }
 
       /* Allocate buffer to that size */
-      buf = malloc(sizeof(char) * (bufsize + 1));
+      buf = calloc(1, sizeof(char) * (bufsize + 1));
 
       /* Go back to start */
       if (fseek(fp, 0l, SEEK_SET) != 0) {
