@@ -247,7 +247,7 @@ void handleLine(HashTable* index, char* line) {
   strcpy(wNode->word, word);
   wNode->page = dNodeList;
   hashtable_insert(index, wNode->word, wNode);
-  free(wNode); 
+  //free(wNode); 
 }
 
 /*

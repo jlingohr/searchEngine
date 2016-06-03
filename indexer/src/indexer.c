@@ -82,7 +82,7 @@ int main(int argc, char** argv) {
   num_files = getFileNamesInDir(target_directory, &filenames);
   if (num_files < 0) {
     fprintf(stderr, "Failure reading filenames.\n");
-    /* TODO - Free memory */
+    hashtable_destroy(Index);
     return 1;
   }
 
@@ -111,6 +111,8 @@ int main(int argc, char** argv) {
   for (int i = 0; i < num_files; i++) {
     if (!isFile(filenames[i])) {
       fprintf(stderr, "%s not a file\n", filenames[i]);
+      hashtable_destroy(Index);
+      free(filenames[i]);
       return 1;
     }
     doc = loadDoc(filenames[i]);
@@ -120,8 +122,11 @@ int main(int argc, char** argv) {
     while ((pos = GetNextWord(doc, pos, &word)) > 0) {
       NormalizeWord(word);
       updateIndex(word, doc_id, Index);
+      free(word);
+      word = NULL;
     }
     free(doc);
+    free(filenames[i]);
   }
 
 
