@@ -77,6 +77,8 @@ int updateIndex(char* word, int docID, HashTable* index)
       dNode->page_word_frequency = 1;
       list_append(wNode->page, dNode);
     }
+    //list_destroy(wNode->page);
+    free(wNode);
   } else {
     initWNode(word, docID, wNode);
 
@@ -150,6 +152,7 @@ element_t IndexLoadWords(element_t Indexv)
     while (node) {  // Go through each word node
       if (node == NULL) {
         fprintf(stderr, "ERROR - IndexLoadWords");
+        hashtable_destoy(ht);
         exit(1);
       }
       wNode = node->data;

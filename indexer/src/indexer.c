@@ -147,6 +147,7 @@ int main(int argc, char** argv) {
   }
   if (fp == NULL) {
     fprintf(stderr, "Error opening file\n");
+    hashtable_destroy(Index);
     return 0;
   }
   free(buf);
@@ -252,7 +253,7 @@ int checkCommandLine(int argc, char** argv) {
     }
 
   }
-
+  //free(dir);
   return 1;
 
 }
