@@ -117,7 +117,7 @@ int checkCommandLine(char* filename, char* path) {
   // Normalize search string and parse
   normalizeQuery(str);
   query->num_sets = parseQuery(str, query->terms, query->ops);
-  free(str);
+  //free(str);
 
   return query;
  }
@@ -382,7 +382,7 @@ int cmpDNode_freq(const element_t av, const element_t bv) {
   DocumentNode* a = (DocumentNode*)av;
   DocumentNode* b = (DocumentNode*)bv;
 
-  return (a->page_word_frequency - b->page_word_frequency);
+  return (b->page_word_frequency - a->page_word_frequency);
 }
 
 /*
