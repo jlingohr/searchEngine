@@ -100,7 +100,7 @@ void list_for_each(List* list, listIterator iterator) {
 
 /*
 * list_head - Stores data in lists head in elem
-*/
+
 void list_head(List* list, element_t elem) {
   assert(list->head != NULL);
 
@@ -108,17 +108,17 @@ void list_head(List* list, element_t elem) {
   memcpy(elem, node->data, list->elementSize);
 
 }
-
+*/
 /*
 * list_tail - Returns a pointer to the tail of
 * the List list
-*/
+
 void list_tail(List* list, element_t elem) {
   assert(list->tail != NULL);
   ListNode* node = list->tail;
   memcpy(elem, node->data, list->elementSize);
 }
-
+*/
 /*
 * list_dequeue - Copies head data into elem and remves
 * from the list, setting the new head.

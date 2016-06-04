@@ -44,10 +44,12 @@ typedef struct List {
 //extern List toVisit;
 
 // ---------------- Prototypes/Macros
+#define list_length(A) ((A)->length)
+#define list_head(A) ((A)->head != NULL ? (A)->head->data : NULL);  // Mainly for testing
+#define list_tail(A) ((A)->tail != NULL ? (A)->tail->data : NULL);
 
 
-
-/* Generic List macros */
+// Generic List Procedures 
 void list_new(List* list, int elementSize, list_compare cmp, freeFunction freeFn);
 void list_destroy(List* list);
 
@@ -56,8 +58,8 @@ void list_append(List* list, element_t elem);
 int list_size(List* list);
 
 void list_for_each(List* list, listIterator iter);
-void list_head(List* list, element_t elem);
-void list_tail(List* list, element_t elem);
+//void list_head(List* list, element_t elem);
+//void list_tail(List* list, element_t elem);
 
 element_t list_dequeue(List* list);
 
