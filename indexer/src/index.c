@@ -184,9 +184,9 @@ void readFile(HashTable* index, char* filename)
   // Read each line and parse
   while ((read = getline(&line, &len, fp)) != -1) {
     handleLine(index, line);
-    if (line) {
+    /*if (line) {
       free(line);
-    }
+    }*/
   }
   fclose(fp);
 }
