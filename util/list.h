@@ -45,8 +45,8 @@ typedef struct List {
 
 // ---------------- Prototypes/Macros
 #define list_length(A) ((A)->length)
-#define list_head(A) ((A)->head != NULL ? (A)->head->data : NULL);  // Mainly for testing
-#define list_tail(A) ((A)->tail != NULL ? (A)->tail->data : NULL);
+#define list_head(A) ((A)->head != NULL ? (A)->head->data : NULL)  // Mainly for testing
+#define list_tail(A) ((A)->tail != NULL ? (A)->tail->data : NULL)
 
 
 // Generic List Procedures 

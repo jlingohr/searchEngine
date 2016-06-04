@@ -158,6 +158,7 @@ int list_get(List* list, element_t key, element_t* elem)
     node = cur;
     cur = node->next;
   }
+  *elem = NULL;
   return 0;
 }
 
