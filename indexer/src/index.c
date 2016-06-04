@@ -153,6 +153,7 @@ element_t IndexLoadWords(element_t Indexv)
       if (node == NULL) {
         fprintf(stderr, "ERROR - IndexLoadWords");
         hashtable_destroy(ht);
+        free(buf);
         exit(1);
       }
       wNode = node->data;
@@ -183,11 +184,10 @@ void readFile(HashTable* index, char* filename)
   // Read each line and parse
   while ((read = getline(&line, &len, fp)) != -1) {
     handleLine(index, line);
+    if (line) {
+      free(line);
+    }
   }
-  if (line) {
-    free(line);
-  }
-
   fclose(fp);
 }
 

@@ -137,7 +137,7 @@ int main(int argc, char** argv) {
   hashtable_insert(URLSVisited, url, url);
   sleep(INTERVAL_PER_FETCH);
 
-  // while there are urls to crawl do 
+  // while there are urls to crawl
   WebPage* temp_page;
 
   while ((temp_page = list_dequeue(toVisit))) {

@@ -83,6 +83,7 @@ int main(int argc, char** argv) {
   if (num_files < 0) {
     fprintf(stderr, "Failure reading filenames.\n");
     hashtable_destroy(Index);
+    free(filenames);
     return 1;
   }
 
@@ -113,6 +114,7 @@ int main(int argc, char** argv) {
       fprintf(stderr, "%s not a file\n", filenames[i]);
       hashtable_destroy(Index);
       free(filenames[i]);
+      free(filenames);
       return 1;
     }
     doc = loadDoc(filenames[i]);
@@ -128,6 +130,7 @@ int main(int argc, char** argv) {
     free(doc);
     free(filenames[i]);
   }
+  free(filenames);
 
 
   //5. saveFile (argv[2], wordindex );
@@ -144,13 +147,14 @@ int main(int argc, char** argv) {
   if (fp) {
     Fputs(buf, fp);
     fclose(fp);
+    free(buf);
   }
   if (fp == NULL) {
     fprintf(stderr, "Error opening file\n");
     hashtable_destroy(Index);
-    return 0;
+    free(buf);
+    return 1;
   }
-  free(buf);
 
   if (STATUS_LOG == 1) {
     printf("\nLogging complete!\n");
@@ -183,12 +187,15 @@ int main(int argc, char** argv) {
     if (fp) {
       Fputs(buf, fd);
       fclose(fd);
-      return 0;
+      free(buf);
     }
     if (fd == NULL) {
       fprintf(stderr, "Error opening file\n");
-      return 0;
+      hashtable_destroy(Index);
+      free(buf);
+      return 1;
     }
+
 
     //saveIndexToFile(test_new, Index);
     printf("Test complete\n");
@@ -196,6 +203,7 @@ int main(int argc, char** argv) {
     /*9. cleanDynamicList(wordindex) */
     cleanUp(Index);
   }
+
   //free(Index);
 
 
