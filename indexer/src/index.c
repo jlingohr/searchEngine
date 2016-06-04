@@ -152,7 +152,7 @@ element_t IndexLoadWords(element_t Indexv)
     while (node) {  // Go through each word node
       if (node == NULL) {
         fprintf(stderr, "ERROR - IndexLoadWords");
-        hashtable_destoy(ht);
+        hashtable_destroy(ht);
         exit(1);
       }
       wNode = node->data;

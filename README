@@ -25,7 +25,6 @@ INDEXER
 
   TODOS:
   ----------
-  * Update all Index hashtable in indexer.c to work with refactored hashtable
   - Fix any memory leaks
 
   -Double check refactoring didnt affect crawler.c
@@ -40,16 +39,15 @@ Query
   Assumptions: Query assumes that [indexed.dat] is a valid file and [Crawl Dir] is a valid directory
 
   TODO
-  - Account for and hashtable refactoring
-  - Check that intersect works
+  - Test that intersect works
   - Start testing on multuple pages
   - exit nicely
   - memory leaks and dangling pointers
   - Move intersect into list.c and make generic
+  - Add kill signal
 
 __________
 TODO (Program)
-- Chaning List and Hashtable again to copy less values on the stack
 - System testing
 - complete unit testing
 - Fix all memory leaks 
