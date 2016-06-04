@@ -25,8 +25,7 @@ void normalizeQuery(char* str);
 List* HandleQuery(HashTable* ht, Query* query);
 void handleResults(List* results, char* path);
 
-int main(int argc, char** argv) {
-  /* TODO */
+int main(int argc, char** argv) { 
   char cmdline[MAXLINE];
   char* filename, *html_path;
   int emit_prompt;
@@ -35,7 +34,10 @@ int main(int argc, char** argv) {
 
   emit_prompt = 1;
 
-  /* Check command line arguments */
+  filename = argv[1];
+  html_path = argv[2];
+
+  // Check command line arguments 
   if (argc != 3) {
     fprintf(stderr, "usage: <file.dat> <directory>\n");
     exit(1);
@@ -43,7 +45,11 @@ int main(int argc, char** argv) {
   if (!checkCommandLine(argv[1], argv[2]))
     exit(1);
 
-  /* What about logical operators? */
+  // Build of index from recent file
+  Index = calloc(1, sizeof(HashTable));
+  hashtable_new(Index, sizeof(WordNode), wNode_cmp, wNode_hash, wNode_free);
+  readFile(Index, filename);
+  // What about logical operators? 
   while (1) { 
     if (emit_prompt) {
       printf("%s", prompt);
@@ -56,18 +62,10 @@ int main(int argc, char** argv) {
       exit(0);
     }
 
-    filename = argv[1];
-    html_path = argv[2];
-    /* Build of index from recent file*/
-    //index = readFile(filename);
-    Index = malloc(sizeof(HashTable));
-    hashtable_new(Index, sizeof(WordNode), wNode_cmp, wNode_hash, wNode_free);
-    readFile(Index, filename);
-
-    /* Build up query */
+    // Build up query
     query = initQuery(cmdline);
 
-    /* Handle the query */
+    // Handle the query 
     List* results;  // This is a list of DocumentNodes sorted in order
     results = HandleQuery(Index, query);
     handleResults(results, html_path);
@@ -107,11 +105,9 @@ int checkCommandLine(char* filename, char* path) {
 */
  Query* initQuery(char* str) {
   // Allocate Query struct
-  Query* query = malloc(sizeof(Query));
-  //query->terms = initList();
-  //query->ops = initList();
-  query->terms = malloc(sizeof(List));
-  query->ops = malloc(sizeof(List));
+  Query* query = calloc(1, sizeof(Query));
+  query->terms = calloc(1, sizeof(List));
+  query->ops = calloc(1, sizeof(List));
   
   // Initialize the lists
   list_new(query->terms, sizeof(char*), str_compare, free_string);
@@ -121,6 +117,7 @@ int checkCommandLine(char* filename, char* path) {
   // Normalize search string and parse
   normalizeQuery(str);
   query->num_sets = parseQuery(str, query->terms, query->ops);
+  free(str);
 
   return query;
  }
@@ -131,14 +128,10 @@ int checkCommandLine(char* filename, char* path) {
 * the search query. Also converts to all lowercase and removes
 * extra characters like '\n'
 * @query; string to parse
-* @str: C-style string to hold new buffer
-* @ops: C-style string to store logicl operations parsed
 *
-* Returns number of words in query
 */
 void normalizeQuery(char* query) {
   // TODO 
-  //NormalizeWord(query);
   query[strlen(query)-1] = '\0';
 
 }
@@ -161,7 +154,7 @@ int parseQuery(char* str, List* terms, List* ops) {
 
   pch = strtok(str, " ");
   while (pch != NULL) {
-    word = malloc(BUF_SIZE);
+    word = calloc(1, BUF_SIZE);
     strcpy(word, pch);
     strcat(word, "\0");
 
@@ -176,12 +169,10 @@ int parseQuery(char* str, List* terms, List* ops) {
       sets++;
     }
     else {
-      /* Not logical operator! */
+      // Not logical operator
       ToLower(word);
-      //listAdd(terms, word);
       list_append(terms, word);
     }
-    //free(word);
 
     tokens++;
     pch = strtok(NULL, " ");
@@ -201,7 +192,7 @@ int parseQuery(char* str, List* terms, List* ops) {
 * @word: Word to change
 */
 void ToLower(char* word) {
-  /* TODO - Check this is corect */
+  // TODO - Check this is corect 
   char* cur = word;
 
   while (*cur) {
@@ -215,7 +206,7 @@ void ToLower(char* word) {
 * ranks them, and prints them
 */
 List* HandleQuery(HashTable* ht, Query* query) {
-  /* TODO - Improve this! Too many casts */
+  // TODO - Improve this! Too many casts 
 
   List* docs;
   int filled, num_sets;
@@ -226,10 +217,8 @@ List* HandleQuery(HashTable* ht, Query* query) {
 
   List* temp_a = getNextQuery(ht, query->terms);
   sets[filled] = temp_a;
-  //filled++;
 
   // Store operand, i.e. AND, OR
-  //char op[WORD_LENGTH];
   char* op;
   while(query->ops->length) {
     op = list_dequeue(query->ops);
@@ -242,7 +231,6 @@ List* HandleQuery(HashTable* ht, Query* query) {
       filled++;
       sets[filled] = getNextQuery(ht, query->terms);
     }
-    //strcpy(op, "");
     free(op);
   }
 
@@ -252,7 +240,7 @@ List* HandleQuery(HashTable* ht, Query* query) {
     sorted[i] = MergeSort(sets[i], sets[i]->length, cmpDNode_freq);
   }
   // Merge all documents 
-  docs = malloc(sizeof(List));
+  docs = calloc(1, sizeof(List));
   list_new(docs, sizeof(DocumentNode), cmpDNode_freq, NULL);
   for (int i = 0; i < query->num_sets; i++) {
     docs = Merge(docs, sorted[i], cmpDNode_freq);
@@ -273,10 +261,8 @@ void handleResults(List* results, char* path)
 {
   // REDO using a list iteration, or something to keep working
   // with the list seperate
-  //list_for_each(results, dNode_iter);
 
   DocumentNode* dNode;
-  //char url[MAX_URL_LENGTH];
   char filename[MAXLINE];
   int path_len = strlen(path);
   FILE* fd;
@@ -296,7 +282,6 @@ void handleResults(List* results, char* path)
     if ((read = getline(&line, &len, fd)) != -1) {
       if (line) {
         printf("%s", line);
-        //free(line);
       }
     }
     fclose(fd);
@@ -314,11 +299,10 @@ void handleResults(List* results, char* path)
 */
 List* getNextQuery(HashTable* ht, List* words) {
   // Dequeue word from words
-  //char* term = calloc(1, WORD_LENGTH);
   char* term;
   term = list_dequeue(words);
 
-  WordNode* wNode = malloc(sizeof(WordNode));
+  WordNode* wNode = calloc(1, sizeof(WordNode));
   hashtable_get(ht, term, wNode);
   free(term);
   return wNode->page;
@@ -338,16 +322,14 @@ ListNode* getNextOp(List* list) {
 * Returns pointer to a new list
 */
 List* intersect(List* A, List* B) {
-  // TODO - NOTE: HUGE mem leaks!
+  // TODO - probably a lot of mem leaks here
   List* list;
-  //ListNode *cur, *tmp;
-
 
   if (A == NULL || B == NULL) // empty sets 
     return NULL;
 
   // Initialize new list 
-  list = malloc(sizeof(List));
+  list = calloc(1, sizeof(List));
   list_new(list, sizeof(DocumentNode), cmpDNode_ID, NULL);
 
   // Set current pointer to smaller list 
