@@ -25,9 +25,12 @@ char* test3 = "test3 data";
 
 char* test_new()
 {
-  list_new(list, sizeof(char*), str_cmp, NULL);
+  list = calloc(1, sizeof(List));
   mu_assert(list != NULL, "Failed to create a new list.");
+  list_new(list, sizeof(char*), str_cmp, NULL);
   mu_assert(list->length == 0, "New list should have length of 0.");
+
+  return NULL;
 }
 
 
