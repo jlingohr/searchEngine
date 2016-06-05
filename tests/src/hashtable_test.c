@@ -19,8 +19,8 @@ char* expect3 = "Data 3";
 * Dummy hash function and value so we always hash to the 
 * same spot for testing
 */
-static uint32_t hash = 0;
-static uint32_t hash1(element_t a)
+uint32_t hash = 0;
+uint32_t hash1(element_t a)
 {
   return hash;
 }
@@ -36,37 +36,51 @@ char* test_new()
 
 char* test_insert_lookup()
 {
-  hashtable_insert(ht, test1, expect1);
+  // Test searching in an empty table
   int rc = hashtable_lookup(ht, test1);
-  mu_assert(rc == 1, "Error hashtable_insert.");
+  mu_assert(rc == 0, "Error hashtable_lookup - found data in empty hashtable.");
 
+  // Test inserting into empty hashtable
+  hashtable_insert(ht, test1, expect1);
+  rc = hashtable_lookup(ht, test1);
+  mu_assert(rc == 1, "Error hashtable_insert.");
+  // Test searching for non-existant data
+  rc = hashtable_lookup(ht, test2);
+  mu_assert(rc == 0, "Error hashtable_lookup - Found non-existant data.");
+
+  // Test inserting 2 with collisions and searching head and tail
   hashtable_insert(ht, test2, expect2);
   rc = hashtable_lookup(ht, test2);
   mu_assert(rc == 1, "Error hashtable_insert.");
+  rc = hashtable_lookup(ht, test1);
+  mu_assert(rc == 1, "Error hashtable_insert - Couldn't find existing data.");
 
+  // Test inserting 3 with collisions and searching
   hashtable_insert(ht, test3, expect3);
   rc = hashtable_lookup(ht, test3);
   mu_assert(rc == 1, "Error hashtable_insert.");
+  rc = hashtable_lookup(ht, test2);
+  mu_assert(rc == 1, "Error hashtable_insert - Couldn't find existing data.");
+  rc = hashtable_lookup(ht, test1);
+  mu_assert(rc == 1, "Error hashtable_insert - Couldn't find existing data.");
 
   return NULL;
 }
 
 char* test_get()
 {
+  // Test getting from tail of the table when there are collisions
   char* result = NULL;
   int rc = hashtable_get(ht, test1, result);
   mu_assert(result == expect1, "Error hashtable_get.");
 
+  // Test getting from middle of table when there are collisions
   rc = hashtable_get(ht, test2, result);
   mu_assert(result == expect2, "Error hashtable_get.");
 
+  // Test getting from head of table when there are collisions
   rc = hashtable_get(ht, test3, result);
   mu_assert(result == expect3, "Error hashtable_get.");
-  return NULL;
-}
-
-char* test_lookup()
-{
   return NULL;
 }
 

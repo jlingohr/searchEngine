@@ -136,7 +136,7 @@ static inline int hashtable_find_bucket(HashTable* ht, element_t key,
 * @key- key to hash
 * Returns 1 if item found, otherwise returns 0
 */
-static inline int hashtable_find(HashTable* ht, HashTableNode* bucket, element_t key,
+static inline int hashtable_find(HashTable* ht, HashTableNode* bucket, const element_t key,
   uint32_t hash, element_t elem)
 {
   // TODO - refactor
