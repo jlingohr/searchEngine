@@ -54,7 +54,6 @@ static void default_free(element_t a)
 void hashtable_new(HashTable* ht, int elementSize, hashtable_compare cmp,
  hashtable_hash hash, freeFunction freeFn)
 {
-  /* TODO - Give default uses for these */
   assert(elementSize > 0);
 
   for (int i = 0; i < MAX_HASH_SLOT; i++) {
@@ -101,7 +100,7 @@ void hashtable_destroy(HashTable* ht)
 * @elementSize - size of data to be inserted into node
 * @data - data to insert into node
 */
-static inline HashTableNode* hashtable_create_node(HashTable* ht, element_t data, uint32_t hash)
+static inline HashTableNode* hashtable_create_node(element_t data, uint32_t hash)
 {
   HashTableNode* node = calloc(1, sizeof(HashTableNode));
   //node->data = calloc(1, ht->elementSize);
@@ -167,12 +166,12 @@ void hashtable_insert(HashTable* ht, element_t key, element_t data)
   int p = hashtable_find_bucket(ht, key, &hash);
   if (ht->table[p] == NULL) {
     // No item hashed here, so start chaining
-    ht->table[p] = hashtable_create_node(ht, data, hash);
+    ht->table[p] = hashtable_create_node(data, hash);
   } else {
     HashTableNode* node = NULL;
     if (!hashtable_find(ht, ht->table[p], key,  hash, node)) {
       // Not found, so insert
-      node = hashtable_create_node(ht, data, hash);
+      node = hashtable_create_node(data, hash);
       node->next = ht->table[p];
       ht->table[p] = node;  // Probably incorrect pointing...
     }
