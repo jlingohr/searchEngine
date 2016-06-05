@@ -1,6 +1,49 @@
 #include "hashtable.h"
 
 /*
+* default_compare - Default compare function if now comparator
+* passed in during initialization. Use only for strings!
+*/
+static int default_compare(element_t av, element_t bv)
+{
+  return strcmp((char*)av, (char*)bv);
+}
+
+/*
+* default_hash - Default hashing function. Use only
+* for strings
+*/
+static uint32_t default_hash(element_t av)
+{
+  char* key = av;
+  size_t len = strlen(key);
+
+  uint32_t hash = 0;
+  uint32_t i = 0;
+
+  for (hash = i = 0; i < len; ++i) {
+    hash += key[i];
+    hash += (hash << 10);
+    hash ^= (hash >> 6);
+  }
+
+  hash += (hash << 3);
+  hash ^= (hash >> 11);
+  hash += (hash << 15);
+
+  return hash;
+}
+
+/*
+* default_free - Default free function for hashtable if none
+* passed in during initialization. Safe only for char*
+*/
+static void default_free(element_t a)
+{
+  free((char*));
+}
+
+/*
 * hashtable_new - Initializes a new hashtable
 * @ht: Hashtable to initialize
 * @elementSize - Size of hash table nodes
@@ -13,16 +56,14 @@ void hashtable_new(HashTable* ht, int elementSize, hashtable_compare cmp,
 {
   /* TODO - Give default uses for these */
   assert(elementSize > 0);
-  assert(cmp != NULL);
-  assert(hash != NULL);
 
   for (int i = 0; i < MAX_HASH_SLOT; i++) {
     ht->table[i] = NULL;
   }
   ht->elementSize = elementSize;
-  ht->compare = cmp;
-  ht->hashFn = hash;
-  ht->freeFn = freeFn;
+  ht->compare = cmp == NULL ? default_compare : compare;
+  ht->hashFn = hash == NULL ? default_hash : hash;
+  ht->freeFn = freeFn == NULL ? default_free : freeFn;
   ht->size = 0;
 }
 
