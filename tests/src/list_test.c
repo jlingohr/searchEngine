@@ -1,3 +1,7 @@
+/*
+* test_list.c - Unit testing for a generic linked-list
+*/
+
 #include "../minunit.h"
 #include "../../util/list.h"
 #include <assert.h>

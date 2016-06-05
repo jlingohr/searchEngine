@@ -48,23 +48,6 @@ typedef struct HashTable {
 // ---------------- Prototypes/Macros
 
 
- //Hashtable macros 
-/*
-int HashString(const element_t strv, int mod);
-
-
-HashTable* initHashTable();
-int HashTableAdd(HashTable* ht, element_t key, int (*f)(element_t, int));
-int HashTableLookUp(HashTable* ht, element_t key, int (*f)(element_t, int), int (*g)(element_t, element_t));
-void cleanHash();
-element_t HashTableGet(HashTable* ht, element_t key, int (*f)(element_t, int), int (*g)(element_t, element_t));
-
-
-// Hashtable helpers 
-int cmpStrings(element_t av, element_t bv);
-void concat(element_t* av, element_t bv); 
-*/
-
 void hashtable_new(HashTable* ht, int elementSize, hashtable_compare cmp,
  hashtable_hash hash, freeFunction freeFn);
 void hashtable_destroy(HashTable* ht);
