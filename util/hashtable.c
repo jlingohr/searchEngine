@@ -40,7 +40,7 @@ static uint32_t default_hash(element_t av)
 */
 static void default_free(element_t a)
 {
-  free((char*));
+  free((char*)a);
 }
 
 /*
@@ -61,7 +61,7 @@ void hashtable_new(HashTable* ht, int elementSize, hashtable_compare cmp,
     ht->table[i] = NULL;
   }
   ht->elementSize = elementSize;
-  ht->compare = cmp == NULL ? default_compare : compare;
+  ht->compare = cmp == NULL ? default_compare : cmp;
   ht->hashFn = hash == NULL ? default_hash : hash;
   ht->freeFn = freeFn == NULL ? default_free : freeFn;
   ht->size = 0;

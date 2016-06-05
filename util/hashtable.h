@@ -14,7 +14,7 @@
 #include <stdio.h>   
 #include <stdint.h>
 #include "common.h"                          // common functionality
-#include "list.h"
+//#include "list.h"
 
 // ---------------- Constants
 #define MAX_HASH_SLOT 997                // number of "buckets" 997 9973 10000 
