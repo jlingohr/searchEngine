@@ -50,6 +50,7 @@ __________
 TODO (Program)
 - ** Changed hashtable comparator to work on key, so have to update rest of
     programs re inserting and comparator funcs
+- * Change query to work with new MergeSort
 - System testing
 - complete unit testing
 - Fix all memory leaks 

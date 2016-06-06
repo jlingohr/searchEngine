@@ -6,8 +6,6 @@
 #include "../../util/list.h"
 #include <assert.h>
 
-//typedef int (*list_compare)(element_t av, element_t bv);
-//typedef void (*freeFunction)(element_t);
 
 static int str_cmp(element_t av, element_t bv)
 {
@@ -20,11 +18,35 @@ static int str_cmp(element_t av, element_t bv)
   return !(*a < *b? -1 : *a == *b? 0 : 1);
 }
 
+bool int_iterate(element_t data)
+{
+  printf("%d ", (int)data);
+  return TRUE;
+}
+
+int int_cmp(element_t av, element_t bv)
+{
+  intptr_t a = (intptr_t)av;
+  intptr_t b = (intptr_t)bv;
+  return a<b ? -1 : a==b? 0 : 1;
+
+}
+
 static List* list = NULL;
 char* test1 = "test1 data";
 char* test2 = "test2 data";
 char* test3 = "test3 data";
 
+int is_sorted(List* list)
+{
+  list_foreach(list, head, next, cur) {
+    if (cur->next && int_cmp(cur->data, cur->next->data) > 0) {
+      debug("%ld %ld", (intptr_t)cur->data, (intptr_t)(cur->next->data));
+      return 0;
+    }
+  }
+  return 1;
+}
 
 
 char* test_new()
@@ -128,6 +150,25 @@ char* test_get()
   return NULL;
 }
 
+char* test_merge_sort()
+{
+  list = calloc(1, sizeof(List));
+  list_new(list, sizeof(intptr_t), int_cmp, NULL);
+  for (int i = 100; i > 0; i--) {
+    list_append(list, (intptr_t)i);
+  }
+
+  List* sorted = MergeSort(list, list_length(list), int_cmp);
+  mu_assert(is_sorted(sorted), "Error MergeSort.");
+
+  List* sorted2 = MergeSort(sorted, list_length(sorted), int_cmp);
+  mu_assert(is_sorted(sorted2), "Error MergeSort on sorted list.");
+  list_destroy(sorted2);
+  list_destroy(sorted);
+
+  list_destroy(list);
+  return NULL;
+}
 
 char* all_tests()
 {
@@ -136,6 +177,9 @@ char* all_tests()
   mu_run_test(test_new);
   mu_run_test(test_append_dequeue);
   mu_run_test(test_get);
+  mu_run_test(test_destroy);
+
+  mu_run_test(test_merge_sort);
 
   return NULL;
 }

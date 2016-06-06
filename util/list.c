@@ -90,7 +90,7 @@ void list_append(List* list, element_t elem) {
 
 /*
 * list_for_each - Iterates through the List list
-*/
+*
 void list_for_each(List* list, listIterator iterator) {
   assert(iterator != NULL);
 
@@ -100,7 +100,7 @@ void list_for_each(List* list, listIterator iterator) {
     result = iterator(node->data);
     node = node->next;
   }
-}
+}*/
 
 /*
 * list_head - Stores data in lists head in elem
@@ -219,13 +219,14 @@ List* MergeSort(List* list, int len, int (*f)(element_t, element_t)) {
     }
     mid--;
   }
-  MergeSort(left, left->length, f);
-  MergeSort(right, right->length, f);
+  List* sort_left = MergeSort(left, left->length, f);
+  List* sort_right = MergeSort(right, right->length, f);
+
+  if (sort_left != left) list_destroy(left);
+  if (sort_right != right) list_destroy(right);
 
   // MEMORY LEAKS and DANGLING POINTERS
-  return Merge(left, right, f);
-  //list_destroy(left);
-  //list_destroy(right);
+  return Merge(sort_left, sort_right, f);
 }
 
 /*
@@ -236,29 +237,25 @@ List* Merge(List* A, List* B, int (*f)(element_t, element_t)) {
   List* list = calloc(1, sizeof(List));
   list_new(list, A->elementSize, A->compare, A->freeFn);
 
-  if (A->head == NULL)
-    return B;
-  if (B->head == NULL)
-    return A;
-
-  //ListNode* tmp;
-  element_t tmp;
-  while (A->length > 0 || B->length > 0) {
-    if (A->length > 0 && B->length > 0) {
-      if (f(A->head->data, B->head->data) <= 0) {
+  element_t tmp = NULL;
+  while (list_length(A) > 0 || list_length(B) > 0) {
+    if (list_length(A) > 0 && list_length(B) > 0) {
+      if (f(list_head(A), list_head(B)) <= 0) {
         tmp = list_dequeue(A);
       }
       else {
         tmp = list_dequeue(B);
       }
+      list_append(list, tmp);
     }
-    else if (A->length > 0) {
+    else if (list_length(A) > 0) {
       tmp = list_dequeue(A);
+      list_append(list, tmp);
     }
-    else if (B->length > 0) {
+    else if (list_length(B) > 0) {
       tmp = list_dequeue(B);
+      list_append(list, tmp);
     }
-    list_append(list, tmp);
   }
   return list;
 }

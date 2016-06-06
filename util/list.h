@@ -47,7 +47,9 @@ typedef struct List {
 #define list_length(A) ((A)->length)
 #define list_head(A) ((A)->head != NULL ? (A)->head->data : NULL)  // Mainly for testing
 #define list_tail(A) ((A)->tail != NULL ? (A)->tail->data : NULL)
-
+#define list_foreach(L, S, M, V) ListNode* _node = NULL;\
+  ListNode* V = NULL;\
+  for(V = _node = L->S; _node != NULL; V = _node = _node->M)
 
 // Generic List Procedures 
 void list_new(List* list, int elementSize, list_compare cmp, freeFunction freeFn);
@@ -63,6 +65,8 @@ element_t list_dequeue(List* list);
 
 int list_get(List* list, element_t key, element_t* elem);
 void list_foldl(void (*f) (element_t*, element_t, element_t), element_t* out_element_p, List* list);
+
+
 
 /**************
 * List Algorithms
