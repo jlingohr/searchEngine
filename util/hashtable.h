@@ -26,6 +26,7 @@ typedef uint32_t (*hashtable_hash)(element_t key);
 
 typedef struct HashTableNode {
     element_t data;                               // object hashed
+    element_t key;
     uint32_t hash;                            // hashed value to make comparison easy
     struct HashTableNode *next;              // pointer to next node
 } HashTableNode;

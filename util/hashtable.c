@@ -6,7 +6,7 @@
 */
 static int default_compare(element_t av, element_t bv)
 {
-  return strcmp((char*)av, (char*)bv);
+  return strcmp((char*)av, (char*)bv) == 0;
 }
 
 /*
@@ -100,13 +100,14 @@ void hashtable_destroy(HashTable* ht)
 * @elementSize - size of data to be inserted into node
 * @data - data to insert into node
 */
-static inline HashTableNode* hashtable_create_node(element_t data, uint32_t hash)
+static inline HashTableNode* hashtable_create_node(element_t key, element_t data, uint32_t hash)
 {
   HashTableNode* node = calloc(1, sizeof(HashTableNode));
   //node->data = calloc(1, ht->elementSize);
   node->hash = hash;
   //memcpy(node->data, data, ht->elementSize);
   node->data = data;
+  node->key = key;
   node->next = NULL;
   
   return node;
@@ -142,7 +143,7 @@ static inline int hashtable_find(HashTable* ht, HashTableNode* bucket, const ele
   // TODO - refactor
   HashTableNode* cur = bucket;
   while (cur) {
-    if (cur->hash == hash && ht->compare(key, cur->data)) {
+    if (cur->hash == hash && ht->compare(key, cur->key)) {
       if (elem != NULL) {
         memcpy(elem, cur->data, ht->elementSize);
       }
@@ -166,12 +167,12 @@ void hashtable_insert(HashTable* ht, element_t key, element_t data)
   int p = hashtable_find_bucket(ht, key, &hash);
   if (ht->table[p] == NULL) {
     // No item hashed here, so start chaining
-    ht->table[p] = hashtable_create_node(data, hash);
+    ht->table[p] = hashtable_create_node(key, data, hash);
   } else {
     HashTableNode* node = NULL;
     if (!hashtable_find(ht, ht->table[p], key,  hash, node)) {
       // Not found, so insert
-      node = hashtable_create_node(data, hash);
+      node = hashtable_create_node(key, data, hash);
       node->next = ht->table[p];
       ht->table[p] = node;  // Probably incorrect pointing...
     }
