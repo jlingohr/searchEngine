@@ -78,18 +78,24 @@ void hashtable_destroy(HashTable* ht)
     while (cur != NULL) {
       tmp = cur;
       cur = cur->next;
-      if (ht->freeFn) {
-        ht->freeFn(tmp->data);
-        tmp->data = NULL;
-      }
+      //if (ht->freeFn) {
+      //  ht->freeFn(tmp->data);
+      // tmp->data = NULL;
+      //}
+      ht->freeFn(tmp->data);
+      tmp->data = NULL;
+      tmp->key = NULL;
+      tmp->hash = 0;
+      tmp->next = NULL;
       free(tmp);
       tmp = NULL;
     }
+    //free(ht->table[i]);
     ht->table[i]= NULL;
   }
-  free(ht->table);
-  //free(ht);
-  ht = NULL;
+  //free(ht->table);
+  free(ht);
+  //ht = NULL;
 }
 
 

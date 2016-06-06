@@ -17,7 +17,7 @@
 //#include "list.h"
 
 // ---------------- Constants
-#define MAX_HASH_SLOT 997                // number of "buckets" 997 9973 10000 
+#define MAX_HASH_SLOT 1                // number of "buckets" 997 9973 10000 
 
 // ---------------- Structures/Types
 
