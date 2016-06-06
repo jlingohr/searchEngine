@@ -78,10 +78,6 @@ void hashtable_destroy(HashTable* ht)
     while (cur != NULL) {
       tmp = cur;
       cur = cur->next;
-      //if (ht->freeFn) {
-      //  ht->freeFn(tmp->data);
-      // tmp->data = NULL;
-      //}
       ht->freeFn(tmp->data);
       tmp->data = NULL;
       tmp->key = NULL;
@@ -90,12 +86,9 @@ void hashtable_destroy(HashTable* ht)
       free(tmp);
       tmp = NULL;
     }
-    //free(ht->table[i]);
     ht->table[i]= NULL;
   }
-  //free(ht->table);
   free(ht);
-  //ht = NULL;
 }
 
 
@@ -109,9 +102,7 @@ void hashtable_destroy(HashTable* ht)
 static inline HashTableNode* hashtable_create_node(element_t key, element_t data, uint32_t hash)
 {
   HashTableNode* node = calloc(1, sizeof(HashTableNode));
-  //node->data = calloc(1, ht->elementSize);
   node->hash = hash;
-  //memcpy(node->data, data, ht->elementSize);
   node->data = data;
   node->key = key;
   node->next = NULL;
@@ -202,7 +193,6 @@ int hashtable_get(HashTable* ht, element_t key, element_t elem)
 {
   // TODO - refactor: Keep the copy or redirect a pointer?
   uint32_t hash = 0;
-  //node = hashtable_find_bucket(ht, key, &hash);
   int p = hashtable_find_bucket(ht, key, &hash);
   if (ht->table[p] == NULL) {
     return 0;
