@@ -58,8 +58,6 @@ void list_append(List* list, element_t elem);
 int list_size(List* list);
 
 void list_for_each(List* list, listIterator iter);
-//void list_head(List* list, element_t elem);
-//void list_tail(List* list, element_t elem);
 
 element_t list_dequeue(List* list);
 

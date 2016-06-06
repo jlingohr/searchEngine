@@ -29,6 +29,7 @@ char* test3 = "test3 data";
 
 char* test_new()
 {
+  // Test list initialization
   list = calloc(1, sizeof(List));
   mu_assert(list != NULL, "Failed to create a new list.");
   list_new(list, sizeof(char*), str_cmp, NULL);
@@ -37,22 +38,37 @@ char* test_new()
   return NULL;
 }
 
+char* test_destroy()
+{
+  list_destroy(list);
+
+  return NULL;
+}
+
 char* test_append_dequeue()
 {
+  // Test dequeue from empty list
+  char* val = list_dequeue(list);
+  mu_assert(val == NULL, "Error list_dequeue on empty list.");
+
+  // Test append to empty list
   list_append(list, test1);
   mu_assert(list_tail(list) == test1, "Error list_append.");
   mu_assert(list_head(list) == test1, "Error list_append.");
 
+  // Test appending to list of size 1
   list_append(list, test2);
   mu_assert(list_tail(list) == test2, "Error list_append.");
   mu_assert(list_head(list) == test1, "Error list_append.");
 
+  // Test appending to list of size 2
   list_append(list, test3);
   mu_assert(list_tail(list) == test3, "Error list_append.");
   mu_assert(list_head(list) == test1, "Error list_append.");
   mu_assert(list_length(list) == 3, "Incorrect length on list_append.");
 
-  char* val = list_dequeue(list);
+  // Test dequeue from list
+  val = list_dequeue(list);
   mu_assert(val == test1, "Error list_dequeue.");
 
   val = list_dequeue(list);
@@ -65,17 +81,20 @@ char* test_append_dequeue()
   val = list_dequeue(list);
   mu_assert(val == NULL, "Error list_dequeue empty list.");
   mu_assert(list_length(list) == 0, "Error length on empty list_dequeue.");
+  val = NULL;
 
   return NULL;
 }
 
 char* test_get()
 {
+  // Test getting from empty list
   char* val = NULL;
   int result = list_get(list, test1, &val);
   mu_assert(result == 0, "Error list_get on empty.");
   mu_assert(val == NULL, "Error list_get on empty.");
 
+  // Test getting from list of size 1
   list_append(list, test1);
   result = list_get(list, test1, &val);
   mu_assert(result == 1, "Error on list_get single.");
@@ -84,6 +103,7 @@ char* test_get()
   mu_assert(result == 0, "Error list_get miss on single.");
   mu_assert(val == NULL, "Error on list_get miss on single.");
 
+  // Test getting from head and tail of list
   list_append(list, test2);
   result = list_get(list, test1, &val);
   mu_assert(result == 1, "Error on list_get.");
@@ -92,6 +112,7 @@ char* test_get()
   mu_assert(result == 1, "Error on list_get.");
   mu_assert(val == test2, "Error on list_get.");
 
+  // Test getting from list of size 3
   list_append(list, test3);
   result = list_get(list, test1, &val);
   mu_assert(result == 1, "Error on list_get head.");
@@ -102,6 +123,7 @@ char* test_get()
   result = list_get(list, test3, &val);
   mu_assert(result == 1, "Error on list_get tail.");
   mu_assert(val == test3, "Error on list_get.");
+  val = NULL;
 
   return NULL;
 }

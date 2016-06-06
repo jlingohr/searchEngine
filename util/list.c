@@ -32,15 +32,19 @@ void list_destroy(List* list) {
   ListNode* cur;
   while (list->head != NULL) {
     cur = list->head;
-    list->head = cur->next;
+    list->head = list->head->next;
 
     if (list->freeFn) {
       list->freeFn(cur->data);
+      cur->data = NULL;
     }
+    cur->data = NULL;
+    cur->next = NULL;
     free(cur);
+    cur = NULL;
   }
-  free(list->head);
-  list->head = NULL;
+  list->length = 0;
+  list->elementSize = 0;
   free(list);
   list = NULL;
 }
@@ -132,7 +136,7 @@ element_t list_dequeue(List* list) {
     return result;
   } else {
     ListNode* tmp = list->head;
-    list->head = tmp->next;
+    list->head = list->head->next;
     result = tmp->data;
     tmp->next = NULL;
     tmp->data = NULL;
