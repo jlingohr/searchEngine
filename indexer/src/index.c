@@ -78,7 +78,7 @@ int updateIndex(char* word, int docID, HashTable* index)
       list_append(wNode->page, dNode);
     }
     //list_destroy(wNode->page);
-    free(wNode);
+    //free(wNode);
   } else {
     initWNode(word, docID, wNode);
 
@@ -198,7 +198,8 @@ void readFile(HashTable* index, char* filename)
 */
 void handleLine(HashTable* index, char* line) {
   // TODO - Buggy doc_id from conversion 
-  char word[BUF_SIZE];
+  //char word[BUF_SIZE];
+  char* word;
   char *pch;
   char* saveptr;
   int num_tokens, num_docs, doc_id, freq;
@@ -215,6 +216,7 @@ void handleLine(HashTable* index, char* line) {
   while (pch != NULL) {
     if (num_tokens == 1) {
       // First token is the word
+      word = calloc(1, WORD_LENGTH);
       strcpy(word, pch);
 
     }
@@ -250,6 +252,7 @@ void handleLine(HashTable* index, char* line) {
   strcpy(wNode->word, word);
   wNode->page = dNodeList;
   hashtable_insert(index, wNode->word, wNode);
+  free(word);
   //free(wNode); 
 }
 
@@ -259,11 +262,13 @@ void handleLine(HashTable* index, char* line) {
 * @elemv: Assume to be the word to match against
 * @wNodev: Assume to be the WordNode to match
 */
-int wNode_cmp(element_t elemv, element_t wNodev)
+int wNode_cmp(element_t av, element_t bv)
 {
-  char* word = elemv;
-  WordNode* wNode = wNodev;
-  return strcmp(word, wNode->word) == 0;
+  char* a = av;
+  //WordNode* wNode = wNodev;
+  char* b = bv;
+  //return strcmp(word, wNode->word) == 0;
+  return strcmp(a, b) == 0;
 
 }
 
@@ -272,9 +277,10 @@ int wNode_cmp(element_t elemv, element_t wNodev)
 */
 uint32_t wNode_hash(element_t keyv)
 {
-  WordNode* wNode = keyv;
+  //WordNode* wNode = keyv;
 
-  char* key = wNode->word;
+  //char* key = wNode->word;
+  char* key = keyv;
   size_t len = strlen(key);
 
   uint32_t hash = 0;

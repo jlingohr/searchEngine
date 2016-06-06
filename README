@@ -48,7 +48,7 @@ Query
 
 __________
 TODO (Program)
-- ** Changed hashtable comparator to work on key, so have to update rest of
+- ** Changed hashtable comparator (re Index - load and reload) to work on key, so have to update rest of
     programs re inserting and comparator funcs
 - * Change query to work with new MergeSort
 - System testing
