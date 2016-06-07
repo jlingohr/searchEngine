@@ -165,3 +165,32 @@ int getFileNamesInDir(const char* dir, char*** filenames) {
 static int SelectFiles(const struct dirent* entry) {
   return (entry->d_type == DT_REG || entry->d_type == DT_UNKNOWN);
 }
+
+/*
+* Signal - wrapper for sigaction
+*/
+handler_t* Signal(int signum, handler_t* handler)
+{
+  struct sigaction action, old_action;
+  action.sa_handler = handler;
+  sigemptyset(&action.sa_mask);
+  action.sa_flags = SA_RESTART;
+
+  if (sigaction(signum, &action, &old_action) < 0) {
+    unix_error("Signal error");
+  }
+  return (old_action.sa_handler);
+}
+
+/*
+* Fork - Wrapper for fork
+*/
+pid_t Fork()
+{
+  pid_t pid;
+
+  if ((pid = fork()) < 0) {
+    unix_error("Fork error");
+  } 
+  return pid;
+}

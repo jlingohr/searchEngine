@@ -25,6 +25,10 @@ void normalizeQuery(char* str);
 List* HandleQuery(HashTable* ht, Query* query);
 void handleResults(List* results, char* path);
 
+void sigquit_handler(int sig);
+
+
+
 int main(int argc, char** argv) { 
   char cmdline[MAXLINE];
   char* filename, *html_path;
@@ -231,7 +235,7 @@ List* HandleQuery(HashTable* ht, Query* query) {
       filled++;
       sets[filled] = getNextQuery(ht, query->terms);
     }
-    free(op);
+    //free(op);
   }
 
   //Sort the lists
@@ -275,7 +279,7 @@ void handleResults(List* results, char* path)
   ListNode* cur = results->head;
   while (cur) {
     dNode = cur->data;
-    sprintf(filename + path_len, "%d", dNode->document_id);
+    sprintf(filename + path_len, "%ld", dNode->document_id);
 
     //open file and retrieve URL
     fd = fopen(filename, "r");
@@ -407,7 +411,7 @@ int Node_strcmp(element_t av, element_t bv) {
 
 void printDNode(const element_t av) {
   DocumentNode* a = (DocumentNode*)av;
-  printf("%d, %d\n", a->document_id, a->page_word_frequency);
+  printf("%ld, %d\n", a->document_id, a->page_word_frequency);
 
 }
 
@@ -422,4 +426,12 @@ void free_string(element_t av)
 {
   char* a = av;
   free(a);
+}
+
+/*
+* sigquit_handler - Terminate program whenever user types ctrl-c
+*/
+void sigquit_handler(int sig)
+{
+  //TODO
 }

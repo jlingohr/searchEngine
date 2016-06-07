@@ -917,5 +917,4 @@ void NormalizeWord(char *word)
     for(char *ptr = word; *ptr; ++ptr)
         *ptr = tolower(*ptr);
 
-
 }

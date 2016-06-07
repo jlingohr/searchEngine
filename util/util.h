@@ -10,6 +10,9 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <dirent.h>
+#include <signal.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 // Print s with the source file name and the current line number to fp.
 #define LOG(fp,s)  fprintf((fp), "Log: [%s:%d] %s.\n", __FILE__, __LINE__, (s))
@@ -46,6 +49,16 @@ int isDirec(const char * dir);
 int isFile(const char* path);
 int isDir(const char *path);
 int getFileNamesInDir(const char* dir, char*** filenames);
+
+/* 
+* Wrapper for sigaction
+*/
+handler_t* Signal(int signum, handler_t* handler);
+
+/*
+* Wrapper for fork
+*/
+pid_t Fork()
 
 #endif
 
