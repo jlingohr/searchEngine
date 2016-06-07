@@ -25,9 +25,8 @@ INDEXER
 
   TODOS:
   ----------
-  - Fix any memory leaks
+  - Fix any memory leaks - seg fault only wen running valgrind
 
-  -Double check refactoring didnt affect crawler.c
   -Tidy up
   -Seperate modules/Libraries
 

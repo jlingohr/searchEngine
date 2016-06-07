@@ -53,7 +53,7 @@ typedef struct WebPage {
 *   2- Number of occurences
 */
 typedef struct DocumentNode {
-  int document_id;              /* Document identifer */
+  intptr_t document_id;              /* Document identifer */
   int page_word_frequency;      /* Number of occurrences of the word */
 } DocumentNode;
 

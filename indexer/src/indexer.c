@@ -37,13 +37,6 @@ void* saveIndexToFile(void* argsv);
 void cleanUp(HashTable* Index);
 
 
-struct t_block {
-  char* file;
-  HashTable* ht;
-};
-
-
-
 /*****
 * Main
 *******/
@@ -57,9 +50,7 @@ int main(int argc, char** argv) {
   char *target_directory, *target_file, *test_old, *test_new;
   //char* prev_file;
   char** filenames;
-  int num_files;// saved;
-  pthread_t tid;
-  
+  int num_files;// saved;  
 
   /*1. Program parameter processing */
   if (!checkCommandLine(argc, argv)) {
@@ -108,7 +99,8 @@ int main(int argc, char** argv) {
 
   /*4. Index *wordindex=buildIndexFromDirectory("argv[1]"); */
   char* doc, *word;
-  int doc_id, pos;
+  intptr_t doc_id; 
+  int pos;
   for (int i = 0; i < num_files; i++) {
     if (!isFile(filenames[i])) {
       fprintf(stderr, "%s not a file\n", filenames[i]);
@@ -118,13 +110,12 @@ int main(int argc, char** argv) {
       return 1;
     }
     doc = loadDoc(filenames[i]);
-    doc_id = getDocID(filenames[i], target_directory);
+    doc_id = (intptr_t)getDocID(filenames[i], target_directory);
     pos = 0;
 
     while ((pos = GetNextWord(doc, pos, &word)) > 0) {
       NormalizeWord(word);
       updateIndex(word, doc_id, Index);
-      free(word);
       word = NULL;
     }
     free(doc);
@@ -138,11 +129,8 @@ int main(int argc, char** argv) {
 
   //5. Save index to file
   FILE* fp;
-  char* buf = NULL;
-  //printf("Loading words from index...\n");
-  pthread_create(&tid, NULL, IndexLoadWords, Index);
-  pthread_join(tid, (element_t*)&buf);
-  //size = IndexLoadWords(index, &buf);
+  char* buf = calloc(1, BUF_SIZE);
+  IndexLoadWords(Index, &buf);
   fp = fopen(target_file, "w+");
   if (fp) {
     Fputs(buf, fp);
@@ -178,11 +166,8 @@ int main(int argc, char** argv) {
     /*8. saveFile (argv[4]. wordindex) */
     //LOG("Test complete\n");
     FILE* fd;
-    buf = NULL;
-    //printf("Loading words from index...\n");
-    pthread_create(&tid, NULL, IndexLoadWords, Index);
-    pthread_join(tid, (element_t*)&buf);
-    //size = IndexLoadWords(index, &buf);
+    buf = calloc(1, BUF_SIZE);
+    IndexLoadWords(Index, &buf);
     fd = fopen(test_new, "w+");
     if (fp) {
       Fputs(buf, fd);

@@ -25,7 +25,7 @@
 * @docID: documet id
 *
 */
-int initWNode(char* word, int docID, WordNode* wNode) {
+int initWNode(char* word, intptr_t docID, WordNode* wNode) {
   /* TODO - BUGS here with assigning dNOde to list;
   Check for memory leaks */
   
@@ -58,31 +58,30 @@ int initWNode(char* word, int docID, WordNode* wNode) {
 * Returns 1 if successful
 * Returns 0 otherwise
 */
-int updateIndex(char* word, int docID, HashTable* index) 
+int updateIndex(char* word, intptr_t docID, HashTable* index) 
 {
   //WordNode* wNode = initWNode(word, docID);
   WordNode* wNode = calloc(1, sizeof(WordNode));
-  if (hashtable_get(index, word, wNode)) { //hashtable_lookup(index, word)
-    // word is in hashtable, so find DocumentNode
-    assert(!strcmp(word, wNode->word));
-    DocumentNode* dNode;
-    if (list_get(wNode->page, &docID, (element_t)&dNode)) {
-      // Update page count
-      assert(dNode != NULL);
-      dNode->page_word_frequency++;
-    } else {
-      // Not found, so just add the DocumentNode
+  if (!hashtable_get(index, word, wNode)) {
+    assert(!hashtable_lookup(index, word));
+    initWNode(word, docID, wNode);
+    hashtable_insert(index, word, wNode);
+  } else {
+    // Word in table, so update its list of DocumentNode
+    assert(hashtable_lookup(index, word));
+    DocumentNode* dNode = NULL;
+    if (!list_get(wNode->page, &docID, (element_t)&dNode)) {
+      // No matching document, so insert a new one
+      assert(dNode == NULL);
       dNode = calloc(1, sizeof(DocumentNode));
       dNode->document_id = docID;
       dNode->page_word_frequency = 1;
       list_append(wNode->page, dNode);
+    } else {
+      assert(dNode != NULL);
+      assert(dNode->document_id == docID);
+      dNode->page_word_frequency++;
     }
-    //list_destroy(wNode->page);
-    //free(wNode);
-  } else {
-    initWNode(word, docID, wNode);
-
-    hashtable_insert(index, word, wNode);
   }
   return 1;
 }
@@ -103,7 +102,7 @@ void dNode_free(element_t elem)
 int dNode_cmp(element_t av, element_t bv)
 {
   DocumentNode* b = bv;
-  int* a = av;
+  intptr_t* a = (intptr_t*)av;
   return b->document_id == *a;
 }
 
@@ -111,16 +110,14 @@ int dNode_cmp(element_t av, element_t bv)
 
 static void wNode_concat(WordNode* wNode, char** str)
 {
-  //char headers[MAXLINE];
   char* docs = calloc(1,BUF_SIZE);
   sprintf(docs, "%s %d", wNode->word, wNode->page->length);
 
   ListNode* node = wNode->page->head;
   DocumentNode* dNode;
-  //char temp[MAXLINE];
   while (node) {
     dNode = node->data;
-    sprintf(eos(docs), " %d %d", dNode->document_id, dNode->page_word_frequency);
+    sprintf(eos(docs), " %ld %d", dNode->document_id, dNode->page_word_frequency);
     node = node->next;
   }
   strcat(docs, "\n");
@@ -142,10 +139,8 @@ static void wNode_concat(WordNode* wNode, char** str)
 * Returns size of buffer
 * TODO - Hoe to make private?
 */
-element_t IndexLoadWords(element_t Indexv) 
+void IndexLoadWords(HashTable* ht, char** buf) 
 { // TODO - this is bugging out
-  HashTable* ht = Indexv;
-  char* buf = calloc(1, BUF_SIZE);
   WordNode* wNode;
   for (int i = 0; i < MAX_HASH_SLOT; i++) { // Go through each hashtable bucket
     HashTableNode* node = ht->table[i];
@@ -157,13 +152,13 @@ element_t IndexLoadWords(element_t Indexv)
         exit(1);
       }
       wNode = node->data;
-      wNode_concat(wNode, &buf);
+      wNode_concat(wNode, buf);
 
       node = node->next;
       
     }
   }
-  return buf;
+  //return buf;
 }
 
 
@@ -202,7 +197,8 @@ void handleLine(HashTable* index, char* line) {
   char* word;
   char *pch;
   char* saveptr;
-  int num_tokens, num_docs, doc_id, freq;
+  int num_tokens, num_docs, freq;
+  intptr_t doc_id;
   List* dNodeList;
   DocumentNode* dNode;
   WordNode* wNode;
@@ -227,7 +223,7 @@ void handleLine(HashTable* index, char* line) {
     else {
       if (num_tokens % 2 == 1) {
         // Odd numbered are document ids
-        doc_id = atoi(pch);
+        doc_id = (intptr_t)atoi(pch);
       }
       else if (num_tokens % 2 == 0) {
         // Even numbered are number of occurences in doc
@@ -253,7 +249,6 @@ void handleLine(HashTable* index, char* line) {
   wNode->page = dNodeList;
   hashtable_insert(index, wNode->word, wNode);
   free(word);
-  //free(wNode); 
 }
 
 /*
@@ -262,7 +257,7 @@ void handleLine(HashTable* index, char* line) {
 * @elemv: Assume to be the word to match against
 * @wNodev: Assume to be the WordNode to match
 */
-int wNode_cmp(element_t av, element_t bv)
+int wNode_cmp(const element_t av, const element_t bv)
 {
   char* a = av;
   //WordNode* wNode = wNodev;
@@ -275,7 +270,7 @@ int wNode_cmp(element_t av, element_t bv)
 /*
 * wNode_hash - Hashing function to hash WordNodes
 */
-uint32_t wNode_hash(element_t keyv)
+uint32_t wNode_hash(const element_t keyv)
 {
   //WordNode* wNode = keyv;
 

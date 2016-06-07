@@ -7,11 +7,11 @@
 #include <pthread.h>
 
 /* Wordnode Hashtable wrappers */
-int updateIndex(char* word, int docID, HashTable* index);
-int initWNode(char* word, int docID, WordNode* wNode);
+int updateIndex(char* word, intptr_t docID, HashTable* index);
+int initWNode(char* word, intptr_t docID, WordNode* wNode);
 void dNode_free(element_t elem);
 int dNode_cmp(element_t av, element_t bv);
-element_t IndexLoadWords(element_t Index);
+void IndexLoadWords(HashTable* Index, char** str);
 void readFile(HashTable* ht, char* filename);
 void handleLine(HashTable* index, char* line);
 int wNode_cmp(element_t av, element_t bv);
