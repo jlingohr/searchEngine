@@ -1,6 +1,11 @@
 Specification
 -------------
 
+  Usage: ./index [Crawl Directory] [indexed.dat]
+
+  Assumptions: Indexer assumes that webpages crawled will be placed in [Crawl Directory]
+  by the crawler
+
 Requirements
 ---------
 1- create index from html files

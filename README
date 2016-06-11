@@ -1,52 +1,42 @@
 Search Engine
+-----------
 
---------
-CRAWLER
+The search engine is composed of 3 modules, the crawler, the indexer, and the query engine. The search engine works as follows: (1) crawler initializes a seed URL to begin crawling, extracting HTML pages and saving those pages to file, along with the URL crawled and a unique document ID; (2) Index reads HTML files saved by the crawler and parses each word and saving the unique document ID in which the word is found along with the word frequency in an inverted index. Once all HTML files are parsed and loaded into the index, the indexer saves each entry to file in the form ((word, total_docs) : (doc_ID, count)); (3) Query engine loads saved data from the indexer into an inverted index, parses a user query, ranks matching URLS by frequency, and prints result to the user.
 
-  Usage: ./crawler [URL] [Directory] [Depth]
+./crawler: Contains source code for the crawler as well as the directory the crawler saves HTML files
+./indexer: Contains source code the the indexer as well as the directory the indexer saves parsed HTML files
+./query: Contains source code for the query engine
+./tests: Contains unit tests for List and Hashtable library created for the search engine
+./util: Contains source code for List and Hashtable, as well as any helper functions
 
-  Note: Crawler limited to crawling domain specified by URL_PREFIX for security purposes
-  and crawls to a depth of at most 4
 
-  TODO
-  -----
+Notes: Program has been compiled on OS X
+
+
+
+__________
+TODO 
+
+  Program:
+  - System testing
+  - complete unit testing
+  - Fix all memory leaks 
+
+  Crawler:
   - Stop safely for problems
   - Check if a file already exists and dont append to if it already exists
-  - Valgrind errors gone, but some memory leaks remain; have to check free conditions in crawPage and freeWebPage, list_dequeue
+  - Valgrind errors gone, but some memory leaks remain; have to check free conditions in crawPage and freeWebPage,    list_dequeue
 
+  Indexer:
+   - Error writing "effor" to file - same line as another word
+   - Fix any memory leaks - seg fault only wen running valgrind
+   - Tidy up
+   - Seperate modules/Libraries
 
----------
-INDEXER
-
-  Usage: ./index [Crawl Directory] [indexed.dat]
-
-  Assumptions: Indexer assumes that webpages crawled will be placed in in [Crawl Directory]
-  by the crawler
-
-  TODOS:
-  ----------
-  - Fix any memory leaks - seg fault only wen running valgrind
-
-  -Tidy up
-  -Seperate modules/Libraries
-
---------
-Query
-
-  Usage: ./query [indexed.dat] [Crawl Dir]
-
-  Assumptions: Query assumes that [indexed.dat] is a valid file and [Crawl Dir] is a valid directory
-
-  TODO
+  Query:
   - Test that intersect works
   - Start testing on multuple pages
   - exit nicely
   - memory leaks and dangling pointers
   - Move intersect into list.c and make generic
   - Add kill signal
-
-__________
-TODO (Program)
-- System testing
-- complete unit testing
-- Fix all memory leaks 

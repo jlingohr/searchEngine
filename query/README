@@ -39,5 +39,7 @@ Input: indexed is the filename of the Indexer's output after indexing results fr
 
 Output: Prints ranked list of urls that best match search terms
 
+Assumptions: Query assumes that [indexed.dat] is a valid file and [Crawl Dir] is a valid directory
+
 ==================
 
