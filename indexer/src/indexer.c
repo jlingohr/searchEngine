@@ -47,7 +47,7 @@ void cleanUp(HashTable* Index);
 int main(int argc, char** argv) {
   HashTable* Index;
 
-  char *target_directory, *target_file, *test_old, *test_new;
+  char *target_directory, *target_file;
   //char* prev_file;
   char** filenames;
   int num_files;// saved;  
@@ -58,18 +58,17 @@ int main(int argc, char** argv) {
     exit(1);
   }
 
-  /*2. Initialize data structures
-       allocate Inverted_index, zero it, and set links to NULL. */
-  //Index = initHashTable();
+  //2. Initialize data structures
+   //    allocate Inverted_index, zero it, and set links to NULL. 
   Index = calloc(1, sizeof(HashTable));
   hashtable_new(Index, sizeof(WordNode), wNode_cmp, wNode_hash, wNode_free);
 
   target_directory = argv[1];
   target_file = argv[2];
-  if (argc == 5) {
-    test_old = argv[3];
-    test_new = argv[4];
-  }
+  /*if (argc == 5) {
+    char* test_old = argv[3];
+    char* test_new = argv[4];
+  }*/
   num_files = getFileNamesInDir(target_directory, &filenames);
   if (num_files < 0) {
     fprintf(stderr, "Failure reading filenames.\n");
@@ -78,7 +77,7 @@ int main(int argc, char** argv) {
     return 1;
   }
 
-  /* Prepend directory name to filenames */
+  // Prepend directory name to filenames 
   for (int i = 0; i < num_files; i++) {
     char* tmp = filenames[i];
     int len = strlen(target_directory) + strlen(tmp) + 1;
@@ -97,9 +96,9 @@ int main(int argc, char** argv) {
     printf("\nBuilding the index\n");
   }
 
-  /*4. Index *wordindex=buildIndexFromDirectory("argv[1]"); */
+  //4. Build the Inverted Index
   char* doc, *word;
-  intptr_t doc_id; 
+  int doc_id; 
   int pos;
   for (int i = 0; i < num_files; i++) {
     if (!isFile(filenames[i])) {
@@ -109,13 +108,15 @@ int main(int argc, char** argv) {
       free(filenames);
       return 1;
     }
+    // Check if doc is NULL?
     doc = loadDoc(filenames[i]);
-    doc_id = (intptr_t)getDocID(filenames[i], target_directory);
+    doc_id = getDocID(filenames[i], target_directory);
     pos = 0;
 
     while ((pos = GetNextWord(doc, pos, &word)) > 0) {
       NormalizeWord(word);
       updateIndex(word, doc_id, Index);
+      //free(word); //Buggs when freed...
       word = NULL;
     }
     free(doc);
@@ -155,6 +156,9 @@ int main(int argc, char** argv) {
   /* For testing (argc == 5) */
   if (argc == 5) {
     //LOG(argv[3]);
+    char* test_old = argv[3];
+    char* test_new = argv[4];
+
     Index = calloc(1, sizeof(HashTable));
     printf("Rebuilding index...\n");
 
@@ -182,14 +186,12 @@ int main(int argc, char** argv) {
     }
 
 
-    //saveIndexToFile(test_new, Index);
     printf("Test complete\n");
 
-    /*9. cleanDynamicList(wordindex) */
+    //9. cleanDynamicList(wordindex) 
     cleanUp(Index);
   }
 
-  //free(Index);
 
 
   return 0; 
@@ -211,14 +213,13 @@ int checkCommandLine(int argc, char** argv) {
   dir = argv[1];
   file = argv[2];
 
-  /* Validate directory */
+  // Validate directory 
   index = strlen(dir)-1;
   if (dir[index] != '/') {
     dir = calloc(1, strlen(argv[1]) + 1); // Dont forget to free
     strcpy(dir, argv[1]);
     strcat(dir, "/");
   }
-  //printf("Checking directory: %s\n", dir);
   if (!isDir(dir))
     return 0;
 
@@ -228,7 +229,7 @@ int checkCommandLine(int argc, char** argv) {
     return 0;
   }
 
-  if (argc == 5) { /* For testing */
+  if (argc == 5) { // For testing
     char* old;
     char* new;
 
@@ -246,16 +247,14 @@ int checkCommandLine(int argc, char** argv) {
     }
 
   }
-  //free(dir);
   return 1;
 
 }
 
 /*
-* loadDoc - Loads the HTML document from a file
+* loadDoc - Loads the HTML document from a file and returns
+* as a string
 * @filename: name of file to be loaded
-*
-* Returns string containing the loaded document
 */
 char* loadDoc(char* filename) {
   /* TODO - Better way to prevent leaks/dangling pointers */
@@ -266,25 +265,25 @@ char* loadDoc(char* filename) {
   buf = NULL;
   fp = fopen(filename, "r");
   if (fp) {
-    /* Go to end of the file */
+    // Go to end of the file 
     if (fseek(fp, 0l, SEEK_END) == 0) {
-      /* Get size of file */
+      // Get size of file 
       bufsize = ftell(fp);
       if (bufsize == -1) {
         fclose(fp);
         return NULL;
       }
 
-      /* Allocate buffer to that size */
+      // Allocate buffer to that size 
       buf = calloc(1, sizeof(char) * (bufsize + 1));
 
-      /* Go back to start */
+      // Go back to start 
       if (fseek(fp, 0l, SEEK_SET) != 0) {
         fclose(fp);
         return NULL;
       }
 
-      /* Read file into buf */
+      // Read file into buf 
       size_t new_len = fread(buf, sizeof(char), bufsize, fp);
       if (new_len == 0) {
         fprintf(stderr, "Error reading file %s\n", filename);

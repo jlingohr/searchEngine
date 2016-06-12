@@ -28,7 +28,8 @@ TODO
   - Valgrind errors gone, but some memory leaks remain; have to check free conditions in crawPage and freeWebPage,    list_dequeue
 
   Indexer:
-   - Error writing "effor" to file - same line as another word
+   - Error writing "effort" to file - same line as another word
+   - Error writing doc_id to file - repeated docs?
    - Fix any memory leaks - seg fault only wen running valgrind
    - Tidy up
    - Seperate modules/Libraries

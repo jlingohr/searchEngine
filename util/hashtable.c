@@ -117,7 +117,7 @@ static inline HashTableNode* hashtable_create_node(element_t key, element_t data
 * @key - key to hash
 * @hash_out - pointer to return full hashed value to caller
 */
-static inline int hashtable_find_bucket(HashTable* ht, element_t key, 
+static inline int hashtable_find_bucket(HashTable* ht, const element_t key, 
   uint32_t *hash_out)
 {
   uint32_t hash = ht->hashFn(key);
@@ -189,7 +189,7 @@ void hashtable_insert(HashTable* ht, element_t key, element_t data)
 * @elem - retrieved item wil be stored in here
 * Returns 1 if item successfully retrieved, else 0
 */
-int hashtable_get(HashTable* ht, element_t key, element_t elem)
+int hashtable_get(HashTable* ht, const element_t key, element_t elem)
 {
   // TODO - refactor: Keep the copy or redirect a pointer?
   uint32_t hash = 0;

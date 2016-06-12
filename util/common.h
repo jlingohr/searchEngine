@@ -30,6 +30,7 @@
 
 // limit crawling to only this domain
 #define URL_PREFIX "http://www.cs.dartmouth.edu/~cs50/"
+// https://en.wikipedia.org/wiki/Portal:Computer_science // Use this when everything looks good
 
 // ---------------- Structures/Types
 
@@ -53,7 +54,7 @@ typedef struct WebPage {
 *   2- Number of occurences
 */
 typedef struct DocumentNode {
-  intptr_t document_id;              /* Document identifer */
+  int document_id;              /* Document identifer */
   int page_word_frequency;      /* Number of occurrences of the word */
 } DocumentNode;
 
@@ -63,7 +64,7 @@ typedef struct DocumentNode {
 */
 
 typedef struct WordNode {
-  char word[WORD_LENGTH];       /* The word */
+  char* word;       /* The word */
   struct List* page;           /* Pointer to first element of the page list */
 } WordNode;
 

@@ -25,10 +25,10 @@
 * @docID: documet id
 *
 */
-int initWNode(char* word, intptr_t docID, WordNode* wNode) {
+int initWNode(char* word, int docID, WordNode* wNode) {
   /* TODO - BUGS here with assigning dNOde to list;
   Check for memory leaks */
-  
+  wNode->word = calloc(1, strlen(word)+1);
   strcpy(wNode->word, word);
 
   wNode->page = calloc(1, sizeof(List));
@@ -58,7 +58,7 @@ int initWNode(char* word, intptr_t docID, WordNode* wNode) {
 * Returns 1 if successful
 * Returns 0 otherwise
 */
-int updateIndex(char* word, intptr_t docID, HashTable* index) 
+int updateIndex(char* word, int docID, HashTable* index) 
 {
   //WordNode* wNode = initWNode(word, docID);
   WordNode* wNode = calloc(1, sizeof(WordNode));
@@ -70,7 +70,7 @@ int updateIndex(char* word, intptr_t docID, HashTable* index)
     // Word in table, so update its list of DocumentNode
     assert(hashtable_lookup(index, word));
     DocumentNode* dNode = NULL;
-    if (!list_get(wNode->page, &docID, (element_t)&dNode)) {
+    if (!list_get(wNode->page, (element_t)&docID, (element_t)&dNode)) {
       // No matching document, so insert a new one
       assert(dNode == NULL);
       dNode = calloc(1, sizeof(DocumentNode));
@@ -99,10 +99,10 @@ void dNode_free(element_t elem)
 * dNode_cmp - Compares a DocumentNodes ID with a docID
 * for equality
 */
-int dNode_cmp(element_t av, element_t bv)
+int dNode_cmp(const element_t av, const element_t bv)
 {
   DocumentNode* b = bv;
-  intptr_t* a = (intptr_t*)av;
+  int* a = (int*)av;
   return b->document_id == *a;
 }
 
@@ -110,6 +110,7 @@ int dNode_cmp(element_t av, element_t bv)
 
 static void wNode_concat(WordNode* wNode, char** str)
 {
+  // TODO strcat slow!
   char* docs = calloc(1,BUF_SIZE);
   sprintf(docs, "%s %d", wNode->word, wNode->page->length);
 
@@ -117,13 +118,14 @@ static void wNode_concat(WordNode* wNode, char** str)
   DocumentNode* dNode;
   while (node) {
     dNode = node->data;
-    sprintf(eos(docs), " %ld %d", dNode->document_id, dNode->page_word_frequency);
+    sprintf(eos(docs), " %d %d", dNode->document_id, dNode->page_word_frequency);
     node = node->next;
   }
-  strcat(docs, "\n");
+  //strcat(docs, "\n");
   if (strlen(docs) + strlen(*str) - 1 >= strlen(*str)) {
     *str = realloc(*str, 2*(strlen(*str)));
   }
+  strcat(docs, "\n");
   strcat(*str, docs);
   free(docs);
 
@@ -137,7 +139,6 @@ static void wNode_concat(WordNode* wNode, char** str)
 * @buf: pointer to C-style string to loads values
 *
 * Returns size of buffer
-* TODO - Hoe to make private?
 */
 void IndexLoadWords(HashTable* ht, char** buf) 
 { // TODO - this is bugging out
@@ -158,7 +159,6 @@ void IndexLoadWords(HashTable* ht, char** buf)
       
     }
   }
-  //return buf;
 }
 
 
@@ -192,13 +192,11 @@ void readFile(HashTable* index, char* filename)
 * @line: Line to parse
 */
 void handleLine(HashTable* index, char* line) {
-  // TODO - Buggy doc_id from conversion 
-  //char word[BUF_SIZE];
   char* word;
   char *pch;
   char* saveptr;
   int num_tokens, num_docs, freq;
-  intptr_t doc_id;
+  int doc_id;
   List* dNodeList;
   DocumentNode* dNode;
   WordNode* wNode;
@@ -223,7 +221,7 @@ void handleLine(HashTable* index, char* line) {
     else {
       if (num_tokens % 2 == 1) {
         // Odd numbered are document ids
-        doc_id = (intptr_t)atoi(pch);
+        doc_id = atoi(pch);
       }
       else if (num_tokens % 2 == 0) {
         // Even numbered are number of occurences in doc
@@ -245,6 +243,7 @@ void handleLine(HashTable* index, char* line) {
   }
   // construct WordNode and add to index 
   wNode = calloc(1, sizeof(WordNode));
+  wNode->word = calloc(1, strlen(word)+1);
   strcpy(wNode->word, word);
   wNode->page = dNodeList;
   hashtable_insert(index, wNode->word, wNode);
@@ -260,9 +259,7 @@ void handleLine(HashTable* index, char* line) {
 int wNode_cmp(const element_t av, const element_t bv)
 {
   char* a = av;
-  //WordNode* wNode = wNodev;
   char* b = bv;
-  //return strcmp(word, wNode->word) == 0;
   return strcmp(a, b) == 0;
 
 }
@@ -272,9 +269,6 @@ int wNode_cmp(const element_t av, const element_t bv)
 */
 uint32_t wNode_hash(const element_t keyv)
 {
-  //WordNode* wNode = keyv;
-
-  //char* key = wNode->word;
   char* key = keyv;
   size_t len = strlen(key);
 
@@ -300,5 +294,7 @@ uint32_t wNode_hash(const element_t keyv)
 void wNode_free(element_t data)
 {
   WordNode* wNode = data;
+  free(wNode->word);
+  wNode->word = NULL;
   list_destroy(wNode->page);
 }
