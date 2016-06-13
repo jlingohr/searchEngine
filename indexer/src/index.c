@@ -8,12 +8,6 @@
 #define eos(s) ((s) + strlen(s))
 
 
-/********************
-* Private functions
-********************/
-
-
-
 /*************************
 * Wordnode Hashtable wrappers 
 **************************/
@@ -23,11 +17,12 @@
 * initWNode - Initializes WordNode and assigns initial values
 * @word: Word the node corresponds to
 * @docID: documet id
+* @wNode: WordNode to initialize
 *
 */
-int initWNode(char* word, int docID, WordNode* wNode) {
-  /* TODO - BUGS here with assigning dNOde to list;
-  Check for memory leaks */
+int initWNode(char* word, int docID, WordNode* wNode) 
+{
+
   wNode->word = calloc(1, strlen(word)+1);
   strcpy(wNode->word, word);
 
@@ -107,10 +102,14 @@ int dNode_cmp(const element_t av, const element_t bv)
 }
 
 
-
+/*
+* wNode_concat - Helper to load inverted index into
+* a string buffer
+* @wNode: WordNode we intend to put into buffer
+* @str: Buffer we are appending the WordNode values to
+*/
 static void wNode_concat(WordNode* wNode, char** str)
 {
-  // TODO strcat slow!
   char* docs = calloc(1,BUF_SIZE);
   sprintf(docs, "%s %d", wNode->word, wNode->page->length);
 
@@ -121,7 +120,6 @@ static void wNode_concat(WordNode* wNode, char** str)
     sprintf(eos(docs), " %d %d", dNode->document_id, dNode->page_word_frequency);
     node = node->next;
   }
-  //strcat(docs, "\n");
   if (strlen(docs) + strlen(*str) - 1 >= strlen(*str)) {
     *str = realloc(*str, 2*(strlen(*str)));
   }
@@ -138,7 +136,6 @@ static void wNode_concat(WordNode* wNode, char** str)
 * @ht: Hashtable to load from
 * @buf: pointer to C-style string to loads values
 *
-* Returns size of buffer
 */
 void IndexLoadWords(HashTable* ht, char** buf) 
 { // TODO - this is bugging out
@@ -165,7 +162,7 @@ void IndexLoadWords(HashTable* ht, char** buf)
 /*
 * readFile - Read an inverted index in from file and
 * construct a new index, i.e. the original.
-* @ht: Hashtable to reconstruct
+* @index: Hashtable to reconstruct
 * @filename: Name of file to construct from
 */
 void readFile(HashTable* index, char* filename)
@@ -179,9 +176,6 @@ void readFile(HashTable* index, char* filename)
   // Read each line and parse
   while ((read = getline(&line, &len, fp)) != -1) {
     handleLine(index, line);
-    /*if (line) {
-      free(line);
-    }*/
   }
   fclose(fp);
 }

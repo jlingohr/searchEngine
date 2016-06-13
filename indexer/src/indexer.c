@@ -10,29 +10,25 @@
 * To Test: ./bin/indexer ../crawler/data/ ./data/index.dat ./data/index.dat ./data/newindex.dat
 */
 
-//#include <stdio.h>                           // printf
-#include <sys/stat.h>                        // isdir
+#include <sys/stat.h>                        
 #include <sys/types.h>
 #include <unistd.h>
-#include <curl/curl.h>                       // curl functionality
-#include <string.h>                          // strncmpr
+#include <curl/curl.h>                       
+#include <string.h>                          
 #include <pthread.h>
 #include <assert.h>
 
-// ---------------- Local includes  e.g., "file.h"
-//#include "../../util/hashtable.h"                       // hashtable functionality
+// ---------------- Local includes  
 #include "index.h"
-//#include "../../util/common.h"                          // common functionality
 #include "../../util/util.h"
-#include "../../util/web.h"                             // curl and html functionality
+#include "../../util/web.h"                             
 
 
 
-/* Private Prototypes */
+/*  Prototypes */
 int checkCommandLine(int argc, char** argv);
 char* loadDoc(char* filename);
 int getDocID(char* filename, char* dir);
-//int saveIndexToFile(char* file, HashTable* index);
 void* saveIndexToFile(void* argsv);
 void cleanUp(HashTable* Index);
 
@@ -48,7 +44,6 @@ int main(int argc, char** argv) {
   HashTable* Index;
 
   char *target_directory, *target_file;
-  //char* prev_file;
   char** filenames;
   int num_files;// saved;  
 
@@ -65,10 +60,7 @@ int main(int argc, char** argv) {
 
   target_directory = argv[1];
   target_file = argv[2];
-  /*if (argc == 5) {
-    char* test_old = argv[3];
-    char* test_new = argv[4];
-  }*/
+
   num_files = getFileNamesInDir(target_directory, &filenames);
   if (num_files < 0) {
     fprintf(stderr, "Failure reading filenames.\n");
@@ -115,8 +107,7 @@ int main(int argc, char** argv) {
 
     while ((pos = GetNextWord(doc, pos, &word)) > 0) {
       NormalizeWord(word);
-      updateIndex(word, doc_id, Index);
-      //free(word); //Buggs when freed...
+      updateIndex(word, doc_id, Index); // Need to free word
       word = NULL;
     }
     free(doc);
@@ -124,9 +115,6 @@ int main(int argc, char** argv) {
   }
   free(filenames);
 
-
-  //5. saveFile (argv[2], wordindex );
-    // LOG( "done!");
 
   //5. Save index to file
   FILE* fp;
@@ -142,7 +130,7 @@ int main(int argc, char** argv) {
     fprintf(stderr, "Error opening file\n");
     hashtable_destroy(Index);
     free(buf);
-    return 1;
+    exit(1);
   }
 
   if (STATUS_LOG == 1) {
@@ -257,7 +245,6 @@ int checkCommandLine(int argc, char** argv) {
 * @filename: name of file to be loaded
 */
 char* loadDoc(char* filename) {
-  /* TODO - Better way to prevent leaks/dangling pointers */
   char* buf;
   FILE* fp;
   long bufsize;

@@ -29,7 +29,8 @@ void sigquit_handler(int sig);
 
 
 
-int main(int argc, char** argv) { 
+int main(int argc, char** argv) 
+{ 
   char cmdline[MAXLINE];
   char* filename, *html_path;
   int emit_prompt;
@@ -87,7 +88,8 @@ int main(int argc, char** argv) {
 * Returns 1 if okay
 * Returns 0 otherwise
 */
-int checkCommandLine(char* filename, char* path) {
+int checkCommandLine(char* filename, char* path) 
+{
   if (!isFile(filename)) {
     printf("%s is not a valid file\n", filename);
     return 0;
@@ -107,7 +109,8 @@ int checkCommandLine(char* filename, char* path) {
 *
 * Returns a pointer to a Query struct
 */
- Query* initQuery(char* str) {
+ Query* initQuery(char* str) 
+ {
   // Allocate Query struct
   Query* query = calloc(1, sizeof(Query));
   query->terms = calloc(1, sizeof(List));
@@ -121,7 +124,6 @@ int checkCommandLine(char* filename, char* path) {
   // Normalize search string and parse
   normalizeQuery(str);
   query->num_sets = parseQuery(str, query->terms, query->ops);
-  //free(str);
 
   return query;
  }
@@ -134,8 +136,8 @@ int checkCommandLine(char* filename, char* path) {
 * @query; string to parse
 *
 */
-void normalizeQuery(char* query) {
-  // TODO 
+void normalizeQuery(char* query) 
+{
   query[strlen(query)-1] = '\0';
 
 }
@@ -147,7 +149,8 @@ void normalizeQuery(char* query) {
 * ASSUMPTIONS: For now assume user specifies all logical operations
 * and everything else valid
 */
-int parseQuery(char* str, List* terms, List* ops) {
+int parseQuery(char* str, List* terms, List* ops) 
+{
   /* TODO - validate string for error conditions */
   char* word;
   char* pch;
@@ -164,11 +167,9 @@ int parseQuery(char* str, List* terms, List* ops) {
 
     if (strcmp(word, "AND") == 0) { 
       /* Append to ops list */
-      //listAdd(ops, word);
       list_append(ops, word);
     }
     else if (strcmp(word, "OR") == 0) {
-      //listAdd(ops, word);
       list_append(ops, word);
       sets++;
     }
@@ -184,19 +185,12 @@ int parseQuery(char* str, List* terms, List* ops) {
   return sets;
 }
 
-
-
-
-
-
-
-
 /* 
 * ToLower - turns a string into all lower case
 * @word: Word to change
 */
-void ToLower(char* word) {
-  // TODO - Check this is corect 
+void ToLower(char* word) 
+{
   char* cur = word;
 
   while (*cur) {
@@ -209,8 +203,8 @@ void ToLower(char* word) {
 * HandleQuery - gets pages matching the query,
 * ranks them, and prints them
 */
-List* HandleQuery(HashTable* ht, Query* query) {
-  // TODO - Improve this! Too many casts 
+List* HandleQuery(HashTable* ht, Query* query) 
+{
 
   List* docs;
   int filled, num_sets;
@@ -235,9 +229,7 @@ List* HandleQuery(HashTable* ht, Query* query) {
       filled++;
       sets[filled] = getNextQuery(ht, query->terms);
     }
-    //free(op);
   }
-
   //Sort the lists
   List* sorted[num_sets];
   for (int i = 0; i < query->num_sets; i++) {
@@ -251,8 +243,6 @@ List* HandleQuery(HashTable* ht, Query* query) {
   }
 
   return docs;
-
-
 }
 
 /*
@@ -263,9 +253,6 @@ List* HandleQuery(HashTable* ht, Query* query) {
 */
 void handleResults(List* results, char* path)
 {
-  // REDO using a list iteration, or something to keep working
-  // with the list seperate
-
   DocumentNode* dNode;
   char filename[MAXLINE];
   int path_len = strlen(path);
@@ -310,15 +297,6 @@ List* getNextQuery(HashTable* ht, List* words) {
   hashtable_get(ht, term, wNode);
   free(term);
   return wNode->page;
-
-}
-
-/*
-* getNextOp - Wrapper to get next operation string
-*/
-ListNode* getNextOp(List* list) {
-  //ListNode* tmp = listRemove(list);
-  return NULL;
 }
 
 /*
@@ -326,7 +304,8 @@ ListNode* getNextOp(List* list) {
 * Returns pointer to a new list
 */
 List* intersect(List* A, List* B) {
-  // TODO - probably a lot of mem leaks here
+  // TODO - probably a lot of mem leaks here,
+  // Better way - Use ht
   List* list;
 
   if (A == NULL || B == NULL) // empty sets 
