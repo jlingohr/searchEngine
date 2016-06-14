@@ -41,3 +41,4 @@ TODO
   - memory leaks and dangling pointers
   - Move intersect into list.c and make generic
   - Add kill signal
+  - Error using same query twice in a row!
