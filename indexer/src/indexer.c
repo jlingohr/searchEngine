@@ -10,13 +10,13 @@
 * To Test: ./bin/indexer ../crawler/data/ ./data/index.dat ./data/index.dat ./data/newindex.dat
 */
 
-#include <sys/stat.h>                        
-#include <sys/types.h>
-#include <unistd.h>
+
 #include <curl/curl.h>                       
 #include <string.h>                          
 #include <pthread.h>
 #include <assert.h>
+#include <sys/stat.h>                        
+#include <sys/types.h>
 
 // ---------------- Local includes  
 #include "index.h"
@@ -26,11 +26,11 @@
 
 
 /*  Prototypes */
-int checkCommandLine(int argc, char** argv);
-char* loadDoc(char* filename);
-int getDocID(char* filename, char* dir);
+static int checkCommandLine(int argc, char** argv);
 void* saveIndexToFile(void* argsv);
 void cleanUp(HashTable* Index);
+char* loadDoc(char* filename);
+int getDocID(char* filename, char* dir);
 
 
 /*****
@@ -191,7 +191,7 @@ int main(int argc, char** argv) {
 * Returns 1 argc == (3|5) && directory and files are valid
 * Returns 0 otherwise
 */
-int checkCommandLine(int argc, char** argv) {
+static int checkCommandLine(int argc, char** argv) {
   char* dir, *file;
   int index;
 
@@ -238,6 +238,7 @@ int checkCommandLine(int argc, char** argv) {
   return 1;
 
 }
+
 
 /*
 * loadDoc - Loads the HTML document from a file and returns
@@ -302,6 +303,8 @@ int getDocID(char* filename, char* dir) {
   id = filename + pos;
   return atoi(id);
 }
+
+
 
 
 /*

@@ -1,6 +1,8 @@
 #ifndef _INDEX_H
 #define _INDEX_H
 
+
+
 #include "../../util/hashtable.h"
 #include "../../util/common.h"
 #include "../../util/list.h"
@@ -16,5 +18,7 @@ void handleLine(HashTable* index, char* line);
 int wNode_cmp(element_t av, element_t bv);
 uint32_t wNode_hash(element_t keyv);
 void wNode_free(element_t data);
+
+
 
 #endif

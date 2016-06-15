@@ -3,6 +3,7 @@
 * WordNodes and the List that each WordNode has
 */
 
+#include <unistd.h>
 #include "index.h"
 
 #define eos(s) ((s) + strlen(s))
@@ -120,8 +121,8 @@ static void wNode_concat(WordNode* wNode, char** str)
     sprintf(eos(docs), " %d %d", dNode->document_id, dNode->page_word_frequency);
     node = node->next;
   }
-  if (strlen(docs) + strlen(*str) - 1 >= strlen(*str)) {
-    *str = realloc(*str, 2*(strlen(*str)));
+  if (strlen(docs) + strlen(*str) + 1 > strlen(*str)) {
+    *str = realloc(*str, 2*(strlen(*str) + strlen(docs)));
   }
   strcat(docs, "\n");
   strcat(*str, docs);
