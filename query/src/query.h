@@ -30,7 +30,6 @@ Query* initQuery(char* str);
 int parseQuery(char* str, List* terms, List* ops);
 List* HandleQuery(HashTable* ht, Query* query);
 List* intersect(List* A, List* B);
-ListNode* getNextOp(List* list);
 List* getNextQuery(HashTable* ht, List* words);
 
 void Sort(List* list, int len);

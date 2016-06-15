@@ -266,7 +266,7 @@ void handleResults(List* results, char* path)
   ListNode* cur = results->head;
   while (cur) {
     dNode = cur->data;
-    sprintf(filename + path_len, "%ld", dNode->document_id);
+    sprintf(filename + path_len, "%d", dNode->document_id);
 
     //open file and retrieve URL
     fd = fopen(filename, "r");
@@ -390,7 +390,7 @@ int Node_strcmp(element_t av, element_t bv) {
 
 void printDNode(const element_t av) {
   DocumentNode* a = (DocumentNode*)av;
-  printf("%ld, %d\n", a->document_id, a->page_word_frequency);
+  printf("%d, %d\n", a->document_id, a->page_word_frequency);
 
 }
 

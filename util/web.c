@@ -21,10 +21,6 @@
 #include <stdlib.h>                          // free, calloc, realloc
 #include <ctype.h>                           // tolower, isspace
 #include <string.h>                          // strcasestr, strchr, strrchr,
-                                             // strncasecmp, memset, strlen,
-                                             // memcpy, strnlen, strncpy,
-                                             // strcmp, strdup, strndup, strcat,
-                                             // strpbrk
 
 #include <curl/curl.h>                       // curl functionality
 
@@ -49,7 +45,6 @@ struct URL {
 };
 
 // ---------------- Private variables
-// students shouldn't need to use this at all'
 const char* EXTS[] = {                       // valid extensions
     "html",
     "jsp",
@@ -108,7 +103,7 @@ int GetWebPage(WebPage* page)
     // add a user agent just in case servers need it
     curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "libcurl-agent/1.0");
 
-    /* Add any additional options here */
+    // Add any additional options here 
     curl_easy_setopt(curl_handle, CURLOPT_FAILONERROR, 1L); // for 404 errors (and other >400 errors)
     curl_easy_setopt(curl_handle, CURLOPT_FOLLOWLOCATION, 1L); // for redirects
 

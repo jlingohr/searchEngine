@@ -14,6 +14,9 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+typedef void handler_t(int);
+
+
 // Print s with the source file name and the current line number to fp.
 #define LOG(fp,s)  fprintf((fp), "Log: [%s:%d] %s.\n", __FILE__, __LINE__, (s))
 
@@ -58,7 +61,7 @@ handler_t* Signal(int signum, handler_t* handler);
 /*
 * Wrapper for fork
 */
-pid_t Fork()
+pid_t Fork();
 
 #endif
 

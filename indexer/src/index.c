@@ -177,6 +177,8 @@ void readFile(HashTable* index, char* filename)
   // Read each line and parse
   while ((read = getline(&line, &len, fp)) != -1) {
     handleLine(index, line);
+    free(line);
+    line = NULL;
   }
   fclose(fp);
 }
@@ -292,4 +294,5 @@ void wNode_free(element_t data)
   free(wNode->word);
   wNode->word = NULL;
   list_destroy(wNode->page);
+  wNode->page = NULL;
 }
