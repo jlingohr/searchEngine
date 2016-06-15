@@ -139,7 +139,7 @@ static void wNode_concat(WordNode* wNode, char** str)
 *
 */
 void IndexLoadWords(HashTable* ht, char** buf) 
-{ // TODO - this is bugging out
+{ 
   WordNode* wNode;
   for (int i = 0; i < MAX_HASH_SLOT; i++) { // Go through each hashtable bucket
     HashTableNode* node = ht->table[i];
