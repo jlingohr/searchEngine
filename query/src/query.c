@@ -222,6 +222,7 @@ List* HandleQuery(HashTable* ht, Query* query)
     op = list_dequeue(query->ops);
 
     if (strcmp(op, "AND") == 0) {
+      // This needs to be imutable or copied
       temp_a = getNextQuery(ht, query->terms);
       sets[filled] = intersect(sets[filled], temp_a);
     }
@@ -289,14 +290,26 @@ void handleResults(List* results, char* path)
 * @words: list of words nodes to get query from
 */
 List* getNextQuery(HashTable* ht, List* words) {
-  // Dequeue word from words
+  // TODO - make immutable or return a copy
   char* term;
-  term = list_dequeue(words);
+  /*term = list_dequeue(words);
 
   WordNode* wNode = calloc(1, sizeof(WordNode));
   hashtable_get(ht, term, wNode);
   free(term);
-  return wNode->page;
+  return wNode->page;*/
+  term = list_dequeue(words);
+  WordNode* wNode = calloc(1, sizeof(WordNode)); // Would need to free, but might create dangling pointers
+  hashtable_get(ht, term, wNode); //need to check actually return the item
+  List* temp_list = wNode->page;  // INVARIANT: wNode->page is immutable
+  List* list = calloc(1, sizeof(List));
+  list_new(list, sizeof(DocumentNode), dNode_cmp, NULL);
+  list_foreach(temp_list, head, next, cur) {
+    list_append(list, cur->data);
+  }
+  //free(wNode) //STOP: dangling pointer likely
+  free(term);
+  return list;
 }
 
 /*

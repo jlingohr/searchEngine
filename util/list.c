@@ -24,31 +24,12 @@ void list_new(List* list, int elementSize, list_compare cmp, freeFunction freeFn
   list->freeFn = freeFn;
 }
 
-static void list_delete_node(List* list, ListNode* node)
-{
-  if (node == list->head) {
-    list->head = node->next;
-  }
-  else {
-    node->prev->next = node->next;
-  }
-  if (node == list->tail) {
-    list->tail = node->prev;
-  }
-  else {
-    node->next->prev = node->prev;
-  }
-  node->next = node->prev = NULL;
-  list_dec_ref(list, node);
-  list_dec_ref(list, node);
-}
-
 /*
 * list_destroy - Destroys the List list
 * and frees mmory
 */
 void list_destroy(List* list) {
-  /*ListNode* cur;
+  ListNode* cur;
   while (list->head != NULL) {
     cur = list->head;
     list->head = list->head->next;
@@ -61,11 +42,6 @@ void list_destroy(List* list) {
     cur->next = NULL;
     free(cur);
     cur = NULL;
-  }*/
-
-  for (ListNode* node = list->head, *n; node != NULL; node = n) {
-    n = node->next;
-    list_delete_node(list, node);
   }
   list->length = 0;
   list->elementSize = 0;
@@ -80,18 +56,15 @@ void list_destroy(List* list) {
 void list_prepend(List* list, element_t elem) {
   ListNode* node = calloc(1, sizeof(ListNode));
   node->data = elem;
-  node->ref_count = 2;
-  node->prev = node->next = NULL;
 
   if (list->head == NULL) { // Empty list
-    list->tail = node;
+    list->head = list->tail = node;
+    node->next = NULL;
   } else {
-    //node->next = list->head;
-    //list->head = node;
-    list->head->next = node;
     node->next = list->head;
+    list->head = node;
   }
-  list->head = node;
+
   list->length++;
 }
 
@@ -102,55 +75,18 @@ void list_prepend(List* list, element_t elem) {
 void list_append(List* list, element_t elem) {
   ListNode* node = calloc(1, sizeof(ListNode));
   node->data = elem;
-  node->ref_count = 2;
-  node->next = node->prev = NULL;
+  node->next = NULL;
 
   if (list->head == NULL) { // Empty list
-    list->head = node;
+    list->head = list->tail = node;
   } else {
     list->tail->next = node;
-    node->prev = list->tail;
+    list->tail = node;
   }
-  list->tail = node;
+
   list->length++;
 }
 
-
-/*
-* list_for_each - Iterates through the List list
-*
-void list_for_each(List* list, listIterator iterator) {
-  assert(iterator != NULL);
-
-  ListNode* node = list->head;
-  bool result = TRUE;
-  while (node != NULL && result) {
-    result = iterator(node->data);
-    node = node->next;
-  }
-}*/
-
-/*
-* list_head - Stores data in lists head in elem
-
-void list_head(List* list, element_t elem) {
-  assert(list->head != NULL);
-
-  ListNode* node = list->head;
-  memcpy(elem, node->data, list->elementSize);
-
-}
-*/
-/*
-* list_tail - Returns a pointer to the tail of
-* the List list
-
-void list_tail(List* list, element_t elem) {
-  assert(list->tail != NULL);
-  ListNode* node = list->tail;
-  memcpy(elem, node->data, list->elementSize);
-}
-*/
 /*
 * list_dequeue - Copies head data into elem and remves
 * from the list, setting the new head.
@@ -218,22 +154,6 @@ void list_foldl(void (*f) (element_t*, element_t, element_t), element_t* out_ele
   }
 }
 
-
-void list_inc_ref(ListNode* node)
-{
-  node->ref_count += 1;
-}
-
-void list_dec_ref(List* list, ListNode* node)
-{
-  node->ref_count = 1;
-  if (node->ref_count == 0) {
-    if (list->freeFn)
-      list->freeFn(node->data);
-    free(node);
-  }
-}
-
 /*****************
 * List Algorithms
 *****************/
@@ -254,12 +174,20 @@ List* MergeSort(List* list, int len, int (*f)(element_t, element_t)) {
   int mid = len / 2;
   //ListNode* cur;
   element_t tmp;
-  while (list->length) {
+  /*while (list->length) {
     tmp = list_dequeue(list);
     if (mid > 0) {
       list_append(left, tmp);
     } else {
       list_append(right, tmp);
+    }
+    mid--;
+  }*/
+  list_foreach(list, head, next, cur) {
+    if (mid > 0) {
+      list_append(left, cur->data);
+    } else {
+      list_append(right, cur->data);
     }
     mid--;
   }
@@ -303,5 +231,4 @@ List* Merge(List* A, List* B, int (*f)(element_t, element_t)) {
   }
   return list;
 }
-
 

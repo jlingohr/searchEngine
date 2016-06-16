@@ -28,10 +28,7 @@ TODO
   - Valgrind errors gone, but some memory leaks remain; have to check free conditions in crawPage and freeWebPage,    list_dequeue
 
   Indexer:
-   - Error writing "effort" to file - same line as another word
-   - Error writing doc_id to file - repeated docs?
-   - Fix any memory leaks - seg fault only wen running valgrind
-   - Tidy up
+   - Fix any memory leaks 
    - Seperate modules/Libraries
 
   Query:
@@ -41,4 +38,4 @@ TODO
   - memory leaks and dangling pointers
   - Move intersect into list.c and make generic
   - Add kill signal
-  - Error using same query twice in a row!
+  - Cleaner way to make list immutable for repeated queries
