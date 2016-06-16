@@ -26,7 +26,8 @@ typedef int (*list_compare)(element_t av, element_t bv);
 
 typedef struct ListNode {
     element_t data;                           // the data for a node
-    struct ListNode *next;                   // pointer to next node
+    int ref_count;
+    struct ListNode *next, *prev;                   // pointer to next node
 } ListNode;
 
 typedef struct List {
@@ -66,6 +67,8 @@ element_t list_dequeue(List* list);
 int list_get(List* list, element_t key, element_t* elem);
 void list_foldl(void (*f) (element_t*, element_t, element_t), element_t* out_element_p, List* list);
 
+void list_inc_ref(ListNode* node);
+void list_dec_ref(List* list, ListNode* node);
 
 
 /**************

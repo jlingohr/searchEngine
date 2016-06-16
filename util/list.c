@@ -24,12 +24,31 @@ void list_new(List* list, int elementSize, list_compare cmp, freeFunction freeFn
   list->freeFn = freeFn;
 }
 
+static void list_delete_node(List* list, ListNode* node)
+{
+  if (node == list->head) {
+    list->head = node->next;
+  }
+  else {
+    node->prev->next = node->next;
+  }
+  if (node == list->tail) {
+    list->tail = node->prev;
+  }
+  else {
+    node->next->prev = node->prev;
+  }
+  node->next = node->prev = NULL;
+  list_dec_ref(list, node);
+  list_dec_ref(list, node);
+}
+
 /*
 * list_destroy - Destroys the List list
 * and frees mmory
 */
 void list_destroy(List* list) {
-  ListNode* cur;
+  /*ListNode* cur;
   while (list->head != NULL) {
     cur = list->head;
     list->head = list->head->next;
@@ -42,6 +61,11 @@ void list_destroy(List* list) {
     cur->next = NULL;
     free(cur);
     cur = NULL;
+  }*/
+
+  for (ListNode* node = list->head, *n; node != NULL; node = n) {
+    n = node->next;
+    list_delete_node(list, node);
   }
   list->length = 0;
   list->elementSize = 0;
@@ -56,15 +80,18 @@ void list_destroy(List* list) {
 void list_prepend(List* list, element_t elem) {
   ListNode* node = calloc(1, sizeof(ListNode));
   node->data = elem;
+  node->ref_count = 2;
+  node->prev = node->next = NULL;
 
   if (list->head == NULL) { // Empty list
-    list->head = list->tail = node;
-    node->next = NULL;
+    list->tail = node;
   } else {
+    //node->next = list->head;
+    //list->head = node;
+    list->head->next = node;
     node->next = list->head;
-    list->head = node;
   }
-
+  list->head = node;
   list->length++;
 }
 
@@ -75,15 +102,16 @@ void list_prepend(List* list, element_t elem) {
 void list_append(List* list, element_t elem) {
   ListNode* node = calloc(1, sizeof(ListNode));
   node->data = elem;
-  node->next = NULL;
+  node->ref_count = 2;
+  node->next = node->prev = NULL;
 
   if (list->head == NULL) { // Empty list
-    list->head = list->tail = node;
+    list->head = node;
   } else {
     list->tail->next = node;
-    list->tail = node;
+    node->prev = list->tail;
   }
-
+  list->tail = node;
   list->length++;
 }
 
@@ -187,6 +215,22 @@ void list_foldl(void (*f) (element_t*, element_t, element_t), element_t* out_ele
   while (node) {
     f(out_element_p, *out_element_p, node->data);
     node = node->next;
+  }
+}
+
+
+void list_inc_ref(ListNode* node)
+{
+  node->ref_count += 1;
+}
+
+void list_dec_ref(List* list, ListNode* node)
+{
+  node->ref_count = 1;
+  if (node->ref_count == 0) {
+    if (list->freeFn)
+      list->freeFn(node->data);
+    free(node);
   }
 }
 
