@@ -13,6 +13,7 @@
 */
 #include "query.h"
 
+#define TRUE 1
 static char prompt[] = "Query:> ";
 
 
@@ -26,7 +27,6 @@ List* HandleQuery(HashTable* ht, Query* query);
 void handleResults(List* results, char* path);
 
 void sigint_handler(int sig);
-
 
 
 int main(int argc, char** argv) 
@@ -58,7 +58,7 @@ int main(int argc, char** argv)
   hashtable_new(Index, sizeof(WordNode), wNode_cmp, wNode_hash, wNode_free);
   readFile(Index, filename);
   // What about logical operators? 
-  while (1) { 
+  while (TRUE) { 
     if (emit_prompt) {
       printf("%s", prompt);
       fflush(stdout);
@@ -77,6 +77,10 @@ int main(int argc, char** argv)
     List* results;  // This is a list of DocumentNodes sorted in order
     results = HandleQuery(Index, query);
     handleResults(results, html_path);
+    list_destroy(results);
+    list_destroy(query->terms);
+    list_destroy(query->ops);
+    free(query);
   }
   /* Clean up */
   hashtable_destroy(Index);
@@ -118,6 +122,8 @@ int checkCommandLine(char* filename, char* path)
   Query* query = calloc(1, sizeof(Query));
   query->terms = calloc(1, sizeof(List));
   query->ops = calloc(1, sizeof(List));
+
+
   
   // Initialize the lists
   list_new(query->terms, sizeof(char*), str_compare, free_string);
@@ -141,6 +147,7 @@ int checkCommandLine(char* filename, char* path)
 */
 void normalizeQuery(char* query) 
 {
+  ToLower(query);
   query[strlen(query)-1] = '\0';
 
 }
@@ -164,21 +171,21 @@ int parseQuery(char* str, List* terms, List* ops)
 
   pch = strtok(str, " ");
   while (pch != NULL) {
-    word = calloc(1, BUF_SIZE);
+    word = calloc(1, WORD_LENGTH + 1);
     strcpy(word, pch);
     strcat(word, "\0");
 
-    if (strcmp(word, "AND") == 0) { 
+    if (strcmp(word, "and") == 0) { 
       /* Append to ops list */
       list_append(ops, word);
     }
-    else if (strcmp(word, "OR") == 0) {
+    else if (strcmp(word, "or") == 0) {
       list_append(ops, word);
       sets++;
     }
     else {
       // Not logical operator
-      ToLower(word);
+      //ToLower(word);
       list_append(terms, word);
     }
 
@@ -224,12 +231,12 @@ List* HandleQuery(HashTable* ht, Query* query)
   while(query->ops->length) {
     op = list_dequeue(query->ops);
 
-    if (strcmp(op, "AND") == 0) {
+    if (strcmp(op, "and") == 0) {
       // This needs to be imutable or copied
       temp_a = getNextQuery(ht, query->terms);
       sets[filled] = intersect(sets[filled], temp_a);
     }
-    else if (strcmp(op, "OR") == 0) {
+    else if (strcmp(op, "or") == 0) {
       filled++;
       sets[filled] = getNextQuery(ht, query->terms);
     }
@@ -248,6 +255,7 @@ List* HandleQuery(HashTable* ht, Query* query)
   // Cleanup
   for (int i = 0; i < num_sets; i++) {
     list_destroy(sets[i]);
+    list_destroy(sorted[i]);
   }
 
   return docs;
@@ -297,17 +305,15 @@ void handleResults(List* results, char* path)
 * @words: list of words nodes to get query from
 */
 List* getNextQuery(HashTable* ht, List* words) {
-  // TODO - make immutable or return a copy
   char* term;
-  /*term = list_dequeue(words);
 
-  WordNode* wNode = calloc(1, sizeof(WordNode));
-  hashtable_get(ht, term, wNode);
-  free(term);
-  return wNode->page;*/
   term = list_dequeue(words);
   WordNode* wNode = calloc(1, sizeof(WordNode)); // Would need to free, but might create dangling pointers
-  hashtable_get(ht, term, wNode); //need to check actually return the item
+  if (!hashtable_get(ht, term, wNode)) { //need to check actually return the item
+    free(wNode);
+    free(term);
+    return NULL;
+  } 
   List* temp_list = wNode->page;  // INVARIANT: wNode->page is immutable
   List* list = calloc(1, sizeof(List));
   list_new(list, sizeof(DocumentNode), dNode_cmp, NULL);
@@ -316,7 +322,7 @@ List* getNextQuery(HashTable* ht, List* words) {
     memcpy(data, cur->data, list->elementSize);
     list_append(list, data);
   }
-  //free(wNode) //STOP: dangling pointer likely
+  free(wNode); //dangling pointer in wNode->word?
   free(term);
   return list;
 }
@@ -326,8 +332,6 @@ List* getNextQuery(HashTable* ht, List* words) {
 * Returns pointer to a new list
 */
 List* intersect(List* A, List* B) {
-  // TODO - probably a lot of mem leaks here,
-  // Better way - Use ht
   List* list;
 
   if (A == NULL || B == NULL) // empty sets 
@@ -361,7 +365,6 @@ List* intersect(List* A, List* B) {
     Intersect[dNode->document_id] = dNode;
   }
   // Go through longer list and find matches. If match, copy into a new list
-
   for (cur = larger->head, _node = cur; _node != NULL; cur = _node = _node->next) {
     DocumentNode* dNode = (DocumentNode*)cur->data;
     if (Intersect[dNode->document_id] != NULL) {
@@ -373,6 +376,8 @@ List* intersect(List* A, List* B) {
       list_append(list, newDNode);
     }
   }
+  list_destroy(A);
+  list_destroy(B);
   return list;
 }
 
