@@ -34,7 +34,7 @@ TODO
   Query:
   - Test that intersect works
   - Start testing on multuple pages
-  - exit nicely
+  - Not print correct word freq - probably overwriting dNodes actual values when intersecting
   - memory leaks and dangling pointers
   - Move intersect into list.c and make generic
   - Add kill signal

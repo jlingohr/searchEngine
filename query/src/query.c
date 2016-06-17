@@ -25,7 +25,7 @@ void normalizeQuery(char* str);
 List* HandleQuery(HashTable* ht, Query* query);
 void handleResults(List* results, char* path);
 
-void sigquit_handler(int sig);
+void sigint_handler(int sig);
 
 
 
@@ -49,6 +49,9 @@ int main(int argc, char** argv)
   }
   if (!checkCommandLine(argv[1], argv[2]))
     exit(1);
+
+  // Register handler
+  Signal(SIGINT, sigint_handler);
 
   // Build of index from recent file
   Index = calloc(1, sizeof(HashTable));
@@ -242,6 +245,10 @@ List* HandleQuery(HashTable* ht, Query* query)
   for (int i = 0; i < query->num_sets; i++) {
     docs = Merge(docs, sorted[i], cmpDNode_freq);
   }
+  // Cleanup
+  for (int i = 0; i < num_sets; i++) {
+    list_destroy(sets[i]);
+  }
 
   return docs;
 }
@@ -273,7 +280,7 @@ void handleResults(List* results, char* path)
     fd = fopen(filename, "r");
     if ((read = getline(&line, &len, fd)) != -1) {
       if (line) {
-        printf("%s", line);
+        printf("%d  %d %s", dNode->document_id, dNode->page_word_frequency, line);
       }
     }
     fclose(fd);
@@ -305,7 +312,9 @@ List* getNextQuery(HashTable* ht, List* words) {
   List* list = calloc(1, sizeof(List));
   list_new(list, sizeof(DocumentNode), dNode_cmp, NULL);
   list_foreach(temp_list, head, next, cur) {
-    list_append(list, cur->data);
+    DocumentNode* data = calloc(1, sizeof(DocumentNode));
+    memcpy(data, cur->data, list->elementSize);
+    list_append(list, data);
   }
   //free(wNode) //STOP: dangling pointer likely
   free(term);
@@ -324,37 +333,46 @@ List* intersect(List* A, List* B) {
   if (A == NULL || B == NULL) // empty sets 
     return NULL;
 
+  assert(A != NULL && B != NULL);
+
   // Initialize new list 
   list = calloc(1, sizeof(List));
   list_new(list, sizeof(DocumentNode), cmpDNode_ID, NULL);
 
+  // Find highest docID of smaller list
+  int maxID = 0;
   // Set current pointer to smaller list 
-  DocumentNode* cur;
-  DocumentNode* tmp = NULL;
-  if (A->length <= B->length) { //Have to check if NULL returned
-    while (A->length) {
-      cur = list_dequeue(A);
-      if (list_get(B, &cur->document_id, (element_t)&tmp)) {
-        // Update Document Node
-        update(cur, tmp);
-        tmp = NULL;
-        // Add updated node to accumulated list
-        list_append(list, cur);
-      }
-    }
-  }
-  else {
-    while (B->length) {
-      cur = list_dequeue(B);
-      if (list_get(A, &cur->document_id, (element_t)&tmp)) {
-        update(cur, tmp);
-        tmp = NULL;
-        list_append(list, cur);
-      }
-    }
+  List* smaller = (list_length(A) < list_length(B)) ? A : B;
+  List* larger = (smaller == A) ? B : A;
+
+  ListNode *cur, *_node;
+  for (cur = smaller->head, _node = cur; _node != NULL; cur = _node = _node->next) {
+    DocumentNode* dNode = (DocumentNode*)cur->data;
+    maxID = (dNode->document_id > maxID) ? dNode->document_id : maxID;
   }
 
-  // Returns list 
+  DocumentNode* Intersect[maxID];
+  for (int i = 0; i < maxID; i++) {
+    Intersect[i] = NULL;
+  }
+  // Copy DocumentNodes in smaller list into an array
+  for (cur = smaller->head, _node = cur; _node != NULL; cur = _node = _node->next) {
+    DocumentNode* dNode = (DocumentNode*)cur->data;
+    Intersect[dNode->document_id] = dNode;
+  }
+  // Go through longer list and find matches. If match, copy into a new list
+
+  for (cur = larger->head, _node = cur; _node != NULL; cur = _node = _node->next) {
+    DocumentNode* dNode = (DocumentNode*)cur->data;
+    if (Intersect[dNode->document_id] != NULL) {
+      // Intersect, so copy over
+      DocumentNode* in_smaller = Intersect[dNode->document_id];
+      DocumentNode* newDNode = calloc(1, sizeof(DocumentNode));
+      newDNode->document_id = dNode->document_id;
+      newDNode->page_word_frequency = (in_smaller->page_word_frequency < dNode->page_word_frequency) ? in_smaller->page_word_frequency : dNode->page_word_frequency;
+      list_append(list, newDNode);
+    }
+  }
   return list;
 }
 
@@ -423,7 +441,9 @@ void free_string(element_t av)
 /*
 * sigquit_handler - Terminate program whenever user types ctrl-c
 */
-void sigquit_handler(int sig)
+void sigint_handler(int sig)
 {
-  //TODO
+  if (sig == SIGINT) {
+    printf("\nExit with Ctrl-d\n");
+  }
 }
