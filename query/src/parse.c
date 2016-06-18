@@ -50,6 +50,14 @@ int checkQueryString(char* query)
   normalizeQuery(str);
   query->num_sets = parseQuery(str, query->terms, query->ops);
 
+  // Check that query was valid re not just string of AND/OR
+  if (list_length(query->terms) == 0) {
+    list_destroy(query->terms);
+    list_destroy(query->ops);
+    free(query);
+    query = NULL;
+  }
+
   return query;
  }
 

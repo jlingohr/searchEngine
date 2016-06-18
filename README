@@ -36,5 +36,5 @@ TODO
   - Start testing on multuple pages
   - memory leaks and dangling pointers
   - Add kill signal
-  - Error for only AND or OR query
+  - Error for query string of AND/OR and tabs
   - Error printing repeated results
