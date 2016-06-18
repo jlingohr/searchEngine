@@ -4,6 +4,27 @@
 #include "parse.h"
 
 /*
+* checkQueryString - Validate user search query
+* @query: string to validate
+* Returns 0 if invalid, else returns 1
+*/
+int checkQueryString(char* query)
+{
+  // Check if NULL
+  if (!query)
+    return 0;
+  // Check if empty
+  if (strlen(query) == 0)
+    return 0;
+  int char_count = 0;
+  char* cur = query;
+  while (*cur && ((*cur == ' ') || (*cur == '\t'))) {
+    cur++;
+  }
+  return *cur != '\n';
+}
+
+/*
 * initQuery - Initializes a search query by parsing the
 * search string into a list of search terms and
 * a list of search operations
