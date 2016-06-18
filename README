@@ -33,11 +33,8 @@ TODO
 
   Query:
   - Test that intersect works 
-  - problem with parsing: AND returns dif result than and
   - Start testing on multuple pages
-  - Not print correct word freq - probably overwriting dNodes actual values when intersecting
   - memory leaks and dangling pointers
-  - Move intersect into list.c and make generic
   - Add kill signal
-  - Cleaner way to make list immutable for repeated queries
   - Error for empty query
+  - Error printing repeated results

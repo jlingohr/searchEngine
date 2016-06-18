@@ -74,12 +74,16 @@ int parseQuery(char* str, List* terms, List* ops)
     if (strcmp(word, "AND") == 0) { 
       if (tokens > 0) // 'AND' cant be first term
         list_append(ops, word);
+      else
+        tokens--;
     }
     else if (strcmp(word, "OR") == 0) {
       if (tokens > 0) { // 'OR' cant be first term
         list_append(ops, word);
         sets++;
       }
+      else
+        tokens--;
     }
     else {
       if (tokens % 2 == 1) {
