@@ -64,6 +64,7 @@ int parseQuery(char* str, List* terms, List* ops)
   tokens = 0;
   sets = 1;
 
+
   pch = strtok(str, " ");
   while (pch != NULL) {
     word = calloc(1, WORD_LENGTH + 1);
@@ -71,15 +72,24 @@ int parseQuery(char* str, List* terms, List* ops)
     strcat(word, "\0");
 
     if (strcmp(word, "AND") == 0) { 
-      /* Append to ops list */
-      list_append(ops, word);
+      if (tokens > 0) // 'AND' cant be first term
+        list_append(ops, word);
     }
     else if (strcmp(word, "OR") == 0) {
-      list_append(ops, word);
-      sets++;
+      if (tokens > 0) { // 'OR' cant be first term
+        list_append(ops, word);
+        sets++;
+      }
     }
     else {
-      // Not logical operator
+      if (tokens % 2 == 1) {
+        // odd tokens should be logical operatives
+        char* tmp = calloc(1, WORD_LENGTH);
+        strncpy(tmp, "AND", strlen("AND"));
+        strcat(tmp, "\0");
+        list_append(ops, tmp);
+        tokens++;
+      }
       ToLower(word);
       list_append(terms, word);
     }
