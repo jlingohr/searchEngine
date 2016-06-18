@@ -11,7 +11,7 @@
 *
 * To Test: 
 */
-#include "query.h"
+#include "parse.h"
 
 #define TRUE 1
 static char prompt[] = "Query:> ";
@@ -19,11 +19,7 @@ static char prompt[] = "Query:> ";
 
 int checkCommandLine(char* filename, char* path);
 void eval(char* cmdline);
-void ToLower(char* word);
-int str_compare(element_t av, element_t bv);
-void free_string(element_t av);
-void normalizeQuery(char* str);
-List* HandleQuery(HashTable* ht, Query* query);
+
 void handleResults(List* results, char* path);
 
 void sigint_handler(int sig);
@@ -108,106 +104,6 @@ int checkCommandLine(char* filename, char* path)
   return 1;
 }
 
-/*
-* initQuery - Initializes a search query by parsing the
-* search string into a list of search terms and
-* a list of search operations
-* @str: search string to parse
-*
-* Returns a pointer to a Query struct
-*/
- Query* initQuery(char* str) 
- {
-  // Allocate Query struct
-  Query* query = calloc(1, sizeof(Query));
-  query->terms = calloc(1, sizeof(List));
-  query->ops = calloc(1, sizeof(List));
-
-
-  
-  // Initialize the lists
-  list_new(query->terms, sizeof(char*), str_compare, free_string);
-  list_new(query->ops, sizeof(char*), str_compare, free_string);
-
-
-  // Normalize search string and parse
-  normalizeQuery(str);
-  query->num_sets = parseQuery(str, query->terms, query->ops);
-
-  return query;
- }
-
-/*
-* normalizeQuery - Normslizes a search query by treating SPACE
-* as an AND if missing and returns the number of words in
-* the search query. Also converts to all lowercase and removes
-* extra characters like '\n'
-* @query; string to parse
-*
-*/
-void normalizeQuery(char* query) 
-{
-  ToLower(query);
-  query[strlen(query)-1] = '\0';
-
-}
-
-/*
-* parseQuery - Works through str and appends word to
-* words and appends logical operators to ops
-*
-* ASSUMPTIONS: For now assume user specifies all logical operations
-* and everything else valid
-*/
-int parseQuery(char* str, List* terms, List* ops) 
-{
-  /* TODO - validate string for error conditions */
-  char* word;
-  char* pch;
-  int tokens, sets;
-
-  tokens = 0;
-  sets = 1;
-
-  pch = strtok(str, " ");
-  while (pch != NULL) {
-    word = calloc(1, WORD_LENGTH + 1);
-    strcpy(word, pch);
-    strcat(word, "\0");
-
-    if (strcmp(word, "and") == 0) { 
-      /* Append to ops list */
-      list_append(ops, word);
-    }
-    else if (strcmp(word, "or") == 0) {
-      list_append(ops, word);
-      sets++;
-    }
-    else {
-      // Not logical operator
-      //ToLower(word);
-      list_append(terms, word);
-    }
-
-    tokens++;
-    pch = strtok(NULL, " ");
-  }
-  return sets;
-}
-
-/* 
-* ToLower - turns a string into all lower case
-* @word: Word to change
-*/
-void ToLower(char* word) 
-{
-  char* cur = word;
-
-  while (*cur) {
-    tolower(*cur);
-    cur++;
-  }
-}
 
 /*
 * HandleQuery - gets pages matching the query,
@@ -228,15 +124,15 @@ List* HandleQuery(HashTable* ht, Query* query)
 
   // Store operand, i.e. AND, OR
   char* op;
-  while(query->ops->length) {
-    op = list_dequeue(query->ops);
+  while((op = list_dequeue(query->ops))) {
+    //op = list_dequeue(query->ops);
 
-    if (strcmp(op, "and") == 0) {
+    if (strcmp(op, "AND") == 0) {
       // This needs to be imutable or copied
       temp_a = getNextQuery(ht, query->terms);
       sets[filled] = intersect(sets[filled], temp_a);
     }
-    else if (strcmp(op, "or") == 0) {
+    else if (strcmp(op, "OR") == 0) {
       filled++;
       sets[filled] = getNextQuery(ht, query->terms);
     }
@@ -298,34 +194,6 @@ void handleResults(List* results, char* path)
 }
 
 
-/*
-* getNextQuery - Returns a list of DocumentNode for
-* the word at the head of words
-* @ht: Hashtable to look in
-* @words: list of words nodes to get query from
-*/
-List* getNextQuery(HashTable* ht, List* words) {
-  char* term;
-
-  term = list_dequeue(words);
-  WordNode* wNode = calloc(1, sizeof(WordNode)); // Would need to free, but might create dangling pointers
-  if (!hashtable_get(ht, term, wNode)) { //need to check actually return the item
-    free(wNode);
-    free(term);
-    return NULL;
-  } 
-  List* temp_list = wNode->page;  // INVARIANT: wNode->page is immutable
-  List* list = calloc(1, sizeof(List));
-  list_new(list, sizeof(DocumentNode), dNode_cmp, NULL);
-  list_foreach(temp_list, head, next, cur) {
-    DocumentNode* data = calloc(1, sizeof(DocumentNode));
-    memcpy(data, cur->data, list->elementSize);
-    list_append(list, data);
-  }
-  free(wNode); //dangling pointer in wNode->word?
-  free(term);
-  return list;
-}
 
 /*
 * intersect - intersect two lists of DocumentNodes
@@ -430,18 +298,6 @@ void printDNode(const element_t av) {
 
 }
 
-int str_compare(element_t av, element_t bv)
-{
-  char* a = av;
-  char* b = bv;
-  return strcmp(a, b) == 0;
-}
-
-void free_string(element_t av)
-{
-  char* a = av;
-  free(a);
-}
 
 /*
 * sigquit_handler - Terminate program whenever user types ctrl-c
