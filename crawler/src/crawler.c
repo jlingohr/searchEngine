@@ -15,7 +15,7 @@
   and the depth on the second line. The HTML will for the webpage 
   will start on the third line.
 
-  To run: ./bin/crawler http://old-www.cs.dartmouth.edu/~cs50/ ./data/ 3
+  To run: ./bin/crawler http://old-www.cs.dartmouth.edu/~cs50/ ./data/ 0
 
 
 */
