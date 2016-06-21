@@ -82,9 +82,6 @@ void free_webpage(element_t elem)
 }
 
 
-
-
-
 char* urls[MAX] = {URL_1, URL_2, URL_3, URL_4, URL_5};
 char* html[MAX] = {HTML_1, HTML_2, HTML_3, HTML_4, HTML_5};
 
@@ -101,7 +98,6 @@ static void init_test(HashTable** URLSVisited, List** toVisit)
 static void sim_crawl(HashTable* URLSVisited, List* toVisit, int depth)
 {
   char* buf = NULL;
-
   for (int i = 0; i < depth; i++) {
     buf = calloc(1, strlen(urls[i])+1);
     strcpy(buf, urls[i]);
@@ -153,20 +149,33 @@ char* test_crawl_one()
   sim_crawl(URLSVisited, toVisit, 1);
   hashtable_insert(URLSVisited, seed_url, seed_url);
 
+  // url_1 should be in toVisit 
+  WebPage* tmp = NULL;
+  int result = list_get(toVisit, URL_1, (element_t*)&tmp);
+  mu_assert(result == 1, "Error - WebPage_1 should be in toVisit.");
+  mu_assert(strcmp(tmp->url, URL_1) == 0, "Error - Incorrect URL retrieved form list.");
+  result = NULL;
+
+  //url_2 should be in toVisit
+  result = list_get(toVisit, URL_2, (element_t*)&tmp);
+  mu_assert(result == 0, "Error - WebPage_2 shouldn't be queued.");
+  result = NULL;
+
   // Crawl page at depth 1
-  WebPage* tmp;
+  
   char* url;
   while ((tmp = list_dequeue(toVisit))) {
     if (!hashtable_lookup(URLSVisited, tmp->url)) {
       sim_crawl(URLSVisited, toVisit, 1);
       url = calloc(1, MAX_URL_LENGTH);
+      strcpy(url, tmp->url);
       hashtable_insert(URLSVisited, url, url);
     }
     strcpy(tmp->url, "");
     free(tmp);
   }
   // Seed page should be in hashtbale
-  int result = hashtable_lookup(URLSVisited, SEED_URL);
+  result = hashtable_lookup(URLSVisited, SEED_URL);
   mu_assert(result == 1, "Error - Didn't crawl seed page.");
   // url_1 should be in hashtable
   result = hashtable_lookup(URLSVisited, URL_1);
@@ -176,10 +185,54 @@ char* test_crawl_one()
   mu_assert(result == 0, "Error - url_2 shouldn't be in hashtable.");
 
 
-
   hashtable_destroy(URLSVisited);
   list_destroy(toVisit);
   return NULL;
+}
+
+char* test_crawl_five()
+{
+  HashTable* URLSVisited = NULL;
+  List* toVisit = NULL;
+  init_test(&URLSVisited, &toVisit);
+  char* seed_url = calloc(1, strlen(SEED_URL)+1);
+  strcpy(seed_url, SEED_URL);
+
+  // Crawl the seed page
+  sim_crawl(URLSVisited, toVisit, 1);
+  hashtable_insert(URLSVisited, seed_url, seed_url);
+
+  WebPage* tmp;
+  char* url;
+  while ((tmp = list_dequeue(toVisit))) {
+    if (!hashtable_lookup(URLSVisited, tmp->url)) {
+      sim_crawl(URLSVisited, toVisit, 5);
+      url = calloc(1, MAX_URL_LENGTH);
+      strcpy(url, tmp->url);
+      hashtable_insert(URLSVisited, url, url);
+    }
+    strcpy(tmp->url, "");
+    free(tmp);
+  }
+  // Make sure list is empty
+  int result = list_length(toVisit);
+  mu_assert(result == 0, "Error - List not dequeued.");
+
+  // url_3 should be in hashtable
+  result = hashtable_lookup(URLSVisited, URL_3);
+  mu_assert(result == 1, "Error - Didn't crawl page 3.");
+
+  // url_4 should be in hashtable
+  result = hashtable_lookup(URLSVisited, URL_4);
+  mu_assert(result == 1, "Error - Didn't crawl page 4.");
+
+  // url_5 should be in hashtable
+  result = hashtable_lookup(URLSVisited, URL_5);
+  mu_assert(result == 1, "Error - Didn't crawl page 5.");
+
+  hashtable_destroy(URLSVisited);
+  list_destroy(toVisit);
+  return NULL; 
 }
 
 
@@ -189,6 +242,7 @@ char* all_tests()
 
   mu_run_test(test_crawl_seed);
   mu_run_test(test_crawl_one);
+  mu_run_test(test_crawl_five);
 
   return NULL;
 }
