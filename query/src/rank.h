@@ -19,7 +19,6 @@
 
 
 void handleResults(List* results, char* path);
-List* HandleQuery(HashTable* ht, Query* query);
 List* intersect(List* A, List* B);
 
 int cmpDNode_ID(const element_t av, const element_t bv);

@@ -134,35 +134,6 @@ int parseQuery(char* str, List* terms, List* ops)
 }
 
 
-/*
-* getNextQuery - Returns a list of DocumentNode for
-* the word at the head of words
-* @ht: Hashtable to look in
-* @words: list of words nodes to get query from
-*/
-List* getNextQuery(HashTable* ht, List* words) {
-  char* term;
-
-  term = list_dequeue(words);
-  WordNode* wNode = calloc(1, sizeof(WordNode)); // Would need to free, but might create dangling pointers
-  if (!hashtable_get(ht, term, wNode)) { //need to check actually return the item
-    free(wNode);
-    free(term);
-    return NULL;
-  } 
-  List* temp_list = wNode->page;  // INVARIANT: wNode->page is immutable
-  List* list = calloc(1, sizeof(List));
-  list_new(list, sizeof(DocumentNode), dNode_cmp, NULL);
-  list_foreach(temp_list, head, next, cur) {
-    DocumentNode* data = calloc(1, sizeof(DocumentNode));
-    memcpy(data, cur->data, list->elementSize);
-    list_append(list, data);
-  }
-  free(wNode); //dangling pointer in wNode->word?
-  free(term);
-  return list;
-}
-
 /* 
 * ToLower - turns a string into all lower case
 * @word: Word to change

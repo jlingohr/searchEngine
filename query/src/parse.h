@@ -25,7 +25,6 @@ int checkQueryString(char* query);
 void normalizeQuery(char* query);
 Query* initQuery(char* str);
 int parseQuery(char* str, List* terms, List* ops);
-List* getNextQuery(HashTable* ht, List* words);
 
 void Sort(List* list, int len);
 

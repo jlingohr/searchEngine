@@ -1,55 +1,6 @@
 #include "rank.h"
 
-/*
-* HandleQuery - gets pages matching the query,
-* ranks them, and prints them
-*/
-List* HandleQuery(HashTable* ht, Query* query) 
-{
 
-  List* docs;
-  int filled, num_sets;
-
-  filled = 0;
-  num_sets = query->num_sets;
-  List* sets[query->num_sets];
-
-  List* temp_a = getNextQuery(ht, query->terms);
-  sets[filled] = temp_a;
-
-  // Store operand, i.e. AND, OR
-  char* op;
-  while((op = list_dequeue(query->ops))) {
-
-    if (strcmp(op, "AND") == 0) {
-      // This needs to be imutable or copied
-      temp_a = getNextQuery(ht, query->terms);
-      sets[filled] = intersect(sets[filled], temp_a);
-    }
-    else if (strcmp(op, "OR") == 0) {
-      filled++;
-      sets[filled] = getNextQuery(ht, query->terms);
-    }
-  }
-  //Sort the lists
-  List* sorted[num_sets];
-  for (int i = 0; i < query->num_sets; i++) {
-    sorted[i] = MergeSort(sets[i], sets[i]->length, cmpDNode_freq);
-  }
-  // Merge all documents 
-  docs = calloc(1, sizeof(List));
-  list_new(docs, sizeof(DocumentNode), cmpDNode_freq, NULL);
-  for (int i = 0; i < query->num_sets; i++) {
-    docs = Merge(docs, sorted[i], cmpDNode_freq);
-  }
-  // Cleanup
-  for (int i = 0; i < num_sets; i++) {
-    list_destroy(sets[i]);
-    //list_destroy(sorted[i]);
-  }
-
-  return docs;
-}
 
 /*
 * printResults - Handle results from query by

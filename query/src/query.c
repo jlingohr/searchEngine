@@ -19,7 +19,8 @@ static char prompt[] = "Query:> ";
 
 
 int checkCommandLine(char* filename, char* path);
-void eval(char* cmdline);
+List* HandleQuery(HashTable* ht, Query* query);
+List* getNextQuery(HashTable* ht, List* words);
 
 
 void sigint_handler(int sig);
@@ -107,6 +108,85 @@ int checkCommandLine(char* filename, char* path)
   return 1;
 }
 
+/*
+* HandleQuery - gets pages matching the query,
+* ranks them, and prints them
+*/
+List* HandleQuery(HashTable* ht, Query* query) 
+{
+
+  List* docs;
+  int filled, num_sets;
+
+  filled = 0;
+  num_sets = query->num_sets;
+  List* sets[query->num_sets];
+
+  List* temp_a = getNextQuery(ht, query->terms);
+  sets[filled] = temp_a;
+
+  // Store operand, i.e. AND, OR
+  char* op;
+  while((op = list_dequeue(query->ops))) {
+
+    if (strcmp(op, "AND") == 0) {
+      // This needs to be imutable or copied
+      temp_a = getNextQuery(ht, query->terms);
+      sets[filled] = intersect(sets[filled], temp_a);
+    }
+    else if (strcmp(op, "OR") == 0) {
+      filled++;
+      sets[filled] = getNextQuery(ht, query->terms);
+    }
+  }
+  //Sort the lists
+  List* sorted[num_sets];
+  for (int i = 0; i < query->num_sets; i++) {
+    sorted[i] = MergeSort(sets[i], sets[i]->length, cmpDNode_freq);
+  }
+  // Merge all documents 
+  docs = calloc(1, sizeof(List));
+  list_new(docs, sizeof(DocumentNode), cmpDNode_freq, NULL);
+  for (int i = 0; i < query->num_sets; i++) {
+    docs = Merge(docs, sorted[i], cmpDNode_freq);
+  }
+  // Cleanup
+  for (int i = 0; i < num_sets; i++) {
+    list_destroy(sets[i]);
+    //list_destroy(sorted[i]);
+  }
+
+  return docs;
+}
+
+/*
+* getNextQuery - Returns a list of DocumentNode for
+* the word at the head of words
+* @ht: Hashtable to look in
+* @words: list of words nodes to get query from
+*/
+List* getNextQuery(HashTable* ht, List* words) {
+  char* term;
+
+  term = list_dequeue(words);
+  WordNode* wNode = calloc(1, sizeof(WordNode)); // Would need to free, but might create dangling pointers
+  if (!hashtable_get(ht, term, wNode)) { //need to check actually return the item
+    free(wNode);
+    free(term);
+    return NULL;
+  } 
+  List* temp_list = wNode->page;  // INVARIANT: wNode->page is immutable
+  List* list = calloc(1, sizeof(List));
+  list_new(list, sizeof(DocumentNode), dNode_cmp, NULL);
+  list_foreach(temp_list, head, next, cur) {
+    DocumentNode* data = calloc(1, sizeof(DocumentNode));
+    memcpy(data, cur->data, list->elementSize);
+    list_append(list, data);
+  }
+  free(wNode); //dangling pointer in wNode->word?
+  free(term);
+  return list;
+}
 
 /*
 * update - Update DocumentNode a with word freq of
