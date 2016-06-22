@@ -29,12 +29,10 @@ TODO
 
   Indexer:
    - Fix any memory leaks 
-   - Seperate modules/Libraries
 
   Query:
   - Test that intersect works 
-  - Start testing on multuple pages
   - memory leaks and dangling pointers
-  - Add kill signal
   - Error for query string of AND/OR and tabs
   - Error printing repeated results
+  - Consider parsing query differently! load each word into an array then parse
